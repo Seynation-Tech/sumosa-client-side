@@ -1,0 +1,9 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.recharts-cartesian-axis-tick {
+    font-size: 0.7rem;
+    font-family: Roboto, sans-serif;
+}

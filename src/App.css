@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css?family=Rubik&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Rubik";
+}
+
+body {
+  /* background: rgb(4, 55, 242);
+   */
+
+   background: rgba(0, 41, 205, 0.06);
+  color: rgba(255, 255, 255, 0.994);
+  position: relative;
+  /* height: 98%; */
+  max-width: 100%;
+  overflow-x: hidden;
+  /* min-height: 120vh; */
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.recharts-cartesian-axis-tick {
+  font-size: 0.6rem;
+  font-family: Roboto, sans-serif;
+}
