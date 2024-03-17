@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from 'react';
 import Sidebar from "../Sidebar/Sidebar";
 import "./Report.css";
 import bell from "../../Images/notify.png";
@@ -6,7 +6,7 @@ import Real from "../Charts/Real";
 import morearrow from "../../Images/icono.png";
 import login from "../../Images/login.png";
 import world from "../../Images/blue-world-globe.jpg";
-import { Link } from "react-router-dom";
+
 import connect from "../../Images/connect.png";
 import insta from "../../Images/instagra.png";
 import whatsp from "../../Images/whatsapp.png";
@@ -19,13 +19,59 @@ import search from "../../Images/searchblue.png";
 import sda from "../../Images/sdalogo.jpg";
 import pcm from "../../Images/PCM LOGO.jpg";
 
-const pesa = true;
-const moneycount = false;
-const debts = false;
-const stocks = true;
+import { Link,useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { AuthContext } from '../AuthContext'
+import moment from 'moment'
+import DotLoader from "react-spinners/DotLoader";
+import Cookies from 'cookie-universal'
+
+axios.defaults.withCredentials = true
+
 
 export default function Expenses ()
 {
+    const [pesa,setPesa] = useState(false)
+    const [debts,setDebts] = useState(false)
+    const [stocks,setStocks] = useState(false)
+    const [moneycount,setMoneycount] = useState(false)
+
+    const handlePesa =()=>{
+        setStocks(false)
+        setMoneycount(false)
+        setDebts(false)
+        setPesa(true)
+    }
+
+    const handleDebt =()=>{
+        setPesa(false)
+        setMoneycount(false)
+        setStocks(false)
+        setDebts(true)
+    }
+
+    const handleMoneycount =()=>{
+        setPesa(false)
+        setStocks(false)
+        setDebts(false)
+        setMoneycount(true)
+
+    }
+
+    const handleStocks =()=>{
+        setPesa(false)
+        setDebts(false)
+        setMoneycount(false)
+        setStocks(true)
+    }
+
+    const handleAll=()=>{
+        setPesa(false)
+        setDebts(false)
+        setMoneycount(false)
+        setStocks(false)
+    }
+
     return (
         <div className="mysals">
             <Sidebar />
@@ -38,19 +84,19 @@ export default function Expenses ()
                 </div>
                 <div className="year">
                     <div className="dail">
-                        <p>LITRES</p>
+                        <p onClick={handleAll}>LITRES</p>
                     </div>
 
                     <div className="dail">
-                        <p>ONLINE PAY</p>
+                        <p onClick={handlePesa}>ONLINE PAY</p>
                     </div>
 
                     <div className="dail">
-                        <p>DEBTS</p>
+                        <p onClick={handleDebt}>DEBTS</p>
                     </div>
 
                     <div className="dail">
-                        <p>MONEY COUNTS</p>
+                        <p onClick={handleMoneycount}>MONEY COUNTS</p>
                     </div>
 
                     <div className="download">

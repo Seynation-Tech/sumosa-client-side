@@ -1,0 +1,346 @@
+body {
+  background-color: white;
+}
+
+.welcome-pages {
+  min-height: 110vh;
+  display: flex;
+  flex-direction: column;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  background-image: linear-gradient(
+      rgba(11, 1, 67, 0.699),
+      rgba(3, 0, 37, 0.932)
+    ),
+    url("../../Images/sheli.jpg");
+}
+
+.login-page {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  object-fit: cover;
+  flex-direction: column;
+}
+
+.login-left {
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(
+    to top left,
+    rgba(142, 206, 2, 0.303),
+    rgba(3, 4, 49, 0.483)
+  );
+  border-radius: 50%;
+  position: relative;
+  top: 80px;
+  left: -350px;
+  box-shadow: 1px 11px 52px 22px rgba(255, 255, 255, 0.297);
+}
+.login-img {
+  position: absolute;
+  width: 600px;
+  left: 23px;
+  height: 600px;
+  border-radius: 53% 47% 50% 50% / 38% 41% 59% 62%;
+  box-shadow: 1px 11px 82px 22px rgba(1, 68, 131, 0.297);
+}
+
+/* .cover{
+    position: absolute;
+    width: 100%;
+    height: 800px;
+    background: linear-gradient(to right top, rgba(4, 4, 65, 0.298),rgb(64, 0, 128));
+} */
+
+.login-right {
+  width: 30%;
+  height: auto;
+  position: absolute;
+  top: 140px;
+  right: 80px;
+  background: rgba(255, 255, 255, 0.085);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-top: 40px;
+  padding-bottom: 50px;
+}
+
+.login-data {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.forms {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 80%;
+  margin-top: 23px;
+  margin-bottom: 23px;
+}
+
+.forms .input-one {
+  display: flex;
+  gap: 10px;
+  position: relative;
+}
+
+.forms .input-two {
+  display: flex;
+  gap: 10px;
+  position: relative;
+}
+
+.login-data p:nth-child(1) {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.login-data p:nth-child(2) {
+  font-size: 0.9em;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.746);
+}
+
+.input-one input {
+  background: transparent;
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.368);
+  height: 45px;
+  width: 100%;
+  border-radius: 5px;
+  padding-left: 12px;
+}
+
+.input-two input {
+  background: transparent;
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.368);
+  height: 45px;
+  width: 100%;
+  border-radius: 5px;
+  padding-left: 12px;
+}
+
+.input-one input::placeholder {
+  font-weight: 300;
+}
+
+.input-two input::placeholder {
+  font-weight: 300;
+}
+
+.remeber {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 9px;
+  margin-left: -142px;
+}
+
+.remeber input {
+  width: 14px;
+  height: 14px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+input {
+  color: rgba(255, 255, 255, 0.871);
+}
+
+.input-one input:focus {
+  border: 3px solid rgb(31, 31, 255);
+}
+
+.input-two input:focus {
+  border: 3px solid rgb(31, 31, 255);
+}
+
+button {
+  cursor: pointer;
+}
+
+.remeber p {
+  font-size: 0.8em;
+}
+.remember-opt {
+  width: 60%;
+  margin: 23px;
+}
+.remember-opt .sign-btn {
+  height: 50px;
+  width: 100%;
+  border-radius: 10px;
+  background: rgb(52, 59, 255);
+  outline: none;
+  border: none;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.775);
+}
+
+.anaccount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 3px;
+}
+
+.anaccount p {
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.account {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  bottom: -94px;
+  left: 25%;
+}
+
+.accounts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  /* position: absolute; */
+  bottom: -44px;
+  left: 27%;
+  margin: 12px;
+}
+
+.accounts p {
+  font-size: 0.8em;
+}
+
+#forgot {
+  color: rgba(253, 253, 255, 0.556);
+  cursor: pointer;
+}
+.acc {
+  font-size: 0.8em;
+}
+
+.account p:nth-child(2) {
+  color: rgb(67, 129, 255);
+  font-size: 0.9em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+span {
+  color: rgb(67, 129, 255);
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.body-contentcc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 12px;
+  position: relative;
+  top: 124px;
+}
+
+.spin{
+  margin: 12px;
+}
+
+.highlight-anim {
+  margin-right: -632px;
+  position: relative;
+  margin-top: -54px;
+}
+
+.ouur {
+  min-width: auto;
+  min-height: 22vh;
+  border: 1px solid rgba(255, 255, 255, 0.183);
+  margin-top: -73px;
+  border-radius: 23px;
+  padding: 23px;
+  backdrop-filter: blur(5px);
+  animation: dscbox 2s ease-in-out;
+  background: linear-gradient(#05149c0b, #ffffff29);
+  /* position: absolute; */
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  /* right: 114px; */
+}
+
+.ouu {
+  min-width: auto;
+  min-height: 22vh;
+  border: 1px solid rgba(255, 255, 255, 0.183);
+  margin-top: -43px;
+  border-radius: 23px;
+  padding: 23px;
+  backdrop-filter: blur(5px);
+  animation: dscbox 2s ease-in-out;
+  background: linear-gradient(#05149c0b, #ffffff29);
+  /* position: absolute; */
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  
+}
+
+.sdas {
+  width: 85px;
+  height: 85px;
+  background: rgba(255, 255, 255, 0.224);
+  border-radius: 50%;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 35px 35px -4px rgba(255, 255, 255, 0.364),
+    inset 15px 15px 30px rgba(7, 110, 255, 0.327),
+    inset 1px -1px 14px rgba(255, 255, 255, 0.723);
+}
+
+.sdas img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.sdacont {
+  min-height: 20vh;
+  backdrop-filter: blur(4px);
+  min-width: 360px;
+  background: rgba(255, 255, 255, 0.001);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 12px;
+  text-align: center;
+  border-bottom: 3px solid rgba(36, 166, 242, 0.519);
+}

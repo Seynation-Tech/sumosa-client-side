@@ -1,5 +1,4 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
 import "./Home.css";
 import Mids from "../Charts/Mids";
 import Real from "../Charts/Real";
@@ -12,25 +11,36 @@ import settings from "../../Images/setting.png";
 import message from "../../Images/chat.png";
 import logout from "../../Images/login.png";
 import overview from "../../Images/routine.png";
-import Sidebar from '../Sidebar/Sidebar'
+import Sidebar from "../Sidebar/Sidebar";
+
+import { Link, useNavigate, NavLink } from "react-router-dom";
+import axios from "axios";
+import { AuthContext } from "../AuthContext";
+import moment from "moment";
+import DotLoader from "react-spinners/DotLoader";
+import Cookies from "cookie-universal";
+
+axios.defaults.withCredentials = true;
 
 const amount = 3000;
 
-export default function Home ()
-{
-
+export default function Home() {
+  const cookies = new Cookies();
+  const { currentUser,tokns, url, logoout } = useContext(AuthContext);
+  const [currentUsers, setCurrentUser] = useState(null);
+  const navigate = useNavigate();
 
   return (
     <div className="mainpage">
       <Sidebar />
-      {/* SECTION TWO THE CONTENT PAGE */ }
+      {/* SECTION TWO THE CONTENT PAGE */}
 
       <div className="sectiontwo">
         <div className="lineage"></div>
         <div className="upsection">
           <div className="leftsect">
             <div className="leftimg">
-              <img src={ overview } alt="" />
+              <img src={overview} alt="" />
             </div>
 
             <div className="over">
@@ -46,17 +56,17 @@ export default function Home ()
           </div>
 
           <div className="leftsect">
-            {/* <img src="" alt="" /> */ }
+            {/* <img src="" alt="" /> */}
 
-            {/* <p id='thisw'>This week</p> */ }
+            {/* <p id='thisw'>This week</p> */}
             <div className="leftimgs">
-              <img src={ message } alt="" />
+              <img src={message} alt="" />
             </div>
             <div className="leftimgs">
-              <img src={ message } alt="" />
+              <img src={message} alt="" />
             </div>
             <div className="leftimgs">
-              <img src={ settings } alt="" />
+              <img src={settings} alt="" />
             </div>
           </div>
         </div>
@@ -66,7 +76,7 @@ export default function Home ()
             <div className="left">
               <div className="head">
                 <div className="leftims">
-                  <img src={ settings } alt="" />
+                  <img src={settings} alt="" />
                 </div>
 
                 <div className="headword">
@@ -80,7 +90,7 @@ export default function Home ()
 
               <div className="head">
                 <div className="leftims">
-                  <img src={ settings } alt="" />
+                  <img src={settings} alt="" />
                 </div>
 
                 <div className="headword">
@@ -95,14 +105,13 @@ export default function Home ()
               <div className="grap">
                 <p>Graphical data analysis</p>
               </div>
-
             </div>
 
             <div className="right">
               <div className="lowersects">
-                {/* <div className="logimg"> */ }
-                {/* <img src={ logout } alt="" /> */ }
-                {/* </div> */ }
+                {/* <div className="logimg"> */}
+                {/* <img src={ logout } alt="" /> */}
+                {/* </div> */}
 
                 <div className="cc">
                   <p>General Data</p>
@@ -114,7 +123,7 @@ export default function Home ()
                 <div className="l">
                   <div className="petrol">
                     <div className="pimg">
-                      <img src={ petrol } alt="" />
+                      <img src={petrol} alt="" />
                     </div>
 
                     <div className="ss">
@@ -122,7 +131,7 @@ export default function Home ()
 
                       <div className="pri">
                         <p>Tsh 23000</p>
-                        {/* <img src={pend} alt="" /> */ }
+                        {/* <img src={pend} alt="" /> */}
                       </div>
                     </div>
                   </div>
@@ -131,7 +140,7 @@ export default function Home ()
                 <div className="r">
                   <div className="ds"></div>
 
-                  {/* <div className="ds"></div> */ }
+                  {/* <div className="ds"></div> */}
                 </div>
               </div>
 
@@ -139,15 +148,15 @@ export default function Home ()
                 <div className="l">
                   <div className="petrol">
                     <div className="pimg">
-                      <img src={ petrol } alt="" />
+                      <img src={petrol} alt="" />
                     </div>
 
                     <div className="ss">
                       <p id="gs">Diesel</p>
 
                       <div className="pri">
-                        <p>Tsh { amount.toLocaleString() }</p>
-                        {/* <img src={pend} alt="" /> */ }
+                        <p>Tsh {amount.toLocaleString()}</p>
+                        {/* <img src={pend} alt="" /> */}
                       </div>
                     </div>
                   </div>
@@ -156,19 +165,19 @@ export default function Home ()
                 <div className="r">
                   <div className="ds"></div>
 
-                  {/* <div className="ds"></div> */ }
+                  {/* <div className="ds"></div> */}
                 </div>
               </div>
 
               <div className="midsects">
                 <div className="sectconts">
-                  {/* <img src={ home } alt="" /> */ }
+                  {/* <img src={ home } alt="" /> */}
                   <p>Metrics</p>
                 </div>
 
                 <div className="sectconty">
                   <div className="sst">
-                    <img src={ report } alt="" />
+                    <img src={report} alt="" />
                     <p>Sales</p>
                   </div>
 
@@ -179,7 +188,7 @@ export default function Home ()
 
                 <div className="sectconty">
                   <div className="sst">
-                    <img src={ report } alt="" />
+                    <img src={report} alt="" />
                     <p>Expenses</p>
                   </div>
 
@@ -190,7 +199,7 @@ export default function Home ()
 
                 <div className="sectconty">
                   <div className="sst">
-                    <img src={ report } alt="" />
+                    <img src={report} alt="" />
                     <p>Remained Debts</p>
                   </div>
 
@@ -201,7 +210,7 @@ export default function Home ()
 
                 <div className="sectconty">
                   <div className="sst">
-                    <img src={ stock } alt="" />
+                    <img src={stock} alt="" />
                     <p>Dipstick Stock</p>
                   </div>
 
@@ -212,20 +221,18 @@ export default function Home ()
               </div>
             </div>
           </div>
-
         </div>
       </div>
 
       <div className="sectionthree">
         <div className="lowersecta">
           <div className="logimg">
-            <img src={ logout } alt="" />
+            <img src={logout} alt="" />
           </div>
           <p>Log out</p>
         </div>
         <div className="first">
           <div className="fs">
-
             <div className="ex">
               <img src="" alt="" />
               <p>Collection</p>
@@ -234,8 +241,6 @@ export default function Home ()
             <div className="curr">
               <p>currences</p>
             </div>
-
-
           </div>
           <div className="sc">
             <div className="pd">
@@ -251,20 +256,22 @@ export default function Home ()
                 <img src="" alt="" />
                 <p>Diesel</p>
               </div>
-
             </div>
             <div className="totalamount">
               <div className="tot">
-                {/* <img src="" alt="" /> */ }
-                {/* <p id="ids">Total Amount</p> */ }
+                {/* <img src="" alt="" /> */}
+                {/* <p id="ids">Total Amount</p> */}
               </div>
 
-              <p>Tsh { String( 10000000 ).toLocaleString() }</p>
-              <p><span id="aval"> Cash: </span>Tsh { String( 5000000 ).toLocaleString() }</p>
+              <p>Tsh {String(10000000).toLocaleString()}</p>
+              <p>
+                <span id="aval"> Cash: </span>Tsh{" "}
+                {String(5000000).toLocaleString()}
+              </p>
             </div>
 
             <div className="remamount">
-              <p>Remain: { String( 12000000 ).toLocaleString() }/=</p>
+              <p>Remain: {String(12000000).toLocaleString()}/=</p>
             </div>
           </div>
           <div className="thr">
@@ -305,27 +312,26 @@ export default function Home ()
         <div className="second">
           <div className="midsectss">
             <div className="sectconta">
-
               <p>Debtors</p>
             </div>
 
             <div className="sectcontt">
-              <img src={ sales } alt="" />
+              <img src={sales} alt="" />
               <p>Sales</p>
             </div>
 
             <div className="sectcontt">
-              <img src={ epxenses } alt="" />
+              <img src={epxenses} alt="" />
               <p>Epxenses</p>
             </div>
 
             <div className="sectcontt">
-              <img src={ report } alt="" />
+              <img src={report} alt="" />
               <p>Daily Report</p>
             </div>
 
             <div className="sectcontt">
-              <img src={ stock } alt="" />
+              <img src={stock} alt="" />
               <p>Dipstick Stock</p>
             </div>
 
@@ -333,11 +339,7 @@ export default function Home ()
               <p>Details</p>
             </div>
           </div>
-
-
         </div>
-
-
       </div>
     </div>
   );

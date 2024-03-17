@@ -341,7 +341,23 @@ body {
     flex-direction: column;
     padding: 12px;
     text-align: center;
-    border: 3px solid rgba(255, 255, 255, 0.591);
+    border: 3px solid rgba(255, 255, 255, 0.243);
+  }
+  
+
+  .sdaconts {
+    min-height: 20vh;
+    backdrop-filter: blur(4px);
+    min-width: 360px;
+    background: rgba(1, 37, 114, 0.041);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.243);
   }
   
 
@@ -415,12 +431,12 @@ body {
   }
 
   .contentonesy{
-    /* background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145)); */
+    background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
       display: flex;
       flex-direction: column;
       gap: 7px;
-      width: 85%;
-      min-height: 53vh;
+      width: 45%;
+      min-height: 63vh;
       margin-top: -114px;
       justify-content: center;
       align-items: center;
@@ -428,7 +444,7 @@ body {
   }
 
   .contentonesa{
-    background: linear-gradient(to right, rgb(5, 90, 194), rgb(4, 1, 145));
+    background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
       display: flex;
       flex-direction: column;
       gap: 7px;

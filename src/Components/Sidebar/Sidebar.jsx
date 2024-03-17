@@ -1,5 +1,4 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext, useEffect, useState } from 'react'
 import home from "../../Images/hoo.png";
 import logos from "../../Images/sumoo.png";
 import profile from "../../Images/one.png";
@@ -9,7 +8,23 @@ import report from "../../Images/repo.png";
 import stock from "../../Images/stock.png";
 import logout from "../../Images/login.png";
 
+
+import { Link, useNavigate, NavLink } from "react-router-dom";
+import axios from "axios";
+import { AuthContext } from "../AuthContext";
+import moment from "moment";
+import DotLoader from "react-spinners/DotLoader";
+import Cookies from "cookie-universal";
+
+axios.defaults.withCredentials = true;
+
 export default function Sidebar() {
+
+    const cookies = new Cookies();
+    const { currentUser,tokns, url, logoout } = useContext(AuthContext);
+    const [currentUsers, setCurrentUser] = useState(null);
+    const navigate = useNavigate();
+
   return (
     <div className="sectionone">
       <div className="uppersect">
@@ -22,8 +37,8 @@ export default function Sidebar() {
           <img src={profile} alt="" />
         </div>
         <div className="profcaption">
-          <p>Salum Ally</p>
-          <p>Station Manager</p>
+          <p>{currentUser[0]?.name}</p>
+          <p>{currentUser[0]?.role}</p>
         </div>
       </div>
 
@@ -66,12 +81,18 @@ export default function Sidebar() {
 
        
       </div>
-      <div className="lowersect">
+
+      <NavLink className="lowersect" to="/">
+          
+     
         <div className="logimg">
           <img src={logout} alt="" />
         </div>
         <p>Log out</p>
-      </div>
+   
+        </NavLink>
+
+     
 
       <div className="copyright">
         <p>copyright @2024</p>
