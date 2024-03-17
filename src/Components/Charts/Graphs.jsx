@@ -52,11 +52,10 @@ const data = [
 ];
 
 export default class Example extends PureComponent {
-  static demoUrl = 'https://codesandbox.io/s/composed-chart-with-axis-label-55s1s';
 
   render() {
     return (
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="110%" height="40%">
         <ComposedChart
           width={500}
           height={400}
@@ -74,7 +73,7 @@ export default class Example extends PureComponent {
           <Tooltip />
           <Legend />
           <Area type="monotone" dataKey="amt" fill="#8884d8" stroke="#8884d8" />
-          <Bar dataKey="pv" barSize={20} fill="#413ea0" />
+          <Bar dataKey="pv" barSize={50} fill="#413ea0" />
           <Line type="monotone" dataKey="uv" stroke="#ff7300" />
         </ComposedChart>
       </ResponsiveContainer>

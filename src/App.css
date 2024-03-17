@@ -29,3 +29,8 @@ body {
   font-size: 0.6rem;
   font-family: Roboto, sans-serif;
 }
+
+a{
+  text-decoration: none;
+  color: white;
+}
