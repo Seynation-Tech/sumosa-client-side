@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const data = [
   {
@@ -47,27 +47,14 @@ const data = [
 ];
 
 export default class Example extends PureComponent {
+  static demoUrl = 'https://codesandbox.io/s/tiny-line-chart-r5z0f';
 
   render() {
     return (
-      <ResponsiveContainer width="100%" height="40%">
-        <AreaChart
-          width={500}
-          height={400}
-          data={data}
-          margin={{
-            top: 10,
-            right: 30,
-            left: 0,
-            bottom: 0,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#0001ff" />
-        </AreaChart>
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart width={300} height={100} data={data}>
+          <Line type="monotone" dataKey="pv" stroke="#8884d8" strokeWidth={2} />
+        </LineChart>
       </ResponsiveContainer>
     );
   }

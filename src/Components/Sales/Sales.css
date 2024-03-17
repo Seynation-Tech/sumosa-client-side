@@ -368,7 +368,7 @@
   /* border-bottom: 1px solid rgba(255, 255, 255, 0.275); */
   border-top-left-radius: 9px;
   border-top-right-radius: 9px;
-  font-size: 0.8em;
+  font-size: 1em;
   justify-content: space-between;
   align-items: center;
   /* padding-left: 12px; */
@@ -400,12 +400,18 @@
 
 .tbb p:nth-child(3){
   position: absolute;
-  left: 51%;
+  left: 46.9%;
 }
 
 .tbb p:nth-child(4){
   position: absolute;
-  left: 73%;
+  left: 66.7%;
+}
+
+.tbb p:nth-child(5){
+  position: absolute;
+  left: 76.6%;
+  
 }
 
 
@@ -512,14 +518,35 @@ tbody tr:last-of-type {
   color: rgba(255, 0, 0, 0.705);
   font-weight: bold;
   font-size: 0.9em;
-  /* background: rgb(255, 255, 255); */
+  background: rgba(21, 17, 255, 0.074);
 }
 
+.pesa{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  right: -7px;
+}
 
+.mpesa{
+  width: 100px;
+  height: 34px;
+  background-color: rgba(17, 9, 255, 0.997);;
+  font-size: 1.3em;;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  margin-left: 12px;
+  cursor: pointer;
+
+}
 
 .search {
   height: 37px;
-  width: 40%;
+  width: 30%;
   border-radius: 9px;
   display: flex;
   justify-content: center;
