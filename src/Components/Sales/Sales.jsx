@@ -19,7 +19,7 @@ let date =
   (today.getMonth() + 1) +
   "/" +
   today.getFullYear() +
-  " " +
+  "," +
   today.getHours() +
   ":" +
   today.getMinutes();
@@ -29,7 +29,7 @@ let mydate =
   (today.getMonth() + 1) +
   "/" +
   today.getFullYear() +
-  " " +
+  "," +
   today.getHours() +
   ":" +
   today.getMinutes() +
@@ -46,10 +46,10 @@ export default function Sales() {
   const { url, login } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
-  const [totalEarnings,setEarnings] = useState("0")
-  const [dieselAmount,setdieselAmount] = useState("0")
-  const [petrolAmount,setpetrolAmount] = useState("0")
-  const [reasons,setReasons]= useState(false)
+  const [totalEarnings, setEarnings] = useState("0");
+  const [dieselAmount, setdieselAmount] = useState("0");
+  const [petrolAmount, setpetrolAmount] = useState("0");
+  const [reasons, setReasons] = useState(false);
 
   const navigate = useNavigate();
 
@@ -78,31 +78,42 @@ export default function Sales() {
           withCredentials: true,
         });
 
-        const dieselamout = Number(res.data[0].diesel)
-        const petrolamount = Number(res.data[0].petrol)
+        const dieselamout = Number(res.data[0].diesel);
+        const petrolamount = Number(res.data[0].petrol);
 
-        
+        const pmsoneAmount =
+          Number(
+            Number(resptwo.data[0].closingdigital) -
+              Number(resptwo.data[0].openingdigital)
+          ) * petrolamount;
+        const pmstwoAmount =
+          Number(
+            Number(respfour.data[0].closingdigital) -
+              Number(respfour.data[0].openingdigital)
+          ) * petrolamount;
 
-
-        const pmsoneAmount = Number(Number(resptwo.data[0].closingdigital)-Number(resptwo.data[0].openingdigital))*(petrolamount)
-        const pmstwoAmount = Number(Number(respfour.data[0].closingdigital)-Number(respfour.data[0].openingdigital))*(petrolamount)
-
-        const agooneAmount =Number( Number(respone.data[0].closingdigital)-Number(respone.data[0].openingdigital))*(dieselamout)
-        const agotwoAmount =Number(Number(respthree.data[0].closingdigital)-Number(respthree.data[0].openingdigital))*(dieselamout)
+        const agooneAmount =
+          Number(
+            Number(respone.data[0].closingdigital) -
+              Number(respone.data[0].openingdigital)
+          ) * dieselamout;
+        const agotwoAmount =
+          Number(
+            Number(respthree.data[0].closingdigital) -
+              Number(respthree.data[0].openingdigital)
+          ) * dieselamout;
 
         // console.log(pmsoneAmount,pmstwoAmount,agooneAmount,agotwoAmount)
 
-        const totalAmount = Number((pmsoneAmount)+(pmstwoAmount)+(agooneAmount)+(agotwoAmount))
-        const totalPetrol = Number(pmsoneAmount)+ Number(pmstwoAmount)
-        const totalDiesel= Number(agooneAmount)+ Number(agotwoAmount)
+        const totalAmount = Number(
+          pmsoneAmount + pmstwoAmount + agooneAmount + agotwoAmount
+        );
+        const totalPetrol = Number(pmsoneAmount) + Number(pmstwoAmount);
+        const totalDiesel = Number(agooneAmount) + Number(agotwoAmount);
 
-        setdieselAmount(totalDiesel)
-        setpetrolAmount(totalPetrol)
-        setEarnings(totalAmount)
-
-        
-        
-
+        setdieselAmount(totalDiesel);
+        setpetrolAmount(totalPetrol);
+        setEarnings(totalAmount);
       } catch (err) {
         // console.log(err)
       }
@@ -110,14 +121,13 @@ export default function Sales() {
     fetchData();
   }, []);
 
-  const handleReasons = ()=> {
-    setReasons(true)
-  }
+  const handleReasons = () => {
+    setReasons(true);
+  };
 
-  const cancelReason = ()=> {
-    setReasons(false)
-  }
-
+  const cancelReason = () => {
+    setReasons(false);
+  };
 
   const handleHandle = () => {
     setPrices(true);
@@ -127,13 +137,11 @@ export default function Sales() {
     setPrices(false);
   };
 
-  const reasonsHandler = async()=>{
-
+  const reasonsHandler = async () => {
     try {
       let pricings = {
         uid: date,
-        petrol: petrolprice,
-        diesel: dieselprice,
+        petrol: petrolprice
       };
 
       // console.log(pmsOne)
@@ -149,8 +157,7 @@ export default function Sales() {
       console.log(err);
       // setError( "Please refresh..." );
     }
-
-  }
+  };
 
   const priceHandler = async () => {
     try {
@@ -258,7 +265,7 @@ export default function Sales() {
             <div className="ours">
               <div className="sdacont">
                 <div className="jins">
-                  <p>CHANGE MONTHLY PRICE </p>
+                  <p>TOTAL CASH DIFFERENCES</p>
                 </div>
                 <div className="forms">
                   <div className="input-two">
