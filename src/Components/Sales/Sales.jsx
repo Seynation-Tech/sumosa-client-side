@@ -46,6 +46,8 @@ export default function Sales() {
   const { url, login } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
+  const [totalEarnings,setEarnings] = useState("0")
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -73,10 +75,26 @@ export default function Sales() {
           withCredentials: true,
         });
 
-        console.log(respone.data);
-        console.log(resptwo.data);
-        console.log(respthree.data);
-        console.log(respfour.data);
+        const dieselamout = Number(res.data[0].diesel)
+        const petrolamount = Number(res.data[0].petrol)
+
+        
+
+
+        const pmsoneAmount = Number(Number(resptwo.data[0].closingdigital)-Number(resptwo.data[0].openingdigital))*(petrolamount)
+        const pmstwoAmount = Number(Number(respfour.data[0].closingdigital)-Number(respfour.data[0].openingdigital))*(petrolamount)
+
+        const agooneAmount =Number( Number(respone.data[0].closingdigital)-Number(respone.data[0].openingdigital))*(dieselamout)
+        const agotwoAmount =Number(Number(respthree.data[0].closingdigital)-Number(respthree.data[0].openingdigital))*(dieselamout)
+
+        // console.log(pmsoneAmount,pmstwoAmount,agooneAmount,agotwoAmount)
+
+        const totalAmount = Number((pmsoneAmount)+(pmstwoAmount)+(agooneAmount)+(agotwoAmount))
+        setEarnings(totalAmount)
+
+        
+        
+
       } catch (err) {
         // console.log(err)
       }
@@ -145,7 +163,7 @@ export default function Sales() {
 
               <div className="en">
                 <div className="mon">
-                  <p>Tsh 2300230230</p>
+                  <p>Tsh {totalEarnings}</p>
                 </div>
                 <div className="mm">
                   <img src="" alt="" />
