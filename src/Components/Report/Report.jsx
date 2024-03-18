@@ -28,60 +28,68 @@ import Cookies from "cookie-universal";
 
 axios.defaults.withCredentials = true;
 
-export default function Expenses() {
-  const [pesa, setPesa] = useState(false);
-  const [debts, setDebts] = useState(false);
-  const [stocks, setStocks] = useState(false);
-  const [moneycount, setMoneycount] = useState(false);
-  const [status, setStatus] = useState("");
+export default function Expenses ()
+{
+  const [ pesa, setPesa ] = useState( false );
+  const [ debts, setDebts ] = useState( false );
+  const [ stocks, setStocks ] = useState( false );
+  const [ moneycount, setMoneycount ] = useState( false );
+  const [ status, setStatus ] = useState( "" );
 
-  const { url, login } = useContext(AuthContext);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const { url, login } = useContext( AuthContext );
+  const [ loading, setLoading ] = useState( false );
+  const [ error, setError ] = useState( null );
 
-  const [pmsonedigOpening, setPmsonedigOpening] = useState("");
-  const [pmsonedigClosing, setPmsonedigClosing] = useState("");
+  const [ pmsonedigOpening, setPmsonedigOpening ] = useState( "" );
+  const [ pmsonedigClosing, setPmsonedigClosing ] = useState( "" );
 
-  const [pmsoneanalogOpening, setPmsoneanalogOpening] = useState("");
-  const [pmsoneanalogClosing, setPmsoneanalogClosing] = useState("");
+  const [ pmsoneanalogOpening, setPmsoneanalogOpening ] = useState( "" );
+  const [ pmsoneanalogClosing, setPmsoneanalogClosing ] = useState( "" );
 
-  const [pmstwodigOpening, setPmstwodigOpening] = useState("");
-  const [pmstwodigClosing, setPmstwodigClosing] = useState("");
+  const [ pmstwodigOpening, setPmstwodigOpening ] = useState( "" );
+  const [ pmstwodigClosing, setPmstwodigClosing ] = useState( "" );
 
-  const [pmstwoanalogOpening, setPmstwoanalogOpening] = useState("");
-  const [pmstwoanalogClosing, setPmstwoanalogClosing] = useState("");
+  const [ pmstwoanalogOpening, setPmstwoanalogOpening ] = useState( "" );
+  const [ pmstwoanalogClosing, setPmstwoanalogClosing ] = useState( "" );
 
-  const [agoonedigOpening, setAgoonedigOpening] = useState("");
-  const [agoonedigClosing, setAgoonedigClosing] = useState("");
+  const [ agoonedigOpening, setAgoonedigOpening ] = useState( "" );
+  const [ agoonedigClosing, setAgoonedigClosing ] = useState( "" );
 
-  const [agooneanalogOpening, setAgooneanalogOpening] = useState("");
-  const [agooneanalogClosing, setAgooneanalogClosing] = useState("");
+  const [ agooneanalogOpening, setAgooneanalogOpening ] = useState( "" );
+  const [ agooneanalogClosing, setAgooneanalogClosing ] = useState( "" );
 
-  const [agotwodigOpening, setAgotwodigOpening] = useState("");
-  const [agotwodigClosing, setAgotwodigClosing] = useState("");
+  const [ agotwodigOpening, setAgotwodigOpening ] = useState( "" );
+  const [ agotwodigClosing, setAgotwodigClosing ] = useState( "" );
 
-  const [agotwoanalogOpening, setAgotwoanalogOpening] = useState("");
-  const [agotwoanalogClosing, setAgotwoanalogClosing] = useState("");
+  const [ agotwoanalogOpening, setAgotwoanalogOpening ] = useState( "" );
+  const [ agotwoanalogClosing, setAgotwoanalogClosing ] = useState( "" );
 
-  const [mPesa, setMpesa] = useState("");
-  const [crdb, setCrdb] = useState("");
-  const [nmb, setNmb] = useState("");
+  const [ mPesa, setMpesa ] = useState( "" );
+  const [ crdb, setCrdb ] = useState( "" );
+  const [ nmb, setNmb ] = useState( "" );
 
-  const [name, setName] = useState("");
-  const [amount, setAmount] = useState("");
+  const [ name, setName ] = useState( "" );
+  const [ amount, setAmount ] = useState( "" );
 
-  const [tenths,setTenths] = useState("")
-  const [fiveths,setFiveths] = useState("")
-  const [twoths,setTwoths] = useState("")
-  const [oneths,setOneths] = useState("")
-  const [fivehs,setFivehs] = useState("")
-  const [twohs,setTwohs] = useState("")
-  const [onehs,setOnehs] = useState("")
-  const [fiftys,setFiftys] = useState("")
+  const [ tenths, setTenths ] = useState( "" )
+  const [ fiveths, setFiveths ] = useState( "" )
+  const [ twoths, setTwoths ] = useState( "" )
+  const [ oneths, setOneths ] = useState( "" )
+  const [ fivehs, setFivehs ] = useState( "" )
+  const [ twohs, setTwohs ] = useState( "" )
+  const [ onehs, setOnehs ] = useState( "" )
+  const [ fiftys, setFiftys ] = useState( "" )
+
+  const [ pmsphyscal, setPhysicalpms ] = useState( "" );
+  const [ pmsdispst, setDipstpms ] = useState( "" )
+
+  const [ agophyscal, setPhysicalago ] = useState( "" );
+  const [ agodispst, setDipstago ] = useState( "" )
 
   const navigate = useNavigate();
 
-  const literHandler = async () => {
+  const literHandler = async () =>
+  {
     // if (
     //   pmsonedigOpening &&
     //   pmsonedigClosing &&
@@ -93,10 +101,11 @@ export default function Expenses() {
     //   agooneanalogClosing
     // ) {
 
-    console.log("hell in");
-    try {
+    console.log( "hell in" );
+    try
+    {
       let pmsOne = {
-        uid: "monday",
+        uid: "tuesday",
         closingsanalog: pmsoneanalogClosing,
         closingdigital: pmsonedigClosing,
         openinganalog: pmsoneanalogOpening,
@@ -104,7 +113,7 @@ export default function Expenses() {
       };
 
       let pmsTwo = {
-        uid: "monday",
+        uid: "tuesday",
         closingsanalog: pmstwoanalogClosing,
         closingdigital: pmstwodigClosing,
         openinganalog: pmstwoanalogOpening,
@@ -112,7 +121,7 @@ export default function Expenses() {
       };
 
       let agoOne = {
-        uid: "monday",
+        uid: "tuesday",
         closingsanalog: agooneanalogClosing,
         closingdigital: agoonedigClosing,
         openinganalog: agooneanalogOpening,
@@ -120,7 +129,7 @@ export default function Expenses() {
       };
 
       let agoTwo = {
-        uid: "monday",
+        uid: "tuesday",
         closingsanalog: agotwoanalogClosing,
         closingdigital: agotwodigClosing,
         openinganalog: agotwoanalogOpening,
@@ -129,22 +138,23 @@ export default function Expenses() {
 
       // console.log(pmsOne)
 
-      const resone = await axios.post(`${url}/api/pumps/petrol`, pmsOne);
-      const restwo = await axios.post(`${url}/api/pumps/petroltwo`, pmsTwo);
-      const resthree = await axios.post(`${url}/api/pumps/diesel`, agoOne);
-      const resfour = await axios.post(`${url}/api/pumps/dieseltwo`, agoTwo);
+      const resone = await axios.post( `${ url }/api/pumps/petrol`, pmsOne );
+      const restwo = await axios.post( `${ url }/api/pumps/petroltwo`, pmsTwo );
+      const resthree = await axios.post( `${ url }/api/pumps/diesel`, agoOne );
+      const resfour = await axios.post( `${ url }/api/pumps/dieseltwo`, agoTwo );
 
       // console.log(res)
-      console.log(resone.data);
-      console.log(restwo.data);
-      console.log(resthree.data);
-      console.log(resfour.data);
+      console.log( resone.data );
+      console.log( restwo.data );
+      console.log( resthree.data );
+      console.log( resfour.data );
 
       //
-    } catch (err) {
-      setLoading(false);
-      console.log(err);
-      setError("Please refresh...");
+    } catch ( err )
+    {
+      setLoading( false );
+      console.log( err );
+      setError( "Please refresh..." );
     }
 
     // }else{
@@ -152,8 +162,10 @@ export default function Expenses() {
     // }
   };
 
-  const pesaHandler = async () => {
-    try {
+  const pesaHandler = async () =>
+  {
+    try
+    {
       let virtualmoney = {
         uid: "monday",
         mpesa: mPesa,
@@ -166,23 +178,26 @@ export default function Expenses() {
       // console.log(pmsOne)
 
       const resone = await axios.post(
-        `${url}/api/billing/virtmoney`,
+        `${ url }/api/billing/virtmoney`,
         virtualmoney
       );
 
       // console.log(res)
-      console.log(resone.data);
+      console.log( resone.data );
 
       //
-    } catch (err) {
-      setLoading(false);
-      console.log(err);
-      setError("Please refresh...");
+    } catch ( err )
+    {
+      setLoading( false );
+      console.log( err );
+      setError( "Please refresh..." );
     }
   };
 
-  const debtsHandler = async () => {
-    try {
+  const debtsHandler = async () =>
+  {
+    try
+    {
       let debtors = {
         uid: "monday",
         name: name,
@@ -192,21 +207,60 @@ export default function Expenses() {
 
       // console.log(pmsOne)
 
-      const resone = await axios.post(`${url}/api/billing/debtors`, debtors);
+      const resone = await axios.post( `${ url }/api/billing/debtors`, debtors );
 
       // console.log(res)
-      console.log(resone.data);
+      console.log( resone.data );
 
       //
-    } catch (err) {
-      setLoading(false);
-      console.log(err);
-      setError("Please refresh...");
+    } catch ( err )
+    {
+      setLoading( false );
+      console.log( err );
+      setError( "Please refresh..." );
     }
   };
 
-  const moneycountHandler = async() => {
-    try {
+  const stocksHandler = async () =>
+  {
+    try
+    {
+      let pmsStock = {
+        uid: "friday",
+        physical: pmsphyscal,
+        dipstick: pmsdispst,
+        difference: Number( pmsphyscal ) - Number( pmsdispst )
+      };
+
+      let agoStock = {
+        uid: "friday",
+        physical: agophyscal,
+        dipstick: agodispst,
+        difference: Number( agophyscal ) - Number( agodispst )
+      };
+
+      // console.log(pmsOne)
+
+      const resone = await axios.post( `${ url }/api/billing/pmsfuelstock`, pmsStock );
+      const reson = await axios.post( `${ url }/api/billing/agofuelstock`, agoStock );
+
+      // console.log(res)
+      console.log( resone.data );
+      console.log( reson.data );
+
+      //
+    } catch ( err )
+    {
+      setLoading( false );
+      console.log( err );
+      setError( "Please refresh..." );
+    }
+  }
+
+  const moneycountHandler = async () =>
+  {
+    try
+    {
       let collections = {
         uid: "monday",
         tenth: tenths,
@@ -221,57 +275,64 @@ export default function Expenses() {
 
       // console.log(pmsOne)
 
-      const resone = await axios.post(`${url}/api/billing/collectmoney`, collections);
+      const resone = await axios.post( `${ url }/api/billing/collectmoney`, collections );
 
       // console.log(res)
-      console.log(resone.data);
+      console.log( resone.data );
 
       //
-    } catch (err) {
-      setLoading(false);
-      console.log(err);
-      setError("Please refresh...");
+    } catch ( err )
+    {
+      setLoading( false );
+      console.log( err );
+      setError( "Please refresh..." );
     }
   };
 
-  const submitButton = async (e) => {
+  const submitButton = async ( e ) =>
+  {
     e.preventDefault();
-    setLoading(true);
+    setLoading( true );
   };
 
-  const handlePesa = () => {
-    setStocks(false);
-    setMoneycount(false);
-    setDebts(false);
-    setPesa(true);
+  const handlePesa = () =>
+  {
+    setStocks( false );
+    setMoneycount( false );
+    setDebts( false );
+    setPesa( true );
   };
 
-  const handleDebt = () => {
-    setPesa(false);
-    setMoneycount(false);
-    setStocks(false);
-    setDebts(true);
+  const handleDebt = () =>
+  {
+    setPesa( false );
+    setMoneycount( false );
+    setStocks( false );
+    setDebts( true );
   };
 
-  const handleMoneycount = () => {
-    setPesa(false);
-    setStocks(false);
-    setDebts(false);
-    setMoneycount(true);
+  const handleMoneycount = () =>
+  {
+    setPesa( false );
+    setStocks( false );
+    setDebts( false );
+    setMoneycount( true );
   };
 
-  const handleStocks = () => {
-    setPesa(false);
-    setDebts(false);
-    setMoneycount(false);
-    setStocks(true);
+  const handleStocks = () =>
+  {
+    setPesa( false );
+    setDebts( false );
+    setMoneycount( false );
+    setStocks( true );
   };
 
-  const handleAll = () => {
-    setPesa(false);
-    setDebts(false);
-    setMoneycount(false);
-    setStocks(false);
+  const handleAll = () =>
+  {
+    setPesa( false );
+    setDebts( false );
+    setMoneycount( false );
+    setStocks( false );
   };
 
   return (
@@ -286,23 +347,23 @@ export default function Expenses() {
         </div>
         <div className="year">
           <div className="dail">
-            <p onClick={handleAll}>LITRES</p>
+            <p onClick={ handleAll }>LITRES</p>
           </div>
 
           <div className="dail">
-            <p onClick={handlePesa}>ONLINE PAY</p>
+            <p onClick={ handlePesa }>ONLINE PAY</p>
           </div>
 
           <div className="dail">
-            <p onClick={handleDebt}>DEBTS</p>
+            <p onClick={ handleDebt }>DEBTS</p>
           </div>
 
           <div className="dail">
-            <p onClick={handleMoneycount}>MONEY COUNTS</p>
+            <p onClick={ handleMoneycount }>MONEY COUNTS</p>
           </div>
 
           <div className="dail">
-            <p onClick={handleStocks}>FUEL STOCK</p>
+            <p onClick={ handleStocks }>FUEL STOCK</p>
           </div>
 
           <div className="download">
@@ -313,10 +374,10 @@ export default function Expenses() {
             </div>
           </div>
         </div>
-        {/* <Real /> */}
+        {/* <Real /> */ }
 
         <div className="lsa">
-          {pesa && (
+          { pesa && (
             <div className="poppesa">
               <div className="contentones">
                 <div className="jins">
@@ -324,46 +385,46 @@ export default function Expenses() {
                 </div>
                 <div className="chote">
                   <div className="bone">
-                    <div className="thetwos">{/* <p>CLOSINGS</p> */}</div>
+                    <div className="thetwos">{/* <p>CLOSINGS</p> */ }</div>
                     <div className="thetwos">
                       <input
                         type="text"
                         placeholder="M-pesa"
-                        value={mPesa}
-                        onChange={(e) => setMpesa(e.target.value)}
+                        value={ mPesa }
+                        onChange={ ( e ) => setMpesa( e.target.value ) }
                       />
                     </div>
                     <div className="thetwos">
                       <input
                         type="text"
                         placeholder="NMB"
-                        value={nmb}
-                        onChange={(e) => setNmb(e.target.value)}
+                        value={ nmb }
+                        onChange={ ( e ) => setNmb( e.target.value ) }
                       />
                     </div>
                     <div className="thetwos">
                       <input
                         type="text"
                         placeholder="CRDB"
-                        value={crdb}
-                        onChange={(e) => setCrdb(e.target.value)}
+                        value={ crdb }
+                        onChange={ ( e ) => setCrdb( e.target.value ) }
                       />
                     </div>
                   </div>
 
                   <div className="bone">
-                    <div className="thetwos">{/* <p></p> */}</div>
+                    <div className="thetwos">{/* <p></p> */ }</div>
 
                     <div className="thetwo">
-                      <button onClick={pesaHandler}>Submit</button>
+                      <button onClick={ pesaHandler }>Submit</button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          )}
+          ) }
 
-          {stocks && (
+          { stocks && (
             <div className="poppesa">
               <div className="contentonest">
                 <div className="jins">
@@ -371,25 +432,59 @@ export default function Expenses() {
                 </div>
                 <div className="chote">
                   <div className="bone">
-                    <div className="thetwos">{/* <p>CLOSINGS</p> */}</div>
+                    <div className="thetwos">{/* <p>CLOSINGS</p> */ }</div>
+
+                    <div className="twos">
+                      <p>PETROL STOCK</p>
+                    </div>
 
                     <div className="thetwos">
-                      <input type="text" placeholder="Physical stock" />
+                      <input type="text" placeholder="Physical stock" 
+                       value={pmsphyscal}
+                       onChange={(e) => setPhysicalpms(e.target.value)}
+                      />
                     </div>
                     <div className="thetwos">
-                      <input type="text" placeholder="Dipstick stock" />
+                      <input type="text" placeholder="Dipstick stock" 
+                       value={pmsdispst}
+                       onChange={(e) => setDipstpms(e.target.value)}
+                      />
                     </div>
+
+                    <div className="twos">
+                      <p>DIESEL STOCK</p>
+                    </div>
+
+                    <div className="thetwos">
+                      <input type="text" placeholder="Physical stock" 
+                       value={agophyscal}
+                       onChange={(e) => setPhysicalago(e.target.value)}
+                      />
+                    </div>
+                    <div className="thetwos">
+                      <input type="text" placeholder="Dipstick stock" 
+                       value={agodispst}
+                       onChange={(e) => setDipstago(e.target.value)}
+                      />
+                    </div>
+                    
 
                     <div className="thetwo">
-                      <button>Submit</button>
+                      <button onClick={ stocksHandler }>Submit</button>
                     </div>
                   </div>
+
+                  
+
+                  
+
+
                 </div>
               </div>
             </div>
-          )}
+          ) }
 
-          {debts && (
+          { debts && (
             <div className="poppesa">
               <div className="contentonesy">
                 <div className="ours">
@@ -399,27 +494,27 @@ export default function Expenses() {
                     </div>
                     <div className="forms">
                       <div className="input-two">
-                        {/* <i>icon</i> */}
+                        {/* <i>icon</i> */ }
                         <input
                           placeholder="Name"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
+                          value={ name }
+                          onChange={ ( e ) => setName( e.target.value ) }
                         />
                       </div>
 
                       <div className="input-two">
-                        {/* <i>icon</i> */}
+                        {/* <i>icon</i> */ }
                         <input
                           placeholder="Amount"
-                          value={amount}
-                          onChange={(e) => setAmount(e.target.value)}
+                          value={ amount }
+                          onChange={ ( e ) => setAmount( e.target.value ) }
                         />
                       </div>
                     </div>
 
                     <div className="remember-opt">
-                      <Link to="/" style={{ textDecoration: "none" }}>
-                        <button onClick={debtsHandler} className="sign-btn">
+                      <Link to="/" style={ { textDecoration: "none" } }>
+                        <button onClick={ debtsHandler } className="sign-btn">
                           Submit
                         </button>
                       </Link>
@@ -428,9 +523,9 @@ export default function Expenses() {
                 </div>
               </div>
             </div>
-          )}
+          ) }
 
-          {moneycount && (
+          { moneycount && (
             <div className="poppesaa">
               <div className="contentonesa">
                 <div className="jins">
@@ -442,59 +537,59 @@ export default function Expenses() {
                       <p>Enter Money counts</p>
                     </div>
                     <div className="thetwos">
-                      <input type="text" placeholder="10,000" 
-                       value={tenths}
-                       onChange={(e) => setTenths(e.target.value)}
+                      <input type="text" placeholder="10,000"
+                        value={ tenths }
+                        onChange={ ( e ) => setTenths( e.target.value ) }
                       />
                     </div>
                     <div className="thetwos">
-                      <input type="text" placeholder="5,000" 
-                       value={fiveths}
-                       onChange={(e) => setFiveths(e.target.value)}
+                      <input type="text" placeholder="5,000"
+                        value={ fiveths }
+                        onChange={ ( e ) => setFiveths( e.target.value ) }
                       />
                     </div>
                     <div className="thetwos">
-                      <input type="text" placeholder="2,000" 
-                       value={twoths}
-                       onChange={(e) => setTwoths(e.target.value)}
+                      <input type="text" placeholder="2,000"
+                        value={ twoths }
+                        onChange={ ( e ) => setTwoths( e.target.value ) }
                       />
                     </div>
 
                     <div className="thetwos">
-                      <input type="text" placeholder="1,000" 
-                       value={oneths}
-                       onChange={(e) => setOneths(e.target.value)}
+                      <input type="text" placeholder="1,000"
+                        value={ oneths }
+                        onChange={ ( e ) => setOneths( e.target.value ) }
                       />
                     </div>
 
                     <div className="thetwos">
                       <input type="text" placeholder="500"
-                       value={fivehs}
-                       onChange={(e) => setFivehs(e.target.value)}
+                        value={ fivehs }
+                        onChange={ ( e ) => setFivehs( e.target.value ) }
                       />
                     </div>
                   </div>
 
                   <div className="bone">
-                    <div className="thetwos">{/* <p></p> */}</div>
+                    <div className="thetwos">{/* <p></p> */ }</div>
                     <div className="thetwos">
-                      <input type="text" placeholder="200" 
-                       value={twohs}
-                       onChange={(e) => setTwohs(e.target.value)}
+                      <input type="text" placeholder="200"
+                        value={ twohs }
+                        onChange={ ( e ) => setTwohs( e.target.value ) }
                       />
                     </div>
 
                     <div className="thetwos">
-                      <input type="text" placeholder="100" 
-                       value={onehs}
-                       onChange={(e) => setOnehs(e.target.value)}
+                      <input type="text" placeholder="100"
+                        value={ onehs }
+                        onChange={ ( e ) => setOnehs( e.target.value ) }
                       />
                     </div>
 
                     <div className="thetwos">
-                      <input type="text" placeholder="50" 
-                       value={fiftys}
-                       onChange={(e) => setFiftys(e.target.value)}
+                      <input type="text" placeholder="50"
+                        value={ fiftys }
+                        onChange={ ( e ) => setFiftys( e.target.value ) }
                       />
                     </div>
 
@@ -502,14 +597,14 @@ export default function Expenses() {
                                             <input type="text" placeholder="CRDB" />
                                         </div> */}
                     <div className="thetwo">
-                      <button onClick={moneycountHandler}>Submit</button>
+                      <button onClick={ moneycountHandler }>Submit</button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          )}
-          {/* body contents */}
+          ) }
+          {/* body contents */ }
           <div className="body-contentc">
             <div className="our">
               <div className="bodyone">
@@ -526,9 +621,9 @@ export default function Expenses() {
                         <input
                           type="text"
                           placeholder="Analog values"
-                          value={pmsoneanalogClosing}
-                          onChange={(e) =>
-                            setPmsoneanalogClosing(e.target.value)
+                          value={ pmsoneanalogClosing }
+                          onChange={ ( e ) =>
+                            setPmsoneanalogClosing( e.target.value )
                           }
                         />
                       </div>
@@ -536,8 +631,8 @@ export default function Expenses() {
                         <input
                           type="text"
                           placeholder="Digital values"
-                          value={pmsonedigClosing}
-                          onChange={(e) => setPmsonedigClosing(e.target.value)}
+                          value={ pmsonedigClosing }
+                          onChange={ ( e ) => setPmsonedigClosing( e.target.value ) }
                         />
                       </div>
                     </div>
@@ -550,9 +645,9 @@ export default function Expenses() {
                         <input
                           type="text"
                           placeholder="Analog values"
-                          value={pmsoneanalogOpening}
-                          onChange={(e) =>
-                            setPmsoneanalogOpening(e.target.value)
+                          value={ pmsoneanalogOpening }
+                          onChange={ ( e ) =>
+                            setPmsoneanalogOpening( e.target.value )
                           }
                         />
                       </div>
@@ -560,8 +655,8 @@ export default function Expenses() {
                         <input
                           type="text"
                           placeholder="Digital values"
-                          value={pmsonedigOpening}
-                          onChange={(e) => setPmsonedigOpening(e.target.value)}
+                          value={ pmsonedigOpening }
+                          onChange={ ( e ) => setPmsonedigOpening( e.target.value ) }
                         />
                       </div>
                     </div>
@@ -581,9 +676,9 @@ export default function Expenses() {
                         <input
                           type="text"
                           placeholder="Analog values"
-                          value={agooneanalogClosing}
-                          onChange={(e) =>
-                            setAgooneanalogClosing(e.target.value)
+                          value={ agooneanalogClosing }
+                          onChange={ ( e ) =>
+                            setAgooneanalogClosing( e.target.value )
                           }
                         />
                       </div>
@@ -591,8 +686,8 @@ export default function Expenses() {
                         <input
                           type="text"
                           placeholder="Digital values"
-                          value={agoonedigClosing}
-                          onChange={(e) => setAgoonedigClosing(e.target.value)}
+                          value={ agoonedigClosing }
+                          onChange={ ( e ) => setAgoonedigClosing( e.target.value ) }
                         />
                       </div>
                     </div>
@@ -605,9 +700,9 @@ export default function Expenses() {
                         <input
                           type="text"
                           placeholder="Analog values"
-                          value={agooneanalogOpening}
-                          onChange={(e) =>
-                            setAgooneanalogOpening(e.target.value)
+                          value={ agooneanalogOpening }
+                          onChange={ ( e ) =>
+                            setAgooneanalogOpening( e.target.value )
                           }
                         />
                       </div>
@@ -615,8 +710,8 @@ export default function Expenses() {
                         <input
                           type="text"
                           placeholder="Digital values"
-                          value={agoonedigOpening}
-                          onChange={(e) => setAgoonedigOpening(e.target.value)}
+                          value={ agoonedigOpening }
+                          onChange={ ( e ) => setAgoonedigOpening( e.target.value ) }
                         />
                       </div>
                     </div>
@@ -635,10 +730,16 @@ export default function Expenses() {
                         <p>CLOSINGS</p>
                       </div>
                       <div className="thetwo">
-                        <input type="text" placeholder="Analog values" />
+                        <input type="text" placeholder="Analog values" 
+                         value={pmstwoanalogClosing}
+                         onChange={(e) => setPmstwoanalogClosing(e.target.value)}
+                        />
                       </div>
                       <div className="thetwo">
-                        <input type="text" placeholder="Digital values" />
+                        <input type="text" placeholder="Digital values" 
+                         value={pmstwodigClosing}
+                         onChange={(e) => setPmstwodigClosing(e.target.value)}
+                        />
                       </div>
                     </div>
 
@@ -647,10 +748,17 @@ export default function Expenses() {
                         <p>OPENINGS</p>
                       </div>
                       <div className="thetwo">
-                        <input type="text" placeholder="Analog values" />
+                        <input type="text" placeholder="Analog values" 
+                        
+                        value={pmstwoanalogOpening}
+                        onChange={(e) => setPmstwoanalogOpening(e.target.value)}
+                        />
                       </div>
                       <div className="thetwo">
-                        <input type="text" placeholder="Digital values" />
+                        <input type="text" placeholder="Digital values" 
+                         value={pmstwodigOpening}
+                         onChange={(e) => setPmstwodigOpening(e.target.value)}
+                        />
                       </div>
                     </div>
                   </div>
@@ -666,10 +774,16 @@ export default function Expenses() {
                         <p>CLOSINGS</p>
                       </div>
                       <div className="thetwo">
-                        <input type="text" placeholder="Analog values" />
+                        <input type="text" placeholder="Analog values" 
+                         value={agotwoanalogClosing}
+                         onChange={(e) => setAgotwoanalogClosing(e.target.value)}
+                        />
                       </div>
                       <div className="thetwo">
-                        <input type="text" placeholder="Digital values" />
+                        <input type="text" placeholder="Digital values" 
+                         value={agotwodigClosing}
+                         onChange={(e) => setAgotwodigClosing(e.target.value)}
+                        />
                       </div>
                     </div>
 
@@ -678,10 +792,16 @@ export default function Expenses() {
                         <p>OPENINGS</p>
                       </div>
                       <div className="thetwo">
-                        <input type="text" placeholder="Analog values" />
+                        <input type="text" placeholder="Analog values" 
+                         value={agotwoanalogOpening}
+                         onChange={(e) => setAgotwoanalogOpening(e.target.value)}
+                        />
                       </div>
                       <div className="thetwo">
-                        <input type="text" placeholder="Digital values" />
+                        <input type="text" placeholder="Digital values" 
+                         value={agotwodigOpening}
+                         onChange={(e) => setAgotwodigOpening(e.target.value)}
+                        />
                       </div>
                     </div>
                   </div>
@@ -692,7 +812,7 @@ export default function Expenses() {
                 <div className="edits">
                   <img src="" alt="" />
                 </div>
-                <button onClick={literHandler}>SUBMIT</button>
+                <button onClick={ literHandler }>SUBMIT</button>
               </div>
             </div>
           </div>
