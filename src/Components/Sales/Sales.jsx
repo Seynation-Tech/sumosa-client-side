@@ -47,6 +47,8 @@ export default function Sales() {
   const [loading, setLoading] = useState(false);
 
   const [totalEarnings,setEarnings] = useState("0")
+  const [dieselAmount,setdieselAmount] = useState("0")
+  const [petrolAmount,setpetrolAmount] = useState("0")
 
   const navigate = useNavigate();
 
@@ -90,6 +92,11 @@ export default function Sales() {
         // console.log(pmsoneAmount,pmstwoAmount,agooneAmount,agotwoAmount)
 
         const totalAmount = Number((pmsoneAmount)+(pmstwoAmount)+(agooneAmount)+(agotwoAmount))
+        const totalPetrol = Number(pmsoneAmount)+ Number(pmstwoAmount)
+        const totalDiesel= Number(agooneAmount)+ Number(agotwoAmount)
+
+        setdieselAmount(totalDiesel)
+        setpetrolAmount(totalPetrol)
         setEarnings(totalAmount)
 
         
@@ -176,12 +183,12 @@ export default function Sales() {
           <div className="lefts">
             <div className="alls">
               <div className="sds">
-                <p>Tsh 5003230</p>
-                <p>Current Monthly Sales </p>
+                <p>Tsh {petrolAmount}</p>
+                <p>Current Petrol Sales </p>
               </div>
               <div className="sds">
-                <p>Tsh 5003230</p>
-                <p>Current Monthly Earnings</p>
+                <p>Tsh {dieselAmount}</p>
+                <p>Current Diesel Earnings</p>
               </div>
             </div>
 
