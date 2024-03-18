@@ -26,7 +26,7 @@
 
 .upsections {
   width: 100%;
-  height: 69px;
+  height: 49px;
   background: rgba(4, 0, 255, 0.074);
   padding-left: 12px;
   padding-right: 12px;
@@ -80,7 +80,16 @@
   align-items: center;
   font-size: 0.8em;
   cursor: pointer;
-  background: blue;
+
+  background: linear-gradient(to right, rgb(0, 38, 255), rgb(25, 0, 255));
+  padding: 5px;
+  /* width: 90px; */
+  height: 37px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8em;
 }
 
 
@@ -231,7 +240,7 @@
 .bbb {
   width: 100%;
   height: 45px;
-  background: linear-gradient(to right, rgb(0, 38, 255), rgb(162, 0, 255));
+  background: linear-gradient(to right, rgb(0, 123, 255), rgb(64, 0, 255));
   border-radius: 5px;
   margin-top: 23px;
   color: white;
@@ -274,8 +283,8 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-top: 23px;
-  height: 44px;
+  margin-top: 3px;
+  height: 64px;
   width: 100%;
   background-color: rgba(0, 0, 255, 0.024);
   border-radius: 5px;
@@ -285,7 +294,7 @@
   background: linear-gradient(to right, rgb(0, 38, 255), rgb(162, 0, 255));
   padding: 5px;
   width: 90px;
-  height: 27px;
+  height: 37px;
   border-radius: 3px;
   display: flex;
   justify-content: center;

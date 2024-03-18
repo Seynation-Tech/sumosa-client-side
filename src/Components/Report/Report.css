@@ -423,6 +423,27 @@ body {
     font-weight: bold;
   }
 
+  .canc{
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background:rgba(255, 255, 255, 0.09);
+    margin-top: -12px;
+  }
+  .contentonesty{
+    background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      width: 32%;
+      min-height: 63vh;
+      margin-top: -114px;
+      justify-content: center;
+      align-items: center;
+      
+  }
+
+
   .contentonest{
     background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
       display: flex;
@@ -608,6 +629,22 @@ color: rgba(0, 0, 0, 0.344);
  position: absolute;
  left: 34px;
 
+  }
+
+  
+  .poppesao{
+    min-height: 113vh;
+    width: 100%;
+    background: rgba(0, 194, 253, 0.084);
+    position: absolute;
+    top: 21%;
+    border-radius: 9px;
+    backdrop-filter: blur(4px);
+    z-index: 898;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
   }
 
   .poppesa{

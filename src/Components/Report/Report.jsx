@@ -116,6 +116,7 @@ export default function Expenses ()
         closingdigital: pmsonedigClosing,
         openinganalog: pmsoneanalogOpening,
         openingdigital: pmsonedigOpening,
+        outputvalue: Number(pmsonedigClosing) - Number(pmsonedigOpening)
       };
 
       let pmsTwo = {
@@ -124,6 +125,7 @@ export default function Expenses ()
         closingdigital: pmstwodigClosing,
         openinganalog: pmstwoanalogOpening,
         openingdigital: pmstwodigOpening,
+         outputvalue: Number(pmstwodigClosing) - Number(pmstwodigOpening)
       };
 
       let agoOne = {
@@ -132,6 +134,7 @@ export default function Expenses ()
         closingdigital: agoonedigClosing,
         openinganalog: agooneanalogOpening,
         openingdigital: agoonedigOpening,
+        outputvalue: Number(agoonedigClosing) - Number(agoonedigOpening)
       };
 
       let agoTwo = {
@@ -140,6 +143,7 @@ export default function Expenses ()
         closingdigital: agotwodigClosing,
         openinganalog: agotwoanalogOpening,
         openingdigital: agotwodigOpening,
+        outputvalue: Number(agotwodigClosing) - Number(agotwodigOpening)
       };
 
       // console.log(pmsOne)
@@ -515,11 +519,9 @@ export default function Expenses ()
                     </div>
 
                     <div className="remember-opt">
-                      <Link to="/" style={ { textDecoration: "none" } }>
-                        <button onClick={ debtsHandler } className="sign-btn">
+                    <button onClick={ debtsHandler } className="sign-btn">
                           Submit
                         </button>
-                      </Link>
                     </div>
                   </div>
                 </div>
