@@ -26,6 +26,11 @@ import moment from "moment";
 import DotLoader from "react-spinners/DotLoader";
 import Cookies from "cookie-universal";
 
+let today = new Date()
+let  date =  today.getDate()  + '/' +  (today.getMonth() + 1)  + '/' + today.getFullYear();
+let  mydate =  today.getDate()  + '/' +  (today.getMonth() + 1)  + '/' + today.getFullYear() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+
+
 axios.defaults.withCredentials = true;
 
 export default function Expenses ()
@@ -39,6 +44,7 @@ export default function Expenses ()
   const { url, login } = useContext( AuthContext );
   const [ loading, setLoading ] = useState( false );
   const [ error, setError ] = useState( null );
+  const [today,setToday] = useState(date)
 
   const [ pmsonedigOpening, setPmsonedigOpening ] = useState( "" );
   const [ pmsonedigClosing, setPmsonedigClosing ] = useState( "" );
@@ -105,7 +111,7 @@ export default function Expenses ()
     try
     {
       let pmsOne = {
-        uid: "tuesday",
+        uid: date,
         closingsanalog: pmsoneanalogClosing,
         closingdigital: pmsonedigClosing,
         openinganalog: pmsoneanalogOpening,
@@ -113,7 +119,7 @@ export default function Expenses ()
       };
 
       let pmsTwo = {
-        uid: "tuesday",
+        uid: date,
         closingsanalog: pmstwoanalogClosing,
         closingdigital: pmstwodigClosing,
         openinganalog: pmstwoanalogOpening,
@@ -121,7 +127,7 @@ export default function Expenses ()
       };
 
       let agoOne = {
-        uid: "tuesday",
+        uid: date,
         closingsanalog: agooneanalogClosing,
         closingdigital: agoonedigClosing,
         openinganalog: agooneanalogOpening,
@@ -129,7 +135,7 @@ export default function Expenses ()
       };
 
       let agoTwo = {
-        uid: "tuesday",
+        uid: date,
         closingsanalog: agotwoanalogClosing,
         closingdigital: agotwodigClosing,
         openinganalog: agotwoanalogOpening,
@@ -144,10 +150,6 @@ export default function Expenses ()
       const resfour = await axios.post( `${ url }/api/pumps/dieseltwo`, agoTwo );
 
       // console.log(res)
-      console.log( resone.data );
-      console.log( restwo.data );
-      console.log( resthree.data );
-      console.log( resfour.data );
 
       //
     } catch ( err )
