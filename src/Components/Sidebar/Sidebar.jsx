@@ -29,7 +29,7 @@ export default function Sidebar() {
     <div className="sectionone">
       <div className="uppersect">
         <img src={logos} alt="" />
-        <p id="sum">SUMOSA</p>
+        {/* <p id="sum">SUMOSA</p> */}
       </div>
 
       <div className="profilesect">
@@ -43,7 +43,7 @@ export default function Sidebar() {
       </div>
 
       <div className="midsect">
-        <NavLink to="/">
+        <NavLink to="/home">
           <div className="sectcont">
             <img src={home} alt="" />
             <p>Dashboard</p>

@@ -4,72 +4,69 @@ import "./Sales.css";
 import bell from "../../Images/notify.png";
 import Graphs from "../Charts/Graphs";
 
-export default function Sales ()
-{
-    return (
-        <div className="mysales">
-            <Sidebar />
+export default function Sales() {
+  return (
+    <div className="mysales">
+      <Sidebar />
 
-            <div className=""></div>
-            <div className="sectiontwos">
-                <div className="lineage"></div>
+      <div className=""></div>
+      <div className="sectiontwos">
+        <div className="lineage"></div>
 
-                <div className="upsections"></div>
+        <div className="upsections"></div>
 
-                <div className="lowsections">
-                    <div className="lefts">
-                        <div className="dash">
-                            <div className="p">
-                                <p>Sales Overview</p>
-                                <p>Fuel Sale Metrics</p>
-                            </div>
+        <div className="lowsections">
+          <div className="lefts">
+            <div className="dash">
+              <div className="p">
+                <p>Sales Overview</p>
+                <p>Fuel Sale Metrics</p>
+              </div>
 
-                            <div className="sss"></div>
-                        </div>
+              <div className="sss"></div>
+            </div>
 
-                        <div className="ean">
-                            <div className="an">
-                                <p id="sd">Earnings</p>
-                                <div className="bel">
-                                    <img src={ bell } alt="" />
-                                </div>
-                            </div>
+            <div className="ean">
+              <div className="an">
+                <p id="sd">Earnings</p>
+                {/* <div className="bel">
+                  <img src={bell} alt="" />
+                </div> */}
+              </div>
 
-                            <div className="en">
-                                <div className="mon">
-                                    <p>Tsh 2300230230</p>
-                                </div>
-                                <div className="mm">
-                                    <img src="" alt="" />
-                                </div>
-                            </div>
-                        </div>
+              <div className="en">
+                <div className="mon">
+                  <p>Tsh 2300230230</p>
+                </div>
+                <div className="mm">
+                  <img src="" alt="" />
+                </div>
+              </div>
+            </div>
 
-                        <div className="bbb">Last Month Summary</div>
-                    </div>
-                    <div className="lefts">
-                        <div className="alls">
-                            <div className="sds">
-                                <p>Tsh 5003230</p>
-                                <p>Current Monthly Sales </p>
-                            </div>
-                            <div className="sds">
-                                <p>Tsh 5003230</p>
-                                <p>Current Monthly Earnings</p>
-                            </div>
-                        </div>
+            <div className="bbb">Last Month Summary</div>
+          </div>
+          <div className="lefts">
+            <div className="alls">
+              <div className="sds">
+                <p>Tsh 5003230</p>
+                <p>Current Monthly Sales </p>
+              </div>
+              <div className="sds">
+                <p>Tsh 5003230</p>
+                <p>Current Monthly Earnings</p>
+              </div>
+            </div>
 
-                        <div className="bbb">Sales Difference Tsh 5000</div>
+            <div className="bbb">Sales Difference Tsh 5000</div>
 
-                        <div className="stoc">
-                            <div className="bb">Last Stock</div>
-                            <div className="bb">Difference Data</div>
+            <div className="stoc">
+              <div className="bb">Last Stock</div>
+              <div className="bb">Difference Data</div>
+            </div>
+          </div>
 
-                        </div>
-
-                    </div>
-
-                    {/* <div className="rights">
+          {/* <div className="rights">
                         <div className="grs">
                             <Graphs />
                         </div>
@@ -78,69 +75,68 @@ export default function Sales ()
 
                         </div>
                     </div> */}
-                </div>
+        </div>
+      </div>
+
+      <div className="sectionthrees">
+        <div className="year">
+          <div className="dail">
+            <p>DAILY</p>
+          </div>
+
+          <div className="dail">
+            <p>WEEKLY</p>
+          </div>
+
+          <div className="dail">
+            <p>MONTHLY</p>
+          </div>
+
+          <div className="dail">
+            <p>YEARLY</p>
+          </div>
+
+          <div className="download">
+            <p>Download Report</p>
+            <div className="down">
+              <img src="" alt="" />
+            </div>
+          </div>
+        </div>
+        <Graphs />
+
+        <div className="pays">
+          <p>Payments</p>
+
+          <div className="pesa">
+            <div className="mpesa">
+              <p>M-PESA</p>
             </div>
 
-            <div className="sectionthrees">
-                <div className="year">
-                    <div className="dail">
-                        <p>DAILY</p>
-                    </div>
+            <div className="mpesa">
+              <p>NMB</p>
+            </div>
 
-                    <div className="dail">
-                        <p>WEEKLY</p>
-                    </div>
+            <div className="mpesa">
+              <p>CRDB</p>
+            </div>
 
-                    <div className="dail">
-                        <p>MONTHLY</p>
-                    </div>
+            <div className="mpesa">
+              <p>DEBTORS</p>
+            </div>
+          </div>
 
-                    <div className="dail">
-                        <p>YEARLY</p>
-                    </div>
-
-                    <div className="download">
-                        <p>Download Report</p>
-                        <div className="down">
-                            <img src="" alt="" />
-                        </div>
-                    </div>
-                </div>
-                <Graphs />
-
-                <div className="pays">
-                    <p>Payments</p>
-
-                    <div className="pesa">
-                        <div className="mpesa">
-                            <p>M-PESA</p>
-                        </div>
-
-                        <div className="mpesa">
-                            <p>NMB</p>
-                        </div>
-
-                        <div className="mpesa">
-                            <p>CRDB</p>
-                        </div>
-
-                        <div className="mpesa">
-                            <p>DEBTORS</p>
-                        </div>
-                    </div>
-
-                    {/* <div className="search">
+          {/* <div className="search">
                         <input type="text" placeholder="Search" />
                     </div> */}
 
-                    {/* <div className="other">
+          {/* <div className="other">
                         <img src="" alt="" />
                     </div> */}
-                </div>
+        </div>
 
-                <div className="con">
-
-                    {/* <div className="sea">
+        <div className="con">
+          {/* <div className="sea">
                         <p>Payments</p>
                         <div className="search">
                             <input type="text" placeholder="Search " />
@@ -148,97 +144,89 @@ export default function Sales ()
                         </div>
                     </div> */}
 
-                    <div className="tbb">
-                        <p>S/N</p>
-                        <p>Name</p>
-                        <p>Amount</p>
-                        <p>Mode</p>
-                        <p>Date</p>
-                    </div>
-
-
-
-                </div>
-                <div className="ls">
-                    <div className="crc"></div>
-
-                    <div className="lft">
-                        <div className="alld">
-
-
-                            <table className="home-table">
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>12,000,000/=</td>
-                                    <td>Cash</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Theonest Basina</td>
-                                    <td>12,000,000/=</td>
-                                    <td>Cash</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Cash</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Cash</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Cash</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Cash</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Cash</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Cash</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                            </table>
-
-                        </div>
-                    </div>
-                    <div className="rght"></div>
-                </div>
-            </div>
+          <div className="tbb">
+            <p>S/N</p>
+            <p>Name</p>
+            <p>Amount</p>
+            <p>Mode</p>
+            <p>Date</p>
+          </div>
         </div>
-    );
+        <div className="ls">
+          {/* <div className="crc"></div> */}
+
+          <div className="lft">
+            <div className="alld">
+              <table className="home-table">
+                <tbody>
+                  <td>01</td>
+                  <td>Apolinary Theonest Basina</td>
+                  <td>12,000,000/=</td>
+                  <td>Cash</td>
+                  <td>Tues,12/09/2024</td>
+                </tbody>
+
+                <tbody>
+                  <td>01</td>
+                  <td>Theonest Basina</td>
+                  <td>12,000,000/=</td>
+                  <td>Cash</td>
+                  <td>Tues,12/09/2024</td>
+                </tbody>
+
+                <tbody>
+                  <td>01</td>
+                  <td>Apolinary Theonest Basina</td>
+                  <td>300,000/=</td>
+                  <td>Cash</td>
+                  <td>Tues,12/09/2024</td>
+                </tbody>
+
+                <tbody>
+                  <td>01</td>
+                  <td>Apolinary Theonest Basina</td>
+                  <td>300,000/=</td>
+                  <td>Cash</td>
+                  <td>Tues,12/09/2024</td>
+                </tbody>
+
+                <tbody>
+                  <td>01</td>
+                  <td>Apolinary Theonest Basina</td>
+                  <td>300,000/=</td>
+                  <td>Cash</td>
+                  <td>Tues,12/09/2024</td>
+                </tbody>
+
+                <tbody>
+                  <td>01</td>
+                  <td>Apolinary Theonest Basina</td>
+                  <td>300,000/=</td>
+                  <td>Cash</td>
+                  <td>Tues,12/09/2024</td>
+                </tbody>
+
+                <tbody>
+                  <td>01</td>
+                  <td>Apolinary Theonest Basina</td>
+                  <td>300,000/=</td>
+                  <td>Cash</td>
+                  <td>Tues,12/09/2024</td>
+                </tbody>
+
+                <tbody>
+                  <td>01</td>
+                  <td>Apolinary Theonest Basina</td>
+                  <td>300,000/=</td>
+                  <td>Cash</td>
+                  <td>Tues,12/09/2024</td>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="rght"></div>
+        </div>
+      </div>
+    </div>
+  );
 }

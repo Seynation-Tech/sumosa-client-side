@@ -99,7 +99,7 @@ export default function Home() {
               </div>
 
               <div className="graphs">
-                <Real />
+              <Mids />
               </div>
 
               <div className="grap">
