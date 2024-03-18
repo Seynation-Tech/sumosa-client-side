@@ -49,6 +49,7 @@ export default function Sales() {
   const [totalEarnings,setEarnings] = useState("0")
   const [dieselAmount,setdieselAmount] = useState("0")
   const [petrolAmount,setpetrolAmount] = useState("0")
+  const [reasons,setReasons]= useState(false)
 
   const navigate = useNavigate();
 
@@ -109,6 +110,15 @@ export default function Sales() {
     fetchData();
   }, []);
 
+  const handleReasons = ()=> {
+    setReasons(true)
+  }
+
+  const cancelReason = ()=> {
+    setReasons(false)
+  }
+
+
   const handleHandle = () => {
     setPrices(true);
   };
@@ -116,6 +126,31 @@ export default function Sales() {
   const cancPrice = () => {
     setPrices(false);
   };
+
+  const reasonsHandler = async()=>{
+
+    try {
+      let pricings = {
+        uid: date,
+        petrol: petrolprice,
+        diesel: dieselprice,
+      };
+
+      // console.log(pmsOne)
+
+      const resone = await axios.post(`${url}/api/billing/pricings`, pricings);
+
+      // console.log(res)
+      console.log(resone.data);
+
+      //
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+      // setError( "Please refresh..." );
+    }
+
+  }
 
   const priceHandler = async () => {
     try {
@@ -213,6 +248,48 @@ export default function Sales() {
                     </div> */}
         </div>
       </div>
+
+      {reasons && (
+        <div className="poppesao">
+          <div className="contentonesty">
+            <div className="canc" onClick={cancPrice}>
+              <img src="" alt="" />
+            </div>
+            <div className="ours">
+              <div className="sdacont">
+                <div className="jins">
+                  <p>CHANGE MONTHLY PRICE </p>
+                </div>
+                <div className="forms">
+                  <div className="input-two">
+                    {/* <i>icon</i> */}
+                    <input
+                      placeholder="Petrol"
+                      value={petrolprice}
+                      onChange={(e) => setPetrolprice(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="input-two">
+                    {/* <i>icon</i> */}
+                    <input
+                      placeholder="Diesel "
+                      value={dieselprice}
+                      onChange={(e) => setDieselprice(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="remember-opt">
+                  <button onClick={priceHandler} className="sign-btn">
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {prices && (
         <div className="poppesao">
