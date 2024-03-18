@@ -3,7 +3,9 @@ import Sidebar from "../Sidebar/Sidebar";
 import "./Sales.css";
 import bell from "../../Images/notify.png";
 import Graphs from "../Charts/Graphs";
-
+import Daily from "../Charts/Daily";
+import Monthly from "../Charts/Monthly";
+import Yearly from "../Charts/Yearly";
 import moment from "moment";
 import DotLoader from "react-spinners/DotLoader";
 import Cookies from "cookie-universal";
@@ -45,11 +47,24 @@ export default function Sales() {
 
   const { url, login } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
+  const [reason, setReason] = useState("");
+  const [amountinwords, setAmountinwords] = useState("");
+  const [diff, setDifferences] = useState("0");
+  const [zrepos, setZreport] = useState("");
 
   const [totalEarnings, setEarnings] = useState("0");
   const [dieselAmount, setdieselAmount] = useState("0");
   const [petrolAmount, setpetrolAmount] = useState("0");
   const [reasons, setReasons] = useState(false);
+
+  const [weekly, setWeekly] = useState(false);
+  const [daily, setDaily] = useState(true);
+  const [monthly, setMonthly] = useState(false);
+  const [yearly, setYearly] = useState(false);
+
+  const [tableData, setData] = useState([]);
+  const [alldat, setAlls] = useState([]);
+  const [click, setClick] = useState(false);
 
   const navigate = useNavigate();
 
@@ -59,6 +74,10 @@ export default function Sales() {
     const fetchData = async () => {
       try {
         const res = await axios.get(`${url}/api/billing/allpricings`, {
+          withCredentials: true,
+        });
+
+        const resps = await axios.get(`${url}/api/billing/allcollectmoney`, {
           withCredentials: true,
         });
 
@@ -111,15 +130,54 @@ export default function Sales() {
         const totalPetrol = Number(pmsoneAmount) + Number(pmstwoAmount);
         const totalDiesel = Number(agooneAmount) + Number(agotwoAmount);
 
+        let last_value = Object.values(resps.data)[
+          Object.values(resps.data).length - 1
+        ];
+
+        const differences = Number(last_value.zreport) - Number(totalAmount);
+
         setdieselAmount(totalDiesel);
         setpetrolAmount(totalPetrol);
         setEarnings(totalAmount);
+        setZreport(last_value.zreport);
+
+        setDifferences(differences);
+
+        // console.log(last_value.zreport)
       } catch (err) {
         // console.log(err)
       }
     };
     fetchData();
   }, []);
+
+  const handleWeekly = () => {
+    setWeekly(true);
+    setDaily(false);
+    setYearly(false);
+    setMonthly(false);
+  };
+
+  const handleMonthly = () => {
+    setWeekly(false);
+    setDaily(false);
+    setYearly(false);
+    setMonthly(true);
+  };
+
+  const handleDaily = () => {
+    setWeekly(false);
+    setDaily(true);
+    setYearly(false);
+    setMonthly(false);
+  };
+
+  const handleYearly = () => {
+    setWeekly(false);
+    setDaily(false);
+    setYearly(true);
+    setMonthly(false);
+  };
 
   const handleReasons = () => {
     setReasons(true);
@@ -137,19 +195,29 @@ export default function Sales() {
     setPrices(false);
   };
 
+  const popClick = () => {
+    setClick(true);
+  };
+
+  const cancClick = () => {
+    setClick(false);
+  };
+
   const reasonsHandler = async () => {
     try {
-      let pricings = {
+      let inwords = {
         uid: date,
-        petrol: petrolprice
+        differencereason: reason,
+        totalamount: amountinwords,
       };
 
       // console.log(pmsOne)
 
-      const resone = await axios.post(`${url}/api/billing/pricings`, pricings);
+      const resone = await axios.post(`${url}/api/billing/reason`, inwords);
 
       // console.log(res)
       console.log(resone.data);
+      alert(resone.data);
 
       //
     } catch (err) {
@@ -172,7 +240,25 @@ export default function Sales() {
       const resone = await axios.post(`${url}/api/billing/pricings`, pricings);
 
       // console.log(res)
+      alert(resone.data);
       console.log(resone.data);
+
+      //
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+      // setError( "Please refresh..." );
+    }
+  };
+
+  const debtorcrediLoad = async () => {
+    try {
+      const respfour = await axios.get(`${url}/api/billing/debtors`, {
+        withCredentials: true,
+      });
+      setData(respfour.data);
+      // alert(respfour.data);
+
 
       //
     } catch (err) {
@@ -234,13 +320,15 @@ export default function Sales() {
               </div>
             </div>
 
-            <div className="bbb">Sales Difference Tsh 5000</div>
+            <div className="bbb">Sales Difference Tsh {diff}</div>
 
             <div className="stoc">
               <div className="bb" onClick={handleHandle}>
                 Price Changes
               </div>
-              <div className="bb">Difference Data</div>
+              <div className="bb" onClick={handleReasons}>
+                Z-Report
+              </div>
             </div>
           </div>
 
@@ -259,7 +347,7 @@ export default function Sales() {
       {reasons && (
         <div className="poppesao">
           <div className="contentonesty">
-            <div className="canc" onClick={cancPrice}>
+            <div className="canc" onClick={cancelReason}>
               <img src="" alt="" />
             </div>
             <div className="ours">
@@ -268,27 +356,44 @@ export default function Sales() {
                   <p>TOTAL CASH DIFFERENCES</p>
                 </div>
                 <div className="forms">
-                  <div className="input-two">
+                  <div className="input-twos">
                     {/* <i>icon</i> */}
-                    <input
-                      placeholder="Petrol"
-                      value={petrolprice}
-                      onChange={(e) => setPetrolprice(e.target.value)}
-                    />
+                    <p>CASH</p>
+                    <p>{totalEarnings}</p>
                   </div>
 
-                  <div className="input-two">
+                  <div className="input-twos">
                     {/* <i>icon</i> */}
-                    <input
-                      placeholder="Diesel "
-                      value={dieselprice}
-                      onChange={(e) => setDieselprice(e.target.value)}
-                    />
+                    <p>Z-REPORT</p>
+                    <p>{zrepos}</p>
                   </div>
+
+                  <div className="input-twoos">
+                    {/* <i>icon</i> */}
+                    <p>DIFFERENCE</p>
+                    <p>9087009</p>
+                  </div>
+                </div>
+                <div className="input-twoo">
+                  {/* <i>icon</i> */}
+                  <input
+                    placeholder="Reason of the difference"
+                    value={reason}
+                    onChange={(e) => setReason(e.target.value)}
+                  />
+                </div>
+
+                <div className="input-too">
+                  {/* <i>icon</i> */}
+                  <input
+                    placeholder="Amounts collected in words"
+                    value={amountinwords}
+                    onChange={(e) => setAmountinwords(e.target.value)}
+                  />
                 </div>
 
                 <div className="remember-opt">
-                  <button onClick={priceHandler} className="sign-btn">
+                  <button onClick={reasonsHandler} className="sign-bt">
                     Submit
                   </button>
                 </div>
@@ -342,19 +447,19 @@ export default function Sales() {
 
       <div className="sectionthrees">
         <div className="year">
-          <div className="dail">
+          <div className="dail" onClick={handleDaily}>
             <p>DAILY</p>
           </div>
 
-          <div className="dail">
+          <div className="dail" onClick={handleWeekly}>
             <p>WEEKLY</p>
           </div>
 
-          <div className="dail">
+          <div className="dail" onClick={handleMonthly}>
             <p>MONTHLY</p>
           </div>
 
-          <div className="dail">
+          <div className="dail" onClick={handleYearly}>
             <p>YEARLY</p>
           </div>
 
@@ -365,26 +470,23 @@ export default function Sales() {
             </div>
           </div>
         </div>
-        <Graphs />
+        {daily && <Daily />}
+        {weekly && <Graphs />}
+
+        {monthly && <Monthly />}
+
+        {yearly && <Yearly />}
 
         <div className="pays">
           <p>Payments</p>
 
           <div className="pesa">
             <div className="mpesa">
-              <p>M-PESA</p>
+              <p>CREDITORS</p>
             </div>
 
             <div className="mpesa">
-              <p>NMB</p>
-            </div>
-
-            <div className="mpesa">
-              <p>CRDB</p>
-            </div>
-
-            <div className="mpesa">
-              <p>DEBTORS</p>
+              <p onClick={debtorcrediLoad}>DEBTORS</p>
             </div>
           </div>
 
@@ -420,68 +522,18 @@ export default function Sales() {
           <div className="lft">
             <div className="alld">
               <table className="home-table">
-                <tbody>
-                  <td>01</td>
-                  <td>Apolinary Theonest Basina</td>
-                  <td>12,000,000/=</td>
-                  <td>Cash</td>
-                  <td>Tues,12/09/2024</td>
-                </tbody>
-
-                <tbody>
-                  <td>01</td>
-                  <td>Theonest Basina</td>
-                  <td>12,000,000/=</td>
-                  <td>Cash</td>
-                  <td>Tues,12/09/2024</td>
-                </tbody>
-
-                <tbody>
-                  <td>01</td>
-                  <td>Apolinary Theonest Basina</td>
-                  <td>300,000/=</td>
-                  <td>Cash</td>
-                  <td>Tues,12/09/2024</td>
-                </tbody>
-
-                <tbody>
-                  <td>01</td>
-                  <td>Apolinary Theonest Basina</td>
-                  <td>300,000/=</td>
-                  <td>Cash</td>
-                  <td>Tues,12/09/2024</td>
-                </tbody>
-
-                <tbody>
-                  <td>01</td>
-                  <td>Apolinary Theonest Basina</td>
-                  <td>300,000/=</td>
-                  <td>Cash</td>
-                  <td>Tues,12/09/2024</td>
-                </tbody>
-
-                <tbody>
-                  <td>01</td>
-                  <td>Apolinary Theonest Basina</td>
-                  <td>300,000/=</td>
-                  <td>Cash</td>
-                  <td>Tues,12/09/2024</td>
-                </tbody>
-
-                <tbody>
-                  <td>01</td>
-                  <td>Apolinary Theonest Basina</td>
-                  <td>300,000/=</td>
-                  <td>Cash</td>
-                  <td>Tues,12/09/2024</td>
-                </tbody>
-
-                <tbody>
-                  <td>01</td>
-                  <td>Apolinary Theonest Basina</td>
-                  <td>300,000/=</td>
-                  <td>Cash</td>
-                  <td>Tues,12/09/2024</td>
+                <tbody onClick={popClick}>
+                  {tableData.map((val, key) => {
+                    return (
+                      <tr onClick={(e) => setAlls(val)}>
+                        <td>{key + 1}</td>
+                        <td>{val.name}</td>
+                        <td>{val.amount}</td>
+                        <td>{val?.modeofpay || "-"}</td>
+                        <td>{val.uid}</td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>

@@ -14,46 +14,16 @@ import {
 
 const data = [
   {
-    name: 'Sun',
+    name: 'Morning',
     uv: 590,
     pv: 800,
     amt: 1400,
   },
   {
-    name: 'Mon',
+
     uv: 868,
     pv: 967,
     amt: 1506,
-  },
-  {
-    name: 'Tue',
-    uv: 1397,
-    pv: 1098,
-    amt: 989,
-  },
-  {
-    name: 'Wed',
-    uv: 1480,
-    pv: 1200,
-    amt: 1228,
-  },
-  {
-    name: 'Thur',
-    uv: 1520,
-    pv: 1108,
-    amt: 1100,
-  },
-  {
-    name: 'Fri',
-    uv: 1400,
-    pv: 680,
-    amt: 1700,
-  },
-  {
-    name: 'Sart',
-    uv: 1400,
-    pv: 680,
-    amt: 1700,
   }
 ];
 
@@ -74,8 +44,8 @@ export default class Example extends PureComponent {
           }}
         >
           <CartesianGrid stroke="#f5f5f5" />
-          <XAxis dataKey="name" label={{ value: 'Days', position: 'insideBottomRight', offset: 0 }} scale="band" />
-          <YAxis label={{ value: 'Amount (10k)', angle: -90, position: 'insideLeft' }} />
+          <XAxis dataKey="name" label={{ value: 'Evening', position: 'insideBottomRight', offset: 0 }} scale="band" />
+          <YAxis label={{ value: 'Amount (appr.10k)', angle: -90, position: 'insideright' }}  />
           <Tooltip />
           <Legend />
           <Area type="monotone" dataKey="amt" fill="#8884d8" stroke="#8884d8" />
