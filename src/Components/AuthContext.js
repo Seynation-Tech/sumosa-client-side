@@ -29,6 +29,7 @@ export const AuthContextProvider = ({ children }) => {
   const [alldebts, setDebts] = useState("");
   const [allexpenses, setExpenses] = useState("");
   const [dipstocks, setDipstocks] = useState("");
+  const [totalliters,setLiters] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,8 +63,8 @@ export const AuthContextProvider = ({ children }) => {
         });
 
         const expens = await axios.get(`${url}/api/billing/allexpenses`, {
-            withCredentials: true,
-          });
+          withCredentials: true,
+        });
 
         let pric = Object.values(res.data)[Object.values(res.data).length - 1];
 
@@ -72,11 +73,15 @@ export const AuthContextProvider = ({ children }) => {
         ];
 
         let todaydates = Object.values(dets.data)[
-            Object.values(dets.data).length - 1
-          ];
+          Object.values(dets.data).length - 1
+        ];
+
+        let allexp = Object.values(expens.data)[
+          Object.values(expens.data).length - 1
+        ];
         const dlength = res.data.length;
 
-        console.log(expens.data)
+        // console.log(expens.data)
 
         let pone = Object.values(resptwo.data)[
           Object.values(resptwo.data).length - 1
@@ -91,7 +96,10 @@ export const AuthContextProvider = ({ children }) => {
           Object.values(respthree.data).length - 1
         ];
 
-        // console.log(pone,ptwo,aone,atwo)
+        const totalvalues = Number(pone.outputvalue)+Number(ptwo.outputvalue)+ Number(aone.outputvalue)+ Number(atwo.outputvalue)
+
+        console.log(totalvalues)
+        setLiters(totalvalues.toLocaleString())
 
         const dieselamout = Number(pric.diesel);
         const petrolamount = Number(pric.petrol);
@@ -131,7 +139,8 @@ export const AuthContextProvider = ({ children }) => {
         // console.log(Number(pricings.diesel).toLocaleString())
         setDieselprice(Number(pricings.diesel).toLocaleString());
         setPetrolprice(Number(pricings.petrol).toLocaleString());
-        setDebts(Number(todaydates.amount).toLocaleString())
+        setDebts(Number(todaydates.amount).toLocaleString());
+        setExpenses(Number(allexp.amount).toLocaleString());
         // console.log(last_value.zreport)
       } catch (err) {
         // console.log(err)
@@ -184,7 +193,9 @@ export const AuthContextProvider = ({ children }) => {
         dieselprice,
         petrolprice,
         currentUser,
-        tableData,alldebts,
+        allexpenses,
+        tableData,totalliters,
+        alldebts,
         userlogin,
         userlogout,
       }}

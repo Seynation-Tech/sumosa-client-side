@@ -26,7 +26,7 @@ const amount = 3000;
 
 export default function Home() {
   const cookies = new Cookies();
-  const { currentUser, tokns, url, dieselprice, petrolprice , diff,
+  const { totalliters, allexpenses, url, dieselprice, petrolprice , diff,
     zrepos,alldebts,
     totalEarnings,
     dieselAmount,
@@ -195,6 +195,17 @@ export default function Home() {
                 <div className="sectconty">
                   <div className="sst">
                     <img src={report} alt="" />
+                    <p>Total Litres</p>
+                  </div>
+
+                  <div className="amount">
+                    <p> {totalliters}</p>
+                  </div>
+                </div>
+
+                <div className="sectconty">
+                  <div className="sst">
+                    <img src={report} alt="" />
                     <p>Sales</p>
                   </div>
 
@@ -210,14 +221,14 @@ export default function Home() {
                   </div>
 
                   <div className="amount">
-                    <p>120230340</p>
+                    <p>Tsh {allexpenses}</p>
                   </div>
                 </div>
 
                 <div className="sectconty">
                   <div className="sst">
                     <img src={report} alt="" />
-                    <p>Remained Debts</p>
+                    <p>Debts</p>
                   </div>
 
                   <div className="amount">
@@ -225,16 +236,6 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="sectconty">
-                  <div className="sst">
-                    <img src={stock} alt="" />
-                    <p>Dipstick Stock</p>
-                  </div>
-
-                  <div className="amount">
-                    <p>120230340</p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
