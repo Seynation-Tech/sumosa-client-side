@@ -244,41 +244,60 @@ export const AuthContextProvider = ({ children }) => {
           setPetrolStock(petrolstk.physical);
           setPetroldisps(petrolstk.dipstick);
 
-          
-          const pmsoneAmountanalog = Number((Number(pone.closingsanalog) - Number(pone.openinganalog))) *petrolamount;
-          const pmstwoAmountanalog = Number((Number(ptwo.closingsanalog) - Number(ptwo.openinganalog))) *petrolamount;
+          const pmsoneAmountanalog =
+            Number(Number(pone.closingsanalog) - Number(pone.openinganalog)) *
+            petrolamount;
+          const pmstwoAmountanalog =
+            Number(Number(ptwo.closingsanalog) - Number(ptwo.openinganalog)) *
+            petrolamount;
 
-          const agooneAmountanalog = Number((Number(ptwo.closingsanalog) - Number(ptwo.openinganalog))) *dieselamout;
-          const agotwoAmountanalog = Number((Number(atwo.closingsanalog) - Number(atwo.openinganalog))) *dieselamout;
+          const agooneAmountanalog =
+            Number(Number(ptwo.closingsanalog) - Number(ptwo.openinganalog)) *
+            dieselamout;
+          const agotwoAmountanalog =
+            Number(Number(atwo.closingsanalog) - Number(atwo.openinganalog)) * 
+            dieselamout;
 
           const totalanalogAmount = Number(
-            pmsoneAmountanalog + pmstwoAmountanalog + agooneAmountanalog + agotwoAmountanalog
+            pmsoneAmountanalog +
+              pmstwoAmountanalog +
+              agooneAmountanalog +
+              agotwoAmountanalog
           );
-
 
           let alldata = {
             uid: date,
 
-            pmsoneanalogamount: String((Number(pone.closingsanalog) - Number(pone.openinganalog))*petrolamount),
-            pmsonedigitalamount:  pmsoneAmount,
+            pmsoneanalogamount: String(
+              (Number(pone.closingsanalog) - Number(pone.openinganalog)) *
+                petrolamount
+            ),
+            pmsonedigitalamount: pmsoneAmount,
             agoonedigitalamount: agooneAmount,
-            agooneanalogamount:String((Number(aone.closingsanalog) - Number(aone.openinganalog))*dieselamout),
-            pmstwoanalogamount: String((Number(ptwo.closingsanalog) - Number(ptwo.openinganalog))*petrolamount), 
-            agotwodigitalamount:agotwoAmount,
-            agotwoanalogamount: String((Number(atwo.closingsanalog) - Number(atwo.openinganalog))*dieselamout),
+            agooneanalogamount: String(
+              (Number(aone.closingsanalog) - Number(aone.openinganalog)) *
+                dieselamout
+            ),
+            pmstwoanalogamount: String(
+              (Number(ptwo.closingsanalog) - Number(ptwo.openinganalog)) *
+                petrolamount
+            ),
+            agotwodigitalamount: agotwoAmount,
+            agotwoanalogamount: String(
+              (Number(atwo.closingsanalog) - Number(atwo.openinganalog)) *
+                dieselamout
+            ),
             totalanalogsalesamount: String(totalanalogAmount),
             totaldigitalsalesamount: String(totalAmount),
             analogdiffamount: "",
             digitaldiffamount: "",
-            zreport: pmstwoAmount,  // ** z-report as pmtwoamount in database ** NOTE
-   
-            
+            zreport: pmstwoAmount, // ** z-report as pmtwoamount in database ** NOTE
           };
-    
-          // console.log(pmsOne)
-    
-          const resone = await axios.post(`${url}/api/billing/petrol`, alldata);
 
+         
+
+          const resone = await axios.post(`${url}/api/billing/totalsales`, alldata);
+ console.log(resone.data)
           // console.log(petrolstk.dipstick)
         } catch (err) {
           // console.log(err)
