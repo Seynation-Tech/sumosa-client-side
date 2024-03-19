@@ -12,19 +12,18 @@ import message from "../../Images/chat.png";
 import logout from "../../Images/login.png";
 import overview from "../../Images/routine.png";
 import Sidebar from "../Sidebar/Sidebar";
-
+import Clock from "react-live-clock";
 import { Link, useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../AuthContext";
 import moment from "moment";
 import DotLoader from "react-spinners/DotLoader";
 import Cookies from "cookie-universal";
-import Moment from 'react-moment';
+import Moment from "react-moment";
 
 axios.defaults.withCredentials = true;
 
-const dateToFormat = '1976-04-19T12:59-0500';
-
+const dateToFormat = "1976-04-19T12:59-0500";
 
 let today = new Date();
 let date =
@@ -50,20 +49,28 @@ let mydate =
   ":" +
   today.getSeconds();
 
-
 const amount = 3000;
 
 export default function Home() {
   const cookies = new Cookies();
-  const { totalliters, allexpenses, url, dieselprice, petrolprice , diff,
-    zrepos,alldebts,
+  const {
+    totalliters,
+    allexpenses,
+    url,
+    dieselprice,
+    petrolprice,
+    diff,
+    zrepos,
+    alldebts,
     totalEarnings,
-    dieselAmount, petroldisp,
+    dieselAmount,
+    petroldisp,
     petrolstock,
     dieseldips,
     dieselstock,
-    petrolAmount} =
-    useContext(AuthContext);
+    petrolAmount,
+    todaydate,
+  } = useContext(AuthContext);
 
   const [currentUsers, setCurrentUser] = useState(null);
   const navigate = useNavigate();
@@ -71,7 +78,8 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // console.log(last_value.zreport)
+        console.log(todaydate)
+        console.log(mydate)
       } catch (err) {
         // console.log(err)
       }
@@ -267,7 +275,6 @@ export default function Home() {
                     <p>Tsh {alldebts}</p>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -276,10 +283,12 @@ export default function Home() {
 
       <div className="sectionthree">
         <div className="lowersecta">
-          {/* <div className="logimg">
-            <img src="" alt="" />
-          </div> */}
-          <p>{mydate}</p>
+          {/* <Moment date={dateToFormat} /> */}
+          <Clock
+            format={"HH:mm:ss"}
+            ticking={true}
+            timezone={"Africa/Nairobi"}
+          />
         </div>
         <div className="first">
           <div className="fs">
@@ -301,7 +310,6 @@ export default function Home() {
               <div className="exch">
                 <img src="" alt="" />
               </div>
-
             </div>
             <div className="totalamount">
               <div className="tot">
@@ -311,27 +319,26 @@ export default function Home() {
 
               <p>Instock: {petrolstock}</p>
               <p>
-                <span id="aval"> Dipstock: </span>{" "}
-                {petroldisp}
+                <span id="aval"> Dipstock: </span> {petroldisp}
               </p>
             </div>
 
             <div className="remamount">
-              <p>Remain:  {Number(Number(petrolstock)-Number(petroldisp)).toLocaleString()}</p>
+              <p>
+                Remain:{" "}
+                {Number(
+                  Number(petrolstock) - Number(petroldisp)
+                ).toLocaleString()}
+              </p>
             </div>
           </div>
-          <div className="thr">
-            
-          </div>
+          <div className="thr"></div>
         </div>
 
         <div className="first">
-          
           <div className="sc">
             <div className="pd">
-              
-
-            <div className="pet">
+              <div className="pet">
                 <img src="" alt="" />
                 <p>Diesel</p>
               </div>
@@ -347,18 +354,20 @@ export default function Home() {
 
               <p>Instock: {dieselstock}</p>
               <p>
-                <span id="aval"> Dipstock: </span>{" "}
-                {dieseldips}
+                <span id="aval"> Dipstock: </span> {dieseldips}
               </p>
             </div>
 
             <div className="remamount">
-              <p>Remain: {Number(Number(dieselstock)-Number(dieseldips)).toLocaleString()}</p>
+              <p>
+                Remain:{" "}
+                {Number(
+                  Number(dieselstock) - Number(dieseldips)
+                ).toLocaleString()}
+              </p>
             </div>
           </div>
-          <div className="thr">
-            
-          </div>
+          <div className="thr"></div>
         </div>
       </div>
     </div>
