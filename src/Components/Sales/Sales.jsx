@@ -45,24 +45,28 @@ export default function Sales() {
   const [dieselprice, setDieselprice] = useState("");
   const [petrolprice, setPetrolprice] = useState("");
 
-  const { url, login } = useContext(AuthContext);
+  const {
+    url,
+    login,
+    diff,
+    zrepos,
+    totalEarnings,
+    dieselAmount,
+    petrolAmount
+  } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [reason, setReason] = useState("");
   const [amountinwords, setAmountinwords] = useState("");
-  const [diff, setDifferences] = useState("0");
-  const [zrepos, setZreport] = useState("");
 
-  const [totalEarnings, setEarnings] = useState("0");
-  const [dieselAmount, setdieselAmount] = useState("0");
-  const [petrolAmount, setpetrolAmount] = useState("0");
   const [reasons, setReasons] = useState(false);
 
   const [weekly, setWeekly] = useState(false);
   const [daily, setDaily] = useState(true);
   const [monthly, setMonthly] = useState(false);
   const [yearly, setYearly] = useState(false);
-
   const [tableData, setData] = useState([]);
+
+
   const [alldat, setAlls] = useState([]);
   const [click, setClick] = useState(false);
 
@@ -73,98 +77,11 @@ export default function Sales() {
 
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${url}/api/billing/allpricings`, {
-          withCredentials: true,
-        });
-
-        const resps = await axios.get(`${url}/api/billing/allcollectmoney`, {
-          withCredentials: true,
-        });
-
-        const respone = await axios.get(`${url}/api/pumps/dieselone/`, {
-          withCredentials: true,
-        });
-
-        const resptwo = await axios.get(`${url}/api/pumps/petrolone/`, {
-          withCredentials: true,
-        });
-
-        const respthree = await axios.get(`${url}/api/pumps/dieseltwo/`, {
-          withCredentials: true,
-        });
-
-        const respfour = await axios.get(`${url}/api/pumps/petroltwo/`, {
-          withCredentials: true,
-        });
-
         const dets = await axios.get(`${url}/api/billing/debtors`, {
           withCredentials: true,
         });
 
-        let pric = Object.values(res.data)[Object.values(res.data).length - 1];
-
-        const dlength = res.data.length;
-        // console.log(dlength)
-
-        let pone = Object.values(resptwo.data)[
-          Object.values(resptwo.data).length - 1
-        ];
-        let ptwo = Object.values(respfour.data)[
-          Object.values(respfour.data).length - 1
-        ];
-        let aone = Object.values(respone.data)[
-          Object.values(respone.data).length - 1
-        ];
-        let atwo = Object.values(respthree.data)[
-          Object.values(respthree.data).length - 1
-        ];
-
-
-        console.log(pone,ptwo,aone,atwo)
-
-
-        const dieselamout = Number(pric.diesel);
-        const petrolamount = Number(pric.petrol);
-
-        const pmsoneAmount =
-          Number(Number(pone.closingdigital) - Number(pone.openingdigital)) *
-          petrolamount;
-        const pmstwoAmount =
-          Number(Number(ptwo.closingdigital) - Number(ptwo.openingdigital)) *
-          petrolamount;
-
-        const agooneAmount =
-          Number(Number(aone.closingdigital) - Number(aone.openingdigital)) *
-          dieselamout;
-        const agotwoAmount =
-          Number(Number(atwo.closingdigital) - Number(atwo.openingdigital)) *
-          dieselamout;
-
-          console.log(pmsoneAmount)
-          console.log((Number(pone.outputvalue)*petrolamount))
-
-        // console.log(pmsoneAmount,pmstwoAmount,agooneAmount,agotwoAmount)
-
-        const totalAmount = Number(
-          pmsoneAmount + pmstwoAmount + agooneAmount + agotwoAmount
-        );
-        const totalPetrol = Number(pmsoneAmount) + Number(pmstwoAmount);
-        const totalDiesel = Number(agooneAmount) + Number(agotwoAmount);
-
-        let last_value = Object.values(resps.data)[
-          Object.values(resps.data).length - 1
-        ];
-
-        const differences = Number(last_value.zreport) - Number(totalAmount);
-
-        setdieselAmount(totalDiesel);
-        setpetrolAmount(totalPetrol);
-        setEarnings(totalAmount);
-        setZreport(last_value.zreport);
-        setData(dets.data);
-        setDifferences(differences);
-
-
+        setData(dets.data)
         // console.log(last_value.zreport)
       } catch (err) {
         // console.log(err)
@@ -564,7 +481,7 @@ export default function Sales() {
                       <tr onClick={(e) => setAlls(val)}>
                         <td>{key + 1}</td>
                         <td>{val.name}</td>
-                        <td>{val.amount}</td>
+                        <td>{Number(val.amount).toLocaleString()}</td>
                         <td>{val?.modeofpay || "-"}</td>
                         <td>{val.uid}</td>
                       </tr>

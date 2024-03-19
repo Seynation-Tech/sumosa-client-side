@@ -26,9 +26,26 @@ const amount = 3000;
 
 export default function Home() {
   const cookies = new Cookies();
-  const { currentUser,tokns, url, logoout } = useContext(AuthContext);
+  const { currentUser, tokns, url, dieselprice, petrolprice , diff,
+    zrepos,alldebts,
+    totalEarnings,
+    dieselAmount,
+    petrolAmount} =
+    useContext(AuthContext);
+
   const [currentUsers, setCurrentUser] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // console.log(last_value.zreport)
+      } catch (err) {
+        // console.log(err)
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="mainpage">
@@ -99,7 +116,7 @@ export default function Home() {
               </div>
 
               <div className="graphs">
-              <Mids />
+                <Mids />
               </div>
 
               <div className="grap">
@@ -130,7 +147,7 @@ export default function Home() {
                       <p id="gs">Petrol</p>
 
                       <div className="pri">
-                        <p>Tsh 23000</p>
+                        <p>Tsh {petrolprice}</p>
                         {/* <img src={pend} alt="" /> */}
                       </div>
                     </div>
@@ -155,7 +172,7 @@ export default function Home() {
                       <p id="gs">Diesel</p>
 
                       <div className="pri">
-                        <p>Tsh {amount.toLocaleString()}</p>
+                        <p>Tsh {dieselprice}</p>
                         {/* <img src={pend} alt="" /> */}
                       </div>
                     </div>
@@ -182,7 +199,7 @@ export default function Home() {
                   </div>
 
                   <div className="amount">
-                    <p>120230340</p>
+                    <p>Tsh {totalEarnings}</p>
                   </div>
                 </div>
 
@@ -204,7 +221,7 @@ export default function Home() {
                   </div>
 
                   <div className="amount">
-                    <p>120230340</p>
+                    <p>Tsh {alldebts}</p>
                   </div>
                 </div>
 

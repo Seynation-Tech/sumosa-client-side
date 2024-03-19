@@ -458,6 +458,20 @@ body {
       
   }
 
+  .contentonesya{
+    background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      width: 56%;
+      min-height: 69vh;
+      margin-top: -14px;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      
+  }
+
   .contentonesy{
     background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
       display: flex;
@@ -638,6 +652,21 @@ color: rgba(0, 0, 0, 0.344);
     background: rgba(0, 194, 253, 0.084);
     position: absolute;
     top: 21%;
+    border-radius: 9px;
+    backdrop-filter: blur(4px);
+    z-index: 898;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+  .poppes{
+    min-height: 103vh;
+    width: 100%;
+    background: rgba(0, 194, 253, 0.084);
+    position: absolute;
+    top: 1%;
     border-radius: 9px;
     backdrop-filter: blur(4px);
     z-index: 898;

@@ -57,7 +57,7 @@ export default function Expenses() {
   const [debts, setDebts] = useState(false);
   const [stocks, setStocks] = useState(false);
   const [moneycount, setMoneycount] = useState(false);
-  const [zrepot, setZrepot] = useState("0");
+  const [zrepot, setZrepot] = useState("");
   const [status, setStatus] = useState("");
 
   const { url, login } = useContext(AuthContext);
@@ -128,7 +128,7 @@ export default function Expenses() {
     //   agooneanalogClosing
     // ) {
 
-    console.log("hell in");
+    // console.log("hell in");
     try {
       let pmsOne = {
         uid: date,
