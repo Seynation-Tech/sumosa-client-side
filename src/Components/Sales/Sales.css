@@ -681,7 +681,7 @@ td {
 }
 
 tbody tr:nth-of-type(even) {
-  background-color: rgba(213, 229, 244, 0.885);
+  background-color: rgba(213, 229, 244, 0.061);
 }
 
 tbody tr:hover {
@@ -691,7 +691,7 @@ tbody tr:hover {
 }
 
 tbody tr:last-of-type {
-  border-bottom: 2px solid rgba(0, 34, 255, 0.979);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.157);
 }
 
 .pays{

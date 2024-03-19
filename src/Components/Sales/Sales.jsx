@@ -97,30 +97,51 @@ export default function Sales() {
           withCredentials: true,
         });
 
-        const dieselamout = Number(res.data[0].diesel);
-        const petrolamount = Number(res.data[0].petrol);
+        const dets = await axios.get(`${url}/api/billing/debtors`, {
+          withCredentials: true,
+        });
+
+        let pric = Object.values(res.data)[Object.values(res.data).length - 1];
+
+        const dlength = res.data.length;
+        // console.log(dlength)
+
+        let pone = Object.values(resptwo.data)[
+          Object.values(resptwo.data).length - 1
+        ];
+        let ptwo = Object.values(respfour.data)[
+          Object.values(respfour.data).length - 1
+        ];
+        let aone = Object.values(respone.data)[
+          Object.values(respone.data).length - 1
+        ];
+        let atwo = Object.values(respthree.data)[
+          Object.values(respthree.data).length - 1
+        ];
+
+
+        console.log(pone,ptwo,aone,atwo)
+
+
+        const dieselamout = Number(pric.diesel);
+        const petrolamount = Number(pric.petrol);
 
         const pmsoneAmount =
-          Number(
-            Number(resptwo.data[0].closingdigital) -
-              Number(resptwo.data[0].openingdigital)
-          ) * petrolamount;
+          Number(Number(pone.closingdigital) - Number(pone.openingdigital)) *
+          petrolamount;
         const pmstwoAmount =
-          Number(
-            Number(respfour.data[0].closingdigital) -
-              Number(respfour.data[0].openingdigital)
-          ) * petrolamount;
+          Number(Number(ptwo.closingdigital) - Number(ptwo.openingdigital)) *
+          petrolamount;
 
         const agooneAmount =
-          Number(
-            Number(respone.data[0].closingdigital) -
-              Number(respone.data[0].openingdigital)
-          ) * dieselamout;
+          Number(Number(aone.closingdigital) - Number(aone.openingdigital)) *
+          dieselamout;
         const agotwoAmount =
-          Number(
-            Number(respthree.data[0].closingdigital) -
-              Number(respthree.data[0].openingdigital)
-          ) * dieselamout;
+          Number(Number(atwo.closingdigital) - Number(atwo.openingdigital)) *
+          dieselamout;
+
+          console.log(pmsoneAmount)
+          console.log((Number(pone.outputvalue)*petrolamount))
 
         // console.log(pmsoneAmount,pmstwoAmount,agooneAmount,agotwoAmount)
 
@@ -140,8 +161,9 @@ export default function Sales() {
         setpetrolAmount(totalPetrol);
         setEarnings(totalAmount);
         setZreport(last_value.zreport);
-
+        setData(dets.data);
         setDifferences(differences);
+
 
         // console.log(last_value.zreport)
       } catch (err) {
@@ -259,6 +281,21 @@ export default function Sales() {
       setData(respfour.data);
       // alert(respfour.data);
 
+      //
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+      // setError( "Please refresh..." );
+    }
+  };
+
+  const creditorLoad = async () => {
+    try {
+      const respfour = await axios.get(`${url}/api/billing/creditors`, {
+        withCredentials: true,
+      });
+      setData(respfour.data);
+      // alert(respfour.data);
 
       //
     } catch (err) {
@@ -312,11 +349,11 @@ export default function Sales() {
             <div className="alls">
               <div className="sds">
                 <p>Tsh {petrolAmount}</p>
-                <p>Current Petrol Sales </p>
+                <p>Today's Petrol Sales </p>
               </div>
               <div className="sds">
                 <p>Tsh {dieselAmount}</p>
-                <p>Current Diesel Earnings</p>
+                <p>Today's Diesel Earnings</p>
               </div>
             </div>
 
@@ -482,11 +519,10 @@ export default function Sales() {
 
           <div className="pesa">
             <div className="mpesa">
-              <p>CREDITORS</p>
-            </div>
-
-            <div className="mpesa">
               <p onClick={debtorcrediLoad}>DEBTORS</p>
+            </div>
+            <div className="mpesa">
+              <p onClick={creditorLoad}>CREDITORS</p>
             </div>
           </div>
 

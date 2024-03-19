@@ -105,6 +105,9 @@ export default function Expenses() {
   const [onehs, setOnehs] = useState("");
   const [fiftys, setFiftys] = useState("");
 
+  const [credits, setCred] = useState(false);
+  const [mode, setMode] = useState("");
+
   const [pmsphyscal, setPhysicalpms] = useState("");
   const [pmsdispst, setDipstpms] = useState("");
 
@@ -171,7 +174,7 @@ export default function Expenses() {
       const resfour = await axios.post(`${url}/api/pumps/dieseltwo`, agoTwo);
 
       // console.log(res)
-      alert(resfour.data)
+      alert(resfour.data);
 
       //
     } catch (err) {
@@ -204,7 +207,33 @@ export default function Expenses() {
       );
 
       // console.log(res)
-      alert(resone.data)
+      alert(resone.data);
+      console.log(resone.data);
+
+      //
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+      setError("Please refresh...");
+    }
+  };
+
+  const credHandler = async () => {
+    try {
+      let debtors = {
+        uid: date,
+        name: name,
+        amount: amount,
+        modeofpay: mode,
+        date: mydate,
+      };
+
+      // console.log(pmsOne)
+
+      const resone = await axios.post(`${url}/api/billing/creditors`, debtors);
+
+      // console.log(res)
+      alert(resone.data);
       console.log(resone.data);
 
       //
@@ -229,7 +258,7 @@ export default function Expenses() {
       const resone = await axios.post(`${url}/api/billing/debtors`, debtors);
 
       // console.log(res)
-      alert(resone.data)
+      alert(resone.data);
       console.log(resone.data);
 
       //
@@ -302,7 +331,7 @@ export default function Expenses() {
       );
 
       // console.log(res)
-      alert(resone.data)
+      alert(resone.data);
       console.log(resone.data);
 
       //
@@ -323,6 +352,7 @@ export default function Expenses() {
     setMoneycount(false);
     setDebts(false);
     setPesa(true);
+    setCred(false);
   };
 
   const handleDebt = () => {
@@ -330,6 +360,15 @@ export default function Expenses() {
     setMoneycount(false);
     setStocks(false);
     setDebts(true);
+    setCred(false);
+  };
+
+  const handleCred = () => {
+    setPesa(false);
+    setMoneycount(false);
+    setStocks(false);
+    setDebts(false);
+    setCred(true);
   };
 
   const handleMoneycount = () => {
@@ -337,6 +376,7 @@ export default function Expenses() {
     setStocks(false);
     setDebts(false);
     setMoneycount(true);
+    setCred(false);
   };
 
   const handleStocks = () => {
@@ -344,6 +384,7 @@ export default function Expenses() {
     setDebts(false);
     setMoneycount(false);
     setStocks(true);
+    setCred(false);
   };
 
   const handleAll = () => {
@@ -351,6 +392,7 @@ export default function Expenses() {
     setDebts(false);
     setMoneycount(false);
     setStocks(false);
+    setCred(false);
   };
 
   return (
@@ -374,6 +416,10 @@ export default function Expenses() {
 
           <div className="dail">
             <p onClick={handleDebt}>DEBTS</p>
+          </div>
+
+          <div className="dail">
+            <p onClick={handleCred}>CREDITORS</p>
           </div>
 
           <div className="dail">
@@ -542,6 +588,54 @@ export default function Expenses() {
             </div>
           )}
 
+          {credits && (
+            <div className="poppesa">
+              <div className="contentonesy">
+                <div className="ours">
+                  <div className="sdacont">
+                    <div className="jins">
+                      <p>CREDITORS' REPORT</p>
+                    </div>
+                    <div className="forms">
+                      <div className="input-two">
+                        {/* <i>icon</i> */}
+                        <input
+                          placeholder="Name"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                        />
+                      </div>
+
+                      <div className="input-two">
+                        {/* <i>icon</i> */}
+                        <input
+                          placeholder="Amount"
+                          value={amount}
+                          onChange={(e) => setAmount(e.target.value)}
+                        />
+                      </div>
+
+                      <div className="input-two">
+                        {/* <i>icon</i> */}
+                        <input
+                          placeholder="Mode of Payment"
+                          value={mode}
+                          onChange={(e) => setMode(e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="remember-opt">
+                      <button onClick={credHandler} className="sign-btn">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {moneycount && (
             <div className="poppesaa">
               <div className="contentonesa">
@@ -627,8 +721,12 @@ export default function Expenses() {
                     </div>
 
                     <div className="input-to">
-                      <input type="text" placeholder="Z-REPORT AMOUNT" value={zrepot}
-                        onChange={(e) => setZrepot(e.target.value)}/>
+                      <input
+                        type="text"
+                        placeholder="Z-REPORT AMOUNT"
+                        value={zrepot}
+                        onChange={(e) => setZrepot(e.target.value)}
+                      />
                     </div>
                     <div className="thetwo">
                       <button onClick={moneycountHandler}>Submit</button>
