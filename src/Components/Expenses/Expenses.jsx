@@ -3,10 +3,11 @@ import Sidebar from "../Sidebar/Sidebar";
 import "./Expenses.css";
 import bell from "../../Images/notify.png";
 import Real from "../Charts/Real";
+import Monthly from "../Charts/Expmonthly";
+import Weekly from "../Charts/Expweekly";
 
 import axios from "axios";
 import { AuthContext } from "../AuthContext";
-
 
 let today = new Date();
 let date =
@@ -34,25 +35,75 @@ let mydate =
 
 axios.defaults.withCredentials = true;
 
+export default function Expenses() {
+  const [usage, setUsage] = useState("");
+  const [amount, setAmount] = useState("");
+  const [expenses, setExpenses] = useState(false);
+  const { url, login } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+  const [tableData, setData] = useState([]);
+
+  const [weekly, setWeekly] = useState(true);
+  const [monthly, setMonthly] = useState(false);
+  const [yearly, setYearly] = useState(false);
 
 
-export default function Expenses ()
-{
-    const [usage,setUsage] = useState("")
-    const [amount,setAmount] = useState("")
-    const [expenses,setExpenses] = useState(false)
-    const { url, login } = useContext(AuthContext);
-    const [loading, setLoading] = useState(false);
 
-    const handleExpenses = ()=>{
-        setExpenses(true)
-    }
+  const [totalexpense, setTotalexpense] = useState("0");
 
-    const cancelExpense=()=>{
-        setExpenses(false)
-    }
+  useEffect(() => {
+    setLoading(true);
 
-    
+    const interval = setInterval(() => {
+      const fetchData = async () => {
+        try {
+          // console.log(pmsOne)
+
+          const resptwo = await axios.get(`${url}/api/billing/allexpenses`, {
+            withCredentials: true,
+          });
+          // console.log(resptwo.data);
+          let expens = 0;
+          for (let i = 0; i < resptwo.data.length; i++) {
+            expens = Number(resptwo.data[i].amount) + expens;
+            setTotalexpense(expens);
+            // console.log(expens)
+          }
+
+          setData(resptwo.data);
+
+          //
+        } catch (err) {
+          setLoading(false);
+          console.log(err);
+          // setError( "Please refresh..." );
+        }
+      };
+      fetchData();
+    }, 1500);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleWeekly = () => {
+    setWeekly(true);
+    setYearly(false);
+    setMonthly(false);
+  };
+
+  const handleMonthly = () => {
+    setWeekly(false);
+    setYearly(false);
+    setMonthly(true);
+  };
+
+  const handleExpenses = () => {
+    setExpenses(true);
+  };
+
+  const cancelExpense = () => {
+    setExpenses(false);
+  };
+
   const expenseHandler = async () => {
     try {
       let debtors = {
@@ -67,123 +118,119 @@ export default function Expenses ()
 
       // console.log(res)
       alert(resone.data);
-      console.log(resone.data);
+      // console.log(resone.data);
 
       //
     } catch (err) {
       setLoading(false);
       console.log(err);
-    //   setError("Please refresh...");
+      //   setError("Please refresh...");
     }
   };
 
-    return (
-        <div className="mysals">
-            <Sidebar />
+  return (
+    <div className="mysals">
+      <Sidebar />
 
-            <div className=""></div>
-          
+      <div className=""></div>
 
-            <div className="sectionthres">
-                <div className="general">
-                    <p>EXPENSES MANAGEMENT REPORT</p>
-                </div>
-                <div className="year">
-                    <div className="dail">
-                        <p>DAILY</p>
-                    </div>
+      <div className="sectionthres">
+        <div className="general">
+          <p>EXPENSES MANAGEMENT REPORT</p>
+        </div>
+        <div className="year">
+          <div className="dail"  onClick={handleWeekly}>
+            <p>WEEKLY</p>
+          </div>
 
-                    <div className="dail">
-                        <p>WEEKLY</p>
-                    </div>
+          <div className="dail" onClick={handleMonthly}>
+            <p>MONTHLY</p>
+          </div>
 
-                    <div className="dail">
-                        <p>MONTHLY</p>
-                    </div>
+          {/* <div className="dail">
+            <p>YEARLY</p>
+          </div> */}
 
-                    <div className="dail">
-                        <p>YEARLY</p>
-                    </div>
-
-                    <div className="download">
-                        <p>Download Report</p>
-                        <div className="down">
-                            <img src="" alt="" />
-                        </div>
-                    </div>
-                </div>
-                <Real />
-
-                {expenses && (
-            <div className="poppes">
-                
-              <div className="contentonesya">
-              <div className="canc" onClick={cancelExpense}>
+          <div className="download">
+            <p>Download Report</p>
+            <div className="down">
               <img src="" alt="" />
             </div>
-                <div className="ours">
-                  <div className="sdacont">
-                    <div className="jins">
-                      <p>EXPENSES' REPORT</p>
-                    </div>
-                    <div className="forms">
-                      <div className="input-two">
-                        {/* <i>icon</i> */}
-                        <input
-                          placeholder="Usage"
-                          value={usage}
-                          onChange={(e) => setUsage(e.target.value)}
-                        />
-                      </div>
+          </div>
+        </div>
+       
 
-                      <div className="input-two">
-                        {/* <i>icon</i> */}
-                        <input
-                          placeholder="Amount"
-                          value={amount}
-                          onChange={(e) => setAmount(e.target.value)}
-                        />
-                      </div>
+        {weekly &&  <Weekly />}
+        {monthly && <Monthly />}
+
+
+
+        {expenses && (
+          <div className="poppes">
+            <div className="contentonesya">
+              <div className="canc" onClick={cancelExpense}>
+                <img src="" alt="" />
+              </div>
+              <div className="ours">
+                <div className="sdacont">
+                  <div className="jins">
+                    <p>EXPENSES' REPORT</p>
+                  </div>
+                  <div className="forms">
+                    <div className="input-two">
+                      {/* <i>icon</i> */}
+                      <input
+                        placeholder="Usage"
+                        value={usage}
+                        onChange={(e) => setUsage(e.target.value)}
+                      />
                     </div>
 
-                    <div className="remember-opt">
-                      <button onClick={expenseHandler} className="sign-btn">
-                        Submit
-                      </button>
+                    <div className="input-two">
+                      {/* <i>icon</i> */}
+                      <input
+                        placeholder="Amount"
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
+                      />
                     </div>
+                  </div>
+
+                  <div className="remember-opt">
+                    <button onClick={expenseHandler} className="sign-btn">
+                      Submit
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
-          )}
+          </div>
+        )}
 
-                <div className="pays">
-                    <p>Expenses General Report</p>
+        <div className="pays">
+          <p>Expenses General Report</p>
 
-                    <div className="addexpenses" onClick={handleExpenses}>
-                        <button>Add expenses</button>
-                    </div>
+          <div className="addexpenses" onClick={handleExpenses}>
+            <button>Add expenses</button>
+          </div>
 
-                    <div className="pesaa">
-                        <div className="mpesaa">
-                            <p>Total Expenses: Tsh 190,000</p>
-                        </div>
+          <div className="pesaa">
+            <div className="mpesaa">
+              <p>Total Expenses: Tsh {Number(totalexpense).toLocaleString()}</p>
+            </div>
+          </div>
 
-                       
-                    </div>
-
-                    {/* <div className="search">
+          {/* <div className="search">
                         <input type="text" placeholder="Search" />
                     </div> */}
 
-                    {/* <div className="other">
+          {/* <div className="other">
                         <img src="" alt="" />
                     </div> */}
-                </div>
+        </div>
 
-                <div className="con">
-
-                    {/* <div className="sea">
+        <div className="con">
+          {/* <div className="sea">
                         <p>Payments</p>
                         <div className="search">
                             <input type="text" placeholder="Search " />
@@ -191,97 +238,35 @@ export default function Expenses ()
                         </div>
                     </div> */}
 
-                    <div className="tbb">
-                        <p>S/N</p>
-                        <p>Usage</p>
-                        <p>Amount</p>
-                        <p>Mode</p>
-                        <p>Date</p>
-                    </div>
-
-
-
-                </div>
-                <div className="lss">
-                    {/* <div className="crc"></div> */}
-
-                    <div className="lft">
-                        <div className="alld">
-
-
-                            <table className="home-table">
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>12,000,000/=</td>
-                                    <td>Cash</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Theonest Basina</td>
-                                    <td>12,000,000/=</td>
-                                    <td>Cash</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Cash</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Cash</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Cash</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Cash</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Cash</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Cash</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                            </table>
-
-                        </div>
-                    </div>
-                    <div className="rght"></div>
-                </div>
-            </div>
+          <div className="tbb">
+            <p>S/N</p>
+            <p>Usage</p>
+            <p>Amount</p>
+            <p>Date</p>
+          </div>
         </div>
-    );
+        <div className="lss">
+          {/* <div className="crc"></div> */}
+
+          <div className="lft">
+            <div className="alld">
+              <table className="home-table">
+                {tableData.map((val, key) => {
+                  return (
+                    <tr>
+                      <td>{key + 1}</td>
+                      <td>{val.uid}</td>
+                      <td>{val.usages}</td>
+                      <td>{Number(val.amount).toLocaleString()}</td>
+                    </tr>
+                  );
+                })}
+              </table>
+            </div>
+          </div>
+          <div className="rght"></div>
+        </div>
+      </div>
+    </div>
+  );
 }

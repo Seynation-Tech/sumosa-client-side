@@ -1,108 +1,253 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Sidebar from "../Sidebar/Sidebar";
 import bell from "../../Images/notify.png";
 import Graphs from "../Charts/Graphs";
-import './Stock.css'
+import "./Stock.css";
 
-export default function Sales ()
-{
-    return (
-        <div className="mysales">
-            <Sidebar />
+import moment from "moment";
+import DotLoader from "react-spinners/DotLoader";
+import Cookies from "cookie-universal";
 
-            <div className=""></div>
-            <div className="sectiontwos">
-                <div className="lineage"></div>
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { AuthContext } from "../AuthContext";
 
-                <div className="upsections"></div>
+let today = new Date();
+let date =
+  today.getDate() +
+  "/" +
+  (today.getMonth() + 1) +
+  "/" +
+  today.getFullYear() +
+  "," +
+  today.getHours() +
+  ":" +
+  today.getMinutes();
+let mydate =
+  today.getDate() +
+  "/" +
+  (today.getMonth() + 1) +
+  "/" +
+  today.getFullYear() +
+  "," +
+  today.getHours() +
+  ":" +
+  today.getMinutes() +
+  ":" +
+  today.getSeconds();
 
-                <div className="lowsections">
+export default function Sales() {
+  const {
+    pmsonelitres,
+    pmstwolitres,
+    agoonelitres,
+    agotwolitres,
+    petrollitres,
+    diesellitres,
+    lastpetrol,
+    lastdiesel,
+    url,
+  } = useContext(AuthContext);
 
-                    <div className="lefts">
-                        <div className="dashs">
-                            <div className="ps">
-                                <p>Litres Overview</p>
-                                <p>Current Sale Metrics</p>
-                            </div>
+  const [weekly, setWeekly] = useState(false);
+  const [daily, setDaily] = useState(true);
+  const [monthly, setMonthly] = useState(false);
+  const [yearly, setYearly] = useState(false);
+  const [tableData, setData] = useState([]);
+  const [tableDat, setDatas] = useState([]);
 
-                            <div className="sss"></div>
-                        </div>
-                        <div className="alls">
-                            <div className="sds">
-                                <p>20000 L</p>
-                                <p>Total Petol Litres </p>
-                            </div>
-                            <div className="sds">
-                                <p> 20000 L</p>
-                                <p>Total Diesel Litres</p>
-                            </div>
-                        </div>
+  const [loading, setLoading] = useState(false);
 
-                        <div className="bbbs">
-                            <p id="ll">Last Stock Summary</p>
-                            <div className="lats">
-                                <p>Petrol: 120000 L</p>
-                                <p>Diesel: 120000 L</p>
-                            </div>
-                        </div>
+  useEffect(() => {
+    setLoading(true);
 
-                        <div className="stoc">
-                            <div className="bba">Analog Value</div>
-                            <div className="bba">Digial Value</div>
+    const fetchData = async () => {
+      try {
+        const respone = await axios.get(`${url}/api/pumps/dieselone/`, {
+          withCredentials: true,
+        });
 
-                        </div>
+        const resptwo = await axios.get(`${url}/api/pumps/petrolone/`, {
+          withCredentials: true,
+        });
 
-                    </div>
+        const respthree = await axios.get(`${url}/api/pumps/dieseltwo/`, {
+          withCredentials: true,
+        });
 
-                    <div className="leftsa">
+        const respfour = await axios.get(`${url}/api/pumps/petroltwo/`, {
+          withCredentials: true,
+        });
 
+        setData(resptwo.data);
 
+        // console.log(last_value.zreport)
+      } catch (err) {
+        // console.log(err)
+      }
+    };
+    fetchData();
+  }, []);
 
+  const handlePmsone = async () => {
+    try {
+      // console.log(pmsOne)
 
-                        <div className="bbbsa">Total Digital Value</div>
-                        <div className="bbba">
+      const resptwo = await axios.get(`${url}/api/pumps/petrolone/`, {
+        withCredentials: true,
+      });
 
-                            <div className="sdaa">
-                                <div className="da"></div>
-                                <p>PMS 01</p>
-                            </div>
+      setData(resptwo.data);
 
-                            <p>1002303 L</p>
-                        </div>
-                        <div className="bbba">
+      
 
-                            <div className="sdaa">
-                                <div className="da"></div>
-                                <p>PMS 02</p>
-                            </div>
+      //
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+      // setError( "Please refresh..." );
+    }
+  };
 
-                            <p>1002303 L</p>
-                        </div>
+  const handlePmstwo = async () => {
+    try {
+      // console.log(pmsOne)
 
-                        <div className="bbba">
+      const resptwo = await axios.get(`${url}/api/pumps/petroltwo/`, {
+        withCredentials: true,
+      });
 
-                            <div className="sdaa">
-                                <div className="da"></div>
-                                <p>AGO 01</p>
-                            </div>
+      setData(resptwo.data);
 
-                            <p>1002303 L</p>
-                        </div>
+      //
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+      // setError( "Please refresh..." );
+    }
+  };
 
-                        <div className="bbba">
+  const handleAgoone = async () => {
+    try {
+      // console.log(pmsOne)
 
-                            <div className="sdaa">
-                                <div className="da"></div>
-                                <p>AGO 02</p>
-                            </div>
+      const respone = await axios.get(`${url}/api/pumps/dieselone/`, {
+        withCredentials: true,
+      });
 
-                            <p>1002303 L</p>
-                        </div>
+      setData(respone.data);
 
+      //
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+      // setError( "Please refresh..." );
+    }
+  };
 
-                    </div>
+  const handleAgotwo = async () => {
 
-                    {/* <div className="rights">
+    try {
+        // console.log(pmsOne)
+  
+        const respone = await axios.get(`${url}/api/pumps/dieseltwo/`, {
+          withCredentials: true,
+        });
+  
+        setData(respone.data);
+  
+        //
+      } catch (err) {
+        setLoading(false);
+        console.log(err);
+        // setError( "Please refresh..." );
+      }
+  };
+
+  return (
+    <div className="mysales">
+      <Sidebar />
+
+      <div className=""></div>
+      <div className="sectiontwos">
+        <div className="lineage"></div>
+
+        <div className="upsections"></div>
+
+        <div className="lowsections">
+          <div className="lefts">
+            <div className="dashs">
+              <div className="ps">
+                <p>Litres Overview</p>
+                <p>Current Sale Metrics</p>
+              </div>
+
+              <div className="sss"></div>
+            </div>
+            <div className="alls">
+              <div className="sds">
+                <p>{petrollitres} L</p>
+                <p>Total Petol Litres </p>
+              </div>
+              <div className="sds">
+                <p> {diesellitres} L</p>
+                <p>Total Diesel Litres</p>
+              </div>
+            </div>
+
+            <div className="bbbs">
+              <p id="ll">Last Stock Summary</p>
+              <div className="lats">
+                <p>Petrol: {lastpetrol} L</p>
+                <p>Diesel: {lastdiesel} L</p>
+              </div>
+            </div>
+
+            {/* <div className="stoc">
+              <div className="bba">Analog Value</div>
+              <div className="bba">Digial Value</div>
+            </div> */}
+          </div>
+
+          <div className="leftsa">
+            <div className="bbbsa">Total Digital Value</div>
+            <div className="bbba">
+              <div className="sdaa">
+                <div className="da"></div>
+                <p>PMS 01</p>
+              </div>
+
+              <p>{pmsonelitres} L</p>
+            </div>
+            <div className="bbba">
+              <div className="sdaa">
+                <div className="da"></div>
+                <p>PMS 02</p>
+              </div>
+
+              <p>{pmstwolitres} L</p>
+            </div>
+
+            <div className="bbba">
+              <div className="sdaa">
+                <div className="da"></div>
+                <p>AGO 01</p>
+              </div>
+
+              <p>{agoonelitres} L</p>
+            </div>
+
+            <div className="bbba">
+              <div className="sdaa">
+                <div className="da"></div>
+                <p>AGO 02</p>
+              </div>
+
+              <p>{agotwolitres} L</p>
+            </div>
+          </div>
+
+          {/* <div className="rights">
                         <div className="grs">
                             <Graphs />
                         </div>
@@ -111,289 +256,140 @@ export default function Sales ()
 
                         </div>
                     </div> */}
-                </div>
-            </div>
-
-            <div className="sectionthrees">
-                <div className="year">
-                    <div className="dail">
-                        <p>PMS 01</p>
-                    </div>
-
-                    <div className="dail">
-                        <p>PMS 02</p>
-                    </div>
-
-                    <div className="dail">
-                        <p>AGO 01</p>
-                    </div>
-
-                    <div className="dail">
-                        <p>AGO 02</p>
-                    </div>
-
-                    <div className="downloads">
-                        <p>Weekly</p>
-                        <div className="downs">
-                            <img src="" alt="" />
-                        </div>
-                    </div>
-                </div>
-                {/* <Graphs /> */ }
-
-                <div className="pays">
-                    <p>Analog Litres</p>
-
-                    <div className="search">
-                        <input type="text" placeholder="Search" />
-                    </div>
-
-                    {/* <div className="other">
-                        <img src="" alt="" />
-                    </div> */}
-                </div>
-
-                <div className="con">
-
-                    {/* <div className="sea">
-                        <p>Payments</p>
-                        <div className="search">
-                            <input type="text" placeholder="Search " />
-                            <img src="" alt="" />
-                        </div>
-                    </div> */}
-
-                    <div className="tbb">
-                        <p>Date</p>
-                        <p>Closing</p>
-                        <p>Opening</p>
-                        <p>Output</p>
-                    </div>
-
-
-
-                </div>
-                <div className="ls">
-                    <div className="crcs"></div>
-
-                    <div className="lft">
-                        <div className="alld">
-
-
-                            <table className="home-table">
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>12,000,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Theonest Basina</td>
-                                    <td>12,000,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-                    <div className="rght"></div>
-                </div>
-
-
-
-
-
-
-                <div className="pays">
-                    <p>Digital Litres</p>
-
-                    {/* <div className="search">
-                        <input type="text" placeholder="Search" />
-                    </div> */}
-
-                    {/* <div className="other">
-                        <img src="" alt="" />
-                    </div> */}
-                </div>
-
-                <div className="con">
-
-                    {/* <div className="sea">
-                        <p>Payments</p>
-                        <div className="search">
-                            <input type="text" placeholder="Search " />
-                            <img src="" alt="" />
-                        </div>
-                    </div> */}
-
-                    <div className="tbb">
-                        <p>Date</p>
-                        <p>Closing</p>
-                        <p>Opening</p>
-                        <p>Output</p>
-                    </div>
-
-
-
-                </div>
-                <div className="ls">
-                    <div className="crcs"></div>
-
-                    <div className="lft">
-                        <div className="alld">
-
-
-                            <table className="home-table">
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>12,000,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Theonest Basina</td>
-                                    <td>12,000,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-
-                                <tbody>
-                                    <td>01</td>
-                                    <td>Apolinary Theonest Basina</td>
-                                    <td>300,000/=</td>
-                                    <td>Tues,12/09/2024</td>
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-                    <div className="rght"></div>
-                </div>
-            </div>
         </div>
-    );
+      </div>
+
+      <div className="sectionthrees">
+        <div className="year">
+          <div className="dail" onClick={handlePmsone}>
+            <p>PMS 01</p>
+          </div>
+
+          <div className="dail" onClick={handlePmstwo}>
+            <p>PMS 02</p>
+          </div>
+
+          <div className="dail" onClick={handleAgoone}>
+            <p>AGO 01</p>
+          </div>
+
+          <div className="dail" onClick={handleAgotwo}>
+            <p>AGO 02</p>
+          </div>
+
+          <div className="downloads">
+            <p>Weekly</p>
+            <div className="downs">
+              <img src="" alt="" />
+            </div>
+          </div>
+        </div>
+        {/* <Graphs /> */}
+
+        <div className="pays">
+          <p>Digital Litres</p>
+
+          <div className="search">
+            <input type="text" placeholder="Search" />
+          </div>
+
+          {/* <div className="other">
+                        <img src="" alt="" />
+                    </div> */}
+        </div>
+
+        <div className="con">
+          {/* <div className="sea">
+                        <p>Payments</p>
+                        <div className="search">
+                            <input type="text" placeholder="Search " />
+                            <img src="" alt="" />
+                        </div>
+                    </div> */}
+
+          <div className="tbb">
+            <p>S/N</p>
+            <p>Date</p>
+            <p>Closing</p>
+            <p>Opening</p>
+            <p>Output</p>
+          </div>
+        </div>
+        <div className="ls">
+          <div className="crcs"></div>
+
+          <div className="lft">
+            <div className="alld">
+              <table className="home-table">
+                {tableData.map((val, key) => {
+                  return (
+                    <tr>
+                      <td>{key + 1}</td>
+                      <td>{val.uid}</td>
+                      <td>{Number(val.closingdigital).toLocaleString()}</td>
+                      <td>{Number(val.openingdigital).toLocaleString()}</td>
+                      <td>{Number(val.outputvalue).toLocaleString()}</td>
+                    </tr>
+                  );
+                })}
+              </table>
+            </div>
+          </div>
+          <div className="rght"></div>
+        </div>
+
+        <div className="pays">
+          <p>Analog Litres</p>
+
+          {/* <div className="search">
+                        <input type="text" placeholder="Search" />
+                    </div> */}
+
+          {/* <div className="other">
+                        <img src="" alt="" />
+                    </div> */}
+        </div>
+
+        <div className="con">
+          {/* <div className="sea">
+                        <p>Payments</p>
+                        <div className="search">
+                            <input type="text" placeholder="Search " />
+                            <img src="" alt="" />
+                        </div>
+                    </div> */}
+
+          <div className="tbb">
+            <p>S/N</p>
+            <p>Date</p>
+            <p>Closing</p>
+            <p>Opening</p>
+            <p>Output</p>
+          </div>
+        </div>
+        <div className="ls">
+          <div className="crcs"></div>
+
+          <div className="lft">
+            <div className="alld">
+              <table className="home-table">
+                {tableData.map((val, key) => {
+                  return (
+                    <tr>
+                      <td>{key + 1}</td>
+                      <td>{val.uid}</td>
+                      <td>{Number(val.closingsanalog).toLocaleString()}</td>
+                      <td>{Number(val.openinganalog).toLocaleString()}</td>
+                      <td>{Number(val.outputvalue).toLocaleString()}</td>
+                    </tr>
+                  );
+                })}
+              </table>
+            </div>
+          </div>
+          <div className="rght"></div>
+        </div>
+      </div>
+    </div>
+  );
 }

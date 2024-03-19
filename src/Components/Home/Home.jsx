@@ -19,8 +19,37 @@ import { AuthContext } from "../AuthContext";
 import moment from "moment";
 import DotLoader from "react-spinners/DotLoader";
 import Cookies from "cookie-universal";
+import Moment from 'react-moment';
 
 axios.defaults.withCredentials = true;
+
+const dateToFormat = '1976-04-19T12:59-0500';
+
+
+let today = new Date();
+let date =
+  today.getDate() +
+  "/" +
+  (today.getMonth() + 1) +
+  "/" +
+  today.getFullYear() +
+  " " +
+  today.getHours() +
+  ":" +
+  today.getMinutes();
+let mydate =
+  today.getDate() +
+  "/" +
+  (today.getMonth() + 1) +
+  "/" +
+  today.getFullYear() +
+  " " +
+  today.getHours() +
+  ":" +
+  today.getMinutes() +
+  ":" +
+  today.getSeconds();
+
 
 const amount = 3000;
 
@@ -29,7 +58,10 @@ export default function Home() {
   const { totalliters, allexpenses, url, dieselprice, petrolprice , diff,
     zrepos,alldebts,
     totalEarnings,
-    dieselAmount,
+    dieselAmount, petroldisp,
+    petrolstock,
+    dieseldips,
+    dieselstock,
     petrolAmount} =
     useContext(AuthContext);
 
@@ -244,10 +276,10 @@ export default function Home() {
 
       <div className="sectionthree">
         <div className="lowersecta">
-          <div className="logimg">
-            <img src={logout} alt="" />
-          </div>
-          <p>Log out</p>
+          {/* <div className="logimg">
+            <img src="" alt="" />
+          </div> */}
+          <p>{mydate}</p>
         </div>
         <div className="first">
           <div className="fs">
@@ -270,9 +302,41 @@ export default function Home() {
                 <img src="" alt="" />
               </div>
 
-              <div className="dies">
+            </div>
+            <div className="totalamount">
+              <div className="tot">
+                {/* <img src="" alt="" /> */}
+                {/* <p id="ids">Total Amount</p> */}
+              </div>
+
+              <p>Instock: {petrolstock}</p>
+              <p>
+                <span id="aval"> Dipstock: </span>{" "}
+                {petroldisp}
+              </p>
+            </div>
+
+            <div className="remamount">
+              <p>Remain:  {Number(Number(petrolstock)-Number(petroldisp)).toLocaleString()}</p>
+            </div>
+          </div>
+          <div className="thr">
+            
+          </div>
+        </div>
+
+        <div className="first">
+          
+          <div className="sc">
+            <div className="pd">
+              
+
+            <div className="pet">
                 <img src="" alt="" />
                 <p>Diesel</p>
+              </div>
+              <div className="exch">
+                <img src="" alt="" />
               </div>
             </div>
             <div className="totalamount">
@@ -281,81 +345,19 @@ export default function Home() {
                 {/* <p id="ids">Total Amount</p> */}
               </div>
 
-              <p>Tsh {String(10000000).toLocaleString()}</p>
+              <p>Instock: {dieselstock}</p>
               <p>
-                <span id="aval"> Cash: </span>Tsh{" "}
-                {String(5000000).toLocaleString()}
+                <span id="aval"> Dipstock: </span>{" "}
+                {dieseldips}
               </p>
             </div>
 
             <div className="remamount">
-              <p>Remain: {String(12000000).toLocaleString()}/=</p>
+              <p>Remain: {Number(Number(dieselstock)-Number(dieseldips)).toLocaleString()}</p>
             </div>
           </div>
           <div className="thr">
-            {/* <div className="st">
-              <div className="pp">
-                <div className="ccs"></div>
-                <p>Cash collected</p>
-              </div>
-              <p id="dg">12000000</p>
-            </div>
-
-            <div className="st">
-              <div className="pp">
-                <div className="ccs"></div>
-                <p>Cash collected</p>
-              </div>
-              <p id="dg">12000000</p>
-            </div>
-
-            <div className="st">
-              <div className="pp">
-                <div className="ccs"></div>
-                <p>Cash collected</p>
-              </div>
-              <p id="dg">12000000</p>
-            </div>
-
-            <div className="st">
-              <div className="pp">
-                <div className="ccs"></div>
-                <p>Cash collected</p>
-              </div>
-              <p id="dg">12000000</p>
-            </div> */}
-          </div>
-        </div>
-
-        <div className="second">
-          <div className="midsectss">
-            <div className="sectconta">
-              <p>Debtors</p>
-            </div>
-
-            <div className="sectcontt">
-              <img src={sales} alt="" />
-              <p>Sales</p>
-            </div>
-
-            <div className="sectcontt">
-              <img src={epxenses} alt="" />
-              <p>Epxenses</p>
-            </div>
-
-            <div className="sectcontt">
-              <img src={report} alt="" />
-              <p>Daily Report</p>
-            </div>
-
-            <div className="sectcontt">
-              <img src={stock} alt="" />
-              <p>Dipstick Stock</p>
-            </div>
-
-            <div className="check">
-              <p>Details</p>
-            </div>
+            
           </div>
         </div>
       </div>

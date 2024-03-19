@@ -74,7 +74,7 @@ export default function Sales() {
 
   useEffect(() => {
     setLoading(true);
-
+    const interval = setInterval(() => {
     const fetchData = async () => {
       try {
         const dets = await axios.get(`${url}/api/billing/debtors`, {
@@ -88,6 +88,8 @@ export default function Sales() {
       }
     };
     fetchData();
+  }, 1500);
+  return () => clearInterval(interval);
   }, []);
 
   const handleWeekly = () => {

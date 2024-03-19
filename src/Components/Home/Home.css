@@ -188,7 +188,7 @@
   width: 55%;
   /* background: linear-gradient(rgb(0, 89, 255), rgba(2, 5, 175, 0.959)); */
   position: absolute;
-  left: 26%;
+  left: 24%;
   margin-top: 15px;
   /* border-radius: 23px; */
   /* padding: 12px; */
@@ -277,9 +277,9 @@
   /* position: fixed; */
   min-height: 99vh;
   position: absolute;
-  background: rgba(0, 0, 255, 0.163);
+  background: rgba(0, 0, 255, 0.092);
   width: 1px;
-  left: -35px;
+  left: -23px;
 }
 #acts {
   font-size: 0.7em;
@@ -591,8 +591,8 @@
 /*SECTION THREE */
 
 .sectionthree {
-  background-color: rgba(255, 255, 255, 0.449);
-  width: 18%;
+  background-color: rgba(3, 116, 255, 0.022);
+  width: 20%;
   height: 99vh;
   position: absolute;
   right: 0;
