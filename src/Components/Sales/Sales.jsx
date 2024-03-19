@@ -82,7 +82,7 @@ export default function Sales() {
         });
 
         setData(dets.data)
-        // console.log(last_value.zreport)
+        console.log(dets.data)
       } catch (err) {
         // console.log(err)
       }

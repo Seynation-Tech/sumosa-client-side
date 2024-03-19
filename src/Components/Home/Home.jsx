@@ -78,8 +78,8 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(todaydate)
-        console.log(mydate)
+        // console.log(todaydate)
+        // console.log(mydate)
       } catch (err) {
         // console.log(err)
       }

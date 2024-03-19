@@ -60,7 +60,7 @@ export default function Expenses() {
   const [zrepot, setZrepot] = useState("");
   const [status, setStatus] = useState("");
 
-  const { url, login } = useContext(AuthContext);
+  const { url, days, petrolAmount, dieselAmount } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [today, setToday] = useState(date);
@@ -128,7 +128,7 @@ export default function Expenses() {
     //   agooneanalogClosing
     // ) {
 
-    // console.log("hell in");
+   
     try {
       let pmsOne = {
         uid: date,
@@ -166,6 +166,15 @@ export default function Expenses() {
         outputvalue: Number(agotwodigClosing) - Number(agotwodigOpening),
       };
 
+      // let alldata = {
+      //   uid: days,
+      //   dieselamount: dieselAmount,
+      //   petrolamount: petrolAmount,
+      //   dieselvalue: "",
+      //   petrolvalue: "",
+      //   // ** z-report as pmtwoamount in database ** NOTE
+      // };
+
       // console.log(pmsOne)
 
       const resone = await axios.post(`${url}/api/pumps/petrol`, pmsOne);
@@ -173,7 +182,9 @@ export default function Expenses() {
       const resthree = await axios.post(`${url}/api/pumps/diesel`, agoOne);
       const resfour = await axios.post(`${url}/api/pumps/dieseltwo`, agoTwo);
 
-      // console.log(res)
+      // const resp = await axios.post(`${url}/api/billing/totalweekly`, alldata);
+
+      // console.log(resp.data);
       alert(resfour.data);
 
       //

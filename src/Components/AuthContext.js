@@ -14,9 +14,10 @@ let nextWeek = new Date();
 
 let date = new Date();
 date.setDate(currentDate.getDate());
-let weekDay = date.toLocaleString("en-US", { weekday: "short" });
+let weekDay = date.toLocaleString("en-US", { weekday: "long" });
 let todaydate = weekDay + ": " + date.toLocaleDateString();
-console.log(todaydate);
+let days = weekDay.toLowerCase()
+console.log(days);
 
 export const AuthContextProvider = ({ children }) => {
   const [tokns, setToken] = useState("");
@@ -57,6 +58,12 @@ export const AuthContextProvider = ({ children }) => {
 
   const [lastpetrol, setPetrollitreslast] = useState("");
   const [lastdiesel, setDiesellitreslast] = useState("");
+;
+  const [totaldieselamount,setTotaldieselamount] = useState("");
+  const [totalpetrolamount,setTotalpetrolamount] = useState("");
+
+  const [totaldieseltwoamount,setTotaldieseltwoamount] = useState("");
+  const [totalpetroltwoamount,setTotalpetroltwoamount] = useState("");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -107,6 +114,8 @@ export const AuthContextProvider = ({ children }) => {
               withCredentials: true,
             }
           );
+
+          
 
           // console.log(dieslstock)
 
@@ -226,6 +235,33 @@ export const AuthContextProvider = ({ children }) => {
 
           const differences = Number(last_value.zreport) - Number(totalAmount);
 
+
+
+          const pmsoneAmountanalog =
+            Number(Number(pone.closingsanalog) - Number(pone.openinganalog)) *
+            petrolamount;
+          const pmstwoAmountanalog =
+            Number(Number(ptwo.closingsanalog) - Number(ptwo.openinganalog)) *
+            petrolamount;
+
+          const agooneAmountanalog =
+            Number(Number(ptwo.closingsanalog) - Number(ptwo.openinganalog)) *
+            dieselamout;
+          const agotwoAmountanalog =
+            Number(Number(atwo.closingsanalog) - Number(atwo.openinganalog)) *
+            dieselamout;
+
+          const totalanalogAmount = Number(
+            pmsoneAmountanalog +
+              pmstwoAmountanalog +
+              agooneAmountanalog +
+              agotwoAmountanalog
+          );
+
+          
+          
+
+
           setdieselAmount(Number(totalDiesel).toLocaleString());
           setpetrolAmount(Number(totalPetrol).toLocaleString());
           setEarnings(Number(totalAmount).toLocaleString());
@@ -244,60 +280,9 @@ export const AuthContextProvider = ({ children }) => {
           setPetrolStock(petrolstk.physical);
           setPetroldisps(petrolstk.dipstick);
 
-          const pmsoneAmountanalog =
-            Number(Number(pone.closingsanalog) - Number(pone.openinganalog)) *
-            petrolamount;
-          const pmstwoAmountanalog =
-            Number(Number(ptwo.closingsanalog) - Number(ptwo.openinganalog)) *
-            petrolamount;
+          
+          
 
-          const agooneAmountanalog =
-            Number(Number(ptwo.closingsanalog) - Number(ptwo.openinganalog)) *
-            dieselamout;
-          const agotwoAmountanalog =
-            Number(Number(atwo.closingsanalog) - Number(atwo.openinganalog)) * 
-            dieselamout;
-
-          const totalanalogAmount = Number(
-            pmsoneAmountanalog +
-              pmstwoAmountanalog +
-              agooneAmountanalog +
-              agotwoAmountanalog
-          );
-
-          let alldata = {
-            uid: date,
-
-            pmsoneanalogamount: String(
-              (Number(pone.closingsanalog) - Number(pone.openinganalog)) *
-                petrolamount
-            ),
-            pmsonedigitalamount: pmsoneAmount,
-            agoonedigitalamount: agooneAmount,
-            agooneanalogamount: String(
-              (Number(aone.closingsanalog) - Number(aone.openinganalog)) *
-                dieselamout
-            ),
-            pmstwoanalogamount: String(
-              (Number(ptwo.closingsanalog) - Number(ptwo.openinganalog)) *
-                petrolamount
-            ),
-            agotwodigitalamount: agotwoAmount,
-            agotwoanalogamount: String(
-              (Number(atwo.closingsanalog) - Number(atwo.openinganalog)) *
-                dieselamout
-            ),
-            totalanalogsalesamount: String(totalanalogAmount),
-            totaldigitalsalesamount: String(totalAmount),
-            analogdiffamount: "",
-            digitaldiffamount: "",
-            zreport: pmstwoAmount, // ** z-report as pmtwoamount in database ** NOTE
-          };
-
-         
-
-          const resone = await axios.post(`${url}/api/billing/totalsales`, alldata);
- console.log(resone.data)
           // console.log(petrolstk.dipstick)
         } catch (err) {
           // console.log(err)
@@ -360,7 +345,7 @@ export const AuthContextProvider = ({ children }) => {
         lastdiesel,
         lastpetrol,
         url,
-        tokns,
+        tokns,days,
         todaydate,
         dieselprice,
         petrolprice,
