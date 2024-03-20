@@ -16,8 +16,8 @@ let date = new Date();
 date.setDate( currentDate.getDate() );
 let weekDay = date.toLocaleString( "en-US", { weekday: "long" } );
 let todaydate = weekDay + ": " + date.toLocaleDateString();
-let days = weekDay.toLowerCase()
-console.log( days );
+let days = weekDay.toUpperCase()
+// console.log( days );
 
 export const AuthContextProvider = ( { children } ) =>
 {

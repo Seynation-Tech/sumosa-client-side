@@ -5,7 +5,7 @@ import Real from "../Charts/Real";
 import Values from "../Charts/Values";
 import sales from "../../Images/sale.png";
 import petrol from "../../Images/sum.png";
-import epxenses from "../../Images/expenses.png";
+import clocs from "../../Images/cloc.png";
 import report from "../../Images/repo.png";
 import stock from "../../Images/stock.png";
 import settings from "../../Images/setting.png";
@@ -60,7 +60,7 @@ export default function Home() {
     url,
     dieselprice,
     petrolprice,
-    diff,
+    diff,days,
     zrepos,
     alldebts,
     totalEarnings,
@@ -277,6 +277,11 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+
+              <div className="firsts">
+          
+          
+          </div>
             </div>
           </div>
         </div>
@@ -285,6 +290,8 @@ export default function Home() {
       <div className="sectionthree">
         <div className="lowersecta">
           {/* <Moment date={dateToFormat} /> */}
+          {/* <img src={clocs} alt="" /> */}
+          <p>{days}</p>
           <Clock
             format={"HH:mm:ss"}
             ticking={true}
@@ -369,6 +376,11 @@ export default function Home() {
             </div>
           </div>
           <div className="thr"></div>
+        </div>
+
+        <div className="firsts">
+          
+          
         </div>
       </div>
     </div>

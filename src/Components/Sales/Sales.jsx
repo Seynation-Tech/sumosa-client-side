@@ -8,6 +8,7 @@ import "./Sales.css";
 
 import axios from "axios";
 import { AuthContext } from "../AuthContext";
+import { useNavigate } from "react-router-dom";
 
 let today = new Date();
 let date =
@@ -52,6 +53,8 @@ export default function Sales() {
   const [alldat, setAlls] = useState([]);
   const [click, setClick] = useState(false);
 
+  const navigate = useNavigate()
+
 
   useEffect(() => {
     setLoading(true);
@@ -63,7 +66,7 @@ export default function Sales() {
         });
 
         setData(dets.data)
-        console.log(dets.data)
+        // console.log(dets.data)
       } catch (err) {
         // console.log(err)
       }
@@ -120,6 +123,10 @@ export default function Sales() {
   const popClick = () => {
     setClick(true);
   };
+
+  const handleLitres =()=>{
+    navigate("/sales/litres")
+  }
 
 
   const reasonsHandler = async () => {
@@ -254,7 +261,11 @@ export default function Sales() {
               </div>
             </div>
 
-            <div className="bbb">Sales Difference Tsh {diff}</div>
+            <div className="bbb">
+              <p>Sales Difference</p>
+              <p>{diff}/=</p>
+               
+              </div>
 
             <div className="stoc">
               <div className="bb" onClick={handleHandle}>
@@ -280,7 +291,7 @@ export default function Sales() {
 
       {reasons && (
         <div className="poppesao">
-          <div className="contentonesty">
+          <div className="contentonestya">
             <div className="canc" onClick={cancelReason}>
               <img src="" alt="" />
             </div>
@@ -393,8 +404,8 @@ export default function Sales() {
             <p>MONTHLY</p>
           </div>
 
-          <div className="dail" onClick={handleYearly}>
-            <p>YEARLY</p>
+          <div className="dail" onClick={handleLitres}>
+            <p>LITRES</p>
           </div>
 
           <div className="download">
@@ -432,29 +443,24 @@ export default function Sales() {
                     </div> */}
         </div>
 
-        <div className="con">
-          {/* <div className="sea">
-                        <p>Payments</p>
-                        <div className="search">
-                            <input type="text" placeholder="Search " />
-                            <img src="" alt="" />
-                        </div>
-                    </div> */}
-
-          <div className="tbb">
-            <p>S/N</p>
-            <p>Name</p>
-            <p>Amount</p>
-            <p>Mode</p>
-            <p>Date</p>
-          </div>
-        </div>
+        {/*  */}
         <div className="ls">
           {/* <div className="crc"></div> */}
 
           <div className="lft">
             <div className="alld">
               <table className="home-table">
+              <thead>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>NAME</th>
+                                        <th>AMOUNT</th>
+
+                                        <th>MODE</th>
+                                        <th>DATE</th>
+                                       
+                                    </tr>
+                                </thead>
                 <tbody onClick={popClick}>
                   {tableData.map((val, key) => {
                     return (

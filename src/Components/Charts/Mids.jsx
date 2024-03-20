@@ -89,17 +89,17 @@ export default function Mids() {
         <Tooltip />
         <Area
           type="monotone"
-          dataKey="uv"
+          dataKey="Diesel"
           stackId="1"
           stroke="#8884d8"
-          fill="#8884d8"
+          fill="#4b03fc"
         />
         <Area
           type="monotone"
-          dataKey="pv"
+          dataKey="Petrol"
           stackId="1"
-          stroke="#82ca9d"
-          fill="#82ca9d"
+          stroke="#fc9d00"
+          fill="#fe00fe"
         />
         {/* <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" /> */}
       </AreaChart>

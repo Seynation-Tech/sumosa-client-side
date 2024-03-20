@@ -247,15 +247,7 @@ export default function Sales() {
             </div>
           </div>
 
-          {/* <div className="rights">
-                        <div className="grs">
-                            <Graphs />
-                        </div>
-
-                        <div className="ls">
-
-                        </div>
-                    </div> */}
+        
         </div>
       </div>
 
@@ -277,35 +269,27 @@ export default function Sales() {
             <p>AGO 02</p>
           </div>
 
-          <div className="downloads">
+          {/* <div className="downloads">
             <p>Weekly</p>
             <div className="downs">
               <img src="" alt="" />
             </div>
-          </div>
+          </div> */}
         </div>
         {/* <Graphs /> */}
 
         <div className="pays">
-          <p>Digital Litres</p>
+          <p>DIGITAL LITRES OUTPUT VALUES</p>
 
-          <div className="search">
+          {/* <div className="search">
             <input type="text" placeholder="Search" />
-          </div>
+          </div> */}
 
-          {/* <div className="other">
-                        <img src="" alt="" />
-                    </div> */}
+         
         </div>
 
         <div className="con">
-          {/* <div className="sea">
-                        <p>Payments</p>
-                        <div className="search">
-                            <input type="text" placeholder="Search " />
-                            <img src="" alt="" />
-                        </div>
-                    </div> */}
+         
 
           <div className="tbb">
             <p>S/N</p>
@@ -339,25 +323,13 @@ export default function Sales() {
         </div>
 
         <div className="pays">
-          <p>Analog Litres</p>
+          <p>ANALOG LITRES OUTPUT VALUES</p>
 
-          {/* <div className="search">
-                        <input type="text" placeholder="Search" />
-                    </div> */}
-
-          {/* <div className="other">
-                        <img src="" alt="" />
-                    </div> */}
+    
         </div>
 
         <div className="con">
-          {/* <div className="sea">
-                        <p>Payments</p>
-                        <div className="search">
-                            <input type="text" placeholder="Search " />
-                            <img src="" alt="" />
-                        </div>
-                    </div> */}
+         
 
           <div className="tbb">
             <p>S/N</p>
