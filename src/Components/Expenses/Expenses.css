@@ -1,96 +1,97 @@
-
-
-
 .sectionthres {
-    background-color: rgba(255, 255, 255, 0.449);
-    width: 56%;
-    height: 99vh;
-    position: absolute;
-    right: 12%;
-    padding-left: 12px;
-    padding-right: 12px;
-    margin-top: 16px;
-    border-radius: 12px;
-  }
+  background-color: rgba(255, 255, 255, 0.449);
+  width: 56%;
+  height: 99vh;
+  position: absolute;
+  right: 12%;
+  padding-left: 12px;
+  padding-right: 12px;
+  margin-top: 16px;
+  border-radius: 12px;
+}
 
-  .addexpenses{
-    display: flex;
-    margin: 20px;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    background: rgb(0, 47, 255);
-    border-radius: 4px;
-    width: 20%;
-    height: 45px;
-    position: absolute;
-    right: 33%;
-    cursor: pointer;
-    /* bottom: 13%; */
-  }
+.addexpenses {
+  display: flex;
+  margin: 20px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background: rgb(0, 47, 255);
+  border-radius: 4px;
+  width: 20%;
+  height: 45px;
+  position: absolute;
+  right: 33%;
+  cursor: pointer;
+  bottom: 13%;
+  right: 0;
+}
 
-  .addexpenses button{
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: white;
-    font-size: 1em;
+.mysals{
+  background: rgba(0, 138, 251, 0.055);
+}
 
-  }
+.addexpenses button {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 1em;
+}
 
-  .mpesaa p{
-    font-size: 1.2em;
-    color: rgba(0, 136, 255, 0.815);
-  }
+.mpesaa p {
+  font-size: 1.2em;
+  color: rgba(0, 136, 255, 0.815);
+}
 
-  .pesaa{
-    padding-left: 12px;
-    border-left: 3px solid rgba(47, 3, 222, 0.175);
-  }
+.pesaa {
+  padding-left: 12px;
+  border-left: 3px solid rgba(47, 3, 222, 0.175);
+}
 
-  .mysals{
-    width: 100%;
-    min-height: 111vh;
-    /* background-color: rgba(0, 0, 0, 0.052);; */
-  }
+.mysals {
+  width: 100%;
+  min-height: 111vh;
+  /* background-color: rgba(0, 0, 0, 0.052);; */
+}
 
-  .lss {
-    background: linear-gradient(to right, rgb(25, 36, 255), rgb(2, 30, 95));
-    height: 50vh;
-    /* border-radius: 5px; */
-    display: flex;
-    gap: 5px;
-    /* padding:12px; */
-    overflow: scroll;
-    flex-direction: column;
-  }
-
-  
 .lss {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  
-  .lss::-webkit-scrollbar {
-    display: none;
-  }
+  background: linear-gradient(to right, rgb(25, 36, 255), rgb(2, 30, 95));
+  height: 50vh;
+  border-radius: 5px;
+  display: flex;
+  gap: 5px;
+  /* padding:12px; */
+  overflow: scroll;
+  flex-direction: column;
+}
 
-  .paysa p{
-    font-size: 1.2em;
-  }
+.lss {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
-  .general{
-    height: 47px;
-    width: 100%;
-    background: rgba(0, 110, 255, 0.108);
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-font-size: 1.4em;
-font-weight: bold;
-margin-top: 14px;
-color:rgb(0, 119, 255);
-  }
+.lss::-webkit-scrollbar {
+  display: none;
+}
+
+.paysa p {
+  font-size: 1.2em;
+}
+
+.general {
+  height: 47px;
+  width: 100%;
+  background: rgba(0, 110, 255, 0.108);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1px;
+  color: rgb(0, 119, 255);
+  margin-bottom: 23px;
+}

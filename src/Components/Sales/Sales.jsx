@@ -207,7 +207,9 @@ export default function Sales() {
       <div className="sectiontwos">
         <div className="lineage"></div>
 
-        <div className="upsections"></div>
+        <div className="upsections">
+          FUEL SALES METRICS
+        </div>
 
         <div className="lowsections">
           <div className="lefts">
@@ -287,8 +289,8 @@ export default function Sales() {
             </div>
             <div className="ours">
               <div className="sdacont">
-                <div className="jins">
-                  <p>TOTAL CASH DIFFERENCES</p>
+                <div className="totalcash">
+                  <p >TOTAL CASH DIFFERENCES</p>
                 </div>
                 <div className="forms">
                   <div className="input-twos">
@@ -382,9 +384,9 @@ export default function Sales() {
 
       <div className="sectionthrees">
         <div className="year">
-          <div className="dail" onClick={handleDaily}>
+          {/* <div className="dail" onClick={handleDaily}>
             <p>DAILY</p>
-          </div>
+          </div> */}
 
           <div className="dail" onClick={handleWeekly}>
             <p>WEEKLY</p>
@@ -394,12 +396,12 @@ export default function Sales() {
             <p>MONTHLY</p>
           </div>
 
-          <div className="dail" onClick={handleLitres}>
+          <div className="dails" onClick={handleLitres}>
             <p>LITRES</p>
           </div>
 
           <div className="download">
-            <p>Download Report</p>
+            <p>Report</p>
             <div className="down">
               <img src="" alt="" />
             </div>

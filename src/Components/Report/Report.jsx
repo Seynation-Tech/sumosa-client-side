@@ -460,8 +460,8 @@ export default function Expenses() {
           </div>
 
           <div className="download">
-            <p>Monday 12/03/2024</p>
-            <p>12:00:00 AM</p>
+            {/* <p>Monday 12/03/2024</p> */}
+            {/* <p>12:00:00 AM</p> */}
             <div className="down">
               <img src="" alt="" />
             </div>
@@ -473,7 +473,7 @@ export default function Expenses() {
           {pesa && (
             <div className="poppesa">
               <div className="contentones">
-                <div className="jins">
+                <div className="jinss">
                   <p>ONLINE PAYMENTS</p>
                 </div>
                 <div className="chote">
@@ -505,14 +505,16 @@ export default function Expenses() {
                     </div>
                   </div>
 
-                  <div className="bone">
+                 
+                </div>
+
+                <div className="bone">
                     <div className="thetwos">{/* <p></p> */}</div>
 
                     <div className="thetwo">
                       <button onClick={pesaHandler}>Submit</button>
                     </div>
                   </div>
-                </div>
               </div>
             </div>
           )}
@@ -520,7 +522,7 @@ export default function Expenses() {
           {stocks && (
             <div className="poppesa">
               <div className="contentonest">
-                <div className="jins">
+                <div className="jinss">
                   <p>FUEL STOCK MANAGEMENT</p>
                 </div>
                 <div className="chote">
@@ -583,7 +585,7 @@ export default function Expenses() {
               <div className="contentonesy">
                 <div className="ours">
                   <div className="sdacont">
-                    <div className="jins">
+                    <div className="jinss">
                       <p>DEBTORS' REPORT</p>
                     </div>
                     <div className="forms">
@@ -622,7 +624,7 @@ export default function Expenses() {
               <div className="contentonesy">
                 <div className="ours">
                   <div className="sdacont">
-                    <div className="jins">
+                    <div className="jinss">
                       <p>CREDITORS' REPORT</p>
                     </div>
                     <div className="forms">
@@ -673,9 +675,9 @@ export default function Expenses() {
                 </div>
                 <div className="chote">
                   <div className="bone">
-                    <div className="thetwos">
+                    {/* <div className="thetwos">
                       <p>Enter Money counts</p>
-                    </div>
+                    </div> */}
                     <div className="thetwos">
                       <input
                         type="text"

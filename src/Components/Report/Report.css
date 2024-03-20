@@ -134,6 +134,7 @@ body {
   .input-one input::placeholder {
     font-weight: 300;
     color: rgba(255, 255, 255, 0.6);
+    
   }
   
   .input-two input::placeholder {
@@ -184,11 +185,13 @@ body {
     height: 40px;
     width: 100%;
     border-radius: 6px;
-    background: rgb(28, 123, 255);
+    background: rgb(6, 22, 172);
     outline: none;
-    border: none;
-    font-weight: bold;
     color: rgb(255, 255, 255);
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 5px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
   }
   
   .anaccount {
@@ -261,6 +264,7 @@ body {
     /* margin: 12px; */
     position: relative;
     top: 104px;
+    border-radius: 10px;
   }
   
   .highlight-anim {
@@ -278,7 +282,7 @@ body {
     /* padding: 23px; */
     backdrop-filter: blur(5px);
     animation: dscbox 2s ease-in-out;
-    background: linear-gradient(#05149c0b, #ffffff29);
+    background: linear-gradient(#0016d80b, #00126c29);
     /* position: absolute; */
     display: flex;
     /* justify-content: center; */
@@ -404,6 +408,8 @@ body {
     justify-content: space-around;
     align-items: center;
     margin-top: 20px;
+    border-radius: 10px;
+    gap: 34px;
 
   }
 
@@ -414,12 +420,12 @@ body {
     /* background: rgb(255, 0, 0); */
     justify-content: space-around;
     align-items: center;
-
+gap: 32px;
   }
 
   .twos{
     margin: 8px;
-    font-size: 1.3em;
+    font-size: 1.0em;
     font-weight: bold;
   }
 
@@ -470,12 +476,12 @@ body {
       flex-direction: column;
       gap: 7px;
       width: 45%;
-      min-height: 86vh;
+      min-height: 66vh;
       margin-top: -114px;
       justify-content: center;
       align-items: center;
       font-size: 0.9em;
-      
+      border-radius: 10px;
   }
 
   .contentonesya{
@@ -490,7 +496,7 @@ body {
       align-items: center;
       position: absolute;
       border-radius: 9px;
-      
+      border-radius: 10px;
   }
 
   .contentonesy{
@@ -503,6 +509,7 @@ body {
       margin-top: -114px;
       justify-content: center;
       align-items: center;
+      border-radius: 10px;
       
   }
 
@@ -511,9 +518,11 @@ body {
       display: flex;
       flex-direction: column;
       gap: 7px;
-      width: 85%;
-      min-height: 53vh;
+      width: 75%;
+      min-height: 60vh;
       margin-top: -114px;
+      border-radius: 10px;
+      padding-top: 23px;;
       
   }
 
@@ -524,39 +533,49 @@ body {
       flex-direction: column;
       gap: 7px;
       width: 55%;
-      min-height: 43vh;
+      min-height: 44vh;
       margin-top: -114px;
+      border-radius: 10px;
+      justify-content: center;
+      align-items: center;
+     
       
   }
 
   .contentone{
-    background: linear-gradient(to right, rgb(0, 61, 135), rgb(3, 2, 76));
+    background: linear-gradient(to right, rgb(8, 0, 115), rgb(10, 0, 150));
       display: flex;
       flex-direction: column;
       gap: 7px;
-      width: 45%;
+      width: 52%;
       min-height: 33vh;
+      border-radius: 10px;
+      padding:12px;
+      border-radius: 10px;
+ 
   }
 
   .contentwo{
-    background: linear-gradient(to right, rgb(0, 61, 135), rgb(3, 2, 76));
+    background: linear-gradient(to right, rgb(2, 52, 167), rgb(4, 2, 76));
     display: flex;
     flex-direction: column;
     gap: 7px;
-    width: 45%;
+    width: 52%;
     min-height: 33vh;
+    border-radius: 10px;
+    padding:12px;
   }
 
   .jins{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 23px;
+    margin: 13px;
   }
 
   .jins p{
     font-weight: bold;
-    font-size: 1.0em;
+    font-size: 1.2em;
   }
 
   .chote{
@@ -569,37 +588,68 @@ body {
     display: flex;
     flex-direction: column;
     gap: 9px;
+  
+  }
+
+  .thetwo{
+    width: 100%;
+    position: relative;
   }
 
   .thetwo button{
     border: none;
-    height: 35px;
+    height: 42px;
     width: 100%;
-    background: rgb(149, 0, 255);
+    background: rgb(6, 22, 172);
     outline: none;
     color: rgb(255, 255, 255);
     padding-left: 12px;
     padding-right: 12px;
+    border-radius: 5px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
   }
 
   .thetwo button:active{
     background: rgba(221, 0, 255, 0.236);
   }
 
+  .jinss{
+    width: 70%;
+    height: 45px;
+    border-radius: 5px;;
+    background: rgba(255, 255, 255, 0.113);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .thetwos{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
+
   .thetwos input{
     border: none;
-    height: 35px;
-    background: rgb(255, 255, 255);
+    height: 40px;
+    background: rgba(255, 255, 255, 0.035);
     outline: none;
-    color: black;
+    color: rgb(255, 255, 255);
     padding-left: 12px;
     padding-right: 12px;
     font-weight: bold;
-    font-size: 1.3em;
+    width: 100%;
+    font-size: 1em;
+    border-radius: 4px;;
+    border: 1px solid rgba(255, 255, 255, 0.263)
+   
   }
 
+
+
   .thetwos input::placeholder{
-color: rgba(0, 0, 0, 0.344);
+color: rgba(255, 255, 255, 0.6);
+font-size: 0.9em;
   }
 
   .thetwos p{
@@ -615,20 +665,22 @@ color: rgba(0, 0, 0, 0.344);
     padding-left: 12px;
     padding-right: 12px;
     font-weight: bold;
-    font-size: 1em;
+    font-size: 1.1em;
+    border-radius: 4px;;
   }
 
   .thetwo input::placeholder{
 color: rgba(0, 0, 0, 0.344);
+font-size: 0.8em;
   }
 
   .thetwo p{
-    font-size: 1.1em;
+    font-size: 1.0em;
   }
 
   .updateing{
-    background-color: rgba(0, 0, 255, 0.135);
-    width: 95%;
+    background-color: rgba(0, 0, 255, 0.059);
+    width: 100%;
     height: 64px;
     position: relative;
     display: flex;
@@ -636,20 +688,23 @@ color: rgba(0, 0, 0, 0.344);
     align-items: center;
     right: 0;
     border-radius: 5px;
+    /* margin-bottom: 12px; */
+    border:3px solid rgba(0, 98, 255, 0.019);
 
   }
 
   .updateing button{
-    height: 39px;
-    width: 20%;
-    background: linear-gradient(to right, rgb(0, 61, 135), rgb(3, 2, 76));
+    height: 42px;
+    width: 26%;
+    background: linear-gradient(to right, rgb(11, 0, 135), rgb(0, 60, 163));
     color: white;
-    font-size: 1.3em;
+    font-size: 0.9em;
     font-weight: bold;
-    right: 23px;
+    right: 13px;
     position: absolute;
     border: none;
     outline: none;
+    border-radius: 4px;
   }
 
   .updateing button:active{
