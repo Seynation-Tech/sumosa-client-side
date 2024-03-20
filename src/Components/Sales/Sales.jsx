@@ -29,14 +29,8 @@ export default function Sales() {
   const [dieselprice, setDieselprice] = useState("");
   const [petrolprice, setPetrolprice] = useState("");
 
-  const {
-    url,
-    diff,
-    zrepos,
-    totalEarnings,
-    dieselAmount,
-    petrolAmount
-  } = useContext(AuthContext);
+  const { url, diff, zrepos, totalEarnings, dieselAmount, petrolAmount } =
+    useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [reason, setReason] = useState("");
   const [amountinwords, setAmountinwords] = useState("");
@@ -49,12 +43,10 @@ export default function Sales() {
   const [yearly, setYearly] = useState(false);
   const [tableData, setData] = useState([]);
 
-
   const [alldat, setAlls] = useState([]);
   const [click, setClick] = useState(false);
 
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -65,15 +57,15 @@ export default function Sales() {
           withCredentials: true,
         });
 
-        setData(dets.data)
+        setData(dets.data);
         // console.log(dets.data)
       } catch (err) {
         // console.log(err)
       }
     };
     fetchData();
-  // }, 1500);
-  // return () => clearInterval(interval);
+    // }, 1500);
+    // return () => clearInterval(interval);
   }, []);
 
   const handleWeekly = () => {
@@ -124,10 +116,9 @@ export default function Sales() {
     setClick(true);
   };
 
-  const handleLitres =()=>{
-    navigate("/sales/litres")
-  }
-
+  const handleLitres = () => {
+    navigate("/sales/litres");
+  };
 
   const reasonsHandler = async () => {
     try {
@@ -264,8 +255,7 @@ export default function Sales() {
             <div className="bbb">
               <p>Sales Difference</p>
               <p>{diff}/=</p>
-               
-              </div>
+            </div>
 
             <div className="stoc">
               <div className="bb" onClick={handleHandle}>
@@ -422,8 +412,8 @@ export default function Sales() {
 
         {yearly && <Yearly />}
 
-        <div className="pays">
-          <p>Payments</p>
+        <div className="payo">
+          <p>PAYMENT</p>
 
           <div className="pesa">
             <div className="mpesa">
@@ -450,17 +440,16 @@ export default function Sales() {
           <div className="lft">
             <div className="alld">
               <table className="home-table">
-              <thead>
-                                    <tr>
-                                        <th>S/N</th>
-                                        <th>NAME</th>
-                                        <th>AMOUNT</th>
+                <thead>
+                  <tr>
+                    <th>S/N</th>
+                    <th>NAME</th>
+                    <th>AMOUNT</th>
 
-                                        <th>MODE</th>
-                                        <th>DATE</th>
-                                       
-                                    </tr>
-                                </thead>
+                    <th>MODE</th>
+                    <th>DATE</th>
+                  </tr>
+                </thead>
                 <tbody onClick={popClick}>
                   {tableData.map((val, key) => {
                     return (

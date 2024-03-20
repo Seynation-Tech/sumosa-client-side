@@ -135,33 +135,14 @@ export default function Expenses() {
       <div className=""></div>
 
       <div className="sectionthres">
-        <div className="general">
+        {/* <div className="general">
           <p>EXPENSES MANAGEMENT REPORT</p>
-        </div>
-        <div className="year">
-          <div className="dail"  onClick={handleWeekly}>
-            <p>WEEKLY</p>
-          </div>
-
-          <div className="dail" onClick={handleMonthly}>
-            <p>MONTHLY</p>
-          </div>
-
-          {/* <div className="dail">
-            <p>YEARLY</p>
-          </div> */}
-
-          <div className="download">
-            <p>Download Report</p>
-            <div className="down">
-              <img src="" alt="" />
-            </div>
-          </div>
-        </div>
+        </div> */}
+        
        
-
+{/* 
         {weekly &&  <Weekly />}
-        {monthly && <Monthly />}
+        {monthly && <Monthly />} */}
 
 
 
@@ -207,16 +188,16 @@ export default function Expenses() {
           </div>
         )}
 
-        <div className="pays">
-          <p>Expenses General Report</p>
+        <div className="paysa">
+          <p>EXPENSES GENERAL REPORT</p>
 
           <div className="addexpenses" onClick={handleExpenses}>
-            <button>Add expenses</button>
+            <button>Add Expenses</button>
           </div>
 
           <div className="pesaa">
             <div className="mpesaa">
-              <p>Total Expenses: Tsh {Number(totalexpense).toLocaleString()}</p>
+              <p>TOTAL: Tsh {Number(totalexpense).toLocaleString()}</p>
             </div>
           </div>
 

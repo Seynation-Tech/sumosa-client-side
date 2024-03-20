@@ -99,8 +99,6 @@ export default function Sales() {
 
       setData(resptwo.data);
 
-      
-
       //
     } catch (err) {
       setLoading(false);
@@ -146,22 +144,21 @@ export default function Sales() {
   };
 
   const handleAgotwo = async () => {
-
     try {
-        // console.log(pmsOne)
-  
-        const respone = await axios.get(`${url}/api/pumps/dieseltwo/`, {
-          withCredentials: true,
-        });
-  
-        setData(respone.data);
-  
-        //
-      } catch (err) {
-        setLoading(false);
-        console.log(err);
-        // setError( "Please refresh..." );
-      }
+      // console.log(pmsOne)
+
+      const respone = await axios.get(`${url}/api/pumps/dieseltwo/`, {
+        withCredentials: true,
+      });
+
+      setData(respone.data);
+
+      //
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+      // setError( "Please refresh..." );
+    }
   };
 
   return (
@@ -172,7 +169,9 @@ export default function Sales() {
       <div className="sectiontwos">
         <div className="lineage"></div>
 
-        <div className="upsections"></div>
+        <div className="upsections">
+          <p>FUEL LITRES METRICS</p>
+        </div>
 
         <div className="lowsections">
           <div className="lefts">
@@ -246,8 +245,6 @@ export default function Sales() {
               <p>{agotwolitres} L</p>
             </div>
           </div>
-
-        
         </div>
       </div>
 
@@ -284,27 +281,25 @@ export default function Sales() {
           {/* <div className="search">
             <input type="text" placeholder="Search" />
           </div> */}
-
-         
         </div>
 
-        <div className="con">
-         
-
-          <div className="tbb">
-            <p>S/N</p>
-            <p>Date</p>
-            <p>Closing</p>
-            <p>Opening</p>
-            <p>Output</p>
-          </div>
-        </div>
+       
         <div className="ls">
           <div className="crcs"></div>
 
           <div className="lft">
             <div className="alld">
               <table className="home-table">
+                <thead>
+                  <tr>
+                    <th>S/N</th>
+                    <th>DATE</th>
+                    <th>CLOSING</th>
+
+                    <th>OPENING</th>
+                    <th>OUPTUT</th>
+                  </tr>
+                </thead>
                 {tableData.map((val, key) => {
                   return (
                     <tr>
@@ -324,27 +319,25 @@ export default function Sales() {
 
         <div className="pays">
           <p>ANALOG LITRES OUTPUT VALUES</p>
-
-    
         </div>
 
-        <div className="con">
-         
-
-          <div className="tbb">
-            <p>S/N</p>
-            <p>Date</p>
-            <p>Closing</p>
-            <p>Opening</p>
-            <p>Output</p>
-          </div>
-        </div>
+        
         <div className="ls">
           <div className="crcs"></div>
 
           <div className="lft">
             <div className="alld">
               <table className="home-table">
+              <thead>
+                  <tr>
+                    <th>S/N</th>
+                    <th>DATE</th>
+                    <th>CLOSING</th>
+
+                    <th>OPENING</th>
+                    <th>OUPTUT</th>
+                  </tr>
+                </thead>
                 {tableData.map((val, key) => {
                   return (
                     <tr>

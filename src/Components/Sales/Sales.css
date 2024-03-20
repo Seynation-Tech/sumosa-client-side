@@ -20,20 +20,23 @@
   right: 42px;
   padding-left: 12px;
   padding-right: 12px;
-  margin-top: 16px;
+  margin-top: 10px;
   border-radius: 12px;
 }
 
 .upsections {
   width: 100%;
   height: 49px;
-  background: rgba(4, 0, 255, 0.074);
+  background: rgba(4, 0, 255, 0.04);
   padding-left: 12px;
   padding-right: 12px;
   display: flex;
-  border-radius: 10px;
+  border-radius: 6px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  color: rgba(0, 89, 255, 0.852);
+  font-weight: bold;
+  border: 4px solid rgba(0, 0, 255, 0.035);
 }
 
 .lowsections {
@@ -267,7 +270,7 @@ padding: 12px;
 
 .ls {
   background: linear-gradient(to right, rgb(33, 25, 255), rgb(0, 74, 247));
-  height: 26vh;
+  height: 34vh;
   /* background: #2776ea; */
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -299,7 +302,7 @@ padding: 12px;
   margin-top: 3px;
   height: 64px;
   width: 100%;
-  background-color: rgba(0, 0, 255, 0.024);
+  background-color: rgba(0, 0, 255, 0.072);
   border-radius: 5px;
 }
 
@@ -712,7 +715,8 @@ tbody tr:last-of-type {
   border-bottom: 2px solid rgba(255, 255, 255, 0.157);
 }
 
-.pays{
+.payo{
+  width: 100%;
   display: flex;
   height: 65px;
   justify-content: space-between;
@@ -724,8 +728,46 @@ tbody tr:last-of-type {
   margin-top: 12px;
   color: rgba(0, 89, 255, 0.705);
   font-weight: bold;
-  font-size: 1em;
+  font-size: 0.9em;
   border: 4px solid rgba(0, 0, 255, 0.035);
+  background: rgba(21, 17, 255, 0.042);
+}
+
+
+.pays{
+  width: 100%;
+  display: flex;
+  height: 65px;
+  justify-content: center;
+  padding-left: 12px;
+  padding-right: 12px;
+  align-items: center;
+  border-radius: 5px;
+  margin-bottom: 12px;
+  margin-top: 12px;
+  color: rgba(0, 89, 255, 0.705);
+  font-weight: bold;
+  font-size: 0.9em;
+  border: 4px solid rgba(0, 0, 255, 0.035);
+  background: rgba(21, 17, 255, 0.042);
+}
+
+
+.paysa{
+  width: 100%;
+  display: flex;
+  height: 65px;
+  justify-content: space-between;
+  padding-left: 12px;
+  padding-right: 12px;
+  align-items: center;
+  border-radius: 5px;
+  margin-bottom: 12px;
+  margin-top: 12px;
+  color: rgba(0, 89, 255, 0.705);
+  font-weight: bold;
+  font-size: 0.9em;
+  border: 3px solid rgba(0, 0, 255, 0.04);
   background: rgba(21, 17, 255, 0.042);
 }
 

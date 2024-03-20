@@ -103,7 +103,7 @@ export default function Home() {
 
             <div className="over">
               <p id="act">Overview</p>
-              <p id="acts">Sumuso overall data</p>
+              <p id="acts">Sumosa overall data</p>
             </div>
           </div>
 
