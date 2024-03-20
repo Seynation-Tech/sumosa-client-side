@@ -77,12 +77,12 @@
 }
 
 .profcaption p:nth-child(1) {
-  font-size: 1.3em;
+  font-size: 0.96em;
   font-weight: 600;
 }
 
 .profcaption p:nth-child(2) {
-  font-size: 1em;
+  font-size: 0.8em;
 }
 
 /*MID SECTION CSS*/
@@ -137,14 +137,14 @@
 }
 
 .lowersect p {
-  font-size: 1em;
+  font-size: 0.9em;
   cursor: pointer;
 }
 
 .copyright {
-  font-size: 0.87em;
+  font-size: 0.7em;
   position: absolute;
-  bottom: 20px;
+  bottom: 19px;
   font-weight: 10px;
   color: rgba(255, 255, 255, 0.52);
 }
@@ -173,7 +173,7 @@
 }
 
 .sectcont p {
-  font-size: 1em;
+  font-size: 0.8em;
   font-weight: 100;
 }
 
@@ -200,7 +200,7 @@
 .upsection {
   width: 100%;
   height: 69px;
-  background: rgba(255, 255, 255, 0.922);
+  background: rgba(11, 96, 255, 0.053);
   padding-left: 12px;
   padding-right: 12px;
   display: flex;
@@ -230,7 +230,7 @@
 .leftimgs {
   width: 26px;
   height: 26px;
-  background: rgba(18, 64, 190, 0.087);
+  background: rgba(17, 215, 255, 0.075);
   border-radius: 50%;
   display: flex;
   align-items: center;

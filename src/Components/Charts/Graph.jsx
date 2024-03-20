@@ -1,7 +1,6 @@
 import "./Graph.css";
-import React,{useEffect,useState} from "react";
-import axios from 'axios'
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import {
   ComposedChart,
@@ -12,12 +11,10 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  Area
+  Area,
 } from "recharts";
 
-
-
-const url = 'https://ruwasadbs.onrender.com'
+const url = "https://ruwasadbs.onrender.com";
 
 const data = [
   {
@@ -25,200 +22,185 @@ const data = [
     uv: 0,
     pv: 0,
     amt: 0,
-    cnt: 0
+    cnt: 0,
   },
   {
     name: "Mond",
-     uv: 0,
+    uv: 0,
     pv: 0,
     amt: 0,
-    cnt: 0
+    cnt: 0,
   },
   {
     name: "Tue",
-     uv: 0,
+    uv: 0,
     pv: 0,
     amt: 0,
-    cnt: 0
+    cnt: 0,
   },
   {
     name: "Wedn",
-     uv: 0,
+    uv: 0,
     pv: 0,
     amt: 0,
-    cnt: 0
+    cnt: 0,
   },
   {
     name: "Thurs",
-     uv: 0,
+    uv: 0,
     pv: 0,
     amt: 0,
-    cnt: 0
+    cnt: 0,
   },
   {
     name: "Fri",
-     uv: 0,
+    uv: 0,
     pv: 0,
     amt: 0,
-    cnt: 0
-    },
+    cnt: 0,
+  },
   {
     name: "Satur",
-     uv: 0,
+    uv: 0,
     pv: 0,
     amt: 0,
-    cnt: 0
-  }
+    cnt: 0,
+  },
 ];
 
 export default function Graph() {
   const [list, setList] = useState(data);
-  const [day,setDays] = useState({
-    'mond':'',
-    'tue':'',
-    'wed':'',
-    'thurs':'',
-    'fri':'',
-    'satur':'',
-    'sun':''
-  })
+  const [day, setDays] = useState({
+    mond: "",
+    tue: "",
+    wed: "",
+    thurs: "",
+    fri: "",
+    satur: "",
+    sun: "",
+  });
 
-  const [ datas, setDatas ] = useState( 
-    [ {
+  const [datas, setDatas] = useState([
+    {
       name: "Sund",
       uv: 0,
       pv: 0,
       amt: 0,
-      cnt: 0
+      cnt: 0,
     },
     {
       name: "Mond",
-       uv: 0,
+      uv: 0,
       pv: 0,
       amt: 0,
-      cnt: 0
+      cnt: 0,
     },
     {
       name: "Tue",
-       uv: 0,
+      uv: 0,
       pv: 0,
       amt: 0,
-      cnt: 0
+      cnt: 0,
     },
     {
       name: "Wedn",
-       uv: 0,
+      uv: 0,
       pv: 0,
       amt: 0,
-      cnt: 0
+      cnt: 0,
     },
     {
       name: "Thurs",
-       uv: 0,
+      uv: 0,
       pv: 0,
       amt: 0,
-      cnt: 0
+      cnt: 0,
     },
     {
       name: "Fri",
-       uv: 0,
+      uv: 0,
       pv: 0,
       amt: 0,
-      cnt: 0
-      },
+      cnt: 0,
+    },
     {
       name: "Satur",
-       uv: 0,
+      uv: 0,
       pv: 0,
       amt: 0,
-      cnt: 0
-    }
-    ]
-)
+      cnt: 0,
+    },
+  ]);
 
-  useEffect( () =>
-  {   
-      const interval = setInterval(() => {
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const fetchData = async () => {
+        try {
+          const rs = await axios.get(`${url}/api/weeklydatas`, {
+            withCredentials: true,
+          });
 
-        const fetchData = async()=>{
-          try{
+          // console.log(rs.data)
 
-            const rs = await axios.get(`${url}/api/weekly/data`,
-                {withCredentials: true}
-                )
+          setDatas([
+            {
+              name: "Sund",
+              uv: rs.data.sunday,
+              pv: rs.data.sunday,
+              amt: rs.data.sunday,
+              cnt: 0,
+            },
+            {
+              name: "Mond",
+              uv: rs.data.monday,
+              pv: rs.data.monday,
+              amt: rs.data.monday,
+              cnt: 0,
+            },
+            {
+              name: "Tue",
+              uv: rs.data.tuesday,
+              pv: rs.data.tuesday,
+              amt: rs.data.tuesday,
+              cnt: 0,
+            },
+            {
+              name: "Wedn",
+              uv: rs.data.wednesday,
+              pv: rs.data.wednesday,
+              amt: rs.data.wednesday,
+              cnt: 0,
+            },
+            {
+              name: "Thurs",
+              uv: rs.data.thursday,
+              pv: rs.data.thursday,
+              amt: rs.data.thursday,
+              cnt: 0,
+            },
+            {
+              name: "Fri",
+              uv: rs.data.friday,
+              pv: rs.data.friday,
+              amt: rs.data.friday,
+              cnt: 0,
+            },
+            {
+              name: "Satur",
+              uv: rs.data.saturday,
+              pv: rs.data.saturday,
+              amt: rs.data.saturday,
+              cnt: 0,
+            },
+          ]);
 
-                
-                // console.log(rs.data)
-
-                setDatas(
-                  [     
-                    {
-                      name: "Sund",
-                      uv: rs.data.sunday,
-                      pv: rs.data.sunday,
-                      amt: rs.data.sunday,
-                      cnt: 0
-                    },
-                    {
-                      name: "Mond",
-                       uv:  rs.data.monday,
-                      pv: rs.data.monday,
-                      amt:  rs.data.monday,
-                      cnt: 0
-                    },
-                    {
-                      name: "Tue",
-                       uv: rs.data.tuesday,
-                      pv: rs.data.tuesday,
-                      amt: rs.data.tuesday,
-                      cnt: 0
-                    },
-                    {
-                      name: "Wedn",
-                       uv: rs.data.wednesday,
-                      pv: rs.data.wednesday,
-                      amt: rs.data.wednesday,
-                      cnt: 0
-                    },
-                    {
-                      name: "Thurs",
-                       uv: rs.data.thursday,
-                      pv: rs.data.thursday,
-                      amt: rs.data.thursday,
-                      cnt: 0
-                    },
-                    {
-                      name: "Fri",
-                       uv: rs.data.friday,
-                      pv: rs.data.friday,
-                      amt: rs.data.friday,
-                      cnt: 0
-                      },
-                    {
-                      name: "Satur",
-                       uv: rs.data.saturday,
-                      pv: rs.data.saturday,
-                      amt: rs.data.saturday,
-                      cnt: 0
-                    }
-                    ]
-                )
-
-                
-
-                // console.log(rs.data)
-          }catch(err){
-            
-          }
-        }
-        fetchData()
-
-          
-         
-          
-        }, 1000);
-  return () => clearInterval(interval);
-}, []);
+          // console.log(rs.data)
+        } catch (err) {}
+      };
+      fetchData();
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <ComposedChart
@@ -229,7 +211,7 @@ export default function Graph() {
         top: 20,
         right: 80,
         bottom: 20,
-        left: 10
+        left: 10,
       }}
     >
       <CartesianGrid stroke="#f5f5f5" />

@@ -54,7 +54,7 @@ export default function Expenses() {
   useEffect(() => {
     setLoading(true);
 
-    const interval = setInterval(() => {
+    // const interval = setInterval(() => {
       const fetchData = async () => {
         try {
           // console.log(pmsOne)
@@ -80,8 +80,8 @@ export default function Expenses() {
         }
       };
       fetchData();
-    }, 1500);
-    return () => clearInterval(interval);
+    // }, 5000);
+    // return () => clearInterval(interval);
   }, []);
 
   const handleWeekly = () => {

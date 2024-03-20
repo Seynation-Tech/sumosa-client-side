@@ -60,7 +60,8 @@ export default function Expenses() {
   const [zrepot, setZrepot] = useState("");
   const [status, setStatus] = useState("");
 
-  const { url, days, petrolAmount, dieselAmount } = useContext(AuthContext);
+  const { url, days, petrolAmount, dieselAmount, petrollitres, diesellitres } =
+    useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [today, setToday] = useState(date);
@@ -128,7 +129,6 @@ export default function Expenses() {
     //   agooneanalogClosing
     // ) {
 
-   
     try {
       let pmsOne = {
         uid: date,
@@ -166,14 +166,14 @@ export default function Expenses() {
         outputvalue: Number(agotwodigClosing) - Number(agotwodigOpening),
       };
 
-      // let alldata = {
-      //   uid: days,
-      //   dieselamount: dieselAmount,
-      //   petrolamount: petrolAmount,
-      //   dieselvalue: "",
-      //   petrolvalue: "",
-      //   // ** z-report as pmtwoamount in database ** NOTE
-      // };
+      let alldata = {
+        uid: days,
+        dieselamount: dieselAmount,
+        petrolamount: petrolAmount,
+        dieselvalue: "",
+        petrolvalue: "",
+        // ** z-report as pmtwoamount in database ** NOTE
+      };
 
       // console.log(pmsOne)
 
@@ -181,8 +181,6 @@ export default function Expenses() {
       const restwo = await axios.post(`${url}/api/pumps/petroltwo`, pmsTwo);
       const resthree = await axios.post(`${url}/api/pumps/diesel`, agoOne);
       const resfour = await axios.post(`${url}/api/pumps/dieseltwo`, agoTwo);
-
-      // const resp = await axios.post(`${url}/api/billing/totalweekly`, alldata);
 
       // console.log(resp.data);
       alert(resfour.data);
@@ -199,6 +197,28 @@ export default function Expenses() {
     // }
   };
 
+  const confirm = async () =>{
+    try{
+      let data = {
+        uid: days,
+        dieselamount: dieselAmount,
+        petrolamount: petrolAmount,
+        dieselvalue: diesellitres,
+        petrolvalue: petrollitres,
+      };
+
+
+      console.log("entering data")
+
+      const response = await axios.post(`${url}/api/weeklydata`, data);
+
+      alert("response")
+
+    }catch(err){
+
+    }
+  }
+
   const pesaHandler = async () => {
     try {
       let virtualmoney = {
@@ -210,14 +230,12 @@ export default function Expenses() {
         debts: "",
       };
 
-      // console.log(pmsOne)
-
+      
       const resone = await axios.post(
         `${url}/api/billing/virtmoney`,
         virtualmoney
       );
 
-      // console.log(res)
       alert(resone.data);
       console.log(resone.data);
 
@@ -974,11 +992,13 @@ export default function Expenses() {
                 </div>
               </div>
 
+              
               <div className="updateing">
-                <div className="edits">
+                <div className="edits" onClick={confirm}>
                   <img src="" alt="" />
                 </div>
                 <button onClick={literHandler}>SUBMIT</button>
+                {/* <button onClick={confirm}>CONFIRM</button> */}
               </div>
             </div>
           </div>

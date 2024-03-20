@@ -1,16 +1,11 @@
-import React, { useState, useContext, useEffect } from "react";
-import Sidebar from "../Sidebar/Sidebar";
-import "./Sales.css";
-import bell from "../../Images/notify.png";
-import Graphs from "../Charts/Graphs";
+import React, { useContext, useEffect, useState } from "react";
 import Daily from "../Charts/Daily";
+import Graphs from "../Charts/Graphs";
 import Monthly from "../Charts/Monthly";
 import Yearly from "../Charts/Yearly";
-import moment from "moment";
-import DotLoader from "react-spinners/DotLoader";
-import Cookies from "cookie-universal";
+import Sidebar from "../Sidebar/Sidebar";
+import "./Sales.css";
 
-import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../AuthContext";
 
@@ -25,18 +20,6 @@ let date =
   today.getHours() +
   ":" +
   today.getMinutes();
-let mydate =
-  today.getDate() +
-  "/" +
-  (today.getMonth() + 1) +
-  "/" +
-  today.getFullYear() +
-  "," +
-  today.getHours() +
-  ":" +
-  today.getMinutes() +
-  ":" +
-  today.getSeconds();
 
 axios.defaults.withCredentials = true;
 
@@ -47,7 +30,6 @@ export default function Sales() {
 
   const {
     url,
-    login,
     diff,
     zrepos,
     totalEarnings,
@@ -70,11 +52,10 @@ export default function Sales() {
   const [alldat, setAlls] = useState([]);
   const [click, setClick] = useState(false);
 
-  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
-    const interval = setInterval(() => {
+    // const interval = setInterval(() => {
     const fetchData = async () => {
       try {
         const dets = await axios.get(`${url}/api/billing/debtors`, {
@@ -88,8 +69,8 @@ export default function Sales() {
       }
     };
     fetchData();
-  }, 1500);
-  return () => clearInterval(interval);
+  // }, 1500);
+  // return () => clearInterval(interval);
   }, []);
 
   const handleWeekly = () => {
@@ -140,9 +121,6 @@ export default function Sales() {
     setClick(true);
   };
 
-  const cancClick = () => {
-    setClick(false);
-  };
 
   const reasonsHandler = async () => {
     try {
@@ -480,7 +458,7 @@ export default function Sales() {
                 <tbody onClick={popClick}>
                   {tableData.map((val, key) => {
                     return (
-                      <tr onClick={(e) => setAlls(val)}>
+                      <tr onClick={() => setAlls(val)}>
                         <td>{key + 1}</td>
                         <td>{val.name}</td>
                         <td>{Number(val.amount).toLocaleString()}</td>

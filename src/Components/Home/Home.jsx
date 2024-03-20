@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Home.css";
 import Mids from "../Charts/Mids";
 import Real from "../Charts/Real";
+import Values from "../Charts/Values";
 import sales from "../../Images/sale.png";
 import petrol from "../../Images/sum.png";
 import epxenses from "../../Images/expenses.png";
@@ -116,9 +117,9 @@ export default function Home() {
             {/* <img src="" alt="" /> */}
 
             {/* <p id='thisw'>This week</p> */}
-            <div className="leftimgs">
+            {/* <div className="leftimgs">
               <img src={message} alt="" />
-            </div>
+            </div> */}
             <div className="leftimgs">
               <img src={message} alt="" />
             </div>
@@ -156,7 +157,7 @@ export default function Home() {
               </div>
 
               <div className="graphs">
-                <Mids />
+                <Values />
               </div>
 
               <div className="grap">

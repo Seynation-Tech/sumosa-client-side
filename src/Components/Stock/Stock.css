@@ -31,14 +31,14 @@
     font-weight: 560;
     font-size: 1.4em;
     color:rgba(255, 255, 255, 0.885);
-    font-family: monospace;
+    /* font-family: monospace; */
     
   }
   
   .lats p{
     font-size: 1.2em;
     margin: 4px;
-    font-family: monospace;
+    /* font-family: monospace; */
   }
 
   .crcs::after {
@@ -72,7 +72,7 @@
     align-items: center;
     font-size: 0.9em;
     cursor: pointer;
-    font-family: monospace;
+    /* font-family: monospace; */
   }
 
   .leftsa {
@@ -103,7 +103,7 @@
     font-size: 1.2em;
     font-weight: bold;
     cursor: pointer;
-    font-family: monospace;
+    /* font-family: monospace; */
   }
 
   .bba {
@@ -119,7 +119,7 @@
     font-size: 1.0em;
     cursor: pointer;
     background: blue;
-    font-family: monospace;
+    /* font-family: monospace; */
     
   }
 
@@ -150,13 +150,13 @@
     
     color: rgba(0, 0, 0, 0.796);
     font-weight: bold;
-    font-family: monospace;
+    /* font-family: monospace; */
     
   }
   
   .ps p:nth-child(2) {
     font-size: 0.9em;
-    font-family: monospace;
+    /* font-family: monospace; */
     color: rgba(0, 0, 0, 0.623);
   }
   

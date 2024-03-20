@@ -1,4 +1,3 @@
-import React, { PureComponent } from 'react';
 import {
   ComposedChart,
   Line,
@@ -11,61 +10,75 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
+import "./Graph.css";
+import React, { useState, useContext, useEffect } from "react";
+import axios from "axios";
+import { AuthContext } from "../AuthContext";
 
-const data = [
+const datas = [
   {
-    name: 'Sun',
-    uv: 590,
-    pv: 800,
-    amt: 1400,
+    name: "Sund",
+    uv: 0,
+    pv: 0,
+    amt: 0,
+    cnt: 0,
   },
   {
-    name: 'Mon',
-    uv: 868,
-    pv: 967,
-    amt: 1506,
+    name: "Mond",
+    uv: 0,
+    pv: 0,
+    amt: 0,
+    cnt: 0,
   },
   {
-    name: 'Tue',
-    uv: 1397,
-    pv: 1098,
-    amt: 989,
+    name: "Tue",
+    uv: 0,
+    pv: 0,
+    amt: 0,
+    cnt: 0,
   },
   {
-    name: 'Wed',
-    uv: 1480,
-    pv: 1200,
-    amt: 1228,
+    name: "Wedn",
+    uv: 0,
+    pv: 0,
+    amt: 0,
+    cnt: 0,
   },
   {
-    name: 'Thur',
-    uv: 1520,
-    pv: 1108,
-    amt: 1100,
+    name: "Thurs",
+    uv: 0,
+    pv: 0,
+    amt: 0,
+    cnt: 0,
   },
   {
-    name: 'Fri',
-    uv: 1400,
-    pv: 680,
-    amt: 1700,
+    name: "Fri",
+    uv: 0,
+    pv: 0,
+    amt: 0,
+    cnt: 0,
   },
   {
-    name: 'Sart',
-    uv: 1400,
-    pv: 680,
-    amt: 1700,
-  }
+    name: "Satur",
+    uv: 0,
+    pv: 0,
+    amt: 0,
+    cnt: 0,
+  },
 ];
 
-export default class Example extends PureComponent {
 
-  render() {
+export default function Mids() {
+  
+
+   const { url, datas } = useContext( AuthContext );
+
     return (
       <ResponsiveContainer width="110%" height="40%">
         <ComposedChart
           width={500}
           height={400}
-          data={data}
+          data={datas}
           margin={{
             top: 20,
             right: 80,
@@ -84,5 +97,5 @@ export default class Example extends PureComponent {
         </ComposedChart>
       </ResponsiveContainer>
     );
-  }
+  
 }

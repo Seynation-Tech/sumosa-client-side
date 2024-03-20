@@ -8,7 +8,7 @@ import Expenses from './Components/Expenses/Expenses';
 import Report from './Components/Report/Report';
 import Login from './Components/Login/Login';
 import Sign from './Components/Login/Sign'
-
+import Review from './Components/Review/Review';
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
           <Route path='/report' element={<Report/>}/>
           <Route path='/signin' element={<Login/>}/>
           <Route path='/signup' element={<Sign/>}/>
+          <Route path='/review' element={<Review/>}/>
         </Route>
       </Routes>
     </Router>
