@@ -32,11 +32,7 @@ let date =
   "/" +
   (today.getMonth() + 1) +
   "/" +
-  today.getFullYear() +
-  " " +
-  today.getHours() +
-  ":" +
-  today.getMinutes();
+  today.getFullYear() 
 let mydate =
   today.getDate() +
   "/" +
@@ -132,8 +128,9 @@ export default function Expenses() {
       agooneanalogClosing
     ) {
       try {
+        const dats = days.toLowerCase() + ","+date;
         let pmsOne = {
-          uid: date,
+          uid: dats,
           closingsanalog: pmsoneanalogClosing,
           closingdigital: pmsonedigClosing,
           openinganalog: pmsoneanalogOpening,
@@ -142,7 +139,7 @@ export default function Expenses() {
         };
 
         let pmsTwo = {
-          uid: date,
+          uid: dats,
           closingsanalog: pmstwoanalogClosing,
           closingdigital: pmstwodigClosing,
           openinganalog: pmstwoanalogOpening,
@@ -151,7 +148,7 @@ export default function Expenses() {
         };
 
         let agoOne = {
-          uid: date,
+          uid: dats,
           closingsanalog: agooneanalogClosing,
           closingdigital: agoonedigClosing,
           openinganalog: agooneanalogOpening,
@@ -160,7 +157,7 @@ export default function Expenses() {
         };
 
         let agoTwo = {
-          uid: date,
+          uid: dats,
           closingsanalog: agotwoanalogClosing,
           closingdigital: agotwodigClosing,
           openinganalog: agotwoanalogOpening,
@@ -168,15 +165,7 @@ export default function Expenses() {
           outputvalue: Number(agotwodigClosing) - Number(agotwodigOpening),
         };
 
-        let alldata = {
-          uid: days,
-          dieselamount: dieselAmount,
-          petrolamount: petrolAmount,
-          dieselvalue: "",
-          petrolvalue: "",
-          // ** z-report as pmtwoamount in database ** NOTE
-        };
-
+    
         setLoading(true);
 
         const resone = await axios.post(`${url}/api/pumps/petrol`, pmsOne);
@@ -203,8 +192,9 @@ export default function Expenses() {
   const confirm = async () => {
     if (diesellitres && dieselAmount && petrolAmount && petrollitres) {
       try {
+        const dats = days.toLowerCase() + ","+date;
         let data = {
-          uid: days,
+          uid: dats,
           dieselamount: dieselAmount,
           petrolamount: petrolAmount,
           dieselvalue: diesellitres,
@@ -228,8 +218,9 @@ export default function Expenses() {
   const pesaHandler = async () => {
     if (mPesa && nmb && crdb) {
       try {
+        const dats = days.toLowerCase() + ","+date;
         let virtualmoney = {
-          uid: "monday",
+          uid: dats,
           mpesa: mPesa,
           nmbpesa: nmb,
           crdbpesa: crdb,
@@ -262,8 +253,9 @@ export default function Expenses() {
   const credHandler = async () => {
     if (name && amount && mode) {
       try {
+        const dats = days.toLowerCase() + ","+date;
         let debtors = {
-          uid: date,
+          uid: dats,
           name: name,
           amount: amount,
           modeofpay: mode,
@@ -292,8 +284,9 @@ export default function Expenses() {
   const debtsHandler = async () => {
     if (name && amount) {
       try {
+        const dats = days.toLowerCase() + ","+date;
         let debtors = {
-          uid: "monday",
+          uid: dats,
           name: name,
           amount: amount,
           date: "12/23/34",
@@ -322,15 +315,16 @@ export default function Expenses() {
     if (pmsphyscal && pmsdispst){
       
     try {
+      const dats = days.toLowerCase() + ","+date;
       let pmsStock = {
-        uid: "friday",
+        uid: dats,
         physical: pmsphyscal,
         dipstick: pmsdispst,
         difference: Number(pmsphyscal) - Number(pmsdispst),
       };
 
       let agoStock = {
-        uid: "friday",
+        uid: dats,
         physical: agophyscal,
         dipstick: agodispst,
         difference: Number(agophyscal) - Number(agodispst),
@@ -365,10 +359,11 @@ export default function Expenses() {
   };
 
   const moneycountHandler = async () => {
-    if (tenths,fivehs,fiveths,onehs,oneths,twohs,fiftys,zrepot.twoth){
+    if (tenths&& fivehs&&fiveths&&onehs&&oneths&&twohs&&fiftys&&zrepot&&twoths){
     try {
+      const dats = days.toLowerCase() + ","+date;
       let collections = {
-        uid: "monday",
+        uid: dats,
         tenth: tenths,
         fiveth: fiveths,
         twoth: twoths,

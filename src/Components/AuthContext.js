@@ -60,6 +60,8 @@ export const AuthContextProvider = ( { children } ) =>
   const [ lastpetrol, setPetrollitreslast ] = useState( "0" );
   const [ lastdiesel, setDiesellitreslast ] = useState( "0" );
 
+  const [totalanalogamount ,setTotalanalogamout] = useState("0")
+
   const [datas, setDatas] = useState([])
   const [dats, setDts] = useState([])
   const [alldats, setAllDats] = useState([])
@@ -193,6 +195,8 @@ export const AuthContextProvider = ( { children } ) =>
             Object.values( respthree.data ).length - 2
           ];
 
+          // console.log(pmone,pmto,agoe,agto)
+
           // console.log(pone.outputvalue,ptwo.outputvalue)
           const totalpetrol = Number( pone.outputvalue ) + Number( ptwo.outputvalue );
 
@@ -200,9 +204,9 @@ export const AuthContextProvider = ( { children } ) =>
 
           const toataldiesel = Number( aone.outputvalue ) + Number( atwo.outputvalue );
 
-          // console.log(toataldiesel)
+          // console.log(respthree.data.length)
 
-          if ( ( dieslstock.data ).length > 1 )
+          if ( respthree.data.length > 1 )
           {
             const lasttotalpetrol =
               Number( pmone.outputvalue ) + Number( pmto.outputvalue );
@@ -210,11 +214,13 @@ export const AuthContextProvider = ( { children } ) =>
 
             const lasttoataldiesel =
               Number( agoe.outputvalue ) + Number( agto.outputvalue );
-
-            setDiesellitreslast( lasttotalpetrol );
-            setPetrollitreslast( lasttoataldiesel );
+console.log(lasttoataldiesel,lasttotalpetrol)
+            setDiesellitreslast( lasttotalpetrol.toLocaleString() );
+            setPetrollitreslast( lasttoataldiesel.toLocaleString() );
           }
 
+
+          
 
           const totalvalues = Number( pone.outputvalue ) + Number( ptwo.outputvalue ) + Number( aone.outputvalue ) + Number( atwo.outputvalue );
 
@@ -226,8 +232,8 @@ export const AuthContextProvider = ( { children } ) =>
 
 
 
-          setPetrollitres( totalpetrol );
-          setDiesellitres( toataldiesel );
+          setPetrollitres( totalpetrol.toLocaleString() );
+          setDiesellitres( toataldiesel.toLocaleString() );
 
 
 
@@ -287,6 +293,8 @@ export const AuthContextProvider = ( { children } ) =>
             agooneAmountanalog +
             agotwoAmountanalog
           );
+
+          setTotalanalogamout( totalanalogAmount.toLocaleString())
 
 
 
@@ -385,6 +393,7 @@ export const AuthContextProvider = ( { children } ) =>
         tableData,
         totalliters,
         alldebts,
+        totalanalogamount,
         userlogin,
         userlogout,
       } }

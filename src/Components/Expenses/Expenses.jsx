@@ -15,11 +15,7 @@ let date =
   "/" +
   ( today.getMonth() + 1 ) +
   "/" +
-  today.getFullYear() +
-  " " +
-  today.getHours() +
-  ":" +
-  today.getMinutes();
+  today.getFullYear() 
 let mydate =
   today.getDate() +
   "/" +
@@ -40,7 +36,7 @@ export default function Expenses ()
   const [ usage, setUsage ] = useState( "" );
   const [ amount, setAmount ] = useState( "" );
   const [ expenses, setExpenses ] = useState( false );
-  const { url, login } = useContext( AuthContext );
+  const { url, days } = useContext( AuthContext );
   const [ loading, setLoading ] = useState( false );
   const [ tableData, setData ] = useState( [] );
 
@@ -115,9 +111,9 @@ export default function Expenses ()
   const expenseHandler = async () =>
   {
     try
-    {
+    {const uid = days.toLowerCase() + ","+date;
       let debtors = {
-        uid: date,
+        uid: uid,
         usages: usage,
         amount: amount,
       };

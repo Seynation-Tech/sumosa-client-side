@@ -16,11 +16,7 @@ let date =
   "/" +
   (today.getMonth() + 1) +
   "/" +
-  today.getFullYear() +
-  "," +
-  today.getHours() +
-  ":" +
-  today.getMinutes();
+  today.getFullYear() 
 
 axios.defaults.withCredentials = true;
 
@@ -29,7 +25,7 @@ export default function Sales() {
   const [dieselprice, setDieselprice] = useState("");
   const [petrolprice, setPetrolprice] = useState("");
 
-  const { url, diff, zrepos, totalEarnings, dieselAmount, petrolAmount } =
+  const { url, diff,days, zrepos, totalEarnings, dieselAmount, petrolAmount } =
     useContext(AuthContext);
   const [loadings, setLoading] = useState(false);
   const [reason, setReason] = useState("");
@@ -166,8 +162,9 @@ export default function Sales() {
       
 
     try {
+      const uid = days.toLowerCase() + ","+date;
       let pricings = {
-        uid: date,
+        uid: uid,
         petrol: petrolprice,
         diesel: dieselprice,
       };
@@ -400,6 +397,7 @@ export default function Sales() {
                   <div className="input-two">
                     {/* <i>icon</i> */}
                     <input
+                    type="number"
                       placeholder="Petrol"
                       value={petrolprice}
                       onChange={(e) => setPetrolprice(e.target.value)}
@@ -409,6 +407,7 @@ export default function Sales() {
                   <div className="input-two">
                     {/* <i>icon</i> */}
                     <input
+                    type="number"
                       placeholder="Diesel "
                       value={dieselprice}
                       onChange={(e) => setDieselprice(e.target.value)}
