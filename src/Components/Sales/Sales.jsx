@@ -9,7 +9,7 @@ import "./Sales.css";
 import axios from "axios";
 import { AuthContext } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
-
+import DotLoader from "react-spinners/DotLoader";
 let today = new Date();
 let date =
   today.getDate() +
@@ -31,7 +31,7 @@ export default function Sales() {
 
   const { url, diff, zrepos, totalEarnings, dieselAmount, petrolAmount } =
     useContext(AuthContext);
-  const [loading, setLoading] = useState(false);
+  const [loadings, setLoading] = useState(false);
   const [reason, setReason] = useState("");
   const [amountinwords, setAmountinwords] = useState("");
 
@@ -45,9 +45,12 @@ export default function Sales() {
 
   const [alldat, setAlls] = useState([]);
   const [click, setClick] = useState(false);
+  const [notify,setNotify] = useState(false);
+
+  const [notification,setNotification] = useState('');
 
   const navigate = useNavigate();
-
+  let [color, setColor] = useState("#ffffff");
   useEffect(() => {
     setLoading(true);
     // const interval = setInterval(() => {
@@ -98,22 +101,27 @@ export default function Sales() {
 
   const handleReasons = () => {
     setReasons(true);
+    setNotify(false)
   };
 
   const cancelReason = () => {
     setReasons(false);
+    setNotify(false)
   };
 
   const handleHandle = () => {
     setPrices(true);
+    setNotify(false)
   };
 
   const cancPrice = () => {
     setPrices(false);
+    setNotify(false)
   };
 
   const popClick = () => {
     setClick(true);
+    setNotify(false)
   };
 
   const handleLitres = () => {
@@ -121,30 +129,42 @@ export default function Sales() {
   };
 
   const reasonsHandler = async () => {
+
+    
+    if (reason && amountinwords){
+
+      
     try {
       let inwords = {
         uid: date,
         differencereason: reason,
         totalamount: amountinwords,
       };
-
-      // console.log(pmsOne)
+      setLoading(true);
 
       const resone = await axios.post(`${url}/api/billing/reason`, inwords);
-
-      // console.log(res)
-      console.log(resone.data);
-      alert(resone.data);
-
+      setNotify(true)
+      setNotification(resone.data)
+      setLoading(false);
       //
     } catch (err) {
       setLoading(false);
       console.log(err);
       // setError( "Please refresh..." );
     }
+  }else{
+    setNotify(true)
+    setNotification("Fill all the details!")
+  
+  }
+  
   };
 
   const priceHandler = async () => {
+
+    if (petrolprice && dieselprice){
+      
+
     try {
       let pricings = {
         uid: date,
@@ -152,20 +172,24 @@ export default function Sales() {
         diesel: dieselprice,
       };
 
-      // console.log(pmsOne)
-
+      setLoading(true);
       const resone = await axios.post(`${url}/api/billing/pricings`, pricings);
+      setNotify(true)
+      setNotification(resone.data)
+      setLoading(false);
+      
 
-      // console.log(res)
-      alert(resone.data);
-      console.log(resone.data);
 
       //
     } catch (err) {
       setLoading(false);
-      console.log(err);
-      // setError( "Please refresh..." );
+   
     }
+  }else{
+    setNotify(true)
+    setNotification("Fill all the details!")
+
+  }
   };
 
   const debtorcrediLoad = async () => {
@@ -174,9 +198,10 @@ export default function Sales() {
         withCredentials: true,
       });
       setData(respfour.data);
-      // alert(respfour.data);
 
-      //
+      // setLoading(false);
+  
+
     } catch (err) {
       setLoading(false);
       console.log(err);
@@ -329,6 +354,26 @@ export default function Sales() {
                   />
                 </div>
 
+                {notify && <div className="inputmy">
+                    <p>{notification}</p>
+                </div>}
+{/* 
+                {loadings ? (
+              <div className="spin">
+                {" "}
+                <DotLoader
+                  color={color}
+                  loading={loadings}
+                  // cssOverride={override}
+                  size={25}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              </div>
+            ) : (
+              <></>
+            )} */}
+
                 <div className="remember-opt">
                   <button onClick={reasonsHandler} className="sign-bt">
                     Submit
@@ -348,7 +393,7 @@ export default function Sales() {
             </div>
             <div className="ours">
               <div className="sdacont">
-                <div className="jins">
+                <div className="totalcash">
                   <p>CHANGE MONTHLY PRICE </p>
                 </div>
                 <div className="forms">
@@ -370,6 +415,26 @@ export default function Sales() {
                     />
                   </div>
                 </div>
+
+                {notify && <div className="inputmy">
+                    <p>{notification}</p>
+                </div>}
+
+                {/* {loadings ? (
+              <div className="spin">
+                {" "}
+                <DotLoader
+                  color={color}
+                  loading={loadings}
+                  // cssOverride={override}
+                  size={25}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              </div>
+            ) : (
+              <></>
+            )} */}
 
                 <div className="remember-opt">
                   <button onClick={priceHandler} className="sign-btn">

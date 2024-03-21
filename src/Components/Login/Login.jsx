@@ -13,7 +13,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState("");
   const [error, setError] = useState("");
-  const { userlogin } = useContext(AuthContext);
+  const { userlogin,currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   let [color, setColor] = useState("#ffffff");
@@ -60,6 +60,7 @@ export default function Login() {
           <div className="sdas">
             <img src={sda} alt="" className="" />
           </div>
+          <p id="sumos">SUMOSA FILLING STATION</p>
           <div className="sdaconts">
             <div className="anaccount">
               <p>Login Your Account</p>

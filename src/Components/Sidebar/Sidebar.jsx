@@ -37,8 +37,8 @@ export default function Sidebar() {
           <img src={profile} alt="" />
         </div>
         <div className="profcaption">
-          <p>{currentUser[0]?.name}</p>
-          <p>{currentUser[0]?.role}</p>
+          <p>{currentUser[0]?.name || "User"}</p>
+          <p>{currentUser[0]?.role || "Admin"}</p>
         </div>
       </div>
 
@@ -70,15 +70,15 @@ export default function Sidebar() {
             <p>Daily Report</p>
           </div>
         </NavLink>
-
-        <NavLink to="/expenses">
+{
+  currentUser[0]?.role==="Director" ?<NavLink to="/expenses">
         <div className="sectcont">
           <img src={stock} alt="" />
           <p>Data Review</p>
         </div>
-        </NavLink>
+        </NavLink>:<></>
 
-
+}
        
       </div>
 

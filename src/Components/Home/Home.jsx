@@ -138,7 +138,7 @@ export default function Home() {
                 </div>
 
                 <div className="headword">
-                  <p>Oil Litres</p>
+                  <p>WEEKLY SALES AMOUNT</p>
                 </div>
               </div>
 
@@ -152,7 +152,7 @@ export default function Home() {
                 </div>
 
                 <div className="headword">
-                  <p>Oil Litres</p>
+                  <p>WEEKLY LITRES VALUES</p>
                 </div>
               </div>
 
