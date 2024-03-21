@@ -35,3 +35,34 @@ a {
   text-decoration: none;
   color: white;
 }
+
+
+
+@keyframes animate_01 {
+  0% {
+    rotate: 0deg;
+  }
+
+  100% {
+    rotate: 360deg;
+  }
+}
+
+
+@keyframes dscbox {
+  0% {
+    transform: translate(-10px, 50px) scale(0.9) rotate(20deg);
+  }
+}
+
+@keyframes outtbox {
+  0% {
+    transform: translate(200px, 10px) scale(0.9) rotate(10deg);
+  }
+}
+
+@keyframes descriptbox {
+  0% {
+    transform: translate(-10px, 50px) scale(0.9) rotate(0deg);
+  }
+}

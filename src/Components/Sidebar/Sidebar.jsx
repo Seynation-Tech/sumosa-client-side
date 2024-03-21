@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from "react";
 import home from "../../Images/hoo.png";
 import logos from "../../Images/sumoo.png";
 import profile from "../../Images/one.png";
@@ -7,7 +7,6 @@ import epxenses from "../../Images/expenses.png";
 import report from "../../Images/repo.png";
 import stock from "../../Images/stock.png";
 import logout from "../../Images/login.png";
-
 
 import { Link, useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
@@ -19,18 +18,20 @@ import Cookies from "cookie-universal";
 axios.defaults.withCredentials = true;
 
 export default function Sidebar() {
-
-    const cookies = new Cookies();
-    const { currentUser,tokns, url, logoout } = useContext(AuthContext);
-    const [currentUsers, setCurrentUser] = useState(null);
-    const navigate = useNavigate();
+  const cookies = new Cookies();
+  const { currentUser, tokns, url, logoout } = useContext(AuthContext);
+  const [currentUsers, setCurrentUser] = useState(null);
+  const navigate = useNavigate();
 
   return (
+    // <div className='allsides'>
     <div className="sectionone">
       <div className="uppersect">
         <img src={logos} alt="" />
         {/* <p id="sum">SUMOSA</p> */}
       </div>
+
+      
 
       <div className="profilesect">
         <div className="profimg">
@@ -60,7 +61,7 @@ export default function Sidebar() {
         <NavLink to="/expenses">
           <div className="sectcont">
             <img src={epxenses} alt="" />
-            <p>Epxenses</p>
+            <p>Expenses</p>
           </div>
         </NavLink>
 
@@ -70,33 +71,29 @@ export default function Sidebar() {
             <p>Daily Report</p>
           </div>
         </NavLink>
-{
-  currentUser[0]?.role==="Director" ?<NavLink to="/expenses">
-        <div className="sectcont">
-          <img src={stock} alt="" />
-          <p>Data Review</p>
-        </div>
-        </NavLink>:<></>
-
-}
-       
+        {currentUser[0]?.role === "Director" ? (
+          <NavLink to="/expenses">
+            <div className="sectcont">
+              <img src={stock} alt="" />
+              <p>Data Review</p>
+            </div>
+          </NavLink>
+        ) : (
+          <></>
+        )}
       </div>
 
       <NavLink className="lowersect" to="/">
-          
-     
         <div className="logimg">
           <img src={logout} alt="" />
         </div>
         <p>Log out</p>
-   
-        </NavLink>
-
-     
+      </NavLink>
 
       <div className="copyright">
         <p>copyright @2024</p>
       </div>
     </div>
+    // </div>
   );
 }

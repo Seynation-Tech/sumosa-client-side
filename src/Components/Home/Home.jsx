@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Home.css";
+import "./Mobile.css";
 import Mids from "../Charts/Mids";
 import Real from "../Charts/Real";
 import Values from "../Charts/Values";
@@ -7,7 +8,7 @@ import sales from "../../Images/sale.png";
 import petrol from "../../Images/sum.png";
 import clocs from "../../Images/cloc.png";
 import report from "../../Images/repo.png";
-import stock from "../../Images/stock.png";
+import drop from "../../Images/dropdo.png";
 import settings from "../../Images/setting.png";
 import message from "../../Images/chat.png";
 import logout from "../../Images/login.png";
@@ -21,6 +22,7 @@ import moment from "moment";
 import DotLoader from "react-spinners/DotLoader";
 import Cookies from "cookie-universal";
 import Moment from "react-moment";
+import logos from "../../Images/sumoo.png";
 
 axios.defaults.withCredentials = true;
 
@@ -60,7 +62,8 @@ export default function Home() {
     url,
     dieselprice,
     petrolprice,
-    diff,days,
+    diff,
+    days,
     zrepos,
     alldebts,
     totalEarnings,
@@ -73,8 +76,12 @@ export default function Home() {
     todaydate,
   } = useContext(AuthContext);
 
+  const [sidebar, setSidebar] = useState(false);
+
   const [currentUsers, setCurrentUser] = useState(null);
   const navigate = useNavigate();
+  const [sideup, setSide] = useState(false);
+  const [upper, setUpper] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -88,11 +95,32 @@ export default function Home() {
     fetchData();
   }, []);
 
+  const popUpside = () => {
+    setUpper(false);
+    let flag = sidebar;
+    flag = !flag;
+    setSidebar(flag);
+  };
+
+  const cancelSide = () => {
+    setSidebar(false);
+    setUpper(true);
+  };
+
   return (
     <div className="mainpage">
-      <Sidebar />
-      {/* SECTION TWO THE CONTENT PAGE */}
+      {sidebar && <Sidebar />}
+      {/* SECTION TWO THE CONTENT PAGE */}|
+      <div className="upbove">
+        <div className="aboveall">
+          <img src={logos} alt="" />
+        </div>
+        <div className="aboves">
+          <p>SUMOSA</p>
+        </div>
 
+        <img className="dropdo" onClick={popUpside} src={drop} alt="" />
+      </div>
       <div className="sectiontwo">
         <div className="lineage"></div>
         <div className="upsection">
@@ -160,9 +188,7 @@ export default function Home() {
                 <Values />
               </div>
 
-              <div className="grap">
-                <p>Graphical data analysis</p>
-              </div>
+              <div className="grap">{/* <p>Graphical data analysis</p> */}</div>
             </div>
 
             <div className="right">
@@ -278,15 +304,11 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="firsts">
-          
-          
-          </div>
+              <div className="firsts"></div>
             </div>
           </div>
         </div>
       </div>
-
       <div className="sectionthree">
         <div className="lowersecta">
           {/* <Moment date={dateToFormat} /> */}
@@ -378,10 +400,7 @@ export default function Home() {
           <div className="thr"></div>
         </div>
 
-        <div className="firsts">
-          
-          
-        </div>
+        <div className="firsts"></div>
       </div>
     </div>
   );

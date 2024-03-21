@@ -1,7 +1,8 @@
 body {
-    background-color: white;
-  }
-  
+  background-color: white;
+}
+
+@media screen and (min-width: 540px) {
   .welcome-pages {
     min-height: 110vh;
     display: flex;
@@ -14,9 +15,9 @@ body {
         rgba(11, 1, 67, 0.699),
         rgba(3, 0, 37, 0.932)
       ),
-      url("../../Images/tucasa.jpg");
+      url("../../Images/sheli.jpg");
   }
-  
+
   .login-page {
     display: flex;
     justify-content: space-around;
@@ -27,7 +28,7 @@ body {
     object-fit: cover;
     flex-direction: column;
   }
-  
+
   .login-left {
     width: 500px;
     height: 500px;
@@ -50,14 +51,14 @@ body {
     border-radius: 53% 47% 50% 50% / 38% 41% 59% 62%;
     box-shadow: 1px 11px 82px 22px rgba(1, 68, 131, 0.297);
   }
-  
+
   /* .cover{
       position: absolute;
       width: 100%;
       height: 800px;
       background: linear-gradient(to right top, rgba(4, 4, 65, 0.298),rgb(64, 0, 128));
   } */
-  
+
   .login-right {
     width: 30%;
     height: auto;
@@ -72,13 +73,13 @@ body {
     padding-top: 40px;
     padding-bottom: 50px;
   }
-  
+
   .login-data {
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
-  
+
   .forms {
     display: flex;
     flex-direction: column;
@@ -87,30 +88,30 @@ body {
     margin-top: 23px;
     margin-bottom: 23px;
   }
-  
+
   .forms .input-one {
     display: flex;
     gap: 10px;
     position: relative;
   }
-  
+
   .forms .input-two {
     display: flex;
     gap: 10px;
     position: relative;
   }
-  
+
   .login-data p:nth-child(1) {
     font-size: 1.5em;
     font-weight: bold;
   }
-  
+
   .login-data p:nth-child(2) {
     font-size: 0.9em;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.746);
   }
-  
+
   .input-one input {
     background: transparent;
     outline: none;
@@ -120,7 +121,7 @@ body {
     border-radius: 5px;
     padding-left: 12px;
   }
-  
+
   .input-two input {
     background: transparent;
     outline: none;
@@ -130,18 +131,17 @@ body {
     border-radius: 5px;
     padding-left: 12px;
   }
-  
+
   .input-one input::placeholder {
     font-weight: 300;
     color: rgba(255, 255, 255, 0.6);
-    
   }
-  
+
   .input-two input::placeholder {
     font-weight: 300;
     color: rgba(255, 255, 255, 0.6);
   }
-  
+
   .remeber {
     display: flex;
     justify-content: flex-start;
@@ -149,7 +149,7 @@ body {
     gap: 9px;
     margin-left: -142px;
   }
-  
+
   .remeber input {
     width: 14px;
     height: 14px;
@@ -157,23 +157,23 @@ body {
     border: none;
     outline: none;
   }
-  
+
   input {
     color: rgba(255, 255, 255, 0.871);
   }
-  
+
   .input-one input:focus {
     border: 3px solid rgba(31, 31, 255, 0.362);
   }
-  
+
   .input-two input:focus {
     border: 3px solid rgb(31, 31, 255);
   }
-  
+
   button {
     cursor: pointer;
   }
-  
+
   .remeber p {
     font-size: 0.8em;
   }
@@ -193,7 +193,7 @@ body {
     border-radius: 5px;
     border: 3px solid rgba(255, 255, 255, 0.1);
   }
-  
+
   .anaccount {
     display: flex;
     justify-content: center;
@@ -201,12 +201,12 @@ body {
     margin-top: 10px;
     margin-bottom: 3px;
   }
-  
+
   .anaccount p {
     font-size: 0.9em;
     font-weight: bold;
   }
-  
+
   .account {
     display: flex;
     flex-direction: column;
@@ -217,7 +217,7 @@ body {
     bottom: -94px;
     left: 25%;
   }
-  
+
   .accounts {
     display: flex;
     flex-direction: column;
@@ -229,11 +229,11 @@ body {
     left: 27%;
     margin: 12px;
   }
-  
+
   .accounts p {
     font-size: 0.8em;
   }
-  
+
   #forgot {
     color: rgba(253, 253, 255, 0.556);
     cursor: pointer;
@@ -241,21 +241,21 @@ body {
   .acc {
     font-size: 0.8em;
   }
-  
+
   .account p:nth-child(2) {
     color: rgb(67, 129, 255);
     font-size: 0.9em;
     font-weight: bold;
     cursor: pointer;
   }
-  
+
   span {
     color: rgb(67, 129, 255);
     font-size: 1em;
     font-weight: bold;
     cursor: pointer;
   }
-  
+
   .body-contentc {
     width: 100%;
     display: flex;
@@ -266,14 +266,14 @@ body {
     top: 104px;
     border-radius: 10px;
   }
-  
+
   .highlight-anim {
     margin-right: -632px;
     position: relative;
     margin-top: -54px;
   }
 
-  .jinsr{
+  .jinsr {
     width: 100%;
     height: 45px;
     background: rgba(255, 255, 255, 0.1);
@@ -283,7 +283,7 @@ body {
     align-items: center;
     backdrop-filter: blur(3px);
   }
-  
+
   .our {
     min-width: 100%;
     min-height: 22vh;
@@ -303,7 +303,7 @@ body {
     position: relative;
     right: -8px;
   }
-  
+
   .ou {
     min-width: auto;
     min-height: 22vh;
@@ -323,7 +323,7 @@ body {
     position: relative;
     right: 114px;
   }
-  
+
   .sdas {
     width: 85px;
     height: 85px;
@@ -337,13 +337,13 @@ body {
       inset 15px 15px 30px rgba(7, 110, 255, 0.327),
       inset 1px -1px 14px rgba(255, 255, 255, 0.723);
   }
-  
+
   .sdas img {
     width: 60px;
     height: 60px;
     border-radius: 50%;
   }
-  
+
   .sdacont {
     min-height: 20vh;
     backdrop-filter: blur(4px);
@@ -358,7 +358,6 @@ body {
     text-align: center;
     border: 3px solid rgba(255, 255, 255, 0.243);
   }
-  
 
   .sdaconts {
     min-height: 20vh;
@@ -374,9 +373,7 @@ body {
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.243);
   }
-  
 
-  
   .lsa {
     /* background: linear-gradient(to right, rgb(2, 7, 92), rgb(1, 20, 66)); */
     min-height: 86vh;
@@ -389,12 +386,11 @@ body {
     margin-top: -14px;
   }
 
-  
-.lsa {
+  .lsa {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  
+
   .lsa::-webkit-scrollbar {
     display: none;
   }
@@ -411,7 +407,7 @@ body {
     border-radius: 12px;
   }
 
-  .bodyone{
+  .bodyone {
     display: flex;
     width: 100%;
     min-height: 23vh;
@@ -421,154 +417,148 @@ body {
     margin-top: 20px;
     border-radius: 10px;
     gap: 34px;
-
   }
 
-  .bodytwo{
+  .bodytwo {
     display: flex;
     width: 100%;
     min-height: 23vh;
     /* background: rgb(255, 0, 0); */
     justify-content: space-around;
     align-items: center;
-gap: 32px;
+    gap: 32px;
   }
 
-  .twos{
+  .twos {
     margin: 8px;
-    font-size: 1.0em;
+    font-size: 1em;
     font-weight: bold;
   }
 
-  .canc{
+  .canc {
     width: 34px;
     height: 34px;
     border-radius: 50%;
-    background:rgba(255, 255, 255, 0.09);
+    background: rgba(255, 255, 255, 0.09);
     margin-top: -12px;
   }
 
-  .contentonestya{
+  .contentonestya {
     background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      width: 32%;
-      min-height: 83vh;
-      margin-top: -100px;
-      justify-content: center;
-      align-items: center;
-      border-radius: 20px;
-      padding: 23px;
-      position: relative;
-      z-index: 10000;
-      
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 32%;
+    min-height: 83vh;
+    margin-top: -100px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: 23px;
+    position: relative;
+    z-index: 10000;
   }
 
-
-
-
-  .contentonesty{
+  .contentonesty {
     background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      width: 32%;
-      min-height: 77vh;
-      margin-top: -100px;
-      justify-content: center;
-      align-items: center;
-      border-radius: 20px;
-      z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 32%;
+    min-height: 77vh;
+    margin-top: -100px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    z-index: 10000;
   }
 
-
-  .contentonest{
+  .contentonest {
     background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      width: 45%;
-      min-height: 80vh;
-      margin-top: -44px;
-      justify-content: center;
-      align-items: center;
-      font-size: 0.9em;
-      border-radius: 10px; z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 45%;
+    min-height: 80vh;
+    margin-top: -44px;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9em;
+    border-radius: 10px;
+    z-index: 10000;
   }
 
-  .contentonesya{
+  .contentonesya {
     background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      width: 56%;
-      min-height: 71vh;
-      margin-top: -14px;
-      justify-content: center;
-      align-items: center;
-      position: absolute;
-      border-radius: 9px;
-      border-radius: 10px; z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 56%;
+    min-height: 71vh;
+    margin-top: -14px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border-radius: 9px;
+    border-radius: 10px;
+    z-index: 10000;
   }
 
-  .contentonesy{
+  .contentonesy {
     background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      width: 45%;
-      min-height: 73vh;
-      margin-top: -114px;
-      justify-content: center;
-      align-items: center;
-      border-radius: 10px; z-index: 10000;
-      
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 45%;
+    min-height: 73vh;
+    margin-top: -114px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    z-index: 10000;
   }
 
-  .contentonesa{
+  .contentonesa {
     background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      width: 75%;
-      min-height: 60vh;
-      margin-top: -114px;
-      border-radius: 10px;
-      padding-top: 23px;;
-      z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 75%;
+    min-height: 60vh;
+    margin-top: -114px;
+    border-radius: 10px;
+    padding-top: 23px;
+    z-index: 10000;
   }
 
-
-  .contentones{
+  .contentones {
     background: linear-gradient(to right, rgb(0, 61, 135), rgb(3, 2, 76));
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      width: 50%;
-      min-height: 54vh;
-      margin-top: -114px;
-      border-radius: 10px;
-      justify-content: center;
-      align-items: center;
-      z-index: 10000;
-      
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 50%;
+    min-height: 54vh;
+    margin-top: -114px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
   }
 
-  .contentone{
+  .contentone {
     background: linear-gradient(to right, rgb(8, 0, 115), rgb(10, 0, 150));
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      width: 50%;
-      min-height: 33vh;
-      border-radius: 10px;
-      padding:12px;
-      border-radius: 10px;
-      z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 50%;
+    min-height: 33vh;
+    border-radius: 10px;
+    padding: 12px;
+    border-radius: 10px;
+    z-index: 10000;
   }
 
-  .contentwo{
+  .contentwo {
     background: linear-gradient(to right, rgb(2, 52, 167), rgb(4, 2, 76));
     display: flex;
     flex-direction: column;
@@ -576,48 +566,48 @@ gap: 32px;
     width: 52%;
     min-height: 33vh;
     border-radius: 10px;
-    padding:12px; z-index: 10000;
+    padding: 12px;
+    z-index: 10000;
   }
 
-  .jins{
+  .jins {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 13px;
   }
 
-  .jins p{
+  .jins p {
     font-weight: bold;
     font-size: 1.2em;
   }
 
-  .chote{
+  .chote {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     gap: 14px;
   }
 
-  .chotes{
+  .chotes {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
   }
 
-  .bone{
+  .bone {
     display: flex;
     flex-direction: column;
     gap: 14px;
-  
   }
 
-  .thetwo{
+  .thetwo {
     width: 100%;
     position: relative;
     display: flex;
   }
 
-  .thetwo button{
+  .thetwo button {
     border: none;
     height: 42px;
     width: 100%;
@@ -630,27 +620,27 @@ gap: 32px;
     border: 3px solid rgba(255, 255, 255, 0.1);
   }
 
-  .thetwo button:active{
+  .thetwo button:active {
     background: rgba(221, 0, 255, 0.236);
   }
 
-  .jinss{
+  .jinss {
     width: 70%;
     height: 45px;
-    border-radius: 5px;;
+    border-radius: 5px;
     background: rgba(255, 255, 255, 0.113);
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  .thetwos{
+  .thetwos {
     display: flex;
     justify-content: center;
     align-content: center;
   }
 
-  .thetwos input{
+  .thetwos input {
     border: none;
     height: 45px;
     background: rgba(255, 255, 255, 0.035);
@@ -660,30 +650,27 @@ gap: 32px;
     padding-right: 12px;
     font-weight: bold;
     font-size: 1em;
-    border-radius: 4px;;
-    border: 1px solid rgba(255, 255, 255, 0.179)
-   
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.179);
   }
 
-  .thetwo input:focus{
-    border: 3px solid rgba(255, 255, 255, 0.426)
+  .thetwo input:focus {
+    border: 3px solid rgba(255, 255, 255, 0.426);
   }
 
-
-
-  .thetwos input::placeholder{
-color: rgba(255, 255, 255, 0.6);
-font-size: 0.9em;
+  .thetwos input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9em;
   }
 
-  .thetwo p{
+  .thetwo p {
     font-size: 0.8em;
   }
 
-  .thetwos p{
+  .thetwos p {
     font-size: 0.8em;
   }
-  .thetwo input{
+  .thetwo input {
     border: none;
     height: 35px;
     background: rgba(255, 255, 255, 0.037);
@@ -693,20 +680,20 @@ font-size: 0.9em;
     padding-right: 12px;
     /* font-weight: bold; */
     font-size: 1.1em;
-    border-radius: 2px;;
+    border-radius: 2px;
     border: 1px solid rgba(255, 255, 255, 0.478);
   }
 
-  .thetwo input::placeholder{
-color: rgba(255, 255, 255, 0.648);
-font-size: 0.8em;
+  .thetwo input::placeholder {
+    color: rgba(255, 255, 255, 0.648);
+    font-size: 0.8em;
   }
 
-  .thetwo p{
-    font-size: 1.0em;
+  .thetwo p {
+    font-size: 1em;
   }
 
-  .updateing{
+  .updateing {
     background-color: rgba(0, 0, 255, 0.059);
     width: 100%;
     height: 64px;
@@ -717,11 +704,10 @@ font-size: 0.8em;
     right: 0;
     border-radius: 5px;
     /* margin-bottom: 12px; */
-    border:3px solid rgba(0, 98, 255, 0.019);
-
+    border: 3px solid rgba(0, 98, 255, 0.019);
   }
 
-  .updateing button{
+  .updateing button {
     height: 42px;
     width: 26%;
     background: linear-gradient(to right, rgb(11, 0, 135), rgb(0, 60, 163));
@@ -735,22 +721,20 @@ font-size: 0.8em;
     border-radius: 4px;
   }
 
-  .updateing button:active{
+  .updateing button:active {
     background: blue;
   }
 
-  .edits{
+  .edits {
     width: 30px;
     height: 30px;
     background: rgba(0, 0, 255, 0.165);
     border-radius: 50%;
- position: absolute;
- left: 34px;
-
+    position: absolute;
+    left: 34px;
   }
 
-  
-  .poppesao{
+  .poppesao {
     min-height: 113vh;
     width: 100%;
     background: rgba(0, 194, 253, 0.084);
@@ -762,10 +746,9 @@ font-size: 0.8em;
     display: flex;
     justify-content: center;
     align-items: center;
-    
   }
 
-  .poppes{
+  .poppes {
     min-height: 103vh;
     width: 100%;
     background: rgba(0, 194, 253, 0.084);
@@ -777,10 +760,9 @@ font-size: 0.8em;
     display: flex;
     justify-content: center;
     align-items: center;
-    
   }
 
-  .poppesa{
+  .poppesa {
     min-height: 83vh;
     width: 100%;
     background: rgba(0, 194, 253, 0.084);
@@ -792,10 +774,9 @@ font-size: 0.8em;
     display: flex;
     justify-content: center;
     align-items: center;
-    
   }
 
-  .poppesaa{
+  .poppesaa {
     min-height: 93vh;
     width: 100%;
     background: rgba(0, 194, 253, 0.084);
@@ -807,10 +788,9 @@ font-size: 0.8em;
     display: flex;
     justify-content: center;
     align-items: center;
-    
   }
 
-  .ours{
+  .ours {
     /* background: rgba(6, 39, 201, 0.596); */
     width: 50%;
     display: flex;
@@ -824,3 +804,4 @@ font-size: 0.8em;
   .ours {
     color: white;
   }
+}

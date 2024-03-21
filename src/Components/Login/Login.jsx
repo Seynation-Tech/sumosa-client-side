@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import "./Login.css";
+import "./Mobile.css"
 import "../../App.css";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext.js";
@@ -21,6 +22,8 @@ export default function Login() {
   const submitButton = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    if (currentUser[0])
 
     try {
       let data = {
@@ -84,10 +87,10 @@ export default function Login() {
                 />
               </div>
             </div>
-            <div className="remeber">
+            {/* <div className="remeber">
               <input type="checkbox" />
               <p>Remember me</p>
-            </div>
+            </div> */}
             <div className="remember-opt">
               <Link to="/home" style={{ textDecoration: "none" }}>
                 <button className="sign-btn" onClick={submitButton}>

@@ -15,15 +15,15 @@ import {
 const data = [
   {
     name: 'Morning',
-    uv: 590,
-    pv: 800,
-    amt: 1400,
+    Ago: 590,
+    Pms: 800,
+    Sales: 1400,
   },
   {
-
-    uv: 868,
-    pv: 967,
-    amt: 1506,
+  
+    Ago: 1590,
+    Pms: 1800,
+    Sales: 400,
   }
 ];
 
@@ -48,9 +48,9 @@ export default class Example extends PureComponent {
           <YAxis  />
           <Tooltip />
           <Legend />
-          <Area type="monotone" dataKey="amt" fill="#8884d8" stroke="#8884d8" />
-          <Bar dataKey="pv" barSize={50} fill="#413ea0" />
-          <Line type="monotone" dataKey="uv" stroke="#ff7300" />
+          <Area type="monotone" dataKey="Pms" fill="#8884d8" stroke="#8884d8" />
+          <Bar dataKey="Ago" barSize={50} fill="#413ea0" />
+          <Line type="monotone" dataKey="Sales" stroke="#ff7300" />
         </ComposedChart>
       </ResponsiveContainer>
     );

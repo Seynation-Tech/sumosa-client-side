@@ -11,15 +11,11 @@ import { AuthContext } from "../AuthContext";
 
 let today = new Date();
 let date =
-  today.getDate() +
-  "/" +
-  ( today.getMonth() + 1 ) +
-  "/" +
-  today.getFullYear() 
+  today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
 let mydate =
   today.getDate() +
   "/" +
-  ( today.getMonth() + 1 ) +
+  (today.getMonth() + 1) +
   "/" +
   today.getFullYear() +
   " " +
@@ -31,107 +27,103 @@ let mydate =
 
 axios.defaults.withCredentials = true;
 
-export default function Expenses ()
-{
-  const [ usage, setUsage ] = useState( "" );
-  const [ amount, setAmount ] = useState( "" );
-  const [ expenses, setExpenses ] = useState( false );
-  const { url, days } = useContext( AuthContext );
-  const [ loading, setLoading ] = useState( false );
-  const [ tableData, setData ] = useState( [] );
+export default function Expenses() {
+  const [usage, setUsage] = useState("");
+  const [amount, setAmount] = useState("");
+  const [expenses, setExpenses] = useState(false);
+  const { url, days } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+  const [tableData, setData] = useState([]);
 
-  const [ weekly, setWeekly ] = useState( true );
-  const [ monthly, setMonthly ] = useState( false );
-  const [ yearly, setYearly ] = useState( false );
+  const [weekly, setWeekly] = useState(true);
+  const [monthly, setMonthly] = useState(false);
+  const [yearly, setYearly] = useState(false);
+  const [notification, setNotification] = useState("");
+  const [totalexpense, setTotalexpense] = useState("0");
+  const [notify, setNotify] = useState(false);
 
-  const [ totalexpense, setTotalexpense ] = useState( "0" );
+  useEffect(() => {
+    setLoading(true);
 
-  useEffect( () =>
-  {
-    setLoading( true );
-
-    // const interval = setInterval(() => {
-    const fetchData = async () =>
-    {
-      try
-      {
+    const interval = setInterval(() => {
+    const fetchData = async () => {
+      try {
         // console.log(pmsOne)
 
-        const resptwo = await axios.get( `${ url }/api/billing/allexpenses`, {
+        const resptwo = await axios.get(`${url}/api/billing/allexpenses`, {
           withCredentials: true,
-        } );
+        });
         // console.log(resptwo.data);
         let expens = 0;
-        for ( let i = 0; i < resptwo.data.length; i++ )
-        {
-          expens = Number( resptwo.data[ i ].amount ) + expens;
-          setTotalexpense( expens );
+        for (let i = 0; i < resptwo.data.length; i++) {
+          expens = Number(resptwo.data[i].amount) + expens;
+          setTotalexpense(expens);
           // console.log(expens)
         }
 
-        setData( resptwo.data );
+        setData(resptwo.data);
 
         //
-      } catch ( err )
-      {
-        setLoading( false );
-        console.log( err );
+      } catch (err) {
+        setLoading(false);
+        console.log(err);
         // setError( "Please refresh..." );
       }
     };
     fetchData();
-    // }, 5000);
-    // return () => clearInterval(interval);
-  }, [] );
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
-  const handleWeekly = () =>
-  {
-    setWeekly( true );
-    setYearly( false );
-    setMonthly( false );
+  const handleWeekly = () => {
+    setWeekly(true);
+    setYearly(false);
+    setMonthly(false);
   };
 
-  const handleMonthly = () =>
-  {
-    setWeekly( false );
-    setYearly( false );
-    setMonthly( true );
+  const handleMonthly = () => {
+    setWeekly(false);
+    setYearly(false);
+    setMonthly(true);
   };
 
-  const handleExpenses = () =>
-  {
-    setExpenses( true );
+  const handleExpenses = () => {
+    setExpenses(true);
+    setNotify(false);
   };
 
-  const cancelExpense = () =>
-  {
-    setExpenses( false );
+  const cancelExpense = () => {
+    setExpenses(false);
+    setNotify(false);
   };
 
-  const expenseHandler = async () =>
-  {
-    try
-    {const uid = days.toLowerCase() + ","+date;
-      let debtors = {
-        uid: uid,
-        usages: usage,
-        amount: amount,
-      };
+  const expenseHandler = async () => {
+    if (usage && amount) {
+      try {
+        const uid = days.toLowerCase() + "," + date;
+        let debtors = {
+          uid: uid,
+          usages: usage,
+          amount: amount,
+        };
 
-      // console.log(pmsOne)
+        // console.log(pmsOne)
 
-      const resone = await axios.post( `${ url }/api/billing/expenses`, debtors );
+        const resone = await axios.post(`${url}/api/billing/expenses`, debtors);
 
-      // console.log(res)
-      alert( resone.data );
-      // console.log(resone.data);
+        setNotify(true);
+        setNotification(resone.data);
+        setLoading(false);
 
-      //
-    } catch ( err )
-    {
-      setLoading( false );
-      console.log( err );
-      //   setError("Please refresh...");
+        //
+      } catch (err) {
+        setLoading(false);
+        console.log(err);
+        //   setError("Please refresh...");
+      }
+    } else {
+      setNotify(true);
+      setNotification("Fill all fields!");
     }
   };
 
@@ -150,10 +142,10 @@ export default function Expenses ()
         {weekly &&  <Weekly />}
         {monthly && <Monthly />} */}
 
-        { expenses && (
+        {expenses && (
           <div className="poppes">
             <div className="contentonesya">
-              <div className="canc" onClick={ cancelExpense }>
+              <div className="canc" onClick={cancelExpense}>
                 <img src="" alt="" />
               </div>
               <div className="ours">
@@ -163,26 +155,32 @@ export default function Expenses ()
                   </div>
                   <div className="forms">
                     <div className="input-two">
-                      {/* <i>icon</i> */ }
+                      {/* <i>icon</i> */}
                       <input
                         placeholder="Usage"
-                        value={ usage }
-                        onChange={ ( e ) => setUsage( e.target.value ) }
+                        value={usage}
+                        onChange={(e) => setUsage(e.target.value)}
                       />
                     </div>
 
                     <div className="input-two">
-                      {/* <i>icon</i> */ }
+                      {/* <i>icon</i> */}
                       <input
                         placeholder="Amount"
-                        value={ amount }
-                        onChange={ ( e ) => setAmount( e.target.value ) }
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
                       />
                     </div>
                   </div>
 
+                  {notify && (
+                  <div className="inputmy">
+                    <p>{notification}</p>
+                  </div>
+                )}
+
                   <div className="remember-opt">
-                    <button onClick={ expenseHandler } className="sign-btn">
+                    <button onClick={expenseHandler} className="sign-btn">
                       Submit
                     </button>
                   </div>
@@ -190,28 +188,25 @@ export default function Expenses ()
               </div>
             </div>
           </div>
-        ) }
+        )}
 
         <div className="paysa">
           <p>EXPENSES GENERAL REPORT</p>
 
-
           <div className="pesaa">
             <div className="mpesaa">
-              <p>TOTAL: Tsh { Number( totalexpense ).toLocaleString() }</p>
+              <p>TOTAL: Tsh {Number(totalexpense).toLocaleString()}</p>
             </div>
           </div>
-
-
         </div>
 
         <div className="lss">
-          {/* <div className="crc"></div> */ }
+          {/* <div className="crc"></div> */}
 
           <div className="lft">
             <div className="alld">
               <table className="home-table">
-              <thead>
+                <thead>
                   <tr>
                     <th>S/N</th>
                     <th>USAGES</th>
@@ -220,22 +215,21 @@ export default function Expenses ()
                     <th>DATE</th>
                   </tr>
                 </thead>
-                { tableData.map( ( val, key ) =>
-                {
+                {tableData.map((val, key) => {
                   return (
                     <tr>
-                      <td>{ key + 1 }</td>
-                      <td>{ val.usages }</td>
-                      <td>{ Number( val.amount  ).toLocaleString()}</td>
-                      <td>{ val.uid }</td>
+                      <td>{key + 1}</td>
+                      <td>{val.usages}</td>
+                      <td>{Number(val.amount).toLocaleString()}</td>
+                      <td>{val.uid}</td>
                     </tr>
                   );
-                } ) }
+                })}
               </table>
             </div>
           </div>
-          
-          <div className="addexpenses" onClick={ handleExpenses }>
+
+          <div className="addexpenses" onClick={handleExpenses}>
             <button>Add Expenses</button>
           </div>
           <div className="rght"></div>

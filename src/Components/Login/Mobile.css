@@ -1,0 +1,325 @@
+@media screen and (max-width: 640px) {
+  .welcome-pages {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(
+        rgba(11, 1, 67, 0.699),
+        rgba(3, 0, 37, 0.932)
+      ),
+      url("../../Images/sheli.jpg");
+  }
+
+  #sumos {
+    margin: 10px;
+    font-size: 0.9em;
+    /* font-weight: bold; */
+  }
+
+  .login-page {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    object-fit: cover;
+    flex-direction: column;
+  }
+  .body-contentcc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 12px;
+    position: relative;
+    width: 90%;
+    /* top: 124px; */
+  }
+
+  .spin {
+    margin: 12px;
+  }
+
+  .ouu {
+    width: 100%;
+    min-height: 25vh;
+    border: 1px solid rgba(255, 255, 255, 0.183);
+    /* margin-top: -43px; */
+    border-radius: 23px;
+    padding: 23px;
+    backdrop-filter: blur(3px);
+    animation: dscbox 2s ease-in-out;
+    background: linear-gradient(#05149c0b, #ffffff29);
+    /* position: absolute; */
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+  }
+
+  
+  .ouur {
+    width: 100%;
+    min-height: 25vh;
+    border: 1px solid rgba(255, 255, 255, 0.183);
+    /* margin-top: -73px; */
+    border-radius: 23px;
+    padding: 23px;
+    backdrop-filter: blur(5px);
+    animation: dscbox 2s ease-in-out;
+    background: linear-gradient(#05149c0b, #ffffff29);
+    /* position: absolute; */
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    /* right: 114px; */
+  }
+
+  .sdas {
+    width: 75px;
+    height: 75px;
+    background: rgba(255, 255, 255, 0.224);
+    border-radius: 50%;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 35px 35px -4px rgba(255, 255, 255, 0.364),
+      inset 15px 15px 30px rgba(7, 110, 255, 0.327),
+      inset 1px -1px 14px rgba(255, 255, 255, 0.723);
+  }
+
+  .sdas img {
+    width: 55px;
+    height: 60px;
+    border-radius: 50%;
+  }
+
+  .sdaconts {
+    min-height: 20vh;
+    backdrop-filter: blur(4px);
+    min-width: 100%;
+    background: rgba(1, 37, 114, 0.041);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.139);
+  }
+
+  .anaccount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 3px;
+  }
+
+  .anaccount p {
+    font-size: 0.8em;
+    /* font-weight: bold; */
+  }
+
+  .forms {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 90%;
+    margin-top: 23px;
+    margin-bottom: 23px;
+  }
+
+  .forms .input-one {
+    display: flex;
+    gap: 10px;
+    position: relative;
+  }
+
+  .forms .input-two {
+    display: flex;
+    gap: 10px;
+    position: relative;
+  }
+
+  .input-one input {
+    background: transparent;
+    outline: none;
+    border: 1px solid rgb(255, 255, 255);
+    height: 40px;
+    width: 100%;
+    border-radius: 5px;
+    padding-left: 12px;
+  }
+
+  .input-two input {
+    background: transparent;
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.743);
+    height: 40px;
+    width: 100%;
+    border-radius: 5px;
+    padding-left: 12px;
+  }
+
+  .input-one input::placeholder {
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .input-two input::placeholder {
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .remeber {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 9px;
+    margin-left: -142px;
+  }
+
+  .remeber input {
+    width: 14px;
+    height: 14px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+  }
+
+  input {
+    color: rgba(255, 255, 255, 0.871);
+  }
+
+  .input-one input:focus {
+    border: 3px solid rgba(31, 31, 255, 0.362);
+  }
+
+  .input-two input:focus {
+    border: 3px solid rgb(31, 31, 255);
+  }
+
+  .remeber p {
+    font-size: 0.8em;
+  }
+  .remember-opt {
+    width: 60%;
+    margin: 23px;
+  }
+  .remember-opt .sign-btn {
+    height: 40px;
+    width: 100%;
+    border-radius: 6px;
+    background: rgb(6, 22, 172);
+    outline: none;
+    color: rgb(255, 255, 255);
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 5px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+  }
+  input {
+    color: rgba(255, 255, 255, 0.871);
+  }
+
+  .remeber {
+    opacity: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 9px;
+    margin-left: -142px;
+  }
+
+  .remeber input {
+    width: 14px;
+    height: 14px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+  }
+
+  .input-one input:focus {
+    border: 3px solid rgba(31, 31, 255, 0.362);
+  }
+
+  .input-two input:focus {
+    border: 3px solid rgb(31, 31, 255);
+  }
+
+  button {
+    cursor: default;
+  }
+
+  .remeber p {
+    font-size: 0.8em;
+  }
+  .remember-opt {
+    width: 60%;
+    margin: 23px;
+  }
+
+  .remember-opt .sign-btn {
+    height: 40px;
+    width: 100%;
+    border-radius: 6px;
+    background: rgb(6, 22, 172);
+    outline: none;
+    color: rgb(255, 255, 255);
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 5px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .stat {
+    background-color: rgba(255, 255, 255, 0.081);
+    height: 40px;
+    width: 100%;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8em;
+  }
+
+  .stat p {
+    font-size: 0.7em;
+  }
+
+  .accounts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    /* position: absolute; */
+    bottom: -44px;
+    left: 27%;
+    margin: 12px;
+  }
+
+  .accounts p {
+    font-size: 0.7em;
+  }
+
+  #forgot {
+    color: rgba(253, 253, 255, 0.556);
+    cursor: default;
+  }
+}

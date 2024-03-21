@@ -5,6 +5,9 @@ import Monthly from "../Charts/Monthly";
 import Yearly from "../Charts/Yearly";
 import Sidebar from "../Sidebar/Sidebar";
 import "./Sales.css";
+import "./Mobile.css"
+import downlo from "../../Images/download.png";
+import drop from "../../Images/dropdo.png";
 
 import axios from "axios";
 import { AuthContext } from "../AuthContext";
@@ -12,11 +15,7 @@ import { useNavigate } from "react-router-dom";
 import DotLoader from "react-spinners/DotLoader";
 let today = new Date();
 let date =
-  today.getDate() +
-  "/" +
-  (today.getMonth() + 1) +
-  "/" +
-  today.getFullYear() 
+  today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
 
 axios.defaults.withCredentials = true;
 
@@ -25,7 +24,7 @@ export default function Sales() {
   const [dieselprice, setDieselprice] = useState("");
   const [petrolprice, setPetrolprice] = useState("");
 
-  const { url, diff,days, zrepos, totalEarnings, dieselAmount, petrolAmount } =
+  const { url, diff, days, zrepos, totalEarnings, dieselAmount, petrolAmount } =
     useContext(AuthContext);
   const [loadings, setLoading] = useState(false);
   const [reason, setReason] = useState("");
@@ -41,15 +40,19 @@ export default function Sales() {
 
   const [alldat, setAlls] = useState([]);
   const [click, setClick] = useState(false);
-  const [notify,setNotify] = useState(false);
+  const [notify, setNotify] = useState(false);
 
-  const [notification,setNotification] = useState('');
+  const [setdelete,setDeletename] = useState("");
+  const [sidebar, setSidebar] = useState(false);
+
+  const [notification, setNotification] = useState("");
+  const [deletes, setDelete] = useState(false);
 
   const navigate = useNavigate();
   let [color, setColor] = useState("#ffffff");
   useEffect(() => {
     setLoading(true);
-    // const interval = setInterval(() => {
+    const interval = setInterval(() => {
     const fetchData = async () => {
       try {
         const dets = await axios.get(`${url}/api/billing/debtors`, {
@@ -63,9 +66,24 @@ export default function Sales() {
       }
     };
     fetchData();
-    // }, 1500);
-    // return () => clearInterval(interval);
+    }, 1500);
+    return () => clearInterval(interval);
   }, []);
+
+  const popUpside = () => {
+
+    let flag = sidebar;
+    flag = !flag;
+    setSidebar(flag);
+  };
+
+  const deletePop = () => {
+    setDelete(true);
+  };
+
+  const cancPopdelete =()=>{
+    setDelete(false);
+  }
 
   const handleWeekly = () => {
     setWeekly(true);
@@ -97,96 +115,99 @@ export default function Sales() {
 
   const handleReasons = () => {
     setReasons(true);
-    setNotify(false)
+    setNotify(false);
   };
 
   const cancelReason = () => {
     setReasons(false);
-    setNotify(false)
+    setNotify(false);
   };
 
   const handleHandle = () => {
     setPrices(true);
-    setNotify(false)
+    setNotify(false);
   };
 
   const cancPrice = () => {
     setPrices(false);
-    setNotify(false)
+    setNotify(false);
   };
 
   const popClick = () => {
     setClick(true);
-    setNotify(false)
+    setNotify(false);
   };
 
   const handleLitres = () => {
     navigate("/sales/litres");
   };
 
-  const reasonsHandler = async () => {
+  const deleteHandler = async(e)=>{
+    try{
+//  alert(alldat.name)
+      const resone = await axios.delete(`${url}/api/billing/debtors/${alldat.name}`,{withCredentials: true});
+        setNotify(true);
+        setNotification(resone.data);
+        setLoading(false);
 
-    
-    if (reason && amountinwords){
+    }catch(err){
 
-      
-    try {
-      let inwords = {
-        uid: date,
-        differencereason: reason,
-        totalamount: amountinwords,
-      };
-      setLoading(true);
-
-      const resone = await axios.post(`${url}/api/billing/reason`, inwords);
-      setNotify(true)
-      setNotification(resone.data)
-      setLoading(false);
-      //
-    } catch (err) {
-      setLoading(false);
-      console.log(err);
-      // setError( "Please refresh..." );
     }
-  }else{
-    setNotify(true)
-    setNotification("Fill all the details!")
-  
   }
-  
+
+  const reasonsHandler = async () => {
+    if (reason && amountinwords) {
+      try {
+        let inwords = {
+          uid: date,
+          differencereason: reason,
+          totalamount: amountinwords,
+        };
+        setLoading(true);
+
+        const resone = await axios.post(`${url}/api/billing/reason`, inwords);
+        setNotify(true);
+        setNotification(resone.data);
+        setLoading(false);
+        //
+      } catch (err) {
+        setLoading(false);
+        console.log(err);
+        // setError( "Please refresh..." );
+      }
+    } else {
+      setNotify(true);
+      setNotification("Fill all the details!");
+    }
   };
 
   const priceHandler = async () => {
+    if (petrolprice && dieselprice) {
+      try {
+        const uid = days.toLowerCase() + "," + date;
+        let pricings = {
+          uid: uid,
+          petrol: petrolprice,
+          diesel: dieselprice,
+        };
 
-    if (petrolprice && dieselprice){
-      
+        setLoading(true);
+        const resone = await axios.post(
+          `${url}/api/billing/pricings`,
+          pricings
+        );
+        setNotify(true);
+        setNotification(resone.data);
+        setLoading(false);
 
-    try {
-      const uid = days.toLowerCase() + ","+date;
-      let pricings = {
-        uid: uid,
-        petrol: petrolprice,
-        diesel: dieselprice,
-      };
-
-      setLoading(true);
-      const resone = await axios.post(`${url}/api/billing/pricings`, pricings);
-      setNotify(true)
-      setNotification(resone.data)
-      setLoading(false);
-      
-
-
-      //
-    } catch (err) {
-      setLoading(false);
-   
+        //
+      } catch (err) {
+        setLoading(false);
+      }
+    } else {
+      setNotify(true);
+      setNotification("Fill all the details!");
     }
-  }else{
-    setNotify(true)
-    setNotification("Fill all the details!")
-
-  }
   };
 
   const debtorcrediLoad = async () => {
@@ -197,8 +218,6 @@ export default function Sales() {
       setData(respfour.data);
 
       // setLoading(false);
-  
-
     } catch (err) {
       setLoading(false);
       console.log(err);
@@ -223,15 +242,24 @@ export default function Sales() {
   };
   return (
     <div className="mysales">
-      <Sidebar />
+       {sidebar && <Sidebar />}
+
+       {/* <div className="upbove">
+        <div className="aboveall">
+          <img src={logos} alt="" />
+        </div>
+        <div className="aboves">
+          <p>SUMOSA</p>
+        </div>
+
+        <img className="dropdo" onClick={popUpside} src={drop} alt="" />
+      </div> */}
 
       <div className=""></div>
       <div className="sectiontwos">
         <div className="lineage"></div>
 
-        <div className="upsections">
-          FUEL SALES METRICS
-        </div>
+        <div className="upsections">FUEL SALES METRICS</div>
 
         <div className="lowsections">
           <div className="lefts">
@@ -312,7 +340,7 @@ export default function Sales() {
             <div className="ours">
               <div className="sdacont">
                 <div className="totalcash">
-                  <p >TOTAL CASH DIFFERENCES</p>
+                  <p>TOTAL CASH DIFFERENCES</p>
                 </div>
                 <div className="forms">
                   <div className="input-twos">
@@ -351,10 +379,12 @@ export default function Sales() {
                   />
                 </div>
 
-                {notify && <div className="inputmy">
+                {notify && (
+                  <div className="inputmy">
                     <p>{notification}</p>
-                </div>}
-{/* 
+                  </div>
+                )}
+                {/* 
                 {loadings ? (
               <div className="spin">
                 {" "}
@@ -382,6 +412,73 @@ export default function Sales() {
         </div>
       )}
 
+      
+{deletes && (
+        <div className="poppesao">
+          <div className="contentonesty">
+            {/* <div className="canc" onClick={cancPrice}>
+              <img src="" alt="" />
+            </div> */}
+            <div className="ours">
+              <div className="sdacont">
+                <div className="totalcash">
+                  <p>CLIENTS' DETAILS? </p>
+                </div>
+                <div className="forms">
+                  <div className="userinfo">
+                    <div className="infos">
+                      <p>NAME</p>
+                      <p>{alldat?.name}</p>
+                    </div>
+                    <div className="infos">
+                      <p>AMOUNT</p>
+                      <p>{alldat?.amount}</p>
+                    </div>
+                    <div className="infos">
+                      <p>DATE</p>
+                      <p>{alldat?.date}</p>
+                    </div>
+                  </div>
+
+                  <div className="areyou">
+                    <p>Are you sure to delete?</p>
+                  </div>
+
+                  <div className="inputo">
+                    <button onClick={cancPopdelete}>No</button>
+                    <button onClick={deleteHandler}>Yes</button>
+                  </div>
+                </div>
+
+                {notify && (
+                  <div className="inputmy">
+                    <p>{notification}</p>
+                  </div>
+                )}
+
+                {/* {loadings ? (
+              <div className="spin">
+                {" "}
+                <DotLoader
+                  color={color}
+                  loading={loadings}
+                  // cssOverride={override}
+                  size={25}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              </div>
+            ) : (
+              <></>
+            )} */}
+
+            
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {prices && (
         <div className="poppesao">
           <div className="contentonesty">
@@ -397,7 +494,7 @@ export default function Sales() {
                   <div className="input-two">
                     {/* <i>icon</i> */}
                     <input
-                    type="number"
+                      type="number"
                       placeholder="Petrol"
                       value={petrolprice}
                       onChange={(e) => setPetrolprice(e.target.value)}
@@ -407,7 +504,7 @@ export default function Sales() {
                   <div className="input-two">
                     {/* <i>icon</i> */}
                     <input
-                    type="number"
+                      type="number"
                       placeholder="Diesel "
                       value={dieselprice}
                       onChange={(e) => setDieselprice(e.target.value)}
@@ -415,9 +512,11 @@ export default function Sales() {
                   </div>
                 </div>
 
-                {notify && <div className="inputmy">
+                {notify && (
+                  <div className="inputmy">
                     <p>{notification}</p>
-                </div>}
+                  </div>
+                )}
 
                 {/* {loadings ? (
               <div className="spin">
@@ -467,7 +566,7 @@ export default function Sales() {
           <div className="download">
             <p>Report</p>
             <div className="down">
-              <img src="" alt="" />
+              <img src={downlo} alt="" />
             </div>
           </div>
         </div>
@@ -511,9 +610,9 @@ export default function Sales() {
                     <th>S/N</th>
                     <th>NAME</th>
                     <th>AMOUNT</th>
-
                     <th>MODE</th>
                     <th>DATE</th>
+                    <div className="delets"></div>
                   </tr>
                 </thead>
                 <tbody onClick={popClick}>
@@ -525,6 +624,9 @@ export default function Sales() {
                         <td>{Number(val.amount).toLocaleString()}</td>
                         <td>{val?.modeofpay || "-"}</td>
                         <td>{val.uid}</td>
+                        <div className="deletes" onClick={deletePop}>
+                          {/* <img src={delete} alt="" /> */}
+                        </div>
                       </tr>
                     );
                   })}
