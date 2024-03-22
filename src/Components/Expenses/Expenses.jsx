@@ -5,7 +5,7 @@ import bell from "../../Images/notify.png";
 import Real from "../Charts/Real";
 import Monthly from "../Charts/Expmonthly";
 import Weekly from "../Charts/Expweekly";
-
+import "./Mobile.css"
 import axios from "axios";
 import { AuthContext } from "../AuthContext";
 
@@ -42,35 +42,34 @@ export default function Expenses() {
   const [totalexpense, setTotalexpense] = useState("0");
   const [notify, setNotify] = useState(false);
 
+  const [sidebar, setSidebar] = useState(false);
+
   useEffect(() => {
     setLoading(true);
 
     const interval = setInterval(() => {
-    const fetchData = async () => {
-      try {
-        // console.log(pmsOne)
+      const fetchData = async () => {
+        try {
+          const resptwo = await axios.get(`${url}/api/billing/allexpenses`, {
+            withCredentials: true,
+          });
+          let expens = 0;
+          for (let i = 0; i < resptwo.data.length; i++) {
+            expens = Number(resptwo.data[i].amount) + expens;
+            setTotalexpense(expens);
+            // console.log(expens)
+          }
 
-        const resptwo = await axios.get(`${url}/api/billing/allexpenses`, {
-          withCredentials: true,
-        });
-        // console.log(resptwo.data);
-        let expens = 0;
-        for (let i = 0; i < resptwo.data.length; i++) {
-          expens = Number(resptwo.data[i].amount) + expens;
-          setTotalexpense(expens);
-          // console.log(expens)
+          setData(resptwo.data);
+
+          //
+        } catch (err) {
+          setLoading(false);
+          console.log(err);
+          // setError( "Please refresh..." );
         }
-
-        setData(resptwo.data);
-
-        //
-      } catch (err) {
-        setLoading(false);
-        console.log(err);
-        // setError( "Please refresh..." );
-      }
-    };
-    fetchData();
+      };
+      fetchData();
     }, 5000);
     return () => clearInterval(interval);
   }, []);
@@ -129,7 +128,7 @@ export default function Expenses() {
 
   return (
     <div className="mysals">
-      <Sidebar />
+      {sidebar && <Sidebar />}
 
       <div className=""></div>
 
@@ -166,6 +165,7 @@ export default function Expenses() {
                     <div className="input-two">
                       {/* <i>icon</i> */}
                       <input
+                      type="number"
                         placeholder="Amount"
                         value={amount}
                         onChange={(e) => setAmount(e.target.value)}
@@ -174,10 +174,10 @@ export default function Expenses() {
                   </div>
 
                   {notify && (
-                  <div className="inputmy">
-                    <p>{notification}</p>
-                  </div>
-                )}
+                    <div className="inputmya">
+                      <p>{notification}</p>
+                    </div>
+                  )}
 
                   <div className="remember-opt">
                     <button onClick={expenseHandler} className="sign-btn">
@@ -195,7 +195,7 @@ export default function Expenses() {
 
           <div className="pesaa">
             <div className="mpesaa">
-              <p>TOTAL: Tsh {Number(totalexpense).toLocaleString()}</p>
+              <p>Total: Tsh {Number(totalexpense).toLocaleString()}</p>
             </div>
           </div>
         </div>
@@ -221,7 +221,7 @@ export default function Expenses() {
                       <td>{key + 1}</td>
                       <td>{val.usages}</td>
                       <td>{Number(val.amount).toLocaleString()}</td>
-                      <td>{val.uid}</td>
+                      <td>{(val.uid).split(" ")[0]}</td>
                     </tr>
                   );
                 })}

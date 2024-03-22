@@ -52,9 +52,10 @@ export default function Sales() {
   let [color, setColor] = useState("#ffffff");
   useEffect(() => {
     setLoading(true);
-    const interval = setInterval(() => {
+    // const interval = setInterval(() => {
     const fetchData = async () => {
       try {
+        window.scrollTo(0,0)
         const dets = await axios.get(`${url}/api/billing/debtors`, {
           withCredentials: true,
         });
@@ -66,8 +67,8 @@ export default function Sales() {
       }
     };
     fetchData();
-    }, 1500);
-    return () => clearInterval(interval);
+    // }, 1500);
+    // return () => clearInterval(interval);
   }, []);
 
   const popUpside = () => {
@@ -124,6 +125,7 @@ export default function Sales() {
   };
 
   const handleHandle = () => {
+    window.scrollTo(0,0)
     setPrices(true);
     setNotify(false);
   };
@@ -290,7 +292,7 @@ export default function Sales() {
               </div>
             </div>
 
-            <div className="bbb">Last Month Summary</div>
+            <div className="bbbp"> SUMOSA FILLING STATION</div>
           </div>
           <div className="lefts">
             <div className="alls">
@@ -490,6 +492,7 @@ export default function Sales() {
                 <div className="totalcash">
                   <p>CHANGE MONTHLY PRICE </p>
                 </div>
+
                 <div className="forms">
                   <div className="input-two">
                     {/* <i>icon</i> */}
@@ -578,7 +581,7 @@ export default function Sales() {
         {yearly && <Yearly />}
 
         <div className="payo">
-          <p>PAYMENT</p>
+          <p id='pa'>PAYMENT</p>
 
           <div className="pesa">
             <div className="mpesa">
@@ -623,7 +626,7 @@ export default function Sales() {
                         <td>{val.name}</td>
                         <td>{Number(val.amount).toLocaleString()}</td>
                         <td>{val?.modeofpay || "-"}</td>
-                        <td>{val.uid}</td>
+                        <td>{(val.uid).split(" ")[0]}</td>
                         <div className="deletes" onClick={deletePop}>
                           {/* <img src={delete} alt="" /> */}
                         </div>

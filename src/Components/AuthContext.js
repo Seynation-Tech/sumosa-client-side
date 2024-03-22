@@ -28,7 +28,7 @@ export const AuthContextProvider = ({ children }) => {
   const url = "http://localhost:5001";
   // const url='https://dormdatabase-production.up.railway.app'
 
-  const [zrepos, setZreport] = useState("");
+  const [zrepos, setZreport] = useState("0");
 
   const [totalEarnings, setEarnings] = useState("0");
   const [dieselAmount, setdieselAmount] = useState("0");

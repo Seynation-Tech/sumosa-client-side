@@ -88,7 +88,7 @@ export default function Mids() {
         >
           <CartesianGrid stroke="#f5f5f5" />
           <XAxis dataKey="name" label={{ value: 'Days', position: 'insideBottomRight', offset: 0 }} scale="band" />
-          <YAxis label={{ value: 'Amount (10k)', angle: -90, position: 'insideLeft' }} />
+          <YAxis label={{  angle: -90, position: 'insideLeft' }} />
           <Tooltip />
           <Legend />
           <Area type="monotone" dataKey="amt" fill="#8884d8" stroke="#8884d8" />

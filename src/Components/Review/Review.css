@@ -1,0 +1,67 @@
+.report{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* background-color: blue; */
+}
+
+
+
+.line{
+    width: 100%;
+    height: 7px;
+    background-color:#2776ea;
+    border-radius: 12px;
+    margin-top: 12px;
+}
+.dots{
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgb(0, 221, 7);
+}
+.allo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* gap: 33px; */
+    margin-top: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+.allrep{
+    color: black;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+.moja{
+    font-size: 0.9em;
+    color: rgba(0, 0, 0, 0.556);
+}
+
+.mbili{
+    font-size: 1.0em;
+  /* margin-left: 27px; */
+}
+
+.dda{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.conts{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.prics{
+    width: 110px;
+    height: 70px;
+    border: 1px solid black;
+    border-radius: 12px;
+}

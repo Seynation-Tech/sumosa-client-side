@@ -48,7 +48,10 @@ export default function Sales() {
     lastdiesel,
     url,
   } = useContext(AuthContext);
-
+  const [notify, setNotify] = useState(false);
+  const [notification, setNotification] = useState("");
+  const [setdelete,setDeletename] = useState("");
+  const [sidebar, setSidebar] = useState(false);
   const [weekly, setWeekly] = useState(false);
   const [daily, setDaily] = useState(true);
   const [monthly, setMonthly] = useState(false);
@@ -163,8 +166,7 @@ export default function Sales() {
 
   return (
     <div className="mysales">
-      <Sidebar />
-
+     {sidebar && <Sidebar />}
       <div className=""></div>
       <div className="sectiontwos">
         <div className="lineage"></div>
@@ -248,21 +250,22 @@ export default function Sales() {
         </div>
       </div>
 
-      <div className="sectionthrees">
-        <div className="year">
-          <div className="dail" onClick={handlePmsone}>
+
+      <div className="sectionthreesa">
+        <div className="yeara">
+          <div className="daila" onClick={handlePmsone}>
             <p>PMS 01</p>
           </div>
 
-          <div className="dail" onClick={handlePmstwo}>
+          <div className="daila" onClick={handlePmstwo}>
             <p>PMS 02</p>
           </div>
 
-          <div className="dail" onClick={handleAgoone}>
+          <div className="daila" onClick={handleAgoone}>
             <p>AGO 01</p>
           </div>
 
-          <div className="dail" onClick={handleAgotwo}>
+          <div className="daila" onClick={handleAgotwo}>
             <p>AGO 02</p>
           </div>
 
@@ -304,7 +307,7 @@ export default function Sales() {
                   return (
                     <tr>
                       <td>{key + 1}</td>
-                      <td>{val.uid}</td>
+                      <td>{(val.uid).split(" ")[0]}</td>
                       <td>{Number(val.closingdigital).toLocaleString()}</td>
                       <td>{Number(val.openingdigital).toLocaleString()}</td>
                       <td>{Number(val.outputvalue).toLocaleString()}</td>
@@ -342,7 +345,7 @@ export default function Sales() {
                   return (
                     <tr>
                       <td>{key + 1}</td>
-                      <td>{val.uid}</td>
+                      <td>{(val.uid).split(" ")[0]}</td>
                       <td>{Number(val.closingsanalog).toLocaleString()}</td>
                       <td>{Number(val.openinganalog).toLocaleString()}</td>
                       <td>{Number(val.outputvalue).toLocaleString()}</td>

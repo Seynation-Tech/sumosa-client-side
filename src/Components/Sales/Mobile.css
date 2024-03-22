@@ -1,7 +1,7 @@
 @media screen and (max-width: 640px) {
   .sectiontwos {
     /* background-color: blue; */
-    min-height: 98vh;
+    min-height: 118vh;
     width: 96%;
     /* background: linear-gradient(rgb(0, 89, 255), rgba(2, 5, 175, 0.959)); */
     /* position: absolute; */
@@ -14,7 +14,9 @@
     flex-direction: column;
     gap: 6px;
     margin: 12px;
+    /* overflow-x: none; */
   }
+  
 
   .lowsections {
     width: 100%;
@@ -164,7 +166,7 @@
   .upsections {
     width: 100%;
     height: 59px;
-    background: rgba(4, 0, 255, 0.04);
+    background: rgba(1, 1, 1, 0.04);
     padding-left: 12px;
     padding-right: 12px;
     display: flex;
@@ -174,6 +176,22 @@
     color: rgba(0, 89, 255, 0.852);
     font-weight: bold;
     border: 4px solid rgba(0, 0, 255, 0.035);
+  }
+
+  .bbbp{
+    width: 100%;
+    height: 55px;
+    background: linear-gradient(to right, rgb(0, 123, 255), rgb(64, 0, 255));
+    border-radius: 5px;
+    margin-top: 23px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8em;
+    cursor: pointer;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
   
@@ -242,10 +260,11 @@
     justify-content: center;
     align-items: center;
     font-size: 0.7em;
+    /* position: absolute; */
   }
 
   .dails p {
-    cursor: pointer;
+    cursor: default;
   }
 
   .dail {
@@ -261,7 +280,25 @@
   }
 
   .dail p {
-    cursor: pointer;
+    cursor: default;
+  }
+
+  .daila {
+    background: linear-gradient(to right, rgb(0, 38, 255), rgb(162, 0, 255));
+    padding: 5px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+ 
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7em;
+  }
+
+  .daila p {
+    cursor: default;
   }
 
   .alls {
@@ -395,12 +432,36 @@
     position: relative;
   }
 
+  .sectionthreesa {
+    background-color: rgba(255, 255, 255, 0.449);
+    width: 100%;
+    height: 99vh;
+   
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-top: -130px;
+    border-radius: 12px;
+    position: relative;
+  }
+
   .year {
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin-top: 3px;
     height: 64px;
+    width: 100%;
+    background-color: rgba(0, 0, 255, 0.072);
+    border-radius: 5px;
+  }
+
+  
+  .yeara {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 3px;
+    height: 94px;
     width: 100%;
     background-color: rgba(0, 0, 255, 0.072);
     border-radius: 5px;
@@ -415,20 +476,22 @@
   .dails {
     background: linear-gradient(to right, rgb(0, 38, 255), rgb(1, 13, 142));
     padding: 5px;
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
     border-radius: 59% 41% 56% 44% / 37% 48% 52% 63% ;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 0.7em;
     position: absolute;
-    bottom: 110px;
+    top: -160px;
 
   }
 
   .dails p {
-    cursor: pointer;
+    cursor: default;
+    font-size: 1.6em;
+    font-weight: bold;
   }
 
   .download {
@@ -458,6 +521,412 @@
   .down img{
     width: 23px;
   }
+
+  
+
+  .payo {
+    width: 100%;
+    display: flex;
+    height: 65px;
+    justify-content: space-between;
+    padding-left: 12px;
+    padding-right: 12px;
+    align-items: center;
+    border-radius: 5px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    color: rgba(0, 89, 255, 0.705);
+    font-weight: bold;
+    font-size: 0.9em;
+    border: 4px solid rgba(0, 0, 255, 0.035);
+    background: rgba(21, 17, 255, 0.042);
+  }
+
+  .pesa {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    right: -7px;
+  }
+
+  .mpesa {
+    width: 100px;
+    height: 34px;
+    background: #2755ea;
+    /* background-color: rgba(17, 9, 255, 0.997);; */
+    font-size: 0.7em;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    margin-left: 12px;
+    cursor: default;
+  }
+
+  #pa{
+    /* position: absolute;
+    opacity: 0; */
+    background: rgba(0, 0, 255, 0.136);
+    padding: 8.3px;
+    border-radius: 4px;
+    border: 2px solid rgba(205, 197, 197, 0.159);
+    color: rgba(0, 115, 255, 0.538);
+  }
+
+  .ls {
+    background: linear-gradient(to right, rgb(33, 25, 255), rgb(0, 74, 247));
+    height: 34vh;
+    /* background: #2776ea; */
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    display: flex;
+    gap: 5px;
+    padding: 7px;
+    overflow: scroll;
+    flex-direction: column;
+  }
+
+  .lft {
+    width: 100%;
+    min-height: 12vh;
+    backdrop-filter: blur(3px);
+    position: relative;
+    z-index: 99;
+    /* padding: 12px; */
+    background: rgba(0, 0, 0, 0.072);
+    overflow: none;
+  }
+
+  
+  .alld {
+    width: 100%;
+    min-height: 12vh;
+    /* background-color: rgba(222, 222, 222, 0.149); */
+    /* margin-top: 12px; */
+    /* border-radius: 5px;
+  padding-top: 5px; */
+  }
+
+  
+  .home-table {
+    border-collapse: collapse;
+    padding: 12px;
+    width: 100%;
+    height: auto;
+    /* margin: 3px; */
+  }
+  
+  thead tr {
+    text-align: center;
+    background-color: rgb(1, 1, 187);
+    color: rgb(237, 237, 237);
+    /* font-weight: bold; */
+    font-size: 0.7em;
+    position: relative;
+  }
+
+  tr,
+  th,
+  td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(5, 255, 226, 0.252);
+    text-align: start;
+    font-size: 0.8em;
+    cursor: default;
+    position: relative;
+  }
+
+  tbody tr:nth-of-type(even) {
+    background-color: rgba(255, 255, 255, 0.06);
+  }
+
+  tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.127);
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  tbody tr:last-of-type {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.157);
+  }
+
+  
+  .poppesao {
+    min-height: 43vh;
+    width: 100%;
+    background: rgba(0, 194, 253, 0.084);
+    position: absolute;
+    top: 11%;
+    border-radius: 9px;
+    backdrop-filter: blur(4px);
+    z-index: 898;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  
+  .contentonesty {
+    background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 100%;
+    min-height: 57vh;
+    margin-top: -100px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    z-index: 10000;
+    margin-right: -19px;
+  }
+
+  .cancs {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.09);
+    position: absolute;
+    /* top: -62px; */
+  }
+
+  
+  .ours {
+    /* background: rgba(6, 39, 201, 0.596); */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border-radius: 20px; */
+    min-height: 12vh;
+    margin-top: 83px;
+    
+  }
+
+  .ours {
+    color: white;
+  }
+
+  
+  .forms {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-top: 23px;
+    margin-bottom: 23px;
+  }
+
+  .forms .input-one {
+    display: flex;
+    gap: 10px;
+    position: relative;
+  }
+
+  .forms .input-two {
+    display: flex;
+    gap: 10px;
+    position: relative;
+  }
+  .inputmy {
+    width: 80%;
+    min-height: 45px;
+    background: rgba(255, 255, 255, 0.097);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    /* font-weight: bold; */
+    font-size: 0.7em;
+    margin-left: 16px;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.826);
+  }
+
+  .contentonestya {
+    background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 90%;
+    min-height: 53vh;
+    margin-top: -90px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: 13px;
+    position: relative;
+    z-index: 10000;
+    margin-right: -24px
+  }
+
+  .sdacont {
+    min-height: 10vh;
+    backdrop-filter: blur(4px);
+    /* min-width: 110px; */
+    /* background: rgba(1, 37, 114, 0.937); */
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 12px;
+    text-align: center;
+    /* border: 3px solid rgba(255, 255, 255, 0.243); */
+  }
+
+  .totalcash {
+  
+    background: rgba(255, 255, 255, 0.119);
+    width: 100%;
+    height: 45px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    font-size: 0.8em;
+  }
+
+  
+  .input-twos {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .input-twos p:nth-child(1) {
+    font-size: 0.8em;
+  }
+
+  .input-twos p:nth-child(2) {
+    font-size: 0.8em;
+  }
+
+  .input-twoos {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* margin: 12px; */
+    padding-left: 18px;
+    padding-right: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.46);
+    border-radius: 5px;
+    height: 45px;
+    width: 100%;
+  }
+
+  .input-twoos p:nth-child(1) {
+    font-size: 0.8em;
+  }
+
+  .input-twoos p:nth-child(2) {
+    font-size: 0.8em;
+  }
+
+  .input-twoo input {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 12px;
+    border: none;
+    padding-left: 18px;
+    padding-right: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.161);
+    /* border-radius: 5px; */
+    height: 45px;
+    padding-left: 12px;
+    background: transparent;
+    outline: none;
+    width: 130%;
+    position: relative;
+    left: -17%;
+  }
+
+  .input-twoo p:nth-child(1) {
+    font-size: 1.4em;
+  }
+
+  .input-twooo p:nth-child(2) {
+    font-size: 1.4em;
+  }
+
+  .input-twoo input::placeholder {
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.582);
+  }
+
+  .canc {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.09);
+    margin-top: 62px;
+    position: absolute;
+    z-index:898;
+    top:-10px;
+  }
+
+  .input-too input {
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 12px;
+    border: none;
+    padding-left: 18px;
+    padding-right: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.46);
+    /* border-radius: 5px; */
+    height: 45px;
+    padding-left: 12px;
+    background: transparent;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.067);
+    width: 130%;
+    position: relative;
+    left: -17%;
+  }
+
+  .input-too p:nth-child(1) {
+    font-size: 1.4em;
+  }
+
+  .input-tooo p:nth-child(2) {
+    font-size: 1.4em;
+  }
+
+  .input-too input::placeholder {
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.64);
+  }
+
+  .remember-opt {
+    width: 60%;
+    margin: 23px;
+  }
+  .remember-opt button {
+    height: 40px;
+    width: 100%;
+    border-radius: 6px;
+    background: rgb(6, 22, 172);
+    outline: none;
+    color: rgb(255, 255, 255);
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 5px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+  }
+
 
 
 }

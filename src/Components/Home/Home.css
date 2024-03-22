@@ -19,6 +19,11 @@
     background: linear-gradient(rgb(0, 89, 255), rgba(2, 5, 175, 0.959));
   }
 
+  .upbove{
+    position: absolute;
+    opacity: 0;;
+  }
+
   .uppersect {
     display: flex;
     justify-content: center;

@@ -91,7 +91,7 @@ export default class Example extends PureComponent {
 
   render() {
     return (
-      <ResponsiveContainer width="110%" height="40%">
+      <ResponsiveContainer width="110%" height="30%">
         <ComposedChart
           width={500}
           height={400}
@@ -100,12 +100,12 @@ export default class Example extends PureComponent {
             top: 20,
             right: 80,
             bottom: 20,
-            left: 20,
+            left: -20,
           }}
         >
           <CartesianGrid stroke="#f5f5f5" />
           <XAxis dataKey="name" label={{ value: 'Months', position: 'insideBottomRight', offset: 0 }} scale="band" />
-          <YAxis label={{ value: 'Amount (appr. 10k)', angle: -90, position: 'insideright' }} />
+          <YAxis label={{ angle: -90, position: 'insideright' }} />
           <Tooltip />
           <Legend />
           <Area type="monotone" dataKey="amt" fill="#8884d8" stroke="#8884d8" />

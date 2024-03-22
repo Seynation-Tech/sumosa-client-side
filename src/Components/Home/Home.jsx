@@ -32,7 +32,7 @@ let today = new Date();
 let date =
   today.getDate() +
   "/" +
-  (today.getMonth() + 1) +
+  ( today.getMonth() + 1 ) +
   "/" +
   today.getFullYear() +
   " " +
@@ -42,7 +42,7 @@ let date =
 let mydate =
   today.getDate() +
   "/" +
-  (today.getMonth() + 1) +
+  ( today.getMonth() + 1 ) +
   "/" +
   today.getFullYear() +
   " " +
@@ -54,7 +54,8 @@ let mydate =
 
 const amount = 3000;
 
-export default function Home() {
+export default function Home ()
+{
   const cookies = new Cookies();
   const {
     totalliters,
@@ -74,59 +75,66 @@ export default function Home() {
     dieselstock,
     petrolAmount,
     todaydate,
-  } = useContext(AuthContext);
+  } = useContext( AuthContext );
 
-  const [sidebar, setSidebar] = useState(false);
+  const [ sidebar, setSidebar ] = useState( false );
 
-  const [currentUsers, setCurrentUser] = useState(null);
+  const [ currentUsers, setCurrentUser ] = useState( null );
   const navigate = useNavigate();
-  const [sideup, setSide] = useState(false);
-  const [upper, setUpper] = useState(true);
+  const [ sideup, setSide ] = useState( false );
+  const [ upper, setUpper ] = useState( true );
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
+  useEffect( () =>
+  {
+    const fetchData = async () =>
+    {
+      try
+      {
         // console.log(todaydate)
         // console.log(mydate)
-      } catch (err) {
+      } catch ( err )
+      {
         // console.log(err)
       }
     };
     fetchData();
-  }, []);
+  }, [] );
 
-  const popUpside = () => {
-    setUpper(false);
+  const popUpside = () =>
+  {
+    window.scrollTo( 0, 0 );
+    setUpper( false );
     let flag = sidebar;
     flag = !flag;
-    setSidebar(flag);
+    setSidebar( flag );
   };
 
-  const cancelSide = () => {
-    setSidebar(false);
-    setUpper(true);
+  const cancelSide = () =>
+  {
+    setSidebar( false );
+    setUpper( true );
   };
 
   return (
     <div className="mainpage">
-      {sidebar && <Sidebar />}
-      {/* SECTION TWO THE CONTENT PAGE */}|
+      { sidebar && <Sidebar /> }
+      {/* SECTION TWO THE CONTENT PAGE */ }|
       <div className="upbove">
         <div className="aboveall">
-          <img src={logos} alt="" />
+          <img src={ logos } alt="" />
         </div>
         <div className="aboves">
           <p>SUMOSA</p>
         </div>
 
-        <img className="dropdo" onClick={popUpside} src={drop} alt="" />
+        <img className="dropdo" onClick={ popUpside } src={ drop } alt="" />
       </div>
       <div className="sectiontwo">
         <div className="lineage"></div>
         <div className="upsection">
           <div className="leftsect">
             <div className="leftimg">
-              <img src={overview} alt="" />
+              <img src={ overview } alt="" />
             </div>
 
             <div className="over">
@@ -142,17 +150,17 @@ export default function Home() {
           </div>
 
           <div className="leftsect">
-            {/* <img src="" alt="" /> */}
+            {/* <img src="" alt="" /> */ }
 
-            {/* <p id='thisw'>This week</p> */}
+            {/* <p id='thisw'>This week</p> */ }
             {/* <div className="leftimgs">
               <img src={message} alt="" />
             </div> */}
             <div className="leftimgs">
-              <img src={message} alt="" />
+              <img src={ message } alt="" />
             </div>
             <div className="leftimgs">
-              <img src={settings} alt="" />
+              <img src={ settings } alt="" />
             </div>
           </div>
         </div>
@@ -162,7 +170,7 @@ export default function Home() {
             <div className="left">
               <div className="head">
                 <div className="leftims">
-                  <img src={settings} alt="" />
+                  <img src={ settings } alt="" />
                 </div>
 
                 <div className="headword">
@@ -176,7 +184,7 @@ export default function Home() {
 
               <div className="head">
                 <div className="leftims">
-                  <img src={settings} alt="" />
+                  <img src={ settings } alt="" />
                 </div>
 
                 <div className="headword">
@@ -188,14 +196,14 @@ export default function Home() {
                 <Values />
               </div>
 
-              <div className="grap">{/* <p>Graphical data analysis</p> */}</div>
+              <div className="grap">{/* <p>Graphical data analysis</p> */ }</div>
             </div>
 
             <div className="right">
               <div className="lowersects">
-                {/* <div className="logimg"> */}
-                {/* <img src={ logout } alt="" /> */}
-                {/* </div> */}
+                {/* <div className="logimg"> */ }
+                {/* <img src={ logout } alt="" /> */ }
+                {/* </div> */ }
 
                 <div className="cc">
                   <p>General Data</p>
@@ -207,15 +215,15 @@ export default function Home() {
                 <div className="l">
                   <div className="petrol">
                     <div className="pimg">
-                      <img src={petrol} alt="" />
+                      <img src={ petrol } alt="" />
                     </div>
 
                     <div className="ss">
                       <p id="gs">Petrol</p>
 
                       <div className="pri">
-                        <p>Tsh {petrolprice}</p>
-                        {/* <img src={pend} alt="" /> */}
+                        <p>Tsh { petrolprice }</p>
+                        {/* <img src={pend} alt="" /> */ }
                       </div>
                     </div>
                   </div>
@@ -224,7 +232,7 @@ export default function Home() {
                 <div className="r">
                   <div className="ds"></div>
 
-                  {/* <div className="ds"></div> */}
+                  {/* <div className="ds"></div> */ }
                 </div>
               </div>
 
@@ -232,15 +240,15 @@ export default function Home() {
                 <div className="l">
                   <div className="petrol">
                     <div className="pimg">
-                      <img src={petrol} alt="" />
+                      <img src={ petrol } alt="" />
                     </div>
 
                     <div className="ss">
                       <p id="gs">Diesel</p>
 
                       <div className="pri">
-                        <p>Tsh {dieselprice}</p>
-                        {/* <img src={pend} alt="" /> */}
+                        <p>Tsh { dieselprice }</p>
+                        {/* <img src={pend} alt="" /> */ }
                       </div>
                     </div>
                   </div>
@@ -249,57 +257,57 @@ export default function Home() {
                 <div className="r">
                   <div className="ds"></div>
 
-                  {/* <div className="ds"></div> */}
+                  {/* <div className="ds"></div> */ }
                 </div>
               </div>
 
               <div className="midsects">
                 <div className="sectconts">
-                  {/* <img src={ home } alt="" /> */}
+                  {/* <img src={ home } alt="" /> */ }
                   <p>Metrics</p>
                 </div>
 
                 <div className="sectconty">
                   <div className="sst">
-                    <img src={report} alt="" />
+                    <img src={ report } alt="" />
                     <p>Total Litres</p>
                   </div>
 
                   <div className="amount">
-                    <p> {totalliters}</p>
+                    <p> { totalliters }</p>
                   </div>
                 </div>
 
                 <div className="sectconty">
                   <div className="sst">
-                    <img src={report} alt="" />
+                    <img src={ report } alt="" />
                     <p>Sales</p>
                   </div>
 
                   <div className="amount">
-                    <p>Tsh {totalEarnings}</p>
+                    <p>Tsh { totalEarnings }</p>
                   </div>
                 </div>
 
                 <div className="sectconty">
                   <div className="sst">
-                    <img src={report} alt="" />
+                    <img src={ report } alt="" />
                     <p>Expenses</p>
                   </div>
 
                   <div className="amount">
-                    <p>Tsh {allexpenses}</p>
+                    <p>Tsh { allexpenses }</p>
                   </div>
                 </div>
 
                 <div className="sectconty">
                   <div className="sst">
-                    <img src={report} alt="" />
+                    <img src={ report } alt="" />
                     <p>Debts</p>
                   </div>
 
                   <div className="amount">
-                    <p>Tsh {alldebts}</p>
+                    <p>Tsh { alldebts }</p>
                   </div>
                 </div>
               </div>
@@ -311,13 +319,13 @@ export default function Home() {
       </div>
       <div className="sectionthree">
         <div className="lowersecta">
-          {/* <Moment date={dateToFormat} /> */}
-          {/* <img src={clocs} alt="" /> */}
-          <p>{days}</p>
+          {/* <Moment date={dateToFormat} /> */ }
+          {/* <img src={clocs} alt="" /> */ }
+          <p>{ days }</p>
           <Clock
-            format={"HH:mm:ss"}
-            ticking={true}
-            timezone={"Africa/Nairobi"}
+            format={ "HH:mm:ss" }
+            ticking={ true }
+            timezone={ "Africa/Nairobi" }
           />
         </div>
         <div className="first">
@@ -343,22 +351,22 @@ export default function Home() {
             </div>
             <div className="totalamount">
               <div className="tot">
-                {/* <img src="" alt="" /> */}
-                {/* <p id="ids">Total Amount</p> */}
+                {/* <img src="" alt="" /> */ }
+                {/* <p id="ids">Total Amount</p> */ }
               </div>
 
-              <p>Instock: {petrolstock}</p>
+              <p>Instock: { petrolstock }</p>
               <p>
-                <span id="aval"> Dipstock: </span> {petroldisp}
+                <span id="aval"> Dipstock: </span> { petroldisp }
               </p>
             </div>
 
             <div className="remamount">
               <p>
-                Remain:{" "}
-                {Number(
-                  Number(petrolstock) - Number(petroldisp)
-                ).toLocaleString()}
+                Remain:{ " " }
+                { Number(
+                  Number( petrolstock ) - Number( petroldisp )
+                ).toLocaleString() }
               </p>
             </div>
           </div>
@@ -378,22 +386,22 @@ export default function Home() {
             </div>
             <div className="totalamount">
               <div className="tot">
-                {/* <img src="" alt="" /> */}
-                {/* <p id="ids">Total Amount</p> */}
+                {/* <img src="" alt="" /> */ }
+                {/* <p id="ids">Total Amount</p> */ }
               </div>
 
-              <p>Instock: {dieselstock}</p>
+              <p>Instock: { dieselstock }</p>
               <p>
-                <span id="aval"> Dipstock: </span> {dieseldips}
+                <span id="aval"> Dipstock: </span> { dieseldips }
               </p>
             </div>
 
             <div className="remamount">
               <p>
-                Remain:{" "}
-                {Number(
-                  Number(dieselstock) - Number(dieseldips)
-                ).toLocaleString()}
+                Remain:{ " " }
+                { Number(
+                  Number( dieselstock ) - Number( dieseldips )
+                ).toLocaleString() }
               </p>
             </div>
           </div>

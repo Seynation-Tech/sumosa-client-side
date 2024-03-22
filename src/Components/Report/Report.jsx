@@ -6,7 +6,7 @@ import Real from "../Charts/Real";
 import morearrow from "../../Images/icono.png";
 import login from "../../Images/login.png";
 import world from "../../Images/blue-world-globe.jpg";
-
+import "./Mobile.css"
 import connect from "../../Images/connect.png";
 import insta from "../../Images/instagra.png";
 import whatsp from "../../Images/whatsapp.png";
@@ -104,6 +104,7 @@ export default function Expenses() {
   const [twohs, setTwohs] = useState("");
   const [onehs, setOnehs] = useState("");
   const [fiftys, setFiftys] = useState("");
+  const [sidebar, setSidebar] = useState(false);
 
   const [credits, setCred] = useState(false);
   const [mode, setMode] = useState("");
@@ -459,7 +460,8 @@ export default function Expenses() {
 
   return (
     <div className="mysals">
-      <Sidebar />
+       {sidebar && <Sidebar />}
+
 
       <div className=""></div>
 
