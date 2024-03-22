@@ -31,6 +31,11 @@ export const AuthContextProvider = ({ children }) => {
 
   const [totalEarnings, setEarnings] = useState("0");
   const [dieselAmount, setdieselAmount] = useState("0");
+
+  const [dAmount,setDamount]  = useState("0")
+  const [pAmount,setpamount]  = useState("0")
+
+
   const [petrolAmount, setpetrolAmount] = useState("0");
   const [diff, setDifferences] = useState("0");
   const [dieselprice, setDieselprice] = useState("0");
@@ -61,6 +66,9 @@ export const AuthContextProvider = ({ children }) => {
   const [datas, setDatas] = useState([]);
   const [dats, setDts] = useState([]);
   const [alldats, setAllDats] = useState([]);
+
+  const [dlita,setDlitres] = useState("")
+  const [plita,setPlitres] = useState("")
 
   const [pmsoneamount,setPmsoneamount] = useState("0");
   const [pmstwoamount,setPmstwoamount] = useState("0");
@@ -151,6 +159,9 @@ export const AuthContextProvider = ({ children }) => {
             withCredentials: true,
           });
 
+          // console.log(rs.data)
+          // console.log(rst.data)
+
           setDatas(rs.data);
           setDts(rst.data);
           setAllDats(rst.data);
@@ -164,7 +175,7 @@ export const AuthContextProvider = ({ children }) => {
             Object.values(petrolstock.data).length - 1
           ];
 
-          // console.log(petrolstk)
+          // console.log(dieslstk)
           setDieselstock(dieslstk.physical);
           setDieseldips(dieslstk.dipstick);
 
@@ -216,14 +227,16 @@ export const AuthContextProvider = ({ children }) => {
           setPmstwoclosing(ptwo.closingdigital)
 
           setAgooneanalogopening(aone.openinganalog)
-          setAgooneanalogclosing(aone.closinganalog)
+          setAgooneanalogclosing(aone.closingsanalog)
           setAgotwoanalogopening(atwo.openinganalog)
-          setAgotwoanalogclosing(atwo.closinganalog)
+          setAgotwoanalogclosing(atwo.closingsanalog)
+
+          // console.log(pone)
 
           setPmsoneanalogopening(pone.openinganalog)
-          setPmsoneanalogclosing(pone.closinganalog)
+          setPmsoneanalogclosing(pone.closingsanalog)
           setPmstwoanalogopening(ptwo.openinganalog)
-          setPmstwoanalogclosing(ptwo.closinganalog)
+          setPmstwoanalogclosing(ptwo.closingsanalog)
 
           let pmone = Object.values(resptwo.data)[
             Object.values(resptwo.data).length - 2
@@ -275,6 +288,9 @@ export const AuthContextProvider = ({ children }) => {
           setAgoonelitres(Number(aone.outputvalue).toLocaleString());
           setAgotwolitres(Number(atwo.outputvalue).toLocaleString());
 
+          setDlitres(Number(toataldiesel))
+          setPlitres(Number(totalpetrol))
+
           setPetrollitres(totalpetrol.toLocaleString());
           setDiesellitres(toataldiesel.toLocaleString());
 
@@ -284,17 +300,21 @@ export const AuthContextProvider = ({ children }) => {
           const petrolamount = Number(pric.petrol);
 
           const pmsoneAmount =
-            Number(Number(pone.closingdigital) - Number(pone.openingdigital)) *
+            Number(Number(pone.openingdigital) - Number(pone.closingdigital)) *
             petrolamount;
           const pmstwoAmount =
-            Number(Number(ptwo.closingdigital) - Number(ptwo.openingdigital)) *
+            Number(Number(ptwo.openingdigital) - Number(ptwo.closingdigital)) *
             petrolamount;
 
           const agooneAmount =
-            Number(Number(aone.closingdigital) - Number(aone.openingdigital)) *
+            Number(Number(aone.openingdigital) - Number(aone.closingdigital)) *
             dieselamout;
+
+            console.log(agooneAmount)
+
+
           const agotwoAmount =
-            Number(Number(atwo.closingdigital) - Number(atwo.openingdigital)) *
+            Number(Number(atwo.openingdigital) - Number(atwo.closingdigital)) *
             dieselamout;
 
           const totalAmount = Number(
@@ -307,20 +327,23 @@ export const AuthContextProvider = ({ children }) => {
             Object.values(resps.data).length - 1
           ];
 
+
           const differences = Number(last_value.zreport) - Number(totalAmount);
 
+          // console.log
+
           const pmsoneAmountanalog =
-            Number(Number(pone.closingsanalog) - Number(pone.openinganalog)) *
+            Number(Number(pone.openinganalog) - Number(pone.closingsanalog)) *
             petrolamount;
           const pmstwoAmountanalog =
-            Number(Number(ptwo.closingsanalog) - Number(ptwo.openinganalog)) *
+            Number(Number(ptwo.openinganalog) - Number(ptwo.closingsanalog)) *
             petrolamount;
 
           const agooneAmountanalog =
-            Number(Number(ptwo.closingsanalog) - Number(ptwo.openinganalog)) *
+            Number(Number(ptwo.openinganalog) - Number(ptwo.closingsanalog)) *
             dieselamout;
           const agotwoAmountanalog =
-            Number(Number(atwo.closingsanalog) - Number(atwo.openinganalog)) *
+            Number(Number(atwo.openinganalog) - Number(atwo.closingsanalog)) *
             dieselamout;
 
           const totalanalogAmount = Number(
@@ -337,11 +360,15 @@ export const AuthContextProvider = ({ children }) => {
 
           setTotalanalogamout(totalanalogAmount.toLocaleString());
 
+          setDamount(Number(totalDiesel))
+          setpamount(Number(totalPetrol))
+
           setdieselAmount(Number(totalDiesel).toLocaleString());
           setpetrolAmount(Number(totalPetrol).toLocaleString());
           setEarnings(Number(totalAmount).toLocaleString());
           setZreport(Number(last_value.zreport).toLocaleString());
-          setDifferences(Number(differences).toLocaleString());
+          // console.log(diff)
+          setDifferences(Number(differences));
           setData(dets.data);
           // console.log(Number(pricings.diesel).toLocaleString())
           setDieselprice(Number(pricings.diesel).toLocaleString());
@@ -391,7 +418,7 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(currentUser));
+    localStorage.setItem("userdata", JSON.stringify(currentUser));
   }, [currentUser]);
 
   return (
@@ -421,13 +448,13 @@ export const AuthContextProvider = ({ children }) => {
         agooneanalogopening,agooneanalogclosing,
         agotwoanalogopening,
         datas,
-        dats,
+        dats,dAmount,pAmount,
         alldats,
         url,
         tokns,
         days,
         todaydate,
-        dieselprice,
+        dieselprice,plita,dlita,
         petrolprice,
         currentUser,
         allexpenses,

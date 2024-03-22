@@ -39,6 +39,9 @@ export default function Sign() {
   const [status, setStatus] = useState("");
   const navigate = useNavigate();
   const [notify,setNotfs] = useState(false);
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("userdata") || null)
+  );
 
 
   const registerUser = async () => {
@@ -56,7 +59,7 @@ export default function Sign() {
           name: name,
           username: idnumber,
           password: lastName,
-          role: role,
+          role: role.toLowerCase(),
           contacts: contacts,
           phaseshift: "default",
           image: "default",
@@ -82,6 +85,14 @@ export default function Sign() {
       setStatus("Fill all details!");
     }
   };
+
+  const updateData=()=>{
+      console.log(currentUser)
+  }
+
+  const addUser=()=>{
+
+  }
   return (
     <div className="welcome-pages">
       {/* body contents */}
@@ -130,7 +141,7 @@ export default function Sign() {
 
             <div className="remember-opt">
               <button className="sign-btn" onClick={registerUser}>
-                Sign in
+                Submit
               </button>
             </div>
 
@@ -138,13 +149,9 @@ export default function Sign() {
               <p>{status}</p>
             </div>}
           </div>
-          <div className="accounts">
-            <p className="acc">
-              Already have an account?
-              <Link to="/signin" style={{ textDecoration: "none" }}>
-                <span>Sign in</span>
-              </Link>
-            </p>
+          <div className="atts">
+            <button onClick={updateData}>UPDATE</button>
+            <button onClick={addUser}>ADD USER</button>
           </div>
         </div>
       </div>

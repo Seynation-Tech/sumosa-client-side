@@ -726,12 +726,20 @@ body {
   }
 
   .edits {
-    width: 30px;
-    height: 30px;
-    background: rgba(0, 0, 255, 0.165);
-    border-radius: 50%;
+    width: 30%;
+    height: 40px;
+    background: rgb(185, 1, 25);
+    border-radius: 5px;
     position: absolute;
-    left: 34px;
+    left: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .edits:active{
+    background: rgb(234, 79, 100);
   }
 
   .poppesao {

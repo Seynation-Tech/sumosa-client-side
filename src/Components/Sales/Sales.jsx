@@ -7,12 +7,10 @@ import Sidebar from "../Sidebar/Sidebar";
 import "./Sales.css";
 import "./Mobile.css"
 import downlo from "../../Images/download.png";
-import drop from "../../Images/dropdo.png";
 
 import axios from "axios";
 import { AuthContext } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
-import DotLoader from "react-spinners/DotLoader";
 let today = new Date();
 let date =
   today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
@@ -171,6 +169,7 @@ export default function Sales() {
         setNotify(true);
         setNotification(resone.data);
         setLoading(false);
+        setReasons(false);
         //
       } catch (err) {
         setLoading(false);
@@ -181,6 +180,8 @@ export default function Sales() {
       setNotify(true);
       setNotification("Fill all the details!");
     }
+    setReason("")
+    setAmountinwords("")
   };
 
   const priceHandler = async () => {
@@ -201,6 +202,8 @@ export default function Sales() {
         setNotify(true);
         setNotification(resone.data);
         setLoading(false);
+        setPrices(false);
+
 
         //
       } catch (err) {
@@ -308,7 +311,7 @@ export default function Sales() {
 
             <div className="bbb">
               <p>Sales Difference</p>
-              <p>{diff}/=</p>
+              <p>{Number(diff)<0?(-(Number(diff))).toLocaleString():Number(diff).toLocaleString()}/=</p>
             </div>
 
             <div className="stoc">
@@ -337,7 +340,8 @@ export default function Sales() {
         <div className="poppesao">
           <div className="contentonestya">
             <div className="canc" onClick={cancelReason}>
-              <img src="" alt="" />
+              {/* <img src="" alt="" /> */}
+              <p>x</p>
             </div>
             <div className="ours">
               <div className="sdacont">
@@ -360,7 +364,7 @@ export default function Sales() {
                   <div className="input-twoos">
                     {/* <i>icon</i> */}
                     <p>DIFFERENCE</p>
-                    <p>9087009</p>
+                    <p>{totalEarnings}</p>
                   </div>
                 </div>
                 <div className="input-twoo">
@@ -418,9 +422,10 @@ export default function Sales() {
 {deletes && (
         <div className="poppesao">
           <div className="contentonesty">
-            {/* <div className="canc" onClick={cancPrice}>
-              <img src="" alt="" />
-            </div> */}
+            <div className="canc" onClick={cancPrice}>
+              {/* <img src="" alt="" /> */}
+              <p>x</p>
+            </div>
             <div className="ours">
               <div className="sdacont">
                 <div className="totalcash">
@@ -485,7 +490,8 @@ export default function Sales() {
         <div className="poppesao">
           <div className="contentonesty">
             <div className="canc" onClick={cancPrice}>
-              <img src="" alt="" />
+              {/* <img src="" alt="" /> */}
+              <p>x</p>
             </div>
             <div className="ours">
               <div className="sdacont">

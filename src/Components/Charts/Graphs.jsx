@@ -73,6 +73,8 @@ export default function Mids() {
 
    const { url, datas } = useContext( AuthContext );
 
+   console.log(datas)
+
     return (
       <ResponsiveContainer width="110%" height="40%">
         <ComposedChart
@@ -87,13 +89,13 @@ export default function Mids() {
           }}
         >
           <CartesianGrid stroke="#f5f5f5" />
-          <XAxis dataKey="name" label={{ value: 'Days', position: 'insideBottomRight', offset: 0 }} scale="band" />
+          <XAxis dataKey="Diesel" label={{ value: 'Days', position: 'insideBottomRight', offset: 0 }} scale="band" />
           <YAxis label={{  angle: -90, position: 'insideLeft' }} />
           <Tooltip />
           <Legend />
-          <Area type="monotone" dataKey="amt" fill="#8884d8" stroke="#8884d8" />
-          <Bar dataKey="pv" barSize={50} fill="#413ea0" />
-          <Line type="monotone" dataKey="uv" stroke="#ff7300" />
+          <Area type="monotone" dataKey="Diesel" fill="#8884d8" stroke="#8884d8" />
+          <Bar dataKey="Diesel" barSize={50} fill="#413ea0" />
+          {/* <Line type="monotone" dataKey="uv" stroke="#ff7300" /> */}
         </ComposedChart>
       </ResponsiveContainer>
     );

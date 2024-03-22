@@ -2,26 +2,19 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Home.css";
 import "./Mobile.css";
 import Mids from "../Charts/Mids";
-import Real from "../Charts/Real";
 import Values from "../Charts/Values";
-import sales from "../../Images/sale.png";
 import petrol from "../../Images/sum.png";
-import can from "../../Images/canc.png";
 import report from "../../Images/repo.png";
 import drop from "../../Images/dropdo.png";
 import settings from "../../Images/setting.png";
 import message from "../../Images/chat.png";
-import logout from "../../Images/login.png";
 import overview from "../../Images/routine.png";
 import Sidebar from "../Sidebar/Sidebar";
 import Clock from "react-live-clock";
-import { Link, useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../AuthContext";
-import moment from "moment";
-import DotLoader from "react-spinners/DotLoader";
 import Cookies from "cookie-universal";
-import Moment from "react-moment";
 import logos from "../../Images/sumoo.png";
 
 axios.defaults.withCredentials = true;
@@ -187,6 +180,7 @@ export default function Home ()
 
   return (
     <div className="mainpage">
+      {sidebar && <Sidebar />}
       <Sidebar />
       {/* SECTION TWO THE CONTENT PAGE */ }|
       <div className="upbove">
@@ -234,8 +228,8 @@ export default function Home ()
                 {
                   return (
                     <div className="mymsg">
-                      <p>- { val.message }</p>
-                      <p>Time: { val.date }</p>
+                      <p>- { val?.message }</p>
+                      <p>Time: { val?.date }</p>
 
                       {/* <img src={can} alt="" onClick={(e)=>deleteMsg(val.uid)}/> */ }
 
@@ -250,9 +244,12 @@ export default function Home ()
             </div>
             }
 
-            { currentUser[ 0 ]?.role === "Director" ? <div className="leftimgs">
+            { currentUser[ 0 ]?.role === "director" ? <NavLink to="/signup">
+
+          
+             <div className="leftimgs">
               <img src={ settings } alt="" />
-            </div> : <></> }
+            </div>  </NavLink> : <></> }
             <div className="leftimgs" onClick={ startreading }>
               <img src={ message } alt="" />
               { nun ? <div className="otify"></div> : <div className="otif"></div> }
@@ -374,6 +371,30 @@ export default function Home ()
                   </div>
                 </div>
 
+               
+
+                <div className="sectconty">
+                  <div className="sst">
+                    <img src={ report } alt="" />
+                    <p>Petrol Sales</p>
+                  </div>
+
+                  <div className="amount">
+                    <p>Tsh { petrolAmount }</p>
+                  </div>
+                </div>
+
+                <div className="sectconty">
+                  <div className="sst">
+                    <img src={ report } alt="" />
+                    <p>Diesel Sales</p>
+                  </div>
+
+                  <div className="amount">
+                    <p>Tsh { dieselAmount }</p>
+                  </div>
+                </div>
+
                 <div className="sectconty">
                   <div className="sst">
                     <img src={ report } alt="" />
@@ -382,28 +403,6 @@ export default function Home ()
 
                   <div className="amount">
                     <p>Tsh { totalEarnings }</p>
-                  </div>
-                </div>
-
-                <div className="sectconty">
-                  <div className="sst">
-                    <img src={ report } alt="" />
-                    <p>Expenses</p>
-                  </div>
-
-                  <div className="amount">
-                    <p>Tsh { allexpenses }</p>
-                  </div>
-                </div>
-
-                <div className="sectconty">
-                  <div className="sst">
-                    <img src={ report } alt="" />
-                    <p>Debts</p>
-                  </div>
-
-                  <div className="amount">
-                    <p>Tsh { alldebts }</p>
                   </div>
                 </div>
               </div>

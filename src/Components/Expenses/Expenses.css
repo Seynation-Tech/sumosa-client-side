@@ -13,6 +13,13 @@
   border-radius: 12px;
 }
 
+.canc{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
 .addexpenses {
   display: flex;
   margin: 20px;
@@ -24,10 +31,11 @@
   width: 20%;
   height: 45px;
   position: absolute;
-  right: 33%;
+  right: 23%;
   cursor: pointer;
-  bottom: 13%;
-  right: 0;
+  top: 24px;
+  /* bottom: 13%; */
+  /* right: 0; */
 }
 
 .mysals{
@@ -54,15 +62,11 @@
   border-left: 3px solid rgba(47, 3, 222, 0.175);
 }
 
-.mysals {
-  width: 100%;
-  min-height: 111vh;
-  /* background-color: rgba(0, 0, 0, 0.052);; */
-}
+/*  */
 
 .lss {
   background: linear-gradient(to right, rgb(25, 36, 255), rgb(2, 30, 95));
-  height: 50vh;
+  height: 100vh;
   border-radius: 5px;
   display: flex;
   gap: 5px;

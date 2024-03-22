@@ -55,7 +55,7 @@ export default function Expenses() {
 
   const [notification, setNotification] = useState("");
   let [color, setColor] = useState("#ffffff");
-  const { url, days, petrolAmount, dieselAmount, petrollitres, diesellitres } =
+  const { url, days, petrolAmount, dieselAmount,dlita,plita, pAmount,dAmount,petrollitres, diesellitres } =
     useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -186,20 +186,26 @@ export default function Expenses() {
   };
 
   const confirm = async () => {
-    if (diesellitres && dieselAmount && petrolAmount && petrollitres) {
+    
+    if (isNaN(diesellitres) && isNaN(dieselAmount) && isNaN(petrolAmount) && isNaN(petrollitres)) {
       try {
+        // console.log(pAmount,plita)
+        // console.log(Math.floor(pAmount),plita)
         const dats = days.toLowerCase() + "," + date;
         let data = {
           uid: dats,
-          dieselamount: dieselAmount,
-          petrolamount: petrolAmount,
-          dieselvalue: diesellitres,
-          petrolvalue: petrollitres,
+          dieselamount: Math.floor(dAmount),
+          petrolamount: Math.floor(pAmount),
+          dieselvalue: dlita,
+          petrolvalue: plita,
         };
+
 
         setLoading(true);
 
         const response = await axios.post(`${url}/api/weeklydata`, data);
+
+  
 
         setNotify(true);
         setNotification(response.data);
@@ -207,7 +213,7 @@ export default function Expenses() {
       } catch (err) {}
     } else {
       setNotify(true);
-      setNotification("Fill all the details!");
+      setNotification(" Ensure all values data are filled!");
     }
   };
 
@@ -1061,8 +1067,9 @@ export default function Expenses() {
               </div>
 
               <div className="updateing">
-                <div className="edits" onClick={confirm}>
-                  <img src="" alt="" />
+                
+                <div className="edits" onClick={literHandler} >
+                  <p>SAVE VALUES</p>
                 </div>
 
                 {notify && (
@@ -1071,7 +1078,7 @@ export default function Expenses() {
                   </div>
                 )}
 
-                <button onClick={literHandler}>SUBMIT</button>
+                <button onClick={confirm} >SUBMIT FORM</button>
                 {/* <button onClick={confirm}>CONFIRM</button> */}
               </div>
             </div>

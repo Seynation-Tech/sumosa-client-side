@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import Sidebar from "../Sidebar/Sidebar";
 import "./Review.css";
+import "./Mobile.css"
 import send from "../../Images/sen.png";
 import Real from "../Charts/Real";
 import Monthly from "../Charts/Expmonthly";
@@ -84,6 +85,8 @@ export default function Review ()
     const [ reason, setReason ] = useState( "" )
     const [ messagesent, setMessagesent ] = useState( "" )
 
+    const [deni,setTotalDeni] = useState("")
+
     useEffect( () =>
     {
         setLoading( true );
@@ -142,6 +145,14 @@ export default function Review ()
                 const resptwo = await axios.get( `${ url }/api/billing/allexpenses`, {
                     withCredentials: true,
                 } );
+
+                let expens = 0;
+                for (let i = 0; i < dets.data.length; i++) {
+                  expens = Number(dets.data[i].amount) + expens;
+                  setTotalDeni(expens);
+                  // console.log(expens)
+                }
+      
 
                 setData( dets.data );
                 setDataa( resptwo.data );
@@ -326,7 +337,7 @@ export default function Review ()
                                 <p className="moja">Debts amount</p>
                             </div>
 
-                            <p className="mbili">Tsh { totalEarnings }</p>
+                            <p className="mbili">Tsh { deni.toLocaleString() }</p>
                         </div>
                     </div>
 
@@ -339,17 +350,17 @@ export default function Review ()
                             <p id="prc">PMS 01</p>
                             <div className="digi">
                                 <p>Opening</p>
-                                <p>{ pmsoneopening } L</p>
+                                <p>{ Number(pmsoneopening).toLocaleString() } L</p>
                             </div>
 
                             <div className="digi">
                                 <p>Closing</p>
-                                <p>{ pmsoneclosing } L</p>
+                                <p>{ Number(pmsoneclosing).toLocaleString() } L</p>
                             </div>
 
                             <div className="digi">
                                 <p>Output</p>
-                                <p>{ pmsonelitres } L</p>
+                                <p>{  Number(Number(pmsoneopening)-Number(pmsoneclosing)).toLocaleString() } L</p>
                             </div>
 
                         </div>
@@ -359,17 +370,17 @@ export default function Review ()
                             <p id="prc">PMS 02</p>
                             <div className="digi">
                                 <p>Opening</p>
-                                <p>{ pmstwoopening } L</p>
+                                <p>{ Number(pmstwoopening).toLocaleString() } L</p>
                             </div>
 
                             <div className="digi">
                                 <p>Closing</p>
-                                <p>{ pmstwoclosing } L</p>
+                                <p>{ Number(pmstwoclosing).toLocaleString() } L</p>
                             </div>
 
                             <div className="digi">
                                 <p>Output</p>
-                                <p>{ pmstwolitres } L</p>
+                                <p>{ Number(Number(pmstwoopening)-Number(pmstwoclosing)).toLocaleString()} L</p>
                             </div>
 
                         </div>
@@ -378,17 +389,17 @@ export default function Review ()
                             <p id="prc">AGO 01</p>
                             <div className="digi">
                                 <p>Opening</p>
-                                <p>{ agooneopening } L</p>
+                                <p>{ Number(agooneopening).toLocaleString() } L</p>
                             </div>
 
                             <div className="digi">
                                 <p>Closing</p>
-                                <p>{ agooneclosing } L</p>
+                                <p>{ Number(agooneclosing).toLocaleString() } L</p>
                             </div>
 
                             <div className="digi">
                                 <p>Output</p>
-                                <p>{ agoonelitres } L</p>
+                                <p>{ Number(Number(agooneopening)-Number(agooneclosing)).toLocaleString() } L</p>
                             </div>
 
                         </div>
@@ -397,17 +408,17 @@ export default function Review ()
                             <p id="prc">AGO 02</p>
                             <div className="digi">
                                 <p>Opening</p>
-                                <p>{ agooneopening } L</p>
+                                <p>{ Number(agooneopening).toLocaleString() } L</p>
                             </div>
 
                             <div className="digi">
                                 <p>Closing</p>
-                                <p>{ agooneclosing } L</p>
+                                <p>{ Number(agooneclosing).toLocaleString() } L</p>
                             </div>
 
                             <div className="digi">
                                 <p>Output</p>
-                                <p>{ agoonelitres } L</p>
+                                <p>{Number(Number(agooneopening)-Number(agooneclosing)).toLocaleString() } L</p>
                             </div>
 
                         </div>
@@ -427,17 +438,17 @@ export default function Review ()
                             <p id="prc">PMS 01</p>
                             <div className="digi">
                                 <p>Opening</p>
-                                <p>{ pmsoneanalogopening } L</p>
+                                <p>{ Number(pmsoneanalogopening).toLocaleString() } L</p>
                             </div>
 
                             <div className="digi">
                                 <p>Closing</p>
-                                <p>{ pmsoneanalogclosing } L</p>
+                                <p>{ Number(pmsoneanalogclosing).toLocaleString() } L</p>
                             </div>
 
                             <div className="digi">
                                 <p>Output</p>
-                                <p>{ Number(Number(pmsoneanalogclosing)-Number(pmsoneanalogopening)) } L</p>
+                                <p>{ Number(Number(pmsoneanalogopening)-Number(pmsoneanalogclosing)).toLocaleString() } L</p>
                             </div>
 
                         </div>
@@ -447,17 +458,17 @@ export default function Review ()
                             <p id="prc">PMS 02</p>
                             <div className="digi">
                                 <p>Opening</p>
-                                <p>{ pmstwoanalogopening } L</p>
+                                <p>{ Number(pmstwoanalogopening).toLocaleString() } L</p>
                             </div>
 
                             <div className="digi">
                                 <p>Closing</p>
-                                <p>{ pmstwoanalogclosing } L</p>
+                                <p>{ Number(pmstwoanalogclosing).toLocaleString() } L</p>
                             </div>
 
                             <div className="digi">
                                 <p>Output</p>
-                                <p>{ Number(Number(pmstwoanalogclosing)-Number(pmstwoanalogopening)) } L</p>
+                                <p>{ Number(Number(pmstwoanalogopening)-Number(pmstwoanalogclosing)).toLocaleString() } L</p>
                             </div>
 
                         </div>
@@ -466,17 +477,17 @@ export default function Review ()
                             <p id="prc">AGO 01</p>
                             <div className="digi">
                                 <p>Opening</p>
-                                <p>{ agooneanalogopening } L</p>
+                                <p>{ Number(agooneanalogopening).toLocaleString() } L</p>
                             </div>
 
                             <div className="digi">
                                 <p>Closing</p>
-                                <p>{ agooneanalogclosing } L</p>
+                                <p>{ Number(agooneanalogclosing).toLocaleString() } L</p>
                             </div>
 
                             <div className="digi">
                                 <p>Output</p>
-                                <p>{  Number(Number(agooneanalogclosing)-Number(agooneanalogopening))  } L</p>
+                                <p>{  Number(Number(agooneanalogopening)-Number(agooneanalogclosing)).toLocaleString()  } L</p>
                             </div>
 
                         </div>
@@ -485,17 +496,17 @@ export default function Review ()
                             <p id="prc">AGO 02</p>
                             <div className="digi">
                                 <p>Opening</p>
-                                <p>{ agotwoanalogopening } L</p>
+                                <p>{ Number(agotwoanalogopening).toLocaleString() } L</p>
                             </div>
 
                             <div className="digi">
                                 <p>Closing</p>
-                                <p>{ agotwoanalogclosing } L</p>
+                                <p>{ Number(agotwoanalogclosing).toLocaleString() } L</p>
                             </div>
 
                             <div className="digi">
                                 <p>Output</p>
-                                <p>{  Number(Number(agotwoanalogclosing)-Number(agotwoanalogopening))  } L</p>
+                                <p>{  Number(Number(agotwoanalogopening)-Number(agotwoanalogclosing)).toLocaleString()  } L</p>
                             </div>
 
                         </div>
@@ -507,22 +518,22 @@ export default function Review ()
                     
                         <div className="priccs">
                             <p>PMS 01</p>
-                            <p>{ pmsoneamount } /=</p>
+                            <p>{ Number(pmsoneamount).toLocaleString() } /=</p>
                         </div>
 
                         <div className="priccs">
                             <p>PMS 02</p>
-                            <p>{ pmstwoamount } /=</p>
+                            <p>{ Number(pmstwoamount).toLocaleString() } /=</p>
                         </div>
 
                         <div className="priccs">
                             <p>AGO 01</p>
-                            <p>{ agooneamount } /=</p>
+                            <p>{ Number(agooneamount).toLocaleString() } /=</p>
                         </div>
 
                         <div className="priccs">
                             <p>AG0 02</p>
-                            <p>{ agotwoamount } /=</p>
+                            <p>{ Number(agotwoamount).toLocaleString() } /=</p>
                         </div>
                     </div>
                 </div>
@@ -537,12 +548,12 @@ export default function Review ()
                         <p className="pps">DIESEL</p>
                         <div className="alldiesel">
                             <p>Pysical Stock</p>
-                            <p>{ dieselstock } L</p>
+                            <p>{ Number(dieselstock).toLocaleString() } L</p>
                         </div>
 
                         <div className="alldiesel">
                             <p>Dipstock Stock</p>
-                            <p>{ dieseldips } L</p>
+                            <p>{ Number(dieseldips).toLocaleString() } L</p>
                         </div>
                     </div>
                     <div className="petrols">
@@ -550,12 +561,12 @@ export default function Review ()
                             <p className="pps">PETROL</p>
                             <div className="alldiesel">
                                 <p>Pysical Stock</p>
-                                <p>{ petrolstock } L</p>
+                                <p>{ Number(petrolstock).toLocaleString() } L</p>
                             </div>
 
                             <div className="alldiesel">
                                 <p>Dipstock Stock</p>
-                                <p>{ petroldisp } L</p>
+                                <p>{ Number(petroldisp).toLocaleString() } L</p>
                             </div>
                         </div>
                     </div>

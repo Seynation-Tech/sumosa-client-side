@@ -9,10 +9,10 @@
 
 .sectionthres {
   background-color: rgba(255, 255, 255, 0.449);
-  width: 56%;
+  width: 76%;
   min-height: 259vh;
   position: absolute;
-  right: 12%;
+  right: 1%;
   padding: 23px;
   margin-top: 16px;
   border-radius: 12px;
@@ -32,7 +32,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: rgba(11, 0, 221, 0.1);
+  background-color: rgb(255, 0, 255);
 }
 .allo {
   display: flex;

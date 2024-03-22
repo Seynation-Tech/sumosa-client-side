@@ -49,17 +49,6 @@ a {
 }
 
 
-@keyframes dscbox {
-  0% {
-    transform: translate(-10px, 50px) scale(0.9) rotate(20deg);
-  }
-}
-
-@keyframes outtbox {
-  0% {
-    transform: translate(200px, 10px) scale(0.9) rotate(10deg);
-  }
-}
 
 @keyframes descriptbox {
   0% {

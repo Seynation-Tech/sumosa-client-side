@@ -66,7 +66,7 @@ export default function Login() {
           <p id="sumos">SUMOSA FILLING STATION</p>
           <div className="sdaconts">
             <div className="anaccount">
-              <p>Login Your Account</p>
+              <p>LOGIN</p>
             </div>
             <div className="forms">
               <div className="input-one">

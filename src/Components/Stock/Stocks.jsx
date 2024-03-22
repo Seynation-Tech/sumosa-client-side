@@ -307,7 +307,7 @@ export default function Sales() {
                   return (
                     <tr>
                       <td>{key + 1}</td>
-                      <td>{(val.uid).split(" ")[0]}</td>
+                      <td>{(val.uid).split(",")[1]}</td>
                       <td>{Number(val.closingdigital).toLocaleString()}</td>
                       <td>{Number(val.openingdigital).toLocaleString()}</td>
                       <td>{Number(val.outputvalue).toLocaleString()}</td>
@@ -345,7 +345,7 @@ export default function Sales() {
                   return (
                     <tr>
                       <td>{key + 1}</td>
-                      <td>{(val.uid).split(" ")[0]}</td>
+                      <td>{(val.uid).split(",")[1]}</td>
                       <td>{Number(val.closingsanalog).toLocaleString()}</td>
                       <td>{Number(val.openinganalog).toLocaleString()}</td>
                       <td>{Number(val.outputvalue).toLocaleString()}</td>

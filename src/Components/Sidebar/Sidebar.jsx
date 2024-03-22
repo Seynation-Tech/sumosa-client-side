@@ -23,6 +23,12 @@ export default function Sidebar() {
   const [currentUsers, setCurrentUser] = useState(null);
   const navigate = useNavigate();
 
+
+  const removeUser =()=>{
+    localStorage.clear();
+    navigate("/")
+  }
+
   return (
     // <div className='allsides'>
     <div className="sectionone">
@@ -39,7 +45,7 @@ export default function Sidebar() {
         </div>
         <div className="profcaption">
           <p>{currentUser[0]?.name || "User"}</p>
-          <p>{currentUser[0]?.role || "Admin"}</p>
+          <p>{String(currentUser[0]?.role).toLocaleLowerCase() || ""}</p>
         </div>
       </div>
 
@@ -71,7 +77,7 @@ export default function Sidebar() {
             <p>Daily Report</p>
           </div>
         </NavLink>
-        {currentUser[0]?.role === "Director" ? (
+        {currentUser[0]?.role === "director" ? (
           <NavLink to="/review">
             <div className="sectcont">
               <img src={stock} alt="" />
@@ -83,12 +89,15 @@ export default function Sidebar() {
         )}
       </div>
 
-      <NavLink className="lowersect" to="/">
-        <div className="logimg">
+      {/* <NavLink className="lowersect" to="/"> */}
+      <div className="lowersect"  onClick={removeUser}>
+         <div className="logimg">
           <img src={logout} alt="" />
         </div>
         <p>Log out</p>
-      </NavLink>
+      </div>
+       
+      {/* </NavLink> */}
 
       <div className="copyright">
         <p>copyright @2024</p>
