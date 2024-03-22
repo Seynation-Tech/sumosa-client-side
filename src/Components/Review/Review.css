@@ -1,67 +1,172 @@
-.report{
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    /* align-items: center; */
-    /* background-color: blue; */
+.report {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* background-color: blue; */
+  gap: 23px;
 }
 
+.line {
+  width: 100%;
+  height: 5px;
+  background-color: #247bff;
+  border-radius: 12px;
+  margin-top: 12px;
+}
+.dots {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(11, 0, 221, 0.1);
+}
+.allo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* gap: 33px; */
+  margin-top: 8px;
+  /* padding-left: 12px;
+    padding-right: 12px; */
+}
+.allrep {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  justify-content: flex-start;
+  align-items: center;
+}
+.moja {
+  font-size: 0.9em;
+  color: rgba(0, 0, 0, 0.556);
+}
 
-
-.line{
-    width: 100%;
-    height: 7px;
-    background-color:#2776ea;
-    border-radius: 12px;
-    margin-top: 12px;
-}
-.dots{
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: rgb(0, 221, 7);
-}
-.allo{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* gap: 33px; */
-    margin-top: 8px;
-    padding-left: 12px;
-    padding-right: 12px;
-}
-.allrep{
-    color: black;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-}
-.moja{
-    font-size: 0.9em;
-    color: rgba(0, 0, 0, 0.556);
-}
-
-.mbili{
-    font-size: 1.0em;
+.mbili {
+  font-size: 1em;
   /* margin-left: 27px; */
 }
 
-.dda{
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    justify-content: center;
+.dda {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
 }
 
-.conts{
+.conts {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 13px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(47, 0, 255, 0.046);
+}
+
+.prics {
+  width: 90%;
+  height: 120px;
+  border: 1px solid rgba(0, 0, 0, 0.127);
+  border-radius: 5px;
+  color: black;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.prics p:nth-child(1) {
+  font-weight: bold;
+}
+
+.prics p:nth-child(2) {
+}
+
+.contss {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  /* padding-bottom: 42px; */
+  /* background-color: rgb(0, 128, 255); */
+  /* border-bottom: 3px solid rgba(47, 0, 255, 0.046); */
+}
+
+.priccs {
+  width: 90%;
+  height: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.127);
+  border-radius: 3px;
+  color: rgb(0, 143, 238);
+  padding: 12px;
+  background-color: #00aeff09;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.priccs p:nth-child(1) {
+  /* font-weight: bold; */
+  font-size: 0.8em;
+}
+
+.priccs p:nth-child(2) {
+    font-size: 0.8em;
+}
+
+.differencereason{
+    color: black;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px;
+    margin-top: 27px;
+    border: 1px solid rgba(0, 0, 0, 0.075);
+    width: 100%;
+    border-radius: 5px;
+height: 45px;
+padding: 12px;
+    ;
+}
+
+.differencereason p:nth-child(1){
+    font-size: 0.8em;
+    color: rgba(0, 0, 0, 0.622);
+}
+
+.differencereason p:nth-child(2){
+    font-size: 0.8em;
+    color: rgba(0, 0, 0, 0.622);
+}
+
+.debtorslist{
+    margin-top: 23px;
+}
+
+.stocks{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 23px;
+    /* background-color: blue; */
 }
 
-.prics{
-    width: 110px;
-    height: 70px;
-    border: 1px solid black;
-    border-radius: 12px;
+.diesels{
+    width: 350px;
+height: 85px;
+border: 1px solid rgba(0, 0, 0, 0.123);
+border-radius: 3px;
+color: black;
+gap: 9px;
+padding: 12px;
+}
+
+
+.alldiesel{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

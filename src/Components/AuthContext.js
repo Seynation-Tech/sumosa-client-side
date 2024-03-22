@@ -63,6 +63,21 @@ export const AuthContextProvider = ({ children }) => {
   const [dats, setDts] = useState([]);
   const [alldats, setAllDats] = useState([]);
 
+  const [pmsoneamount,setPmsoneamount] = useState("0");
+  const [pmstwoamount,setPmstwoamount] = useState("0");
+  const [agooneamount,setagooneamount] = useState("0");
+  const [agotwoamount,setagotwoamount] = useState("0");
+
+  const [agooneopening,setAgooneopening] = useState("0");
+  const [agooneclosing,setAgooneclosing] = useState("0"); 
+  const [agotwoopening,setAgotwoopening] = useState("0"); 
+  const [agotwoclosing,setAgotwoclosing] = useState("0"); 
+
+  const [pmsoneopening,setPmsoneopening] = useState("0");
+  const [pmsoneclosing,setPmsoneclosing] =  useState("0"); 
+  const [pmstwoopening,setPmstwoopening] = useState("0");
+  const [pmstwoclosing,setPmstwoclosing] = useState("0");
+
   useEffect(() => {
     const interval = setInterval(() => {
       const fetchData = async () => {
@@ -134,6 +149,8 @@ export const AuthContextProvider = ({ children }) => {
           let dieslstk = Object.values(dieslstock.data)[
             Object.values(dieslstock.data).length - 1
           ];
+
+          console.log(dieslstk)
           let petrolstk = Object.values(petrolstock.data)[
             Object.values(petrolstock.data).length - 1
           ];
@@ -170,6 +187,18 @@ export const AuthContextProvider = ({ children }) => {
             Object.values(respthree.data).length - 1
           ];
 
+          // console.log(pone)
+
+          setAgooneopening(aone.openingdigital)
+          setAgooneclosing(aone.closingdigital)
+          setAgotwoopening(atwo.openingdigital)
+          setAgotwoclosing(atwo.closingdigital)
+
+          setPmsoneopening(pone.openingdigital)
+          setPmsoneclosing(pone.closingdigital) 
+          setPmstwoopening(ptwo.openingdigital)
+          setPmstwoclosing(ptwo.closingdigital)
+
           let pmone = Object.values(resptwo.data)[
             Object.values(resptwo.data).length - 2
           ];
@@ -182,6 +211,8 @@ export const AuthContextProvider = ({ children }) => {
           let agto = Object.values(respthree.data)[
             Object.values(respthree.data).length - 2
           ];
+
+         
 
           // console.log(pmone,pmto,agoe,agto)
 
@@ -273,6 +304,11 @@ export const AuthContextProvider = ({ children }) => {
               agotwoAmountanalog
           );
 
+          setPmsoneamount(pmsoneAmount)
+          setPmstwoamount(pmstwoAmount)
+          setagooneamount(agooneAmount)
+          setagotwoamount(agotwoAmount)
+
           setTotalanalogamout(totalanalogAmount.toLocaleString());
 
           setdieselAmount(Number(totalDiesel).toLocaleString());
@@ -352,6 +388,10 @@ export const AuthContextProvider = ({ children }) => {
         diesellitres,
         lastdiesel,
         lastpetrol,
+        agooneopening,agooneclosing,
+        agotwoopening,agotwoclosing,
+        pmsoneopening,pmsoneclosing,
+        pmstwoopening,pmstwoclosing,
         datas,
         dats,
         alldats,
@@ -367,6 +407,7 @@ export const AuthContextProvider = ({ children }) => {
         totalliters,
         alldebts,
         totalanalogamount,
+        pmsoneamount,pmstwoamount,agooneamount,agotwoamount,
         userlogin,
         userlogout,
       }}
