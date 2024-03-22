@@ -105,20 +105,26 @@ export default function Home ()
             withCredentials: true,
           } );
 
+          console.log(resp)
+
+          
+          let todaydate = Object.values(resp.data)[
+            Object.values(resp.data).length - 1
+          ];
+
+          let todaydates = Object.values(resptwo.data)[
+            Object.values(resptwo.data).length - 1
+          ];
+          // console.log(todaydates)
           if ( resp.data.length > 0 || resptwo.data.length > 0 )
           {
-            if(resptwo.data[0].reportstatus==="Accepted"){
+            if(todaydates.reportstatus==="Accepted"){
  setNun( true )
             }else{
               setNun( false )
             }
            
           }
-
-
-          let todaydates = Object.values(resptwo.data)[
-            Object.values(resptwo.data).length - 1
-          ];
           setMessageone( [todaydates] )
           setMessagetwo( resp.data )
 
@@ -178,7 +184,7 @@ export default function Home ()
 
   return (
     <div className="mainpage">
-      { sidebar && <Sidebar /> }
+     <Sidebar /> 
       {/* SECTION TWO THE CONTENT PAGE */ }|
       <div className="upbove">
         <div className="aboveall">

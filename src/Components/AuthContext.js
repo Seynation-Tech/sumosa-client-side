@@ -78,6 +78,16 @@ export const AuthContextProvider = ({ children }) => {
   const [pmstwoopening,setPmstwoopening] = useState("0");
   const [pmstwoclosing,setPmstwoclosing] = useState("0");
 
+  const [agooneanalogopening,setAgooneanalogopening] = useState("0");
+  const [agooneanalogclosing,setAgooneanalogclosing] = useState("0");
+  const [agotwoanalogopening,setAgotwoanalogopening] = useState("0"); 
+  const [agotwoanalogclosing,setAgotwoanalogclosing] = useState("0");
+
+  const [pmsoneanalogopening,setPmsoneanalogopening] = useState("0");
+  const [pmsoneanalogclosing,setPmsoneanalogclosing] = useState("0");
+  const [pmstwoanalogopening,setPmstwoanalogopening] = useState("0"); 
+  const[pmstwoanalogclosing, setPmstwoanalogclosing] = useState("0");
+
   useEffect(() => {
     const interval = setInterval(() => {
       const fetchData = async () => {
@@ -205,6 +215,16 @@ export const AuthContextProvider = ({ children }) => {
           setPmsoneclosing(pone.closingdigital) 
           setPmstwoopening(ptwo.openingdigital)
           setPmstwoclosing(ptwo.closingdigital)
+
+          setAgooneanalogopening(aone.openinganalog)
+          setAgooneanalogclosing(aone.closinganalog)
+          setAgotwoanalogopening(atwo.openinganalog)
+          setAgotwoanalogclosing(atwo.closinganalog)
+
+          setPmsoneanalogopening(pone.openinganalog)
+          setPmsoneanalogclosing(pone.closinganalog)
+          setPmstwoanalogopening(ptwo.openinganalog)
+          setPmstwoanalogclosing(ptwo.closinganalog)
 
           let pmone = Object.values(resptwo.data)[
             Object.values(resptwo.data).length - 2
@@ -397,6 +417,8 @@ export const AuthContextProvider = ({ children }) => {
         agotwoopening,agotwoclosing,
         pmsoneopening,pmsoneclosing,
         pmstwoopening,pmstwoclosing,
+        agooneanalogopening,agooneanalogclosing,
+        agotwoanalogopening,
         datas,
         dats,
         alldats,
@@ -413,7 +435,10 @@ export const AuthContextProvider = ({ children }) => {
         alldebts,
         totalanalogamount,
         pmsoneamount,pmstwoamount,agooneamount,agotwoamount,
+        agotwoanalogclosing,pmsoneanalogopening,pmsoneanalogclosing,
+        pmstwoanalogopening,pmstwoanalogclosing,
         userlogin,
+
         userlogout,
       }}
     >

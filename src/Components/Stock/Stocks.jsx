@@ -166,7 +166,7 @@ export default function Sales() {
 
   return (
     <div className="mysales">
-     {sidebar && <Sidebar />}
+     <Sidebar />
       <div className=""></div>
       <div className="sectiontwos">
         <div className="lineage"></div>

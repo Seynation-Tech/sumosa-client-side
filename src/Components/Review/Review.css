@@ -7,6 +7,20 @@
   gap: 23px;
 }
 
+.sectionthres {
+  background-color: rgba(255, 255, 255, 0.449);
+  width: 56%;
+  min-height: 259vh;
+  position: absolute;
+  right: 12%;
+  padding: 23px;
+  margin-top: 16px;
+  border-radius: 12px;
+
+  border: 1px solid rgba(0, 0, 0, 0.085);
+}
+
+
 .line {
   width: 100%;
   height: 5px;
@@ -58,6 +72,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
   gap: 10px;
   margin-top: 13px;
   padding-bottom: 12px;
@@ -66,10 +81,10 @@
 
 .prics {
   width: 90%;
-  height: 120px;
+  height: 110px;
   border: 1px solid rgba(0, 0, 0, 0.127);
   border-radius: 5px;
-  color: rgba(0, 0, 0, 0.794);
+  color: rgba(0, 0, 0, 0.716);
   padding: 12px;
   display: flex;
   flex-direction: column;
@@ -81,6 +96,10 @@
 }
 
 .prics p:nth-child(2) {
+}
+
+#prc{
+  color: rgba(0, 86, 114, 0.786);
 }
 
 .contss {
@@ -318,4 +337,23 @@ color: rgba(0, 98, 255, 0.692);
     display: flex;
     align-items: center;
     justify-content: flex-end;
+}
+
+.digi{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9em;
+}
+
+.analogs{
+  width: 100%;
+  height: 45px;
+  display: flex;
+  background: rgba(0, 26, 255, 0.089);
+  border-radius: 3px;
+  justify-content: center;
+  align-items: center;
+  margin: 12px;
+  color: rgba(0, 140, 255, 0.786);
 }

@@ -42,6 +42,8 @@ export default function Expenses() {
   const [totalexpense, setTotalexpense] = useState("0");
   const [notify, setNotify] = useState(false);
 
+  const [sidbar,setSisdebar] = useState("desktop")
+
   const [sidebar, setSidebar] = useState(false);
 
   useEffect(() => {
@@ -128,7 +130,15 @@ export default function Expenses() {
 
   return (
     <div className="mysals">
-      {sidebar && <Sidebar />}
+       <Sidebar />
+
+       <div className={sidbar}>
+       {/* <Sidebar /> */}
+       </div>
+
+       <div className={sidbar}>
+       {/* <Sidebar /> */}
+       </div>
 
       <div className=""></div>
 

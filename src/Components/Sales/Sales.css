@@ -323,6 +323,28 @@
     /* font-family: monospace; */
   }
 
+  
+  .bbbp {
+    width: 100%;
+    height: 45px;
+    background: linear-gradient(to right, rgb(0, 123, 255), rgb(64, 0, 255));
+    border-radius: 5px;
+    margin-top: 23px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8em;
+    cursor: pointer;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .bbb:hover {
+    background: linear-gradient(to right, rgb(81, 0, 255), rgb(0, 38, 255));
+  }
+
+
   .bbb {
     width: 100%;
     height: 45px;

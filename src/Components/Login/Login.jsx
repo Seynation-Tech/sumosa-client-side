@@ -121,10 +121,10 @@ export default function Login() {
           </div>
           <div className="accounts">
             <p>
-              Don't have an account?
+              {/* Don't have an account?
               <Link to="/signup" style={{ textDecoration: "none" }}>
                 <span>Sign up</span>
-              </Link>
+              </Link> */}
             </p>
             <p id="forgot">Forgot Password?</p>
           </div>

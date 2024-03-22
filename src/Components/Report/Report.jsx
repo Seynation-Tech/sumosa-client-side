@@ -6,7 +6,7 @@ import Real from "../Charts/Real";
 import morearrow from "../../Images/icono.png";
 import login from "../../Images/login.png";
 import world from "../../Images/blue-world-globe.jpg";
-import "./Mobile.css"
+import "./Mobile.css";
 import connect from "../../Images/connect.png";
 import insta from "../../Images/instagra.png";
 import whatsp from "../../Images/whatsapp.png";
@@ -28,11 +28,7 @@ import Cookies from "cookie-universal";
 
 let today = new Date();
 let date =
-  today.getDate() +
-  "/" +
-  (today.getMonth() + 1) +
-  "/" +
-  today.getFullYear() 
+  today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
 let mydate =
   today.getDate() +
   "/" +
@@ -65,55 +61,55 @@ export default function Expenses() {
   const [error, setError] = useState(null);
   const [today, setToday] = useState(date);
 
-  const [pmsonedigOpening, setPmsonedigOpening] = useState("");
-  const [pmsonedigClosing, setPmsonedigClosing] = useState("");
+  const [pmsonedigOpening, setPmsonedigOpening] = useState("0");
+  const [pmsonedigClosing, setPmsonedigClosing] = useState("0");
 
-  const [pmsoneanalogOpening, setPmsoneanalogOpening] = useState("");
-  const [pmsoneanalogClosing, setPmsoneanalogClosing] = useState("");
+  const [pmsoneanalogOpening, setPmsoneanalogOpening] = useState("0");
+  const [pmsoneanalogClosing, setPmsoneanalogClosing] = useState("0");
 
-  const [pmstwodigOpening, setPmstwodigOpening] = useState("");
-  const [pmstwodigClosing, setPmstwodigClosing] = useState("");
+  const [pmstwodigOpening, setPmstwodigOpening] = useState("0");
+  const [pmstwodigClosing, setPmstwodigClosing] = useState("0");
 
-  const [pmstwoanalogOpening, setPmstwoanalogOpening] = useState("");
-  const [pmstwoanalogClosing, setPmstwoanalogClosing] = useState("");
+  const [pmstwoanalogOpening, setPmstwoanalogOpening] = useState("0");
+  const [pmstwoanalogClosing, setPmstwoanalogClosing] = useState("0");
 
-  const [agoonedigOpening, setAgoonedigOpening] = useState("");
-  const [agoonedigClosing, setAgoonedigClosing] = useState("");
+  const [agoonedigOpening, setAgoonedigOpening] = useState("0");
+  const [agoonedigClosing, setAgoonedigClosing] = useState("0");
 
-  const [agooneanalogOpening, setAgooneanalogOpening] = useState("");
-  const [agooneanalogClosing, setAgooneanalogClosing] = useState("");
+  const [agooneanalogOpening, setAgooneanalogOpening] = useState("0");
+  const [agooneanalogClosing, setAgooneanalogClosing] = useState("0");
 
-  const [agotwodigOpening, setAgotwodigOpening] = useState("");
-  const [agotwodigClosing, setAgotwodigClosing] = useState("");
+  const [agotwodigOpening, setAgotwodigOpening] = useState("0");
+  const [agotwodigClosing, setAgotwodigClosing] = useState("0");
 
-  const [agotwoanalogOpening, setAgotwoanalogOpening] = useState("");
-  const [agotwoanalogClosing, setAgotwoanalogClosing] = useState("");
+  const [agotwoanalogOpening, setAgotwoanalogOpening] = useState("0");
+  const [agotwoanalogClosing, setAgotwoanalogClosing] = useState("0");
 
-  const [mPesa, setMpesa] = useState("");
-  const [crdb, setCrdb] = useState("");
-  const [nmb, setNmb] = useState("");
+  const [mPesa, setMpesa] = useState("0");
+  const [crdb, setCrdb] = useState("0");
+  const [nmb, setNmb] = useState("0");
 
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
 
-  const [tenths, setTenths] = useState("");
-  const [fiveths, setFiveths] = useState("");
-  const [twoths, setTwoths] = useState("");
-  const [oneths, setOneths] = useState("");
-  const [fivehs, setFivehs] = useState("");
-  const [twohs, setTwohs] = useState("");
-  const [onehs, setOnehs] = useState("");
-  const [fiftys, setFiftys] = useState("");
+  const [tenths, setTenths] = useState("0");
+  const [fiveths, setFiveths] = useState("00");
+  const [twoths, setTwoths] = useState("0");
+  const [oneths, setOneths] = useState("0");
+  const [fivehs, setFivehs] = useState("0");
+  const [twohs, setTwohs] = useState("0");
+  const [onehs, setOnehs] = useState("0");
+  const [fiftys, setFiftys] = useState("0");
   const [sidebar, setSidebar] = useState(false);
 
   const [credits, setCred] = useState(false);
   const [mode, setMode] = useState("");
 
-  const [pmsphyscal, setPhysicalpms] = useState("");
-  const [pmsdispst, setDipstpms] = useState("");
+  const [pmsphyscal, setPhysicalpms] = useState("0");
+  const [pmsdispst, setDipstpms] = useState("0");
 
-  const [agophyscal, setPhysicalago] = useState("");
-  const [agodispst, setDipstago] = useState("");
+  const [agophyscal, setPhysicalago] = useState("0");
+  const [agodispst, setDipstago] = useState("0");
 
   const navigate = useNavigate();
 
@@ -129,7 +125,7 @@ export default function Expenses() {
       agooneanalogClosing
     ) {
       try {
-        const dats = days.toLowerCase() + ","+date;
+        const dats = days.toLowerCase() + "," + date;
         let pmsOne = {
           uid: dats,
           closingsanalog: pmsoneanalogClosing,
@@ -166,7 +162,6 @@ export default function Expenses() {
           outputvalue: Number(agotwodigClosing) - Number(agotwodigOpening),
         };
 
-    
         setLoading(true);
 
         const resone = await axios.post(`${url}/api/pumps/petrol`, pmsOne);
@@ -193,7 +188,7 @@ export default function Expenses() {
   const confirm = async () => {
     if (diesellitres && dieselAmount && petrolAmount && petrollitres) {
       try {
-        const dats = days.toLowerCase() + ","+date;
+        const dats = days.toLowerCase() + "," + date;
         let data = {
           uid: dats,
           dieselamount: dieselAmount,
@@ -219,7 +214,7 @@ export default function Expenses() {
   const pesaHandler = async () => {
     if (mPesa && nmb && crdb) {
       try {
-        const dats = days.toLowerCase() + ","+date;
+        const dats = days.toLowerCase() + "," + date;
         let virtualmoney = {
           uid: dats,
           mpesa: mPesa,
@@ -254,7 +249,7 @@ export default function Expenses() {
   const credHandler = async () => {
     if (name && amount && mode) {
       try {
-        const dats = days.toLowerCase() + ","+date;
+        const dats = days.toLowerCase() + "," + date;
         let debtors = {
           uid: dats,
           name: name,
@@ -285,7 +280,7 @@ export default function Expenses() {
   const debtsHandler = async () => {
     if (name && amount) {
       try {
-        const dats = days.toLowerCase() + ","+date;
+        const dats = days.toLowerCase() + "," + date;
         let debtors = {
           uid: dats,
           name: name,
@@ -313,90 +308,98 @@ export default function Expenses() {
   };
 
   const stocksHandler = async () => {
-    if (pmsphyscal && pmsdispst){
-      
-    try {
-      const dats = days.toLowerCase() + ","+date;
-      let pmsStock = {
-        uid: dats,
-        physical: pmsphyscal,
-        dipstick: pmsdispst,
-        difference: Number(pmsphyscal) - Number(pmsdispst),
-      };
+    if (pmsphyscal && pmsdispst) {
+      try {
+        const dats = days.toLowerCase() + "," + date;
+        let pmsStock = {
+          uid: dats,
+          physical: pmsphyscal,
+          dipstick: pmsdispst,
+          difference: Number(pmsphyscal) - Number(pmsdispst),
+        };
 
-      let agoStock = {
-        uid: dats,
-        physical: agophyscal,
-        dipstick: agodispst,
-        difference: Number(agophyscal) - Number(agodispst),
-      };
+        let agoStock = {
+          uid: dats,
+          physical: agophyscal,
+          dipstick: agodispst,
+          difference: Number(agophyscal) - Number(agodispst),
+        };
 
-      // console.log(pmsOne)
+        // console.log(pmsOne)
 
-      const resone = await axios.post(
-        `${url}/api/billing/pmsfuelstock`,
-        pmsStock
-      );
-      const reson = await axios.post(
-        `${url}/api/billing/agofuelstock`,
-        agoStock
-      );
+        const resone = await axios.post(
+          `${url}/api/billing/pmsfuelstock`,
+          pmsStock
+        );
+        const reson = await axios.post(
+          `${url}/api/billing/agofuelstock`,
+          agoStock
+        );
 
-      setNotify(true)
-      setNotification(resone.data)
-      setLoading(false);
+        setNotify(true);
+        setNotification(resone.data);
+        setLoading(false);
 
-      //
-    } catch (err) {
-      setLoading(false);
-      console.log(err);
-      setError("Please refresh...");
-    }
-  }
-    else{
-      setNotify(true)
-      setNotification("Fill all the details!")
+        //
+      } catch (err) {
+        setLoading(false);
+        console.log(err);
+        setError("Please refresh...");
+      }
+    } else {
+      setNotify(true);
+      setNotification("Fill all the details!");
     }
   };
 
   const moneycountHandler = async () => {
-    if (tenths&& fivehs&&fiveths&&onehs&&oneths&&twohs&&fiftys&&zrepot&&twoths){
-    try {
-      const dats = days.toLowerCase() + ","+date;
-      let collections = {
-        uid: dats,
-        tenth: tenths,
-        fiveth: fiveths,
-        twoth: twoths,
-        oneth: oneths,
-        fiveh: fivehs,
-        twoh: twohs,
-        oneh: onehs,
-        fifty: fiftys,
-        zreport: zrepot,
-      };
+    if (
+      tenths &&
+      fivehs &&
+      fiveths &&
+      onehs &&
+      oneths &&
+      twohs &&
+      fiftys &&
+      zrepot &&
+      twoths
+    ) {
+      try {
+        const dats = days.toLowerCase() + "," + date;
+        let collections = {
+          uid: dats,
+          tenth: tenths,
+          fiveth: fiveths,
+          twoth: twoths,
+          oneth: oneths,
+          fiveh: fivehs,
+          twoh: twohs,
+          oneh: onehs,
+          fifty: fiftys,
+          zreport: zrepot,
+        };
 
-      setLoading(true);
+        setLoading(true);
 
-      const resone = await axios.post(
-        `${url}/api/billing/collectmoney`,
-        collections
-      );
+        const resone = await axios.post(
+          `${url}/api/billing/collectmoney`,
+          collections
+        );
 
-      setNotify(true)
-      setNotification(resone.data)
-      setLoading(false);
+        setNotify(true);
+        setNotification(resone.data);
+        setLoading(false);
 
-      //
-    } catch (err) {
-      setLoading(false);
-      console.log(err);
-      setError("Please refresh...");
+        //
+      } catch (err) {
+        setLoading(false);
+        console.log(err);
+        setError("Please refresh...");
+      }
+    } else {
+      setNotify(true);
+      setNotification("Fill all the details!");
     }
-  }else{
-    setNotify(true)
-    setNotification("Fill all the details!")
-  }
   };
 
   const submitButton = async (e) => {
@@ -410,7 +413,7 @@ export default function Expenses() {
     setDebts(false);
     setPesa(true);
     setCred(false);
-    setNotify(false)
+    setNotify(false);
   };
 
   const handleDebt = () => {
@@ -419,7 +422,7 @@ export default function Expenses() {
     setStocks(false);
     setDebts(true);
     setCred(false);
-    setNotify(false)
+    setNotify(false);
   };
 
   const handleCred = () => {
@@ -428,14 +431,14 @@ export default function Expenses() {
     setStocks(false);
     setDebts(false);
     setCred(true);
-    setNotify(false)
+    setNotify(false);
   };
 
   const handleMoneycount = () => {
     setPesa(false);
     setStocks(false);
     setDebts(false);
-    setNotify(false)
+    setNotify(false);
     setMoneycount(true);
     setCred(false);
   };
@@ -443,7 +446,7 @@ export default function Expenses() {
   const handleStocks = () => {
     setPesa(false);
     setDebts(false);
-    setNotify(false)
+    setNotify(false);
     setMoneycount(false);
     setStocks(true);
     setCred(false);
@@ -453,15 +456,14 @@ export default function Expenses() {
     setPesa(false);
     setDebts(false);
     setMoneycount(false);
-    setNotify(false)
+    setNotify(false);
     setStocks(false);
     setCred(false);
   };
 
   return (
     <div className="mysals">
-       {sidebar && <Sidebar />}
-
+      <Sidebar />
 
       <div className=""></div>
 
@@ -541,10 +543,11 @@ export default function Expenses() {
                   </div>
                 </div>
 
-                
-                {notify && <div className="inputmy">
+                {notify && (
+                  <div className="inputmy">
                     <p>{notification}</p>
-                </div>}
+                  </div>
+                )}
 
                 <div className="bone">
                   <div className="thetwos">{/* <p></p> */}</div>
@@ -580,7 +583,7 @@ export default function Expenses() {
                     </div>
                     <div className="thetwos">
                       <input
-                       type="number"
+                        type="number"
                         placeholder="Dipstick stock"
                         value={pmsdispst}
                         onChange={(e) => setDipstpms(e.target.value)}
@@ -608,10 +611,11 @@ export default function Expenses() {
                       />
                     </div>
 
-                    
-                {notify && <div className="inputmy">
-                    <p>{notification}</p>
-                </div>}
+                    {notify && (
+                      <div className="inputmy">
+                        <p>{notification}</p>
+                      </div>
+                    )}
 
                     <div className="thetwo">
                       <button onClick={stocksHandler}>Submit</button>
@@ -643,7 +647,7 @@ export default function Expenses() {
                       <div className="input-two">
                         {/* <i>icon</i> */}
                         <input
-                        type="number"
+                          type="number"
                           placeholder="Amount"
                           value={amount}
                           onChange={(e) => setAmount(e.target.value)}
@@ -651,10 +655,11 @@ export default function Expenses() {
                       </div>
                     </div>
 
-                    
-                {notify && <div className="inputmy">
-                    <p>{notification}</p>
-                </div>}
+                    {notify && (
+                      <div className="inputmy">
+                        <p>{notification}</p>
+                      </div>
+                    )}
 
                     <div className="remember-opt">
                       <button onClick={debtsHandler} className="sign-btn">
@@ -688,7 +693,7 @@ export default function Expenses() {
                       <div className="input-two">
                         {/* <i>icon</i> */}
                         <input
-                        type="number"
+                          type="number"
                           placeholder="Amount"
                           value={amount}
                           onChange={(e) => setAmount(e.target.value)}
@@ -705,10 +710,11 @@ export default function Expenses() {
                       </div>
                     </div>
 
-                    
-                {notify && <div className="inputmy">
-                    <p>{notification}</p>
-                </div>}
+                    {notify && (
+                      <div className="inputmy">
+                        <p>{notification}</p>
+                      </div>
+                    )}
 
                     <div className="remember-opt">
                       <button onClick={credHandler} className="sign-btn">
@@ -734,7 +740,6 @@ export default function Expenses() {
                     </div> */}
                     <div className="thetwos">
                       <input
-                      
                         type="number"
                         placeholder="10,000"
                         value={tenths}
@@ -751,7 +756,7 @@ export default function Expenses() {
                     </div>
                     <div className="thetwos">
                       <input
-                      type="number"
+                        type="number"
                         placeholder="2,000"
                         value={twoths}
                         onChange={(e) => setTwoths(e.target.value)}
@@ -814,10 +819,12 @@ export default function Expenses() {
                         onChange={(e) => setZrepot(e.target.value)}
                       />
                     </div>
-                    
-                {notify && <div className="inputmy">
-                    <p>{notification}</p>
-                </div>}
+
+                    {notify && (
+                      <div className="inputmy">
+                        <p>{notification}</p>
+                      </div>
+                    )}
                     <div className="thetwo">
                       <button onClick={moneycountHandler}>Submit</button>
                     </div>
@@ -1058,10 +1065,11 @@ export default function Expenses() {
                   <img src="" alt="" />
                 </div>
 
-                
-                {notify && <div className="inputmy">
+                {notify && (
+                  <div className="inputmy">
                     <p>{notification}</p>
-                </div>}
+                  </div>
+                )}
 
                 <button onClick={literHandler}>SUBMIT</button>
                 {/* <button onClick={confirm}>CONFIRM</button> */}

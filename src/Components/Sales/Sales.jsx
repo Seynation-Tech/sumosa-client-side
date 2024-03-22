@@ -244,7 +244,7 @@ export default function Sales() {
   };
   return (
     <div className="mysales">
-       {sidebar && <Sidebar />}
+        <Sidebar />
 
        {/* <div className="upbove">
         <div className="aboveall">
