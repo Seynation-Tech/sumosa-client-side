@@ -69,7 +69,7 @@
   height: 120px;
   border: 1px solid rgba(0, 0, 0, 0.127);
   border-radius: 5px;
-  color: black;
+  color: rgba(0, 0, 0, 0.794);
   padding: 12px;
   display: flex;
   flex-direction: column;
@@ -156,10 +156,10 @@ padding: 12px;
 
 .diesels{
     width: 350px;
-height: 85px;
+height: 95px;
 border: 1px solid rgba(0, 0, 0, 0.123);
 border-radius: 3px;
-color: black;
+color: rgba(0, 0, 0, 0.838);
 gap: 9px;
 padding: 12px;
 }
@@ -169,4 +169,140 @@ padding: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.pps{
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+
+.debtorslist{
+    width: 100%;
+    min-height: 23vh;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.deters p{
+    color: rgba(0, 0, 0, 0.818);
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.dlist{
+    background-color: rgb(0, 76, 255);
+}
+
+.debtorslists{
+    width: 100%;
+    min-height: 23vh;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 23px;
+
+    margin-bottom: 34px;
+
+}
+
+.debtorslista{
+    width: 100%;
+    min-height: 3vh;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 23px;
+
+    margin-bottom: 14px;
+
+}
+
+
+.debtorslis{
+    background-color: rgba(0, 30, 255, 0.005);
+    height: 55px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 13px;
+    
+}
+
+.debtorslis button:nth-child(1){
+    width: 190px;
+    height: 45px;
+    border-radius: 4px;
+    background: blue;
+    border:none;
+    color: white;
+}
+
+.debtorslis button:nth-child(2){
+    width: 190px;
+    height: 45px;
+    border-radius: 4px;
+    background: rgb(255, 0, 0);
+    color: white;
+    border:none;
+}
+
+.debtoslis{
+ 
+    height: 55px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 13px;
+    
+}
+
+.mesags{
+    /* background-color: blue; */
+    height: 45px;
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.msgs{
+    background-color: rgba(0, 0, 255, 0.09);
+    height: 45px;
+    width: 270px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.msgs input{
+    color: rgba(0, 0, 0, 0.763);
+    width: 100%;
+    height: 45px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    padding-left: 12px;
+    padding-right: 40px;
+    background-color:rgba(0, 0, 255, 0.082);
+}
+
+.msgs input::placeholder{
+    color: rgba(0, 0, 0, 0.248);
+}
+
+.msgs img{
+    width: 23px;
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    cursor: pointer;
 }

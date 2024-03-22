@@ -150,10 +150,17 @@ export const AuthContextProvider = ({ children }) => {
             Object.values(dieslstock.data).length - 1
           ];
 
-          console.log(dieslstk)
+          
           let petrolstk = Object.values(petrolstock.data)[
             Object.values(petrolstock.data).length - 1
           ];
+
+          // console.log(petrolstk)
+          setDieselstock(dieslstk.physical);
+          setDieseldips(dieslstk.dipstick);
+
+          setPetrolStock(petrolstk.physical);
+          setPetroldisps(petrolstk.dipstick);
 
           let pric = Object.values(res.data)[
             Object.values(res.data).length - 1
@@ -323,11 +330,9 @@ export const AuthContextProvider = ({ children }) => {
           setDebts(Number(todaydates.amount).toLocaleString());
           setExpenses(Number(allexp.amount).toLocaleString());
 
-          setDieselstock(dieslstk.physical);
-          setDieseldips(dieslstk.dipstick);
+         
 
-          setPetrolStock(petrolstk.physical);
-          setPetroldisps(petrolstk.dipstick);
+         
         } catch (err) {
           // console.log(err)
         }

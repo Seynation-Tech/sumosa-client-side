@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import Sidebar from "../Sidebar/Sidebar";
 import "./Review.css";
-import bell from "../../Images/notify.png";
+import send from "../../Images/sen.png";
 import Real from "../Charts/Real";
 import Monthly from "../Charts/Expmonthly";
 import Weekly from "../Charts/Expweekly";
@@ -59,11 +59,16 @@ export default function Review ()
         agooneamount,
         agotwoamount,
         dieselAmount,
-        petrolAmount,
+        petrolAmount, petroldisp,
+        petrolstock,
+        dieseldips,
+        dieselstock
     } = useContext( AuthContext );
 
     const [ loading, setLoading ] = useState( false );
     const [ tableData, setData ] = useState( [] );
+    const [ tableDatas, setDatas ] = useState( [] );
+    const [ tableDataa, setDataa ] = useState( [] );
 
     const [ weekly, setWeekly ] = useState( true );
     const [ monthly, setMonthly ] = useState( false );
@@ -87,6 +92,12 @@ export default function Review ()
                     const resptwo = await axios.get( `${ url }/api/billing/inwords`, {
                         withCredentials: true,
                     } );
+
+                    const respfour = await axios.get( `${ url }/api/billing/creditors`, {
+                        withCredentials: true,
+                    } );
+                    setDatas( respfour.data );
+
                     // console.log(resptwo.data);
                     let words = Object.values( resptwo.data )[
                         Object.values( resptwo.data ).length - 1
@@ -106,6 +117,36 @@ export default function Review ()
             fetchData();
         }, 3500 );
         return () => clearInterval( interval );
+    }, [] );
+
+    useEffect( () =>
+    {
+        setLoading( true );
+        // const interval = setInterval(() => {
+        const fetchData = async () =>
+        {
+            try
+            {
+                window.scrollTo( 0, 0 )
+                const dets = await axios.get( `${ url }/api/billing/debtors`, {
+                    withCredentials: true,
+                } );
+
+                const resptwo = await axios.get( `${ url }/api/billing/allexpenses`, {
+                    withCredentials: true,
+                } );
+
+                setData( dets.data );
+                setDataa( resptwo.data );
+                // console.log(dets.data)
+            } catch ( err )
+            {
+                // console.log(err)
+            }
+        };
+        fetchData();
+        // }, 1500);
+        // return () => clearInterval(interval);
     }, [] );
 
     const handleWeekly = () =>
@@ -271,39 +312,158 @@ export default function Review ()
 
                 <div className="stocks">
                     <div className="diesels">
-                        <p>DIESEL</p>
+                        <p className="pps">DIESEL</p>
                         <div className="alldiesel">
                             <p>Pysical Stock</p>
-                            <p>{ 0 } L</p>
+                            <p>{ dieselstock } L</p>
                         </div>
 
                         <div className="alldiesel">
-                            <p>Pysical Stock</p>
-                            <p>{ 0 } L</p>
+                            <p>Dipstock Stock</p>
+                            <p>{ dieseldips } L</p>
                         </div>
                     </div>
                     <div className="petrols">
-                    <div className="diesels">
-                        <p>PETROL</p>
-                        <div className="alldiesel">
-                            <p>Pysical Stock</p>
-                            <p>{ 0 } L</p>
-                        </div>
+                        <div className="diesels">
+                            <p className="pps">PETROL</p>
+                            <div className="alldiesel">
+                                <p>Pysical Stock</p>
+                                <p>{ petrolstock } L</p>
+                            </div>
 
-                        <div className="alldiesel">
-                            <p>Pysical Stock</p>
-                            <p>{ 0 } L</p>
+                            <div className="alldiesel">
+                                <p>Dipstock Stock</p>
+                                <p>{ petroldisp } L</p>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
 
                 <div className="debtorslist">
 
+                    <div className="deters">
+                        <p>DEBTORS' LIST</p>
+                    </div>
+
+                    <div className="dlist">
+                        <table className="home-table">
+                            <thead>
+                                <tr>
+                                    <th>S/N</th>
+                                    <th>NAME</th>
+                                    <th>AMOUNT</th>
+                                    <th>MODE</th>
+                                    <th>DATE</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                { tableData.map( ( val, key ) =>
+                                {
+                                    return (
+                                        <tr>
+                                            <td>{ key + 1 }</td>
+                                            <td>{ val.name }</td>
+                                            <td>{ Number( val.amount ).toLocaleString() }</td>
+                                            <td>{ val?.modeofpay || "-" }</td>
+                                            <td>{ ( val.uid ).split( "," )[ 1 ] }</td>
+
+
+                                        </tr>
+                                    );
+                                } ) }
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
 
 
                 <div className="debtorslist">
+                    <div className="deters">
+                        <p>CREDITORS' LIST</p>
+                    </div>
+
+                    <div className="dlist">
+                        <table className="home-table">
+                            <thead>
+                                <tr>
+                                    <th>S/N</th>
+                                    <th>NAME</th>
+                                    <th>AMOUNT</th>
+                                    <th>MODE</th>
+                                    <th>DATE</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                { tableDatas.map( ( val, key ) =>
+                                {
+                                    return (
+                                        <tr>
+                                            <td>{ key + 1 }</td>
+                                            <td>{ val.name }</td>
+                                            <td>{ Number( val.amount ).toLocaleString() }</td>
+                                            <td>{ val?.modeofpay || "-" }</td>
+                                            <td>{ ( val.uid ).split( "," )[ 1 ] }</td>
+
+
+                                        </tr>
+                                    );
+                                } ) }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div className="debtorslists">
+                    <div className="deters">
+                        <p>EXPENSES' LIST</p>
+                    </div>
+
+                    <div className="dlist">
+                        <table className="home-table">
+                            <thead>
+                                <tr>
+                                    <th>S/N</th>
+                                    <th>USAGES</th>
+                                    <th>AMOUNT</th>
+
+                                    <th>DATE</th>
+                                </tr>
+                            </thead>
+                            { tableDataa.map( ( val, key ) =>
+                            {
+                                return (
+                                    <tr>
+                                        <td>{ key + 1 }</td>
+                                        <td>{ val.usages }</td>
+                                        <td>{ Number( val.amount ).toLocaleString() }</td>
+                                        <td>{ ( val.uid ).split( "," )[ 1 ] }</td>
+                                    </tr>
+                                );
+                            } ) }
+                        </table>
+                    </div>
+                </div>
+
+                <div className="debtorslista"></div>
+                <div className="mesags">
+                   
+                    <div className="debtorslis">
+                        <button>Approve</button>
+                        <button>Reject</button>
+                    </div>
+
+                    <div className="msgs">
+                        <input type="text" placeholder="Write message ..." />
+                        <img src={send} alt="" />
+                    </div>
+
+                </div>
+
+                <div className="debtoslis">
 
                 </div>
 
