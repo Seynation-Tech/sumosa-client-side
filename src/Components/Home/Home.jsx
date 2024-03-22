@@ -107,12 +107,19 @@ export default function Home ()
 
           if ( resp.data.length > 0 || resptwo.data.length > 0 )
           {
-            setNun( true )
+            if(resptwo.data[0].reportstatus==="Accepted"){
+ setNun( true )
+            }else{
+              setNun( false )
+            }
+           
           }
 
 
-
-          setMessageone( resptwo.data )
+          let todaydates = Object.values(resptwo.data)[
+            Object.values(resptwo.data).length - 1
+          ];
+          setMessageone( [todaydates] )
           setMessagetwo( resp.data )
 
           //
@@ -221,7 +228,7 @@ export default function Home ()
                       <p>{ val.message }</p>
                       <p>Time: { val.date }</p>
 
-                      <img src={can} alt="" onClick={(e)=>deleteMsg(val.uid)}/>
+                      {/* <img src={can} alt="" onClick={(e)=>deleteMsg(val.uid)}/> */}
 
                     </div>
                   )
@@ -239,7 +246,7 @@ export default function Home ()
             </div> : <></> }
             <div className="leftimgs" onClick={ startreading }>
               <img src={ message } alt="" />
-              { nun && <div className="otify"></div> }
+              { nun ? <div className="otify"></div>:<div className="otif"></div> }
             </div>
 
           </div>
