@@ -21,9 +21,10 @@ export default function Login() {
 
   const submitButton = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
+    // console.log("login")
 
-    if (currentUser[0])
+    if (name && password)
 
     try {
       let data = {
@@ -32,16 +33,8 @@ export default function Login() {
       };
       const resp = await userlogin(data);
       const counter = Object.keys(resp).length
-      console.log( counter);
 
-      if (counter === 11) {
-        setLoading(false);
-        navigate("/home");
-      } else {
-        setLoading(false);
-        setStatus("User not found!");
-        setError("User not found!");
-      }
+    
     } catch (err) {
       setLoading(false);
       setStatus("Failed to login!");

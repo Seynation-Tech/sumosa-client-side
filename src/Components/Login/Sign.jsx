@@ -46,15 +46,16 @@ export default function Sign() {
     if (name && role && contacts && residence && idnumber) {
       try {
         
-        const lastName = name.split(" ")[1];
+        const lastName = name.split(" ")[0];
         const uid = days.toLowerCase() + ","+date;
         // name	username	password	role	contacts	phaseshift	image	idnumber	residence	permit	
 
+        // console.log(uid,name,idnumber,lastName,role,contacts,residence)
         let data = {
           uid: uid,
           name: name,
           username: idnumber,
-          password: lastName.toLocaleLowerCase(),
+          password: lastName,
           role: role,
           contacts: contacts,
           phaseshift: "default",
@@ -73,6 +74,7 @@ export default function Sign() {
         setStatus(res.data);
       } catch (err) {
         setNotfs(true)
+        console.log(err)
         setStatus("Registration Failed!");
       }
     } else {

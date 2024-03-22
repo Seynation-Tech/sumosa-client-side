@@ -61,55 +61,55 @@ export default function Expenses() {
   const [error, setError] = useState(null);
   const [today, setToday] = useState(date);
 
-  const [pmsonedigOpening, setPmsonedigOpening] = useState("0");
-  const [pmsonedigClosing, setPmsonedigClosing] = useState("0");
+  const [pmsonedigOpening, setPmsonedigOpening] = useState("");
+  const [pmsonedigClosing, setPmsonedigClosing] = useState("");
 
-  const [pmsoneanalogOpening, setPmsoneanalogOpening] = useState("0");
-  const [pmsoneanalogClosing, setPmsoneanalogClosing] = useState("0");
+  const [pmsoneanalogOpening, setPmsoneanalogOpening] = useState("");
+  const [pmsoneanalogClosing, setPmsoneanalogClosing] = useState("");
 
-  const [pmstwodigOpening, setPmstwodigOpening] = useState("0");
-  const [pmstwodigClosing, setPmstwodigClosing] = useState("0");
+  const [pmstwodigOpening, setPmstwodigOpening] = useState("");
+  const [pmstwodigClosing, setPmstwodigClosing] = useState("");
 
-  const [pmstwoanalogOpening, setPmstwoanalogOpening] = useState("0");
-  const [pmstwoanalogClosing, setPmstwoanalogClosing] = useState("0");
+  const [pmstwoanalogOpening, setPmstwoanalogOpening] = useState("");
+  const [pmstwoanalogClosing, setPmstwoanalogClosing] = useState("");
 
-  const [agoonedigOpening, setAgoonedigOpening] = useState("0");
-  const [agoonedigClosing, setAgoonedigClosing] = useState("0");
+  const [agoonedigOpening, setAgoonedigOpening] = useState("");
+  const [agoonedigClosing, setAgoonedigClosing] = useState("");
 
-  const [agooneanalogOpening, setAgooneanalogOpening] = useState("0");
-  const [agooneanalogClosing, setAgooneanalogClosing] = useState("0");
+  const [agooneanalogOpening, setAgooneanalogOpening] = useState("");
+  const [agooneanalogClosing, setAgooneanalogClosing] = useState("");
 
-  const [agotwodigOpening, setAgotwodigOpening] = useState("0");
-  const [agotwodigClosing, setAgotwodigClosing] = useState("0");
+  const [agotwodigOpening, setAgotwodigOpening] = useState("");
+  const [agotwodigClosing, setAgotwodigClosing] = useState("");
 
-  const [agotwoanalogOpening, setAgotwoanalogOpening] = useState("0");
-  const [agotwoanalogClosing, setAgotwoanalogClosing] = useState("0");
+  const [agotwoanalogOpening, setAgotwoanalogOpening] = useState("");
+  const [agotwoanalogClosing, setAgotwoanalogClosing] = useState("");
 
-  const [mPesa, setMpesa] = useState("0");
-  const [crdb, setCrdb] = useState("0");
-  const [nmb, setNmb] = useState("0");
+  const [mPesa, setMpesa] = useState("");
+  const [crdb, setCrdb] = useState("");
+  const [nmb, setNmb] = useState("");
 
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
 
-  const [tenths, setTenths] = useState("0");
-  const [fiveths, setFiveths] = useState("00");
-  const [twoths, setTwoths] = useState("0");
-  const [oneths, setOneths] = useState("0");
-  const [fivehs, setFivehs] = useState("0");
-  const [twohs, setTwohs] = useState("0");
-  const [onehs, setOnehs] = useState("0");
-  const [fiftys, setFiftys] = useState("0");
+  const [tenths, setTenths] = useState("");
+  const [fiveths, setFiveths] = useState("");
+  const [twoths, setTwoths] = useState("");
+  const [oneths, setOneths] = useState("");
+  const [fivehs, setFivehs] = useState("");
+  const [twohs, setTwohs] = useState("");
+  const [onehs, setOnehs] = useState("");
+  const [fiftys, setFiftys] = useState("");
   const [sidebar, setSidebar] = useState(false);
 
   const [credits, setCred] = useState(false);
   const [mode, setMode] = useState("");
 
-  const [pmsphyscal, setPhysicalpms] = useState("0");
-  const [pmsdispst, setDipstpms] = useState("0");
+  const [pmsphyscal, setPhysicalpms] = useState("");
+  const [pmsdispst, setDipstpms] = useState("");
 
-  const [agophyscal, setPhysicalago] = useState("0");
-  const [agodispst, setDipstago] = useState("0");
+  const [agophyscal, setPhysicalago] = useState("");
+  const [agodispst, setDipstago] = useState("");
 
   const navigate = useNavigate();
 
@@ -128,7 +128,7 @@ export default function Expenses() {
         const dats = days.toLowerCase() + "," + date;
         let pmsOne = {
           uid: dats,
-          closingsanalog: pmsoneanalogClosing,
+          closingsanalog: pmsoneanalogClosing ,
           closingdigital: pmsonedigClosing,
           openinganalog: pmsoneanalogOpening,
           openingdigital: pmsonedigOpening,

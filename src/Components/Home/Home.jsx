@@ -101,32 +101,35 @@ export default function Home ()
             withCredentials: true,
           } );
 
-          const resp = await axios.get( `${ url }/api/billing/incoming`, {
+          const resp = await axios.get( `http://localhost:5001/api/billing/incoming`, {
             withCredentials: true,
           } );
 
-          console.log(resp)
 
-          
-          let todaydate = Object.values(resp.data)[
-            Object.values(resp.data).length - 1
+
+
+          let mesage = Object.values( resp.data )[
+            Object.values( resp.data ).length - 1
           ];
 
-          let todaydates = Object.values(resptwo.data)[
-            Object.values(resptwo.data).length - 1
+          let todaydates = Object.values( resptwo.data )[
+            Object.values( resptwo.data ).length - 1
           ];
           // console.log(todaydates)
           if ( resp.data.length > 0 || resptwo.data.length > 0 )
           {
-            if(todaydates.reportstatus==="Accepted"){
- setNun( true )
-            }else{
+            if ( todaydates.reportstatus === "Accepted" )
+            {
+              setNun( true )
+            } else
+            {
               setNun( false )
             }
-           
+
           }
-          setMessageone( [todaydates] )
-          setMessagetwo( resp.data )
+          // console.log(mesage)
+          setMessageone( [ mesage ] )
+     
 
           //
         } catch ( err )
@@ -141,20 +144,20 @@ export default function Home ()
     return () => clearInterval( interval );
   }, [] );
 
-  const cancelreading = async() =>
+  const cancelreading = async () =>
   {
     setRead( false )
-   
+
   }
 
-  const deleteMsg = async(e) =>
+  const deleteMsg = async ( e ) =>
   {
 
     try
     {
       //  alert(alldat.name)
-      const resone = await axios.delete( `${ url }/api/billing/incoming/${e}`, { withCredentials: true } );
-      
+      const resone = await axios.delete( `${ url }/api/billing/incoming/${ e }`, { withCredentials: true } );
+
 
     } catch ( err )
     {
@@ -184,7 +187,7 @@ export default function Home ()
 
   return (
     <div className="mainpage">
-     <Sidebar /> 
+      <Sidebar />
       {/* SECTION TWO THE CONTENT PAGE */ }|
       <div className="upbove">
         <div className="aboveall">
@@ -231,10 +234,10 @@ export default function Home ()
                 {
                   return (
                     <div className="mymsg">
-                      <p>{ val.message }</p>
+                      <p>- { val.message }</p>
                       <p>Time: { val.date }</p>
 
-                      {/* <img src={can} alt="" onClick={(e)=>deleteMsg(val.uid)}/> */}
+                      {/* <img src={can} alt="" onClick={(e)=>deleteMsg(val.uid)}/> */ }
 
                     </div>
                   )
@@ -252,7 +255,7 @@ export default function Home ()
             </div> : <></> }
             <div className="leftimgs" onClick={ startreading }>
               <img src={ message } alt="" />
-              { nun ? <div className="otify"></div>:<div className="otif"></div> }
+              { nun ? <div className="otify"></div> : <div className="otif"></div> }
             </div>
 
           </div>
