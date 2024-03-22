@@ -4,7 +4,7 @@ body {
 
 @media screen and (min-width: 540px) {
   .welcome-pages {
-    min-height: 110vh;
+    min-height: 160vh;
     display: flex;
     flex-direction: column;
     background-repeat: no-repeat;

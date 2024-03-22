@@ -39,9 +39,18 @@ export default function Sign() {
   const [status, setStatus] = useState("");
   const navigate = useNavigate();
   const [notify,setNotfs] = useState(false);
+  const [password, setPassword] = useState("")
+  const [username,setUsername] = useState("")
+  const [phaseshift,setPhaseshift] = useState("")
+  const [byster,setB] = useState("Register Account")
+  const [permit,setPermit] = useState("")	
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("userdata") || null)
   );
+
+  const [types,setTypes] = useState("userinfo")
+
+  
 
 
   const registerUser = async () => {
@@ -87,7 +96,50 @@ export default function Sign() {
   };
 
   const updateData=()=>{
-      console.log(currentUser)
+
+    setTypes("update")
+    setB("Update infos")
+   
+      setName(currentUser[0]?.name)
+      setContacts(Number(currentUser[0]?.contacts))
+      setPassword(currentUser[0]?.password) 
+      setRole(currentUser[0]?.role)
+      setResidence(currentUser[0]?.residence)
+      setPermit(currentUser[0]?.permit)
+      setIdnumber(Number(currentUser[0]?.idnumber))
+      setUsername(currentUser[0]?.username)
+    setPhaseshift(currentUser[0]?.phaseshift)
+    
+
+
+  }
+
+  const updateDatabase = async()=>{
+    const uid = days.toLowerCase() + "," + date;
+    let data = {
+                    
+      'uid': uid,
+      'name': name,
+      'username': username,
+      'password': password,
+      'role': role,
+      'contacts': contacts,
+      'phaseshift': phaseshift,
+      'image': '',
+      'idnumber': idnumber,
+      'residence': residence,
+      'permit': "default"
+    
+  }
+
+  
+  try{
+      const res = await axios.put(`${url}/api/auths/userinfo/${username}`,data,   {withCredentials: true})
+      setStatus(res.data)
+      
+  }catch(err){
+
+  }
   }
 
   const addUser=()=>{
@@ -122,15 +174,23 @@ export default function Sign() {
               </div>
               <div className="input-two">
                 {/* <i>icon</i> */}
-                <input type="number" placeholder="Contacts" Value={contacts}
+                <input type="number" placeholder="Contacts" value={contacts}
                   onChange={(e) => setContacts(e.target.value)}/>
               </div>
 
               <div className="input-two">
                 {/* <i>icon</i> */}
-                <input type="number" placeholder="Idnumber" alue={idnumber}
+                <input type="text" placeholder="Password" value={password}
                   onChange={(e) => setIdnumber(e.target.value)}/>
               </div>
+
+              <div className="input-two">
+                {/* <i>icon</i> */}
+                <input type="text" placeholder="Username" value={username}
+                  onChange={(e) => setUsername(e.target.value)}/>
+              </div>
+
+
 
               <div className="input-two">
                 {/* <i>icon</i> */}
@@ -140,9 +200,13 @@ export default function Sign() {
             </div>
 
             <div className="remember-opt">
-              <button className="sign-btn" onClick={registerUser}>
-                Submit
-              </button>
+              {types==="update"&&<button className="sign-btn" onClick={updateDatabase}>
+                {byster}
+              </button>}
+
+              {types==="userinfo"&&<button className="sign-btn" onClick={registerUser}>
+                {byster}
+              </button>}
             </div>
 
             {notify&& <div className="stat">
@@ -151,7 +215,7 @@ export default function Sign() {
           </div>
           <div className="atts">
             <button onClick={updateData}>UPDATE</button>
-            <button onClick={addUser}>ADD USER</button>
+            <button  onClick={addUser}>ADD USER</button>
           </div>
         </div>
       </div>
