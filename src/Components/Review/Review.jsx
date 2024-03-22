@@ -44,7 +44,7 @@ export default function Review ()
         agotwolitres,
         petrollitres,
         diesellitres,
-        lastpetrol,
+        lastpetrol,currentUser,
         lastdiesel,
         agooneopening,
         agooneclosing,
@@ -74,8 +74,11 @@ export default function Review ()
     const [ monthly, setMonthly ] = useState( false );
     const [ yearly, setYearly ] = useState( false );
 
+    const [mesg,setMessage] = useState( "" );
+
     const [ totalexpense, setTotalexpense ] = useState( "0" );
     const [ reason, setReason ] = useState( "" )
+    const [messagesent,setMessagesent] = useState("")
 
     useEffect( () =>
     {
@@ -173,23 +176,60 @@ export default function Review ()
         setExpenses( false );
     };
 
-    const expenseHandler = async () =>
-    {
+
+
+    const sendingsms = async()=>{
         try
         {
             const uid = days.toLowerCase() + "," + date;
-            let debtors = {
-                uid: uid,
-                usages: usage,
-                amount: amount,
+            let data = {
+                uid: currentUser[0]?.role,
+                message: mesg,
+                date: mydate
             };
 
             // console.log(pmsOne)
 
-            const resone = await axios.post( `${ url }/api/billing/expenses`, debtors );
+            console.log("message")
 
+            const resone = await axios.post( `${ url }/api/billing/incoming`, data );
+
+            setMessagesent(resone.data)
             // console.log(res)
-            alert( resone.data );
+
+            // alert( resone.data );
+            // console.log(resone.data);
+
+            //
+        } catch ( err )
+        {
+            setLoading( false );
+            console.log( err );
+            //   setError("Please refresh...");
+        }
+    }
+
+    const approve = async () =>
+    {
+        try
+        {
+            const uid = days.toLowerCase() + "," + date;
+            let data = {
+                uid: currentUser[0]?.role,
+                reportstatus: "Accepted",
+                message: mesg,
+                date: mydate
+            };
+
+            // console.log(pmsOne)
+          
+
+            const resone = await axios.post( `${ url }/api/billing/message`, data );
+
+            setMessagesent(`Approval ${resone.data}`)
+            // console.log(res)
+
+            // alert( resone.data );
             // console.log(resone.data);
 
             //
@@ -200,6 +240,39 @@ export default function Review ()
             //   setError("Please refresh...");
         }
     };
+
+    
+    const rejected = async () =>
+    {
+        try
+        {
+            const uid = days.toLowerCase() + "," + date;
+            let data = {
+                uid: currentUser[0]?.role,
+                reportstatus: "Rejected",
+                message: mesg,
+                date: mydate
+            };
+
+            // console.log(pmsOne)
+
+            const resone = await axios.post( `${ url }/api/billing/message`, data );
+
+            setMessagesent(`Reject ${resone.data}`)
+            // console.log(res)
+
+            // alert( resone.data );
+            // console.log(resone.data);
+
+            //
+        } catch ( err )
+        {
+            setLoading( false );
+            console.log( err );
+            //   setError("Please refresh...");
+        }
+    };
+
 
     return (
         <div className="mysals">
@@ -452,13 +525,20 @@ export default function Review ()
                 <div className="mesags">
                    
                     <div className="debtorslis">
-                        <button>Approve</button>
-                        <button>Reject</button>
+                        <button onClick={approve}>Approve</button>
+                        <button onClick={rejected}>Reject</button>
                     </div>
 
+                    
+
                     <div className="msgs">
-                        <input type="text" placeholder="Write message ..." />
-                        <img src={send} alt="" />
+                        <input type="text" placeholder="Write message ..." value={mesg}
+                        onChange={(e) => setMessage(e.target.value)}/>
+                        <img src={send} alt="" onClick={sendingsms}/>
+
+                        <div className="msgsent">
+                        <p>{messagesent}</p>
+                    </div>
                     </div>
 
                 </div>

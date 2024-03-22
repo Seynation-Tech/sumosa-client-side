@@ -221,7 +221,7 @@ padding: 12px;
     margin-top: 23px;
 
     margin-bottom: 14px;
-
+    position: relative;
 }
 
 
@@ -305,4 +305,17 @@ padding: 12px;
     right: 10px;
     top: 12px;
     cursor: pointer;
+}
+
+.msgsent{
+    position: absolute;
+color: rgba(0, 98, 255, 0.692);
+
+    height: 35px;
+    width: 320px;
+    right: 0;
+    top: -53px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }

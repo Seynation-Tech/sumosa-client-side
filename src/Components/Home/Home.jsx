@@ -84,21 +84,33 @@ export default function Home ()
   const [ sideup, setSide ] = useState( false );
   const [ upper, setUpper ] = useState( true );
 
-  useEffect( () =>
-  {
-    const fetchData = async () =>
-    {
-      try
-      {
-        // console.log(todaydate)
-        // console.log(mydate)
-      } catch ( err )
-      {
-        // console.log(err)
-      }
-    };
-    fetchData();
-  }, [] );
+  useEffect(() => {
+
+
+    const interval = setInterval(() => {
+      const fetchData = async () => {
+        try {
+          const resptwo = await axios.get(`${url}/api/billing/message`, {
+            withCredentials: true,
+          });
+
+          const resp = await axios.get(`${url}/api/billing/incoming`, {
+            withCredentials: true,
+          });
+
+          console.log(resp)
+         
+          //
+        } catch (err) {
+       
+          console.log(err);
+          // setError( "Please refresh..." );
+        }
+      };
+      fetchData();
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   const popUpside = () =>
   {
