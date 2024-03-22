@@ -24,8 +24,8 @@ export const AuthContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("userdata") || null)
   );
 
-  // const url = "https://sumosa-api.onrender.com";
-  const url = "http://localhost:5001";
+  const url = "https://sumosa-api.onrender.com";
+  // const url = "http://localhost:5001";
   // const url='https://dormdatabase-production.up.railway.app'
 
   const [zrepos, setZreport] = useState("0");
