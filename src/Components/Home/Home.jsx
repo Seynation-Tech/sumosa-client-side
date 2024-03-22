@@ -6,7 +6,7 @@ import Real from "../Charts/Real";
 import Values from "../Charts/Values";
 import sales from "../../Images/sale.png";
 import petrol from "../../Images/sum.png";
-import clocs from "../../Images/cloc.png";
+import can from "../../Images/canc.png";
 import report from "../../Images/repo.png";
 import drop from "../../Images/dropdo.png";
 import settings from "../../Images/setting.png";
@@ -64,7 +64,7 @@ export default function Home ()
     dieselprice,
     petrolprice,
     diff,
-    days,
+    days, currentUser,
     zrepos,
     alldebts,
     totalEarnings,
@@ -83,34 +83,76 @@ export default function Home ()
   const navigate = useNavigate();
   const [ sideup, setSide ] = useState( false );
   const [ upper, setUpper ] = useState( true );
+  const [ nun, setNun ] = useState( false )
+  const [ messageOne, setMessageone ] = useState( [] )
+  const [ messagetwo, setMessagetwo ] = useState( [] )
+  const [ reads, setRead ] = useState( false )
+  useEffect( () =>
+  {
 
-  useEffect(() => {
 
-
-    const interval = setInterval(() => {
-      const fetchData = async () => {
-        try {
-          const resptwo = await axios.get(`${url}/api/billing/message`, {
+    const interval = setInterval( () =>
+    {
+      const fetchData = async () =>
+      {
+        try
+        {
+          const resptwo = await axios.get( `${ url }/api/billing/message`, {
             withCredentials: true,
-          });
+          } );
 
-          const resp = await axios.get(`${url}/api/billing/incoming`, {
+          const resp = await axios.get( `${ url }/api/billing/incoming`, {
             withCredentials: true,
-          });
+          } );
 
-          console.log(resp)
-         
+          if ( resp.data.length > 0 || resptwo.data.length > 0 )
+          {
+            setNun( true )
+          }
+
+
+
+          setMessageone( resptwo.data )
+          setMessagetwo( resp.data )
+
           //
-        } catch (err) {
-       
-          console.log(err);
+        } catch ( err )
+        {
+
+          console.log( err );
           // setError( "Please refresh..." );
         }
       };
       fetchData();
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+    }, 2000 );
+    return () => clearInterval( interval );
+  }, [] );
+
+  const cancelreading = async() =>
+  {
+    setRead( false )
+   
+  }
+
+  const deleteMsg = async() =>
+  {
+
+    try
+    {
+      //  alert(alldat.name)
+      const resone = await axios.delete( `${ url }/api/billing/message`, { withCredentials: true } );
+      
+
+    } catch ( err )
+    {
+
+    }
+  }
+
+  const startreading = () =>
+  {
+    setRead( true )
+  }
 
   const popUpside = () =>
   {
@@ -168,12 +210,38 @@ export default function Home ()
             {/* <div className="leftimgs">
               <img src={message} alt="" />
             </div> */}
-            <div className="leftimgs">
-              <img src={ message } alt="" />
+
+            { reads && <div className="readmssg">
+
+              {
+                messageOne.map( ( val, key ) =>
+                {
+                  return (
+                    <div className="mymsg">
+                      <p>{ val.message }</p>
+                      <p>Time: { val.date }</p>
+
+                      <img src={can} alt="" onClick={deleteMsg}/>
+
+                    </div>
+                  )
+                } )
+              }
+
+
+              <button className="cancelo" onClick={ cancelreading }>cancel</button>
+
             </div>
-            <div className="leftimgs">
+            }
+
+            { currentUser[ 0 ]?.role === "Director" ? <div className="leftimgs">
               <img src={ settings } alt="" />
+            </div> : <></> }
+            <div className="leftimgs" onClick={ startreading }>
+              <img src={ message } alt="" />
+              { nun && <div className="otify"></div> }
             </div>
+
           </div>
         </div>
 
