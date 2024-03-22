@@ -134,13 +134,13 @@ export default function Home ()
    
   }
 
-  const deleteMsg = async() =>
+  const deleteMsg = async(e) =>
   {
 
     try
     {
       //  alert(alldat.name)
-      const resone = await axios.delete( `${ url }/api/billing/message`, { withCredentials: true } );
+      const resone = await axios.delete( `${ url }/api/billing/incoming/${e}`, { withCredentials: true } );
       
 
     } catch ( err )
@@ -221,7 +221,7 @@ export default function Home ()
                       <p>{ val.message }</p>
                       <p>Time: { val.date }</p>
 
-                      <img src={can} alt="" onClick={deleteMsg}/>
+                      <img src={can} alt="" onClick={(e)=>deleteMsg(val.uid)}/>
 
                     </div>
                   )
