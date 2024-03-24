@@ -269,6 +269,8 @@ export default function Sales ()
         setNotification( resone.data );
         setLoading( false );
         setReasons( false );
+        setAmountinwords("")
+        setReason("")
         //
       } catch ( err )
       {
@@ -307,6 +309,9 @@ export default function Sales ()
         setNotification( resone.data );
         setLoading( false );
         setPrices( false );
+
+        setDieselprice("")
+        setPetrolprice("")
 
 
         //
@@ -357,7 +362,7 @@ export default function Sales ()
     } catch ( err )
     {
       setLoading( false );
-      console.log( err );
+      // console.log( err );
       // setError( "Please refresh..." );
     }
   };
@@ -389,7 +394,8 @@ export default function Sales ()
 
       setNotification( res.data );
 
-      console.log(res.data)
+      setName("")
+      setAmounts("")
 
       // setNotfs(true)
       setLoading( false );
