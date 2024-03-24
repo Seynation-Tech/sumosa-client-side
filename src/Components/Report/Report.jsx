@@ -18,6 +18,7 @@ import long from "../../Images/startarrow.png";
 import search from "../../Images/searchblue.png";
 import sda from "../../Images/sdalogo.jpg";
 import pcm from "../../Images/PCM LOGO.jpg";
+import cancs from "../../Images/o.png";
 
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -241,11 +242,7 @@ export default function Expenses ()
         setNotification( response.data );
         setLoading( false );
       } catch ( err ) { }
-    } else
-    {
-      setNotify( true );
-      setNotification( " Ensure all values data are filled!" );
-    }
+    } 
   };
 
   const pesaHandler = async () =>
@@ -709,8 +706,7 @@ export default function Expenses ()
         <div className="poppesao">
           <div className="contentonesty">
             <div className="canc" onClick={cancPopdelete}>
-              {/* <img src="" alt="" /> */}
-              <p>x</p>
+            <img src={cancs} alt="" />
             </div>
             <div className="ours">
               <div className="sdacont">

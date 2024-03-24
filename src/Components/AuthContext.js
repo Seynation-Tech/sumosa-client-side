@@ -44,7 +44,7 @@ export const AuthContextProvider = ({ children }) => {
   const [tokns, setToken] = useState("");
   const cookies = new Cookies();
   const [currentUser, setCurrentUser] = useState(
-    JSON.parse(localStorage.getItem("userdata") || null)
+    JSON.parse(localStorage.getItem("userdata") ||  null)
   );
 
   // const url = "https://sumosa-api.onrender.com";
@@ -619,7 +619,7 @@ const todate = getFormattedDate();
   }, []);
 
   const userlogin = async (inputs) => {
-    console.log(inputs)
+    // console.log(inputs)
     const res = await axios.post(`${url}/api/auths/login`, inputs, {
       withCredentials: true,
     });

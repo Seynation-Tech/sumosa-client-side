@@ -8,6 +8,7 @@ import "./Sales.css";
 import "./Mobile.css";
 import downlo from "../../Images/download.png";
 import growth from "../../Images/growth.png";
+import cancs from "../../Images/o.png";
 
 import axios from "axios";
 import { AuthContext } from "../AuthContext";
@@ -543,8 +544,8 @@ export default function Sales ()
         <div className="poppesao">
           <div className="contentonestya">
             <div className="canc" onClick={ cancelReason }>
-              {/* <img src="" alt="" /> */ }
-              <p>x</p>
+            <img src={cancs} alt="" />
+              {/* <p>x</p> */}
             </div>
             <div className="ours">
               <div className="sdacont">
@@ -612,8 +613,7 @@ export default function Sales ()
         <div className="poppesaoo">
           <div className="contentonestyo">
             <div className="canc" onClick={ cancPopdelete }>
-              {/* <img src="" alt="" /> */ }
-              <p>x</p>
+            <img src={cancs} alt="" />
             </div>
             <div className="ours">
               <div className="sdacont">
@@ -668,8 +668,7 @@ export default function Sales ()
         <div className="poppesao">
           <div className="contentonesty">
             <div className="canc" onClick={ cancPopdelete }>
-              {/* <img src="" alt="" /> */ }
-              <p>x</p>
+            <img src={cancs} alt="" />
             </div>
             <div className="ours">
               <div className="sdacont">
@@ -723,8 +722,7 @@ export default function Sales ()
         <div className="poppesao">
           <div className="contentonesty">
             <div className="canc" onClick={ cancPrice }>
-              {/* <img src="" alt="" /> */ }
-              <p>x</p>
+            <img src={cancs} alt="" />
             </div>
             <div className="ours">
               <div className="sdacont">
@@ -806,7 +804,7 @@ export default function Sales ()
           </div>
 
           <div className="download">
-            <p>Report</p>
+            {/* <p>Report</p> */}
             <div className="down">
               <img src={ downlo } alt="" />
             </div>

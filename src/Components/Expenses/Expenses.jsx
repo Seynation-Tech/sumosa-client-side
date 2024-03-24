@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import Sidebar from "../Sidebar/Sidebar";
 import "./Expenses.css";
-import bell from "../../Images/notify.png";
+import cancs from "../../Images/o.png";
 import Real from "../Charts/Real";
 import Monthly from "../Charts/Expmonthly";
 import Weekly from "../Charts/Expweekly";
@@ -302,8 +302,7 @@ export default function Expenses ()
           <div className="poppes">
             <div className="contentonesya">
               <div className="canc" onClick={ cancelExpense }>
-                {/* <img src="" alt="" /> */ }
-                <p>x</p>
+              <img src={cancs} alt="" />
               </div>
               <div className="ours">
                 <div className="sdacont">
@@ -350,11 +349,11 @@ export default function Expenses ()
 
 
         { delets && (
-          <div className="poppesao">
-            <div className="contentonesty">
+          <div className="poppesaoo">
+            <div className="contentonestyo">
               <div className="canc" onClick={ cancpop }>
-                {/* <img src="" alt="" /> */ }
-                <p>x</p>
+           <img src={cancs} alt="" />
+                {/* <p>x</p> */}
               </div>
               <div className="ours">
                 <div className="sdacont">
@@ -408,8 +407,7 @@ export default function Expenses ()
           <div className="poppesaoo">
             <div className="contentonestyo">
               <div className="canc" onClick={ cancPopdelete }>
-                {/* <img src="" alt="" /> */ }
-                <p>x</p>
+              <img src={cancs} alt="" />
               </div>
               <div className="ours">
                 <div className="sdacont">

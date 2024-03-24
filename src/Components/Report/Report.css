@@ -383,7 +383,7 @@ body {
     /* padding:12px; */
     /* overflow: scroll; */
     flex-direction: column;
-    margin-top: -14px;
+    margin-top: -54px;
   }
 
   .lsa {
@@ -655,7 +655,7 @@ body {
   }
 
   .thetwo input:focus {
-    border: 3px solid rgba(255, 255, 255, 0.426);
+    /* border: 3px solid rgba(255, 255, 255, 0.426); */
   }
 
   .thetwos input::placeholder {
