@@ -84,22 +84,22 @@ export default function Values() {
         }}
       >
         {/* <CartesianGrid strokeDasharray="3 3" /> */}
-        <XAxis dataKey="name" />
-        <YAxis />
+        <XAxis  tick={{ fontSize: 10 }}  dataKey="name" />
+        <YAxis  tick={{ fontSize: 10 }}  />
         <Tooltip />
         <Area
           type="monotone"
           dataKey="Diesel"
           stackId="1"
           stroke="#8884d8"
-          fill="#4b03fc"
+          fill="#05fc00"
         />
         <Area
           type="monotone"
           dataKey="Petrol"
           stackId="1"
           stroke="#fc9d00"
-          fill="#fe00fe"
+          fill="#ff6401"
         />
         {/* <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" /> */}
       </AreaChart>

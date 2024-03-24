@@ -14,6 +14,7 @@ import { AuthContext } from "../AuthContext";
 import moment from "moment";
 import DotLoader from "react-spinners/DotLoader";
 import Cookies from "cookie-universal";
+import _ from "lodash-es";
 
 axios.defaults.withCredentials = true;
 
@@ -23,7 +24,7 @@ export default function Sidebar() {
   const [currentUsers, setCurrentUser] = useState(null);
   const navigate = useNavigate();
 
-
+ 
   const removeUser =()=>{
     localStorage.clear();
     navigate("/")
@@ -44,8 +45,9 @@ export default function Sidebar() {
           <img src={profile} alt="" />
         </div>
         <div className="profcaption">
-          <p>{currentUser[0]?.name || "User"}</p>
-          <p>{String(currentUser[0]?.role).toLocaleLowerCase() || ""}</p>
+          
+          <p>{currentUser[0]?.name}</p>
+          <p>{currentUser[0]?.role}</p>
         </div>
       </div>
 

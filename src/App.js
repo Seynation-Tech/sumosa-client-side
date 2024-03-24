@@ -9,6 +9,8 @@ import Report from './Components/Report/Report';
 import Login from './Components/Login/Login';
 import Sign from './Components/Login/Sign'
 import Review from './Components/Review/Review';
+import Register from './Components/Login/Register';
+
 
 
 function App ()
@@ -29,6 +31,7 @@ function App ()
             <Route path='/report' element={ <Report /> } />
             <Route path='/signin' element={ <Login /> } />
             <Route path='/signup' element={ <Sign /> } />
+            <Route path='/register' element={ <Register /> } />
             <Route path='/review' element={ <Review /> } />
           </Route>
           <Route path='/' element={ <Login /> } />

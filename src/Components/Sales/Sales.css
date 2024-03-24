@@ -367,11 +367,11 @@
 
   .ls {
     background: linear-gradient(to right, rgb(33, 25, 255), rgb(0, 74, 247));
-    height: 34vh;
+    height: 44vh;
     /* background: #2776ea; */
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-
+/* margin-top: 34px; */
     display: flex;
     gap: 5px;
     padding: 7px;
@@ -401,6 +401,7 @@
     width: 100%;
     background-color: rgba(0, 0, 255, 0.072);
     border-radius: 5px;
+    margin-bottom: 45px;
   }
 
   .dails {
@@ -806,7 +807,7 @@
     align-items: center;
     border-radius: 5px;
     margin-bottom: 12px;
-    margin-top: 12px;
+    margin-top: 22px;
     color: rgba(0, 89, 255, 0.705);
     font-weight: bold;
     font-size: 0.9em;

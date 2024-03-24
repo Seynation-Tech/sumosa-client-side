@@ -16,14 +16,14 @@ const url = "http://localhost:5001";
 
 const datas = [
   {
-    name: "Sund",
+    name: "Sun",
     uv: 0,
     pv: 0,
     amt: 0,
     cnt: 0,
   },
   {
-    name: "Mond",
+    name: "Mon",
     uv: 0,
     pv: 0,
     amt: 0,
@@ -37,14 +37,14 @@ const datas = [
     cnt: 0,
   },
   {
-    name: "Wedn",
+    name: "Wed",
     uv: 0,
     pv: 0,
     amt: 0,
     cnt: 0,
   },
   {
-    name: "Thurs",
+    name: "Thur",
     uv: 0,
     pv: 0,
     amt: 0,
@@ -58,7 +58,7 @@ const datas = [
     cnt: 0,
   },
   {
-    name: "Satur",
+    name: "Sat",
     uv: 0,
     pv: 0,
     amt: 0,
@@ -83,9 +83,9 @@ export default function Mids() {
           bottom: -4,
         }}
       >
-        {/* <CartesianGrid strokeDasharray="3 3" /> */}
-        <XAxis dataKey="name" />
-        <YAxis />
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name"  tick={{ fontSize: 10 }} />
+        <YAxis  tick={{ fontSize: 10 }}  />
         <Tooltip />
         <Area
           type="monotone"

@@ -5,7 +5,7 @@ import Monthly from "../Charts/Monthly";
 import Yearly from "../Charts/Yearly";
 import Sidebar from "../Sidebar/Sidebar";
 import "./Sales.css";
-import "./Mobile.css"
+import "./Mobile.css";
 import downlo from "../../Images/download.png";
 
 import axios from "axios";
@@ -13,8 +13,20 @@ import { AuthContext } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 let today = new Date();
 let date =
-  today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
+today.getFullYear()+ "-" + today.getMonth() + "-" + today.getDate();
+const currentDate = new Date()
+const currentDayofWeek = currentDate.getDay();
 
+const startDate = new Date( currentDate );
+startDate.setDate( currentDate.getDate() - currentDayofWeek + 1 );
+
+const endDate = new Date( currentDate );
+endDate.setDate( currentDate.getDate() - currentDayofWeek + 7 );
+
+const formattedStartDate = currentDate.toISOString().split( 'T' )[ 0 ]
+const formattedEndDate = endDate.toISOString().split( 'T' )[ 0 ]
+
+// console.log(formattedStartDate)
 axios.defaults.withCredentials = true;
 
 export default function Sales() {
@@ -28,9 +40,11 @@ export default function Sales() {
   const [reason, setReason] = useState("");
   const [amountinwords, setAmountinwords] = useState("");
 
+  const [wahusika,setWahusika] = useState("DEBTORS");
+
   const [reasons, setReasons] = useState(false);
 
-  const [weekly, setWeekly] = useState(false);
+  const [weekly, setWeekly] = useState(true);
   const [daily, setDaily] = useState(true);
   const [monthly, setMonthly] = useState(false);
   const [yearly, setYearly] = useState(false);
@@ -159,7 +173,7 @@ export default function Sales() {
     if (reason && amountinwords) {
       try {
         let inwords = {
-          uid: date,
+          uid: formattedStartDate,
           differencereason: reason,
           totalamount: amountinwords,
         };
@@ -187,9 +201,9 @@ export default function Sales() {
   const priceHandler = async () => {
     if (petrolprice && dieselprice) {
       try {
-        const uid = days.toLowerCase() + "," + date;
+        const uid =  date;
         let pricings = {
-          uid: uid,
+          uid: formattedStartDate,
           petrol: petrolprice,
           diesel: dieselprice,
         };
@@ -216,6 +230,7 @@ export default function Sales() {
   };
 
   const debtorcrediLoad = async () => {
+    setWahusika("DEBTORS")
     try {
       const respfour = await axios.get(`${url}/api/billing/debtors`, {
         withCredentials: true,
@@ -231,6 +246,7 @@ export default function Sales() {
   };
 
   const creditorLoad = async () => {
+    setWahusika("CREDITORS")
     try {
       const respfour = await axios.get(`${url}/api/billing/creditors`, {
         withCredentials: true,
@@ -422,7 +438,7 @@ export default function Sales() {
 {deletes && (
         <div className="poppesao">
           <div className="contentonesty">
-            <div className="canc" onClick={cancPrice}>
+            <div className="canc" onClick={cancPopdelete}>
               {/* <img src="" alt="" /> */}
               <p>x</p>
             </div>
@@ -579,7 +595,8 @@ export default function Sales() {
             </div>
           </div>
         </div>
-        {daily && <Daily />}
+        
+
         {weekly && <Graphs />}
 
         {monthly && <Monthly />}
@@ -587,7 +604,7 @@ export default function Sales() {
         {yearly && <Yearly />}
 
         <div className="payo">
-          <p id='pa'>PAYMENT</p>
+          <p id='pa'> {wahusika} PAYMENT</p>
 
           <div className="pesa">
             <div className="mpesa">
@@ -632,7 +649,7 @@ export default function Sales() {
                         <td>{val.name}</td>
                         <td>{Number(val.amount).toLocaleString()}</td>
                         <td>{val?.modeofpay || "-"}</td>
-                        <td>{(val.uid).split(" ")[0]}</td>
+                        <td>{(val.uid).split(",")[1]}</td>
                         <div className="deletes" onClick={deletePop}>
                           {/* <img src={delete} alt="" /> */}
                         </div>

@@ -25,6 +25,20 @@ let mydate =
   ":" +
   today.getSeconds();
 
+  const currentDate = new Date()
+const currentDayofWeek = currentDate.getDay();
+
+const startDate = new Date( currentDate );
+startDate.setDate( currentDate.getDate() - currentDayofWeek + 1 );
+
+const endDate = new Date( currentDate );
+endDate.setDate( currentDate.getDate() - currentDayofWeek + 7 );
+
+const formattedStartDate = currentDate.toISOString().split( 'T' )[ 0 ]
+const formattedEndDate = endDate.toISOString().split( 'T' )[ 0 ]
+
+// console.log(formattedStartDate)
+
 axios.defaults.withCredentials = true;
 
 export default function Expenses ()
@@ -79,7 +93,7 @@ export default function Expenses ()
         }
       };
       fetchData();
-    }, 5000 );
+    }, 1000 );
     return () => clearInterval( interval );
   }, [] );
 
@@ -117,7 +131,7 @@ export default function Expenses ()
       {
         const uid = days.toLowerCase() + "," + date;
         let debtors = {
-          uid: uid,
+          uid: formattedStartDate,
           usages: usage,
           amount: amount,
         };

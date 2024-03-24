@@ -4,6 +4,25 @@ import Cookies from "cookie-universal";
 import "moment-timezone";
 axios.defaults.withCredentials = true;
 
+
+function getStartandEndofWeek ( date )
+{
+    const currentDate = new Date( date )
+    const currentDayofWeek = currentDate.getDay();
+
+    const startDate = new Date( currentDate );
+    startDate.setDate( currentDate.getDate() - currentDayofWeek + 1 );
+
+    const endDate = new Date( currentDate );
+    endDate.setDate( currentDate.getDate() - currentDayofWeek + 7 );
+
+    const formattedStartDate = startDate.toISOString().split( 'T' )[ 0 ]
+    const formattedEndDate = endDate.toISOString().split( 'T' )[ 0 ]
+
+    return { startDate: formattedStartDate, endDate: formattedEndDate };
+}
+
+
 export const AuthContext = createContext();
 
 let currentDate = new Date();
@@ -16,6 +35,10 @@ let weekDay = date.toLocaleString("en-US", { weekday: "long" });
 let todaydate = weekDay + ": " + date.toLocaleDateString();
 let days = weekDay.toUpperCase();
 // console.log( days );
+
+let today = new Date();
+let dates =
+today.getFullYear()+ "-" + today.getMonth() + "-" + today.getDate();
 
 export const AuthContextProvider = ({ children }) => {
   const [tokns, setToken] = useState("");
@@ -147,24 +170,31 @@ export const AuthContextProvider = ({ children }) => {
             }
           );
 
-          const rs = await axios.get(`${url}/api/weeklydatas`, {
+          // http://localhost:5001/api/pumps/datas
+
+          // http://localhost:5001/api/pumps/alldatavalues
+          
+         const startdate = getStartandEndofWeek(dates).startDate
+         const enddate = getStartandEndofWeek(dates).endDate
+
+          const rs = await axios.get(`${url}/api/weeklydatas/data/${startdate}/${enddate}`, {
             withCredentials: true,
           });
 
-          const rst = await axios.get(`${url}/api/weeklyvalues`, {
+          const rst = await axios.get(`${url}/api/weeklydatas/datas/${startdate}/${enddate}`, {
             withCredentials: true,
           });
 
-          const rsts = await axios.get(`${url}/api/mountsvalues`, {
+          const rsts = await axios.get(`${url}/api/weeklydatas/alldatas/${startdate}/${enddate}`, {
             withCredentials: true,
           });
 
-          // console.log(rs.data)
-          // console.log(rst.data)
+
+          
 
           setDatas(rs.data);
           setDts(rst.data);
-          setAllDats(rst.data);
+          setAllDats(rsts.data);
 
           let dieslstk = Object.values(dieslstock.data)[
             Object.values(dieslstock.data).length - 1
@@ -310,7 +340,7 @@ export const AuthContextProvider = ({ children }) => {
             Number(Number(aone.openingdigital) - Number(aone.closingdigital)) *
             dieselamout;
 
-            console.log(agooneAmount)
+            // console.log(agooneAmount)
 
 
           const agotwoAmount =

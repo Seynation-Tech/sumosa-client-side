@@ -28,11 +28,11 @@ import Cookies from "cookie-universal";
 
 let today = new Date();
 let date =
-  today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
+  today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate();
 let mydate =
   today.getDate() +
   "/" +
-  (today.getMonth() + 1) +
+  ( today.getMonth() + 1 ) +
   "/" +
   today.getFullYear() +
   " " +
@@ -44,76 +44,95 @@ let mydate =
 
 axios.defaults.withCredentials = true;
 
-export default function Expenses() {
-  const [pesa, setPesa] = useState(false);
-  const [debts, setDebts] = useState(false);
-  const [stocks, setStocks] = useState(false);
-  const [moneycount, setMoneycount] = useState(false);
-  const [zrepot, setZrepot] = useState("");
-  const [status, setStatus] = useState("");
-  const [notify, setNotify] = useState(false);
 
-  const [notification, setNotification] = useState("");
-  let [color, setColor] = useState("#ffffff");
-  const { url, days, petrolAmount, dieselAmount,dlita,plita, pAmount,dAmount,petrollitres, diesellitres } =
-    useContext(AuthContext);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [today, setToday] = useState(date);
+const currentDate = new Date()
+const currentDayofWeek = currentDate.getDay();
 
-  const [pmsonedigOpening, setPmsonedigOpening] = useState("");
-  const [pmsonedigClosing, setPmsonedigClosing] = useState("");
+const startDate = new Date( currentDate );
+startDate.setDate( currentDate.getDate() - currentDayofWeek + 1 );
 
-  const [pmsoneanalogOpening, setPmsoneanalogOpening] = useState("");
-  const [pmsoneanalogClosing, setPmsoneanalogClosing] = useState("");
+const endDate = new Date( currentDate );
+endDate.setDate( currentDate.getDate() - currentDayofWeek + 7 );
 
-  const [pmstwodigOpening, setPmstwodigOpening] = useState("");
-  const [pmstwodigClosing, setPmstwodigClosing] = useState("");
+const formattedStartDate = currentDate.toISOString().split( 'T' )[ 0 ]
+const formattedEndDate = endDate.toISOString().split( 'T' )[ 0 ]
 
-  const [pmstwoanalogOpening, setPmstwoanalogOpening] = useState("");
-  const [pmstwoanalogClosing, setPmstwoanalogClosing] = useState("");
+console.log(formattedStartDate)
 
-  const [agoonedigOpening, setAgoonedigOpening] = useState("");
-  const [agoonedigClosing, setAgoonedigClosing] = useState("");
+export default function Expenses ()
+{
+  const [ pesa, setPesa ] = useState( false );
+  const [ debts, setDebts ] = useState( false );
+  const [ stocks, setStocks ] = useState( false );
+  const [ moneycount, setMoneycount ] = useState( false );
+  const [ zrepot, setZrepot ] = useState( "" );
+  const [ status, setStatus ] = useState( "" );
+  const [ notify, setNotify ] = useState( false );
 
-  const [agooneanalogOpening, setAgooneanalogOpening] = useState("");
-  const [agooneanalogClosing, setAgooneanalogClosing] = useState("");
+  const [ notification, setNotification ] = useState( "" );
+  let [ color, setColor ] = useState( "#ffffff" );
+  const { url, days, petrolAmount, dieselAmount, dlita, plita, pAmount, dAmount, petrollitres, diesellitres } =
+    useContext( AuthContext );
+  const [ loading, setLoading ] = useState( false );
+  const [ error, setError ] = useState( null );
+  const [ today, setToday ] = useState( date );
 
-  const [agotwodigOpening, setAgotwodigOpening] = useState("");
-  const [agotwodigClosing, setAgotwodigClosing] = useState("");
+  const [ pmsonedigOpening, setPmsonedigOpening ] = useState( "" );
+  const [ pmsonedigClosing, setPmsonedigClosing ] = useState( "" );
 
-  const [agotwoanalogOpening, setAgotwoanalogOpening] = useState("");
-  const [agotwoanalogClosing, setAgotwoanalogClosing] = useState("");
+  const [ pmsoneanalogOpening, setPmsoneanalogOpening ] = useState( "" );
+  const [ pmsoneanalogClosing, setPmsoneanalogClosing ] = useState( "" );
 
-  const [mPesa, setMpesa] = useState("");
-  const [crdb, setCrdb] = useState("");
-  const [nmb, setNmb] = useState("");
+  const [ pmstwodigOpening, setPmstwodigOpening ] = useState( "" );
+  const [ pmstwodigClosing, setPmstwodigClosing ] = useState( "" );
 
-  const [name, setName] = useState("");
-  const [amount, setAmount] = useState("");
+  const [ pmstwoanalogOpening, setPmstwoanalogOpening ] = useState( "" );
+  const [ pmstwoanalogClosing, setPmstwoanalogClosing ] = useState( "" );
 
-  const [tenths, setTenths] = useState("");
-  const [fiveths, setFiveths] = useState("");
-  const [twoths, setTwoths] = useState("");
-  const [oneths, setOneths] = useState("");
-  const [fivehs, setFivehs] = useState("");
-  const [twohs, setTwohs] = useState("");
-  const [onehs, setOnehs] = useState("");
-  const [fiftys, setFiftys] = useState("");
-  const [sidebar, setSidebar] = useState(false);
+  const [ agoonedigOpening, setAgoonedigOpening ] = useState( "" );
+  const [ agoonedigClosing, setAgoonedigClosing ] = useState( "" );
 
-  const [credits, setCred] = useState(false);
-  const [mode, setMode] = useState("");
+  const [ agooneanalogOpening, setAgooneanalogOpening ] = useState( "" );
+  const [ agooneanalogClosing, setAgooneanalogClosing ] = useState( "" );
 
-  const [pmsphyscal, setPhysicalpms] = useState("");
-  const [pmsdispst, setDipstpms] = useState("");
+  const [ agotwodigOpening, setAgotwodigOpening ] = useState( "" );
+  const [ agotwodigClosing, setAgotwodigClosing ] = useState( "" );
 
-  const [agophyscal, setPhysicalago] = useState("");
-  const [agodispst, setDipstago] = useState("");
+  const [ agotwoanalogOpening, setAgotwoanalogOpening ] = useState( "" );
+  const [ agotwoanalogClosing, setAgotwoanalogClosing ] = useState( "" );
 
+  const [ mPesa, setMpesa ] = useState( "" );
+  const [ crdb, setCrdb ] = useState( "" );
+  const [ nmb, setNmb ] = useState( "" );
+
+  const [ name, setName ] = useState( "" );
+  const [ amount, setAmount ] = useState( "" );
+
+  const [ tenths, setTenths ] = useState( "" );
+  const [ fiveths, setFiveths ] = useState( "" );
+  const [ twoths, setTwoths ] = useState( "" );
+  const [ oneths, setOneths ] = useState( "" );
+  const [ fivehs, setFivehs ] = useState( "" );
+  const [ twohs, setTwohs ] = useState( "" );
+  const [ onehs, setOnehs ] = useState( "" );
+  const [ fiftys, setFiftys ] = useState( "" );
+  const [ sidebar, setSidebar ] = useState( false );
+
+  const [ credits, setCred ] = useState( false );
+  const [ mode, setMode ] = useState( "" );
+
+  const [ pmsphyscal, setPhysicalpms ] = useState( "" );
+  const [ pmsdispst, setDipstpms ] = useState( "" );
+
+  const [ agophyscal, setPhysicalago ] = useState( "" );
+  const [ agodispst, setDipstago ] = useState( "" );
+
+  const [sure,setAre] = useState(false)
+  const [deletes, setDelete] = useState(false);
   const navigate = useNavigate();
 
-  const literHandler = async () => {
+  const literHandler = async () =>
+  {
     if (
       pmsonedigOpening &&
       pmsonedigClosing &&
@@ -123,16 +142,18 @@ export default function Expenses() {
       agoonedigClosing &&
       agooneanalogOpening &&
       agooneanalogClosing
-    ) {
-      try {
+    )
+    {
+      try
+      {
         const dats = days.toLowerCase() + "," + date;
         let pmsOne = {
-          uid: dats,
-          closingsanalog: pmsoneanalogClosing ,
+          uid: formattedEndDate,
+          closingsanalog: pmsoneanalogClosing,
           closingdigital: pmsonedigClosing,
           openinganalog: pmsoneanalogOpening,
           openingdigital: pmsonedigOpening,
-          outputvalue: Number(pmsonedigClosing) - Number(pmsonedigOpening),
+          outputvalue: Number( pmsonedigClosing ) - Number( pmsonedigOpening ),
         };
 
         let pmsTwo = {
@@ -141,7 +162,7 @@ export default function Expenses() {
           closingdigital: pmstwodigClosing,
           openinganalog: pmstwoanalogOpening,
           openingdigital: pmstwodigOpening,
-          outputvalue: Number(pmstwodigClosing) - Number(pmstwodigOpening),
+          outputvalue: Number( pmstwodigClosing ) - Number( pmstwodigOpening ),
         };
 
         let agoOne = {
@@ -150,7 +171,7 @@ export default function Expenses() {
           closingdigital: agoonedigClosing,
           openinganalog: agooneanalogOpening,
           openingdigital: agoonedigOpening,
-          outputvalue: Number(agoonedigClosing) - Number(agoonedigOpening),
+          outputvalue: Number( agoonedigClosing ) - Number( agoonedigOpening ),
         };
 
         let agoTwo = {
@@ -159,206 +180,247 @@ export default function Expenses() {
           closingdigital: agotwodigClosing,
           openinganalog: agotwoanalogOpening,
           openingdigital: agotwodigOpening,
-          outputvalue: Number(agotwodigClosing) - Number(agotwodigOpening),
+          outputvalue: Number( agotwodigClosing ) - Number( agotwodigOpening ),
         };
 
-        setLoading(true);
+        setLoading( true );
 
-        const resone = await axios.post(`${url}/api/pumps/petrol`, pmsOne);
-        const restwo = await axios.post(`${url}/api/pumps/petroltwo`, pmsTwo);
-        const resthree = await axios.post(`${url}/api/pumps/diesel`, agoOne);
-        const resfour = await axios.post(`${url}/api/pumps/dieseltwo`, agoTwo);
+        const resone = await axios.post( `${ url }/api/pumps/petrol`, pmsOne );
+        const restwo = await axios.post( `${ url }/api/pumps/petroltwo`, pmsTwo );
+        const resthree = await axios.post( `${ url }/api/pumps/diesel`, agoOne );
+        const resfour = await axios.post( `${ url }/api/pumps/dieseltwo`, agoTwo );
 
-        setNotify(true);
-        setNotification(resfour.data);
-        setLoading(false);
+        setNotify( true );
+        setNotification( resfour.data );
+        setLoading( false );
 
         //
-      } catch (err) {
-        setLoading(false);
-        console.log(err);
-        setError("Please refresh...");
+      } catch ( err )
+      {
+        setLoading( false );
+        console.log( err );
+        setError( "Please refresh..." );
       }
-    } else {
-      setNotify(true);
-      setNotification("Fill all the details!");
+    } else
+    {
+      setNotify( true );
+      setNotification( "Fill all the details!" );
     }
   };
 
-  const confirm = async () => {
+  const sureTy =()=>{
+    setAre(true)
+  }
+
+  const confirm = async () =>
+  {
     
-    if (isNaN(diesellitres) && isNaN(dieselAmount) && isNaN(petrolAmount) && isNaN(petrollitres)) {
-      try {
-        // console.log(pAmount,plita)
+    if ( isNaN( diesellitres ) && isNaN( dieselAmount ) && isNaN( petrolAmount ) && isNaN( petrollitres ) )
+    {
+      try
+      {
+       
         // console.log(Math.floor(pAmount),plita)
-        const dats = days.toLowerCase() + "," + date;
+        const dats = date;
         let data = {
-          uid: dats,
-          dieselamount: Math.floor(dAmount),
-          petrolamount: Math.floor(pAmount),
+          uid: formattedStartDate,
+          dieselamount: Math.floor( dAmount ),
+          petrolamount: Math.floor( pAmount ),
           dieselvalue: dlita,
           petrolvalue: plita,
         };
 
 
-        setLoading(true);
+        setLoading( true );
 
-        const response = await axios.post(`${url}/api/weeklydata`, data);
+        const response = await axios.post( `${ url }/api/weeklydatas/data`, data );
 
-  
 
-        setNotify(true);
-        setNotification(response.data);
-        setLoading(false);
-      } catch (err) {}
-    } else {
-      setNotify(true);
-      setNotification(" Ensure all values data are filled!");
+
+        setNotify( true );
+        setNotification( response.data );
+        setLoading( false );
+      } catch ( err ) { }
+    } else
+    {
+      setNotify( true );
+      setNotification( " Ensure all values data are filled!" );
     }
   };
 
-  const pesaHandler = async () => {
-    if (mPesa && nmb && crdb) {
-      try {
-        const dats = days.toLowerCase() + "," + date;
+  const pesaHandler = async () =>
+  {
+    if ( mPesa && nmb && crdb )
+    {
+      try
+      {
+        const dats = date;
         let virtualmoney = {
-          uid: dats,
+          uid: formattedEndDate,
           mpesa: mPesa,
           nmbpesa: nmb,
           crdbpesa: crdb,
           generalexpenses: "",
           debts: "",
         };
-        setLoading(true);
+        setLoading( true );
 
         const resone = await axios.post(
-          `${url}/api/billing/virtmoney`,
+          `${ url }/api/billing/virtmoney`,
           virtualmoney
         );
 
-        setNotify(true);
-        setNotification(resone.data);
-        setLoading(false);
+        setNotify( true );
+        setNotification( resone.data );
+        setLoading( false );
 
         //
-      } catch (err) {
-        setLoading(false);
+      } catch ( err )
+      {
+        setLoading( false );
 
-        setError("Please refresh...");
+        setError( "Please refresh..." );
       }
-    } else {
-      setNotify(true);
-      setNotification("Fill all the details!");
+    } else
+    {
+      setNotify( true );
+      setNotification( "Fill all the details!" );
     }
   };
+  const deletePop = () => {
+    setDelete(true);
+  };
 
-  const credHandler = async () => {
-    if (name && amount && mode) {
-      try {
-        const dats = days.toLowerCase() + "," + date;
+  const cancPopdelete =()=>{
+    setAre(false);
+  }
+  const credHandler = async () =>
+  {
+    if ( name && amount && mode )
+    {
+      try
+      {
+        const dats = date;
         let debtors = {
-          uid: dats,
+          uid: formattedEndDate,
           name: name,
           amount: amount,
           modeofpay: mode,
           date: mydate,
         };
-        setLoading(true);
+        setLoading( true );
 
         const resone = await axios.post(
-          `${url}/api/billing/creditors`,
+          `${ url }/api/billing/creditors`,
           debtors
         );
-        setNotify(true);
-        setNotification(resone.data);
-        setLoading(false);
-      } catch (err) {
-        setLoading(false);
-        console.log(err);
-        setError("Please refresh...");
+        setNotify( true );
+        setNotification( resone.data );
+        setLoading( false );
+      } catch ( err )
+      {
+        setLoading( false );
+        console.log( err );
+        setError( "Please refresh..." );
       }
-    } else {
-      setNotify(true);
-      setNotification("Fill all the details!");
+    } else
+    {
+      setNotify( true );
+      setNotification( "Fill all the details!" );
     }
   };
 
-  const debtsHandler = async () => {
-    if (name && amount) {
-      try {
-        const dats = days.toLowerCase() + "," + date;
+  const debtsHandler = async () =>
+  {
+    if ( name && amount )
+    {
+      try
+      {
+        const dats = date;
         let debtors = {
-          uid: dats,
+          uid: formattedEndDate,
           name: name,
           amount: amount,
           date: "12/23/34",
         };
 
-        setLoading(true);
+        setLoading( true );
 
-        const resone = await axios.post(`${url}/api/billing/debtors`, debtors);
-        setNotify(true);
-        setNotification(resone.data);
-        setLoading(false);
+        const resone = await axios.post( `${ url }/api/billing/debtors`, debtors );
+        setNotify( true );
+        setNotification( resone.data );
+        setLoading( false );
 
         //
-      } catch (err) {
-        setLoading(false);
-        console.log(err);
-        setError("Please refresh...");
+      } catch ( err )
+      {
+        setLoading( false );
+        console.log( err );
+        setError( "Please refresh..." );
       }
-    } else {
-      setNotify(true);
-      setNotification("Fill all the details!");
+    } else
+    {
+      setNotify( true );
+      setNotification( "Fill all the details!" );
     }
   };
 
-  const stocksHandler = async () => {
-    if (pmsphyscal && pmsdispst) {
-      try {
-        const dats = days.toLowerCase() + "," + date;
+  const stocksHandler = async () =>
+  {
+    if ( pmsphyscal && pmsdispst )
+    {
+      try
+      {
+        const dats = date;
         let pmsStock = {
-          uid: dats,
+          uid: formattedEndDate,
           physical: pmsphyscal,
           dipstick: pmsdispst,
-          difference: Number(pmsphyscal) - Number(pmsdispst),
+          difference: Number( pmsphyscal ) - Number( pmsdispst ),
         };
 
         let agoStock = {
           uid: dats,
           physical: agophyscal,
           dipstick: agodispst,
-          difference: Number(agophyscal) - Number(agodispst),
+          difference: Number( agophyscal ) - Number( agodispst ),
         };
 
         // console.log(pmsOne)
 
         const resone = await axios.post(
-          `${url}/api/billing/pmsfuelstock`,
+          `${ url }/api/billing/pmsfuelstock`,
           pmsStock
         );
         const reson = await axios.post(
-          `${url}/api/billing/agofuelstock`,
+          `${ url }/api/billing/agofuelstock`,
           agoStock
         );
 
-        setNotify(true);
-        setNotification(resone.data);
-        setLoading(false);
+        setNotify( true );
+        setNotification( resone.data );
+        setLoading( false );
 
         //
-      } catch (err) {
-        setLoading(false);
-        console.log(err);
-        setError("Please refresh...");
+      } catch ( err )
+      {
+        setLoading( false );
+        console.log( err );
+        setError( "Please refresh..." );
       }
-    } else {
-      setNotify(true);
-      setNotification("Fill all the details!");
+    } else
+    {
+      setNotify( true );
+      setNotification( "Fill all the details!" );
     }
   };
 
-  const moneycountHandler = async () => {
+  const updateHandler=()=>{
+
+  }
+
+  const moneycountHandler = async () =>
+  {
     if (
       tenths &&
       fivehs &&
@@ -369,11 +431,13 @@ export default function Expenses() {
       fiftys &&
       zrepot &&
       twoths
-    ) {
-      try {
-        const dats = days.toLowerCase() + "," + date;
+    )
+    {
+      try
+      {
+        const dats = date;
         let collections = {
-          uid: dats,
+          uid: formattedEndDate,
           tenth: tenths,
           fiveth: fiveths,
           twoth: twoths,
@@ -385,86 +449,95 @@ export default function Expenses() {
           zreport: zrepot,
         };
 
-        setLoading(true);
+        setLoading( true );
 
         const resone = await axios.post(
-          `${url}/api/billing/collectmoney`,
+          `${ url }/api/billing/collectmoney`,
           collections
         );
 
-        setNotify(true);
-        setNotification(resone.data);
-        setLoading(false);
+        setNotify( true );
+        setNotification( resone.data );
+        setLoading( false );
 
         //
-      } catch (err) {
-        setLoading(false);
-        console.log(err);
-        setError("Please refresh...");
+      } catch ( err )
+      {
+        setLoading( false );
+        console.log( err );
+        setError( "Please refresh..." );
       }
-    } else {
-      setNotify(true);
-      setNotification("Fill all the details!");
+    } else
+    {
+      setNotify( true );
+      setNotification( "Fill all the details!" );
     }
   };
 
-  const submitButton = async (e) => {
+  const submitButton = async ( e ) =>
+  {
     e.preventDefault();
-    setLoading(true);
+    setLoading( true );
   };
 
-  const handlePesa = () => {
-    setStocks(false);
-    setMoneycount(false);
-    setDebts(false);
-    setPesa(true);
-    setCred(false);
-    setNotify(false);
+  const handlePesa = () =>
+  {
+    setStocks( false );
+    setMoneycount( false );
+    setDebts( false );
+    setPesa( true );
+    setCred( false );
+    setNotify( false );
   };
 
-  const handleDebt = () => {
-    setPesa(false);
-    setMoneycount(false);
-    setStocks(false);
-    setDebts(true);
-    setCred(false);
-    setNotify(false);
+  const handleDebt = () =>
+  {
+    setPesa( false );
+    setMoneycount( false );
+    setStocks( false );
+    setDebts( true );
+    setCred( false );
+    setNotify( false );
   };
 
-  const handleCred = () => {
-    setPesa(false);
-    setMoneycount(false);
-    setStocks(false);
-    setDebts(false);
-    setCred(true);
-    setNotify(false);
+  const handleCred = () =>
+  {
+    setPesa( false );
+    setMoneycount( false );
+    setStocks( false );
+    setDebts( false );
+    setCred( true );
+    setNotify( false );
   };
 
-  const handleMoneycount = () => {
-    setPesa(false);
-    setStocks(false);
-    setDebts(false);
-    setNotify(false);
-    setMoneycount(true);
-    setCred(false);
+  const handleMoneycount = () =>
+  {
+    setPesa( false );
+    setStocks( false );
+    setDebts( false );
+    setNotify( false );
+    setMoneycount( true );
+    setCred( false );
   };
 
-  const handleStocks = () => {
-    setPesa(false);
-    setDebts(false);
-    setNotify(false);
-    setMoneycount(false);
-    setStocks(true);
-    setCred(false);
+  const handleStocks = () =>
+  {
+    setPesa( false );
+    setDebts( false );
+    setNotify( false );
+    setMoneycount( false );
+    setStocks( true );
+    setCred( false );
   };
 
-  const handleAll = () => {
-    setPesa(false);
-    setDebts(false);
-    setMoneycount(false);
-    setNotify(false);
-    setStocks(false);
-    setCred(false);
+  const handleAll = () =>
+  {
+    setPesa( false );
+    setDebts( false );
+    setMoneycount( false );
+    setNotify( false );
+    setStocks( false );
+    setCred( false );
   };
 
   return (
@@ -479,41 +552,41 @@ export default function Expenses() {
         </div>
         <div className="year">
           <div className="dail">
-            <p onClick={handleAll}>LITRES</p>
+            <p onClick={ handleAll }>LITRES</p>
           </div>
 
           <div className="dail">
-            <p onClick={handlePesa}>ONLINE PAY</p>
+            <p onClick={ handlePesa }>ONLINE PAY</p>
           </div>
 
           <div className="dail">
-            <p onClick={handleDebt}>DEBTS</p>
+            <p onClick={ handleDebt }>DEBTS</p>
           </div>
 
           <div className="dail">
-            <p onClick={handleCred}>CREDITORS</p>
+            <p onClick={ handleCred }>CREDITORS</p>
           </div>
 
           <div className="dail">
-            <p onClick={handleMoneycount}>MONEY COUNTS</p>
+            <p onClick={ handleMoneycount }>MONEY COUNTS</p>
           </div>
 
           <div className="dail">
-            <p onClick={handleStocks}>FUEL STOCK</p>
+            <p onClick={ handleStocks }>FUEL STOCK</p>
           </div>
 
           <div className="download">
-            {/* <p>Monday 12/03/2024</p> */}
-            {/* <p>12:00:00 AM</p> */}
+            {/* <p>Monday 12/03/2024</p> */ }
+            {/* <p>12:00:00 AM</p> */ }
             <div className="down">
               <img src="" alt="" />
             </div>
           </div>
         </div>
-        {/* <Real /> */}
+        {/* <Real /> */ }
 
         <div className="lsa">
-          {pesa && (
+          { pesa && (
             <div className="poppesa">
               <div className="contentones">
                 <div className="jinss">
@@ -521,51 +594,51 @@ export default function Expenses() {
                 </div>
                 <div className="chote">
                   <div className="bone">
-                    <div className="thetwos">{/* <p>CLOSINGS</p> */}</div>
+                    <div className="thetwos">{/* <p>CLOSINGS</p> */ }</div>
                     <div className="thetwos">
                       <input
                         type="number"
                         placeholder="M-pesa"
-                        value={mPesa}
-                        onChange={(e) => setMpesa(e.target.value)}
+                        value={ mPesa }
+                        onChange={ ( e ) => setMpesa( e.target.value ) }
                       />
                     </div>
                     <div className="thetwos">
                       <input
                         type="number"
                         placeholder="NMB"
-                        value={nmb}
-                        onChange={(e) => setNmb(e.target.value)}
+                        value={ nmb }
+                        onChange={ ( e ) => setNmb( e.target.value ) }
                       />
                     </div>
                     <div className="thetwos">
                       <input
                         type="number"
                         placeholder="CRDB"
-                        value={crdb}
-                        onChange={(e) => setCrdb(e.target.value)}
+                        value={ crdb }
+                        onChange={ ( e ) => setCrdb( e.target.value ) }
                       />
                     </div>
                   </div>
                 </div>
 
-                {notify && (
+                { notify && (
                   <div className="inputmy">
-                    <p>{notification}</p>
+                    <p>{ notification }</p>
                   </div>
-                )}
+                ) }
 
                 <div className="bone">
-                  <div className="thetwos">{/* <p></p> */}</div>
+                  <div className="thetwos">{/* <p></p> */ }</div>
                   <div className="thetwo">
-                    <button onClick={pesaHandler}>Submit</button>
+                    <button onClick={ pesaHandler }>Submit</button>
                   </div>
                 </div>
               </div>
             </div>
-          )}
+          ) }
 
-          {stocks && (
+          { stocks && (
             <div className="poppesa">
               <div className="contentonest">
                 <div className="jinss">
@@ -573,7 +646,7 @@ export default function Expenses() {
                 </div>
                 <div className="chote">
                   <div className="bone">
-                    <div className="thetwos">{/* <p>CLOSINGS</p> */}</div>
+                    <div className="thetwos">{/* <p>CLOSINGS</p> */ }</div>
 
                     <div className="twos">
                       <p>PETROL STOCK</p>
@@ -583,16 +656,16 @@ export default function Expenses() {
                       <input
                         type="number"
                         placeholder="Physical stock"
-                        value={pmsphyscal}
-                        onChange={(e) => setPhysicalpms(e.target.value)}
+                        value={ pmsphyscal }
+                        onChange={ ( e ) => setPhysicalpms( e.target.value ) }
                       />
                     </div>
                     <div className="thetwos">
                       <input
                         type="number"
                         placeholder="Dipstick stock"
-                        value={pmsdispst}
-                        onChange={(e) => setDipstpms(e.target.value)}
+                        value={ pmsdispst }
+                        onChange={ ( e ) => setDipstpms( e.target.value ) }
                       />
                     </div>
 
@@ -604,35 +677,90 @@ export default function Expenses() {
                       <input
                         type="number"
                         placeholder="Physical stock"
-                        value={agophyscal}
-                        onChange={(e) => setPhysicalago(e.target.value)}
+                        value={ agophyscal }
+                        onChange={ ( e ) => setPhysicalago( e.target.value ) }
                       />
                     </div>
                     <div className="thetwos">
                       <input
                         type="number"
                         placeholder="Dipstick stock"
-                        value={agodispst}
-                        onChange={(e) => setDipstago(e.target.value)}
+                        value={ agodispst }
+                        onChange={ ( e ) => setDipstago( e.target.value ) }
                       />
                     </div>
 
-                    {notify && (
+                    { notify && (
                       <div className="inputmy">
-                        <p>{notification}</p>
+                        <p>{ notification }</p>
                       </div>
-                    )}
+                    ) }
 
                     <div className="thetwo">
-                      <button onClick={stocksHandler}>Submit</button>
+                      <button onClick={ stocksHandler }>Submit</button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          )}
+          ) }
+     
+     {sure && (
+        <div className="poppesao">
+          <div className="contentonesty">
+            <div className="canc" onClick={cancPopdelete}>
+              {/* <img src="" alt="" /> */}
+              <p>x</p>
+            </div>
+            <div className="ours">
+              <div className="sdacont">
+                <div className="totalcash">
+                  <p>UPDATING' FUEL VALUES? </p>
+                </div>
+                <div className="forms">
+                  
 
-          {debts && (
+                  <div className="areyou">
+                    <p>Adding to today values and amount.</p>
+                    <p>Are you sure to do this?</p>
+                  </div>
+
+                  <div className="inputo">
+                    <button onClick={cancPopdelete}>No</button>
+                    <button onClick={confirm}>Yes</button>
+                  </div>
+                </div>
+
+                {notify && (
+                  <div className="inputmy">
+                    <p>{notification}</p>
+                  </div>
+                )}
+
+                {/* {loadings ? (
+              <div className="spin">
+                {" "}
+                <DotLoader
+                  color={color}
+                  loading={loadings}
+                  // cssOverride={override}
+                  size={25}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              </div>
+            ) : (
+              <></>
+            )} */}
+
+            
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+          { debts && (
             <div className="poppesa">
               <div className="contentonesy">
                 <div className="ours">
@@ -642,33 +770,33 @@ export default function Expenses() {
                     </div>
                     <div className="forms">
                       <div className="input-two">
-                        {/* <i>icon</i> */}
+                        {/* <i>icon</i> */ }
                         <input
                           placeholder="Name"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
+                          value={ name }
+                          onChange={ ( e ) => setName( e.target.value ) }
                         />
                       </div>
 
                       <div className="input-two">
-                        {/* <i>icon</i> */}
+                        {/* <i>icon</i> */ }
                         <input
                           type="number"
                           placeholder="Amount"
-                          value={amount}
-                          onChange={(e) => setAmount(e.target.value)}
+                          value={ amount }
+                          onChange={ ( e ) => setAmount( e.target.value ) }
                         />
                       </div>
                     </div>
 
-                    {notify && (
+                    { notify && (
                       <div className="inputmy">
-                        <p>{notification}</p>
+                        <p>{ notification }</p>
                       </div>
-                    )}
+                    ) }
 
                     <div className="remember-opt">
-                      <button onClick={debtsHandler} className="sign-btn">
+                      <button onClick={ debtsHandler } className="sign-btn">
                         Submit
                       </button>
                     </div>
@@ -676,9 +804,9 @@ export default function Expenses() {
                 </div>
               </div>
             </div>
-          )}
+          ) }
 
-          {credits && (
+          { credits && (
             <div className="poppesa">
               <div className="contentonesy">
                 <div className="ours">
@@ -688,42 +816,42 @@ export default function Expenses() {
                     </div>
                     <div className="forms">
                       <div className="input-two">
-                        {/* <i>icon</i> */}
+                        {/* <i>icon</i> */ }
                         <input
                           placeholder="Name"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
+                          value={ name }
+                          onChange={ ( e ) => setName( e.target.value ) }
                         />
                       </div>
 
                       <div className="input-two">
-                        {/* <i>icon</i> */}
+                        {/* <i>icon</i> */ }
                         <input
                           type="number"
                           placeholder="Amount"
-                          value={amount}
-                          onChange={(e) => setAmount(e.target.value)}
+                          value={ amount }
+                          onChange={ ( e ) => setAmount( e.target.value ) }
                         />
                       </div>
 
                       <div className="input-two">
-                        {/* <i>icon</i> */}
+                        {/* <i>icon</i> */ }
                         <input
                           placeholder="Mode of Payment"
-                          value={mode}
-                          onChange={(e) => setMode(e.target.value)}
+                          value={ mode }
+                          onChange={ ( e ) => setMode( e.target.value ) }
                         />
                       </div>
                     </div>
 
-                    {notify && (
+                    { notify && (
                       <div className="inputmy">
-                        <p>{notification}</p>
+                        <p>{ notification }</p>
                       </div>
-                    )}
+                    ) }
 
                     <div className="remember-opt">
-                      <button onClick={credHandler} className="sign-btn">
+                      <button onClick={ credHandler } className="sign-btn">
                         Submit
                       </button>
                     </div>
@@ -731,9 +859,9 @@ export default function Expenses() {
                 </div>
               </div>
             </div>
-          )}
+          ) }
 
-          {moneycount && (
+          { moneycount && (
             <div className="poppesaa">
               <div className="contentonesa">
                 <div className="jins">
@@ -748,24 +876,24 @@ export default function Expenses() {
                       <input
                         type="number"
                         placeholder="10,000"
-                        value={tenths}
-                        onChange={(e) => setTenths(e.target.value)}
+                        value={ tenths }
+                        onChange={ ( e ) => setTenths( e.target.value ) }
                       />
                     </div>
                     <div className="thetwos">
                       <input
                         type="number"
                         placeholder="5,000"
-                        value={fiveths}
-                        onChange={(e) => setFiveths(e.target.value)}
+                        value={ fiveths }
+                        onChange={ ( e ) => setFiveths( e.target.value ) }
                       />
                     </div>
                     <div className="thetwos">
                       <input
                         type="number"
                         placeholder="2,000"
-                        value={twoths}
-                        onChange={(e) => setTwoths(e.target.value)}
+                        value={ twoths }
+                        onChange={ ( e ) => setTwoths( e.target.value ) }
                       />
                     </div>
 
@@ -773,8 +901,8 @@ export default function Expenses() {
                       <input
                         type="number"
                         placeholder="1,000"
-                        value={oneths}
-                        onChange={(e) => setOneths(e.target.value)}
+                        value={ oneths }
+                        onChange={ ( e ) => setOneths( e.target.value ) }
                       />
                     </div>
 
@@ -782,20 +910,20 @@ export default function Expenses() {
                       <input
                         type="number"
                         placeholder="500"
-                        value={fivehs}
-                        onChange={(e) => setFivehs(e.target.value)}
+                        value={ fivehs }
+                        onChange={ ( e ) => setFivehs( e.target.value ) }
                       />
                     </div>
                   </div>
 
                   <div className="bone">
-                    <div className="thetwos">{/* <p></p> */}</div>
+                    <div className="thetwos">{/* <p></p> */ }</div>
                     <div className="thetwos">
                       <input
                         type="number"
                         placeholder="200"
-                        value={twohs}
-                        onChange={(e) => setTwohs(e.target.value)}
+                        value={ twohs }
+                        onChange={ ( e ) => setTwohs( e.target.value ) }
                       />
                     </div>
 
@@ -803,8 +931,8 @@ export default function Expenses() {
                       <input
                         type="number"
                         placeholder="100"
-                        value={onehs}
-                        onChange={(e) => setOnehs(e.target.value)}
+                        value={ onehs }
+                        onChange={ ( e ) => setOnehs( e.target.value ) }
                       />
                     </div>
 
@@ -812,8 +940,8 @@ export default function Expenses() {
                       <input
                         type="number"
                         placeholder="50"
-                        value={fiftys}
-                        onChange={(e) => setFiftys(e.target.value)}
+                        value={ fiftys }
+                        onChange={ ( e ) => setFiftys( e.target.value ) }
                       />
                     </div>
 
@@ -821,25 +949,25 @@ export default function Expenses() {
                       <input
                         type="number"
                         placeholder="Z-REPORT AMOUNT"
-                        value={zrepot}
-                        onChange={(e) => setZrepot(e.target.value)}
+                        value={ zrepot }
+                        onChange={ ( e ) => setZrepot( e.target.value ) }
                       />
                     </div>
 
-                    {notify && (
+                    { notify && (
                       <div className="inputmy">
-                        <p>{notification}</p>
+                        <p>{ notification }</p>
                       </div>
-                    )}
+                    ) }
                     <div className="thetwo">
-                      <button onClick={moneycountHandler}>Submit</button>
+                      <button onClick={ moneycountHandler }>Submit</button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          )}
-          {/* body contents */}
+          ) }
+          {/* body contents */ }
           <div className="body-contentc">
             <div className="our">
               <div className="bodyone">
@@ -856,9 +984,9 @@ export default function Expenses() {
                         <input
                           type="number"
                           placeholder="Analog values"
-                          value={pmsoneanalogClosing}
-                          onChange={(e) =>
-                            setPmsoneanalogClosing(e.target.value)
+                          value={ pmsoneanalogClosing }
+                          onChange={ ( e ) =>
+                            setPmsoneanalogClosing( e.target.value )
                           }
                         />
                       </div>
@@ -866,8 +994,8 @@ export default function Expenses() {
                         <input
                           type="number"
                           placeholder="Digital values"
-                          value={pmsonedigClosing}
-                          onChange={(e) => setPmsonedigClosing(e.target.value)}
+                          value={ pmsonedigClosing }
+                          onChange={ ( e ) => setPmsonedigClosing( e.target.value ) }
                         />
                       </div>
                     </div>
@@ -880,9 +1008,9 @@ export default function Expenses() {
                         <input
                           type="number"
                           placeholder="Analog values"
-                          value={pmsoneanalogOpening}
-                          onChange={(e) =>
-                            setPmsoneanalogOpening(e.target.value)
+                          value={ pmsoneanalogOpening }
+                          onChange={ ( e ) =>
+                            setPmsoneanalogOpening( e.target.value )
                           }
                         />
                       </div>
@@ -890,8 +1018,8 @@ export default function Expenses() {
                         <input
                           type="number"
                           placeholder="Digital values"
-                          value={pmsonedigOpening}
-                          onChange={(e) => setPmsonedigOpening(e.target.value)}
+                          value={ pmsonedigOpening }
+                          onChange={ ( e ) => setPmsonedigOpening( e.target.value ) }
                         />
                       </div>
                     </div>
@@ -911,9 +1039,9 @@ export default function Expenses() {
                         <input
                           type="number"
                           placeholder="Analog values"
-                          value={agooneanalogClosing}
-                          onChange={(e) =>
-                            setAgooneanalogClosing(e.target.value)
+                          value={ agooneanalogClosing }
+                          onChange={ ( e ) =>
+                            setAgooneanalogClosing( e.target.value )
                           }
                         />
                       </div>
@@ -921,8 +1049,8 @@ export default function Expenses() {
                         <input
                           type="number"
                           placeholder="Digital values"
-                          value={agoonedigClosing}
-                          onChange={(e) => setAgoonedigClosing(e.target.value)}
+                          value={ agoonedigClosing }
+                          onChange={ ( e ) => setAgoonedigClosing( e.target.value ) }
                         />
                       </div>
                     </div>
@@ -935,9 +1063,9 @@ export default function Expenses() {
                         <input
                           type="number"
                           placeholder="Analog values"
-                          value={agooneanalogOpening}
-                          onChange={(e) =>
-                            setAgooneanalogOpening(e.target.value)
+                          value={ agooneanalogOpening }
+                          onChange={ ( e ) =>
+                            setAgooneanalogOpening( e.target.value )
                           }
                         />
                       </div>
@@ -945,8 +1073,8 @@ export default function Expenses() {
                         <input
                           type="number"
                           placeholder="Digital values"
-                          value={agoonedigOpening}
-                          onChange={(e) => setAgoonedigOpening(e.target.value)}
+                          value={ agoonedigOpening }
+                          onChange={ ( e ) => setAgoonedigOpening( e.target.value ) }
                         />
                       </div>
                     </div>
@@ -968,9 +1096,9 @@ export default function Expenses() {
                         <input
                           type="number"
                           placeholder="Analog values"
-                          value={pmstwoanalogClosing}
-                          onChange={(e) =>
-                            setPmstwoanalogClosing(e.target.value)
+                          value={ pmstwoanalogClosing }
+                          onChange={ ( e ) =>
+                            setPmstwoanalogClosing( e.target.value )
                           }
                         />
                       </div>
@@ -978,8 +1106,8 @@ export default function Expenses() {
                         <input
                           type="number"
                           placeholder="Digital values"
-                          value={pmstwodigClosing}
-                          onChange={(e) => setPmstwodigClosing(e.target.value)}
+                          value={ pmstwodigClosing }
+                          onChange={ ( e ) => setPmstwodigClosing( e.target.value ) }
                         />
                       </div>
                     </div>
@@ -992,9 +1120,9 @@ export default function Expenses() {
                         <input
                           type="number"
                           placeholder="Analog values"
-                          value={pmstwoanalogOpening}
-                          onChange={(e) =>
-                            setPmstwoanalogOpening(e.target.value)
+                          value={ pmstwoanalogOpening }
+                          onChange={ ( e ) =>
+                            setPmstwoanalogOpening( e.target.value )
                           }
                         />
                       </div>
@@ -1002,8 +1130,8 @@ export default function Expenses() {
                         <input
                           type="number"
                           placeholder="Digital values"
-                          value={pmstwodigOpening}
-                          onChange={(e) => setPmstwodigOpening(e.target.value)}
+                          value={ pmstwodigOpening }
+                          onChange={ ( e ) => setPmstwodigOpening( e.target.value ) }
                         />
                       </div>
                     </div>
@@ -1023,9 +1151,9 @@ export default function Expenses() {
                         <input
                           type="number"
                           placeholder="Analog values"
-                          value={agotwoanalogClosing}
-                          onChange={(e) =>
-                            setAgotwoanalogClosing(e.target.value)
+                          value={ agotwoanalogClosing }
+                          onChange={ ( e ) =>
+                            setAgotwoanalogClosing( e.target.value )
                           }
                         />
                       </div>
@@ -1033,8 +1161,8 @@ export default function Expenses() {
                         <input
                           type="number"
                           placeholder="Digital values"
-                          value={agotwodigClosing}
-                          onChange={(e) => setAgotwodigClosing(e.target.value)}
+                          value={ agotwodigClosing }
+                          onChange={ ( e ) => setAgotwodigClosing( e.target.value ) }
                         />
                       </div>
                     </div>
@@ -1047,9 +1175,9 @@ export default function Expenses() {
                         <input
                           type="number"
                           placeholder="Analog values"
-                          value={agotwoanalogOpening}
-                          onChange={(e) =>
-                            setAgotwoanalogOpening(e.target.value)
+                          value={ agotwoanalogOpening }
+                          onChange={ ( e ) =>
+                            setAgotwoanalogOpening( e.target.value )
                           }
                         />
                       </div>
@@ -1057,8 +1185,8 @@ export default function Expenses() {
                         <input
                           type="number"
                           placeholder="Digital values"
-                          value={agotwodigOpening}
-                          onChange={(e) => setAgotwodigOpening(e.target.value)}
+                          value={ agotwodigOpening }
+                          onChange={ ( e ) => setAgotwodigOpening( e.target.value ) }
                         />
                       </div>
                     </div>
@@ -1067,19 +1195,19 @@ export default function Expenses() {
               </div>
 
               <div className="updateing">
-                
-                <div className="edits" onClick={literHandler} >
+
+                <div className="edits" onClick={ literHandler } >
                   <p>SAVE VALUES</p>
                 </div>
 
-                {notify && (
+                { notify && (
                   <div className="inputmy">
-                    <p>{notification}</p>
+                    <p>{ notification }</p>
                   </div>
-                )}
+                ) }
 
-                <button onClick={confirm} >SUBMIT FORM</button>
-                {/* <button onClick={confirm}>CONFIRM</button> */}
+                <button onClick={ sureTy } >SUBMIT FORM</button>
+                {/* <button onClick={confirm}>CONFIRM</button> */ }
               </div>
             </div>
           </div>
