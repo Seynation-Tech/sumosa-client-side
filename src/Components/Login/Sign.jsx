@@ -100,6 +100,7 @@ export default function Sign() {
       setNotfs(true)
       setLoading(false);
       setStatus(res.data);
+      navigate("/signin")
       
   }catch(err){
     setNotfs(true)
@@ -133,11 +134,11 @@ export default function Sign() {
                   onChange={(e) => setName(e.target.value)}/>
               </div>
 
-              <div className="input-two">
+              {currentUser[ 0 ]?.role==="director" && <div className="input-two">
                 {/* <i>icon</i> */}
                 <input placeholder="Role" alue={role}
                   onChange={(e) => setRole(e.target.value)}/>
-              </div>
+              </div>}
               <div className="input-two">
                 {/* <i>icon</i> */}
                 <input type="number" placeholder="Contacts" value={contacts}
@@ -180,7 +181,7 @@ export default function Sign() {
           </div>
           <div className="atts">
             <button onClick={updateData}>UPDATE</button>
-            <button  onClick={addUser}>ADD USER</button>
+           { currentUser[ 0 ]?.role === "director" && <button  onClick={addUser}>ADD USER</button>}
           </div>
         </div>
        

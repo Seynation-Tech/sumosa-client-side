@@ -57,7 +57,7 @@ endDate.setDate( currentDate.getDate() - currentDayofWeek + 7 );
 const formattedStartDate = currentDate.toISOString().split( 'T' )[ 0 ]
 const formattedEndDate = endDate.toISOString().split( 'T' )[ 0 ]
 
-console.log(formattedStartDate)
+// console.log(formattedStartDate)
 
 export default function Expenses ()
 {

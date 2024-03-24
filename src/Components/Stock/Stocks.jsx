@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import Sidebar from "../Sidebar/Sidebar";
-import bell from "../../Images/notify.png";
+import growth from "../../Images/droplet.png";
 import Graphs from "../Charts/Graphs";
 import "./Stock.css";
 
@@ -63,7 +63,7 @@ export default function Sales() {
 
   useEffect(() => {
     setLoading(true);
-
+    window.scrollTo( 0, 0 );
     const fetchData = async () => {
       try {
         const respone = await axios.get(`${url}/api/pumps/dieselone/`, {
@@ -183,7 +183,9 @@ export default function Sales() {
                 <p>Current Sale Metrics</p>
               </div>
 
-              <div className="sss"></div>
+              <div className="sss">
+              <img src={growth} style={{width: "23px"}} alt="" />
+              </div>
             </div>
             <div className="alls">
               <div className="sds">
@@ -307,7 +309,7 @@ export default function Sales() {
                   return (
                     <tr>
                       <td>{key + 1}</td>
-                      <td>{(val.uid).split(",")[1]}</td>
+                      <td>{(val.uid).split(",")[0]}</td>
                       <td>{Number(val.closingdigital).toLocaleString()}</td>
                       <td>{Number(val.openingdigital).toLocaleString()}</td>
                       <td>{Number(val.outputvalue).toLocaleString()}</td>
@@ -345,7 +347,7 @@ export default function Sales() {
                   return (
                     <tr>
                       <td>{key + 1}</td>
-                      <td>{(val.uid).split(",")[1]}</td>
+                      <td>{(val.uid).split(",")[0]}</td>
                       <td>{Number(val.closingsanalog).toLocaleString()}</td>
                       <td>{Number(val.openinganalog).toLocaleString()}</td>
                       <td>{Number(val.outputvalue).toLocaleString()}</td>

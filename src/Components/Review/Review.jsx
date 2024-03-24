@@ -189,7 +189,7 @@ export default function Review ()
     useEffect( () =>
     {
         setLoading( true );
-
+        window.scrollTo( 0, 0 );
         // const interval = setInterval( () =>
         // {
         const fetchData = async () =>
@@ -669,7 +669,7 @@ export default function Review ()
 
             <div className="sectionthres">
                 <div className="general">
-                    <p>TODAY GENERAL REPORT</p>
+                    <p>GENERAL REPORT  {getFormattedDate()}</p>
                 </div>
                 <div className="datepicking">
                     <input
@@ -707,7 +707,7 @@ export default function Review ()
                             </div>
 
                             <p className="mbili">
-                                Tsh { Number( salesdata.difference ).toLocaleString() }
+                                Tsh { Number( salesdata.zreport ).toLocaleString() }
                             </p>
                         </div>
 
@@ -971,7 +971,7 @@ export default function Review ()
                                             <td>{ val.name }</td>
                                             <td>{ Number( val.amount ).toLocaleString() }</td>
                                             <td>{ val?.modeofpay || "-" }</td>
-                                            <td>{ val.uid.split( "," )[ 1 ] }</td>
+                                            <td>{ val.uid.split( "," )[ 0 ] }</td>
                                         </tr>
                                     );
                                 } ) }
@@ -1005,7 +1005,7 @@ export default function Review ()
                                             <td>{ val.name }</td>
                                             <td>{ Number( val.amount ).toLocaleString() }</td>
                                             <td>{ val?.modeofpay || "-" }</td>
-                                            <td>{ val.uid.split( "," )[ 1 ] }</td>
+                                            <td>{ val.uid.split( "," )[ 0 ] }</td>
                                         </tr>
                                     );
                                 } ) }
@@ -1037,7 +1037,7 @@ export default function Review ()
                                         <td>{ key + 1 }</td>
                                         <td>{ val.usages }</td>
                                         <td>{ Number( val.amount ).toLocaleString() }</td>
-                                        <td>{ val.uid.split( "," )[ 1 ] }</td>
+                                        <td>{ val.uid.split( "," )[ 0 ] }</td>
                                     </tr>
                                 );
                             } ) }

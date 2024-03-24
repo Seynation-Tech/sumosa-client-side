@@ -64,7 +64,6 @@ navigate("/signin")
     if (name && role && contacts && residence && idnumber && password) {
       try {
         
-        const lastName = name.split(" ")[0];
         const uid = days.toLowerCase() + ","+date;
         // name	username	password	role	contacts	phaseshift	image	idnumber	residence	permit	
 
@@ -90,6 +89,8 @@ navigate("/signin")
         setNotfs(true)
         setLoading(false);
         setStatus(res.data);
+
+      
       } catch (err) {
         setNotfs(true)
 

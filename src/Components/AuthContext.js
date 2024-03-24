@@ -118,6 +118,73 @@ export const AuthContextProvider = ({ children }) => {
   const [pmstwoanalogopening,setPmstwoanalogopening] = useState("0"); 
   const[pmstwoanalogclosing, setPmstwoanalogclosing] = useState("0");
 
+  
+  const [ salesdata, setSales ] = useState( {
+    totalsales: "0",
+    difference: "0",
+    totaldebts: "0",
+    zreport: "0",
+    agophysical: "0",
+    agodipstick: "0",
+    pmsphysical: "0",
+    creditors: [],
+    debtors: [],
+    dieselsales: "0",
+    pmssales: "0",
+    expenses: "0",
+    expensesdata: [],
+    pmsdipstick: [],
+    pmsoneoutput: "0",
+    pmstwooutput: "0",
+    agooneoutput: "0",
+    agotwooutput: "0",
+} );
+
+const [ values, setValues ] = useState( {
+    pmsonedigitalclosing: "0",
+    pmsonedigitalopening: "0",
+    pmsonedigitaloutput: "0",
+
+    pmstwodigitalclosing: "0",
+    pmstwodigitalopening: "0",
+    pmstwodigitaloutput: "0",
+
+    agoonedigitalclosing: "0",
+    agoonedigitalopening: "0",
+    agoonedigitaloutput: "0",
+
+    agotwodigitalclosing: "0",
+    agotwodigitalopening: "0",
+    agotwodigitaloutput: "0",
+
+    pmsoneanalogclosing: "0",
+    pmsoneanalogopening: "0",
+    pmsoneanalogoutput: "0",
+
+    pmstwoanalogclosing: "0",
+    pmstwoanalogopening: "0",
+    pmstwoanalogoutput: "0",
+
+    agooneanalogclosing: "0",
+    agooneanalogopening: "0",
+    agooneanalogoutput: "0",
+
+    agotwoanalogclosing: "0",
+    agotwoanalogopening: "0",
+    agotwoanalogoutput: "0",
+} );
+
+
+  function getFormattedDate ()
+  {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String( today.getMonth() + 1 ).padStart( 2, "0" ); // Add leading zero if needed
+      const day = String( today.getDate() ).padStart( 2, "0" ); // Add leading zero if needed
+      return `${ year }-${ month }-${ day }`;
+  }
+
+
   useEffect(() => {
     const interval = setInterval(() => {
       const fetchData = async () => {
@@ -188,6 +255,139 @@ export const AuthContextProvider = ({ children }) => {
           const rsts = await axios.get(`${url}/api/weeklydatas/alldatas/${startdate}/${enddate}`, {
             withCredentials: true,
           });
+
+
+const todate = getFormattedDate();
+
+           
+
+                const allreportBYid = await axios.get(
+                    `http://localhost:5001/api/pumps/alldatavalues/${ todate }`,
+                    {
+                        withCredentials: true,
+                    }
+                );
+
+                const allreportsbyid = await axios.get(
+                    `http://localhost:5001/api/pumps/alldata/${ todate }`,
+                    {
+                        withCredentials: true,
+                    }
+                );
+
+                const report = await axios.get(
+                    `http://localhost:5001/api/pumps/alldatavalues`,
+                    {
+                        withCredentials: true,
+                    }
+                );
+
+                const allreports = await axios.get(
+                    `http://localhost:5001/api/pumps/alldata`,
+                    {
+                        withCredentials: true,
+                    }
+                );
+
+                const datas = allreportBYid.data;
+                const mydatas = allreportsbyid.data;
+
+                const pmsoneouput = datas.petrol.pmsone[ 0 ]?.outputvalue ?? 0;
+                const pmstwooutput = datas.petrol.pmstwo[ 0 ]?.outputvalue ?? 0;
+
+                const agooneoutput = datas.diesel.agoone[ 0 ]?.outputvalue ?? 0;
+                const agotwooutput = datas.diesel.agotwo[ 0 ]?.outputvalue ?? 0;
+
+                // console.log(datas)
+
+                const pmsonedigitalclosing = mydatas.pmsone[ 0 ]?.closingdigital ?? 0;
+                const pmsonedigitalopening = mydatas.pmsone[ 0 ]?.openingdigital ?? 0;
+                const pmsonedigitaloutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
+
+                const pmsoneanalogclosing = mydatas.pmsone[ 0 ]?.closingsanalog ?? 0;
+                const pmsoneanalogopening = mydatas.pmsone[ 0 ]?.openinganalog ?? 0;
+                const pmsoneanalogoutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
+
+                const pmstwodigitalclosing = mydatas.pmstwo[ 0 ]?.closingdigital ?? 0;
+                const pmstwodigitalopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
+                const pmstwodigitaloutputvalue = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
+
+                const pmstwoanalogClosing = mydatas.pmstwo[ 0 ]?.closingsanalog ?? 0;
+                const pmstwoanalogopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
+                const pmstwoanalogoutput = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
+
+                const agoonedigitalclosing = mydatas.agoone[ 0 ]?.closingdigital ?? 0;
+                const agoonedigitalopening = mydatas.agoone[ 0 ]?.openingdigital ?? 0;
+                const agoonedigitaloutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
+
+                const agotwodigitalclosing = mydatas.agotwo[ 0 ]?.closingdigital ?? 0;
+                const agotowodigitalopening = mydatas.agotwo[ 0 ]?.openingdigital ?? 0;
+                const agotwodigitaloutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
+
+                const agooneanalogclosing = mydatas.agoone[ 0 ]?.closingsanalog ?? 0;
+                const agooneanalogopening = mydatas.agoone[ 0 ]?.openinganalog ?? 0;
+                const agooneanalogoutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
+
+                const agotwoanalogclosing = mydatas.agotwo[ 0 ]?.closingsanalog ?? 0;
+                const agotwoanalogopening = mydatas.agotwo[ 0 ]?.openinganalog ?? 0;
+                const agotwoanalogoutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
+
+                setValues( {
+                    pmsonedigitalclosing: pmsonedigitalclosing,
+                    pmsonedigitalopening: pmsonedigitalopening,
+                    pmsonedigitaloutput: pmsonedigitaloutputvalue,
+
+                    pmstwodigitalclosing: pmstwodigitalclosing,
+                    pmstwodigitalopening: pmstwodigitalopening,
+                    pmstwodigitaloutput: pmstwodigitaloutputvalue,
+
+                    agoonedigitalclosing: agoonedigitalclosing,
+                    agoonedigitalopening: agoonedigitalopening,
+                    agoonedigitaloutput: agoonedigitaloutput,
+
+                    agotwodigitalclosing: agotwodigitalclosing,
+                    agotwodigitalopening: agotowodigitalopening,
+                    agotwodigitaloutput: agotwodigitaloutput,
+
+                    pmsoneanalogclosing: pmsoneanalogclosing,
+                    pmsoneanalogopening: pmsoneanalogopening,
+                    pmsoneanalogoutput: pmsoneanalogoutputvalue,
+
+                    pmstwoanalogclosing: pmstwoanalogClosing,
+                    pmstwoanalogopening: pmstwoanalogopening,
+                    pmstwoanalogoutput: pmstwoanalogoutput,
+
+                    agooneanalogclosing: agooneanalogclosing,
+                    agooneanalogopening: agooneanalogopening,
+                    agooneanalogoutput: agooneanalogoutput,
+
+                    agotwoanalogclosing: agotwoanalogclosing,
+                    agotwoanalogopening: agotwoanalogopening,
+                    agotwoanalogoutput: agotwoanalogoutput,
+                } );
+
+                // console.log( oneData.petrol.pmsone )
+
+                setSales( {
+                    totalsales: datas?.totalsales,
+                    difference: datas?.difference,
+                    totaldebts: datas?.debts,
+                    zreport: datas?.zreport,
+                    agophysical: datas?.agopysical,
+                    agodipstick: datas?.agodipstick,
+                    pmsphysical: datas?.pmsphysical,
+                    creditors: datas?.creditors,
+                    debtors: datas?.debtors,
+                    dieselsales: datas?.dieselsales,
+                    pmssales: datas?.pmssales,
+                    expenses: datas?.expenses,
+                    expensesdata: datas?.expensesdata,
+                    pmsdipstick: datas?.pmsdipstic,
+                    pmsoneoutput: pmsoneouput,
+                    pmstwooutput: pmstwooutput,
+                    agooneoutput: agooneoutput,
+                    agotwooutput: agotwooutput,
+                } );
 
 
           
@@ -494,7 +694,7 @@ export const AuthContextProvider = ({ children }) => {
         totalanalogamount,
         pmsoneamount,pmstwoamount,agooneamount,agotwoamount,
         agotwoanalogclosing,pmsoneanalogopening,pmsoneanalogclosing,
-        pmstwoanalogopening,pmstwoanalogclosing,
+        pmstwoanalogopening,pmstwoanalogclosing,values,salesdata,
         userlogin,
 
         userlogout,

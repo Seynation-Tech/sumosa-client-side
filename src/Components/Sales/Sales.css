@@ -1,3 +1,19 @@
+#dup{
+  font-size: 0.8em;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.605);
+  cursor: pointer;
+  margin-top: 3px;
+}
+
+#dup:hover{
+  color: white;
+}
+
+.sss img{
+  width: 23px;
+}
+
 @media screen and (min-width: 540px) {
   .sectiontwos {
     min-height: 98vh;
@@ -63,10 +79,11 @@
     top: 14px;
   }
   .inputo {
-    height: 80px;
+    height: 60px;
     width: 100%;
     background: rgba(255, 255, 255, 0.056);
     display: flex;
+    margin-bottom: 8px;
     align-items: center;
     justify-content: space-evenly;
   }
@@ -215,8 +232,11 @@
   }
 
   .sss {
-    width: 27px;
-    height: 27px;
+    width: 37px;
+    height: 37px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: rgba(0, 0, 255, 0.048);
     border-radius: 50%;
     border: 1px solid rgba(140, 140, 140, 0.086);

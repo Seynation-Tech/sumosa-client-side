@@ -7,6 +7,7 @@ import Monthly from "../Charts/Expmonthly";
 import Weekly from "../Charts/Expweekly";
 import "./Mobile.css"
 import axios from "axios";
+import pen from "../../Images/pen.png";
 import { AuthContext } from "../AuthContext";
 
 let today = new Date();
@@ -25,7 +26,7 @@ let mydate =
   ":" +
   today.getSeconds();
 
-  const currentDate = new Date()
+const currentDate = new Date()
 const currentDayofWeek = currentDate.getDay();
 
 const startDate = new Date( currentDate );
@@ -49,6 +50,7 @@ export default function Expenses ()
   const { url, days } = useContext( AuthContext );
   const [ loading, setLoading ] = useState( false );
   const [ tableData, setData ] = useState( [] );
+  const [ deletes, setDelete ] = useState( false );
 
   const [ weekly, setWeekly ] = useState( true );
   const [ monthly, setMonthly ] = useState( false );
@@ -58,8 +60,14 @@ export default function Expenses ()
   const [ notify, setNotify ] = useState( false );
 
   const [ sidbar, setSisdebar ] = useState( "desktop" )
+  const [ alldat, setAlls ] = useState( [] );
+  const [ ids, setIds ] = useState( "" )
 
   const [ sidebar, setSidebar ] = useState( false );
+  const [ delets, setDelets ] = useState( false )
+
+  const [ name, setName ] = useState( "" )
+  const [ amounts, setAmounts ] = useState( "" )
 
   useEffect( () =>
   {
@@ -111,11 +119,33 @@ export default function Expenses ()
     setMonthly( true );
   };
 
+  const cancpop = () =>
+  {
+    setDelete( false );
+    setDelets( false )
+  }
+
+
+  const popdelete = () =>
+  {
+    setDelete( false );
+    setDelets( true )
+  }
+
+
+  const cancPopdelete = () =>
+  {
+    setDelete( false );
+  }
+
   const handleExpenses = () =>
   {
     setExpenses( true );
     setNotify( false );
   };
+
+
+
 
   const cancelExpense = () =>
   {
@@ -159,6 +189,92 @@ export default function Expenses ()
     }
   };
 
+
+  const deletePop = async ( e ) =>
+  {
+    setDelete( true );
+    setNotify( false );
+
+    // console.log(e)
+    setName( e?.usages )
+    setAmounts( e?.amount )
+    setIds( e?.id )
+
+    try
+    {
+      const respfour = await axios.get( `${ url }/api/billing/expenses/${ e?.id }`, {
+        withCredentials: true,
+      } );
+
+      // alert(respfour.data);
+
+      //
+    } catch ( err )
+    {
+      setLoading( false );
+      console.log( err );
+      // setError( "Please refresh..." );
+    }
+  };
+
+
+  const deleteHandler = async ( e ) =>
+  {
+    try
+    {
+      //  alert(alldat.name)
+      const resone = await axios.delete( `${ url }/api/billing/expenses/${ ids }`, { withCredentials: true } );
+      setNotify( true );
+      setNotification( resone.data );
+      setLoading( false );
+
+    } catch ( err )
+    {
+
+    }
+  }
+
+
+  const updateExpenses = async ( e ) =>
+  {
+
+    setNotify( false );
+
+    // const uid = (e.target.value)
+    // alert(ids)
+
+    let data = {
+
+      'usages': name,
+      'amount': amounts
+    }
+
+
+
+    try
+    {
+      const res = await axios.put( `${ url }/api/billing/expenses/${ ids }`, data, { withCredentials: true } )
+      // setStatus(res.data)
+      setNotify( true );
+
+
+      setNotification( res.data );
+
+      // console.log(res.data)
+
+      // setNotfs(true)
+      setLoading( false );
+      // setStatus(res.data);
+
+    } catch ( err )
+    {
+      // setNotfs(true)
+
+      // setStatus("Registration Failed!");
+    }
+  }
+
+
   return (
     <div className="mysals">
       <Sidebar />
@@ -186,7 +302,7 @@ export default function Expenses ()
           <div className="poppes">
             <div className="contentonesya">
               <div className="canc" onClick={ cancelExpense }>
-                {/* <img src="" alt="" /> */}
+                {/* <img src="" alt="" /> */ }
                 <p>x</p>
               </div>
               <div className="ours">
@@ -232,6 +348,117 @@ export default function Expenses ()
           </div>
         ) }
 
+
+        { delets && (
+          <div className="poppesao">
+            <div className="contentonesty">
+              <div className="canc" onClick={ cancpop }>
+                {/* <img src="" alt="" /> */ }
+                <p>x</p>
+              </div>
+              <div className="ours">
+                <div className="sdacont">
+                  <div className="totalcash">
+                    <p>DELETE' DETAILS? </p>
+                  </div>
+                  <div className="forms">
+
+                    <div className="areyou">
+                      <p>Are you sure to delete?</p>
+                    </div>
+
+                    <div className="inputo">
+                      <button onClick={ cancpop }>No</button>
+                      <button onClick={ deleteHandler }>Yes</button>
+                    </div>
+                  </div>
+
+                  { notify && (
+                    <div className="inputmy">
+                      <p>{ notification }</p>
+                    </div>
+                  ) }
+
+                  {/* {loadings ? (
+              <div className="spin">
+                {" "}
+                <DotLoader
+                  color={color}
+                  loading={loadings}
+                  // cssOverride={override}
+                  size={25}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              </div>
+            ) : (
+              <></>
+            )} */}
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        ) }
+
+
+
+        { deletes && (
+          <div className="poppesaoo">
+            <div className="contentonestyo">
+              <div className="canc" onClick={ cancPopdelete }>
+                {/* <img src="" alt="" /> */ }
+                <p>x</p>
+              </div>
+              <div className="ours">
+                <div className="sdacont">
+                  <div className="totalcash">
+                    <p>UPDATE EXPENSES </p>
+                  </div>
+
+                  <div className="forms">
+                    <div className="input-two">
+                      {/* <i>icon</i> */ }
+                      <input
+                        type="text"
+                        placeholder="Usage"
+                        value={ name }
+                        onChange={ ( e ) => setName( e.target.value ) }
+                      />
+                    </div>
+
+                    <div className="input-two">
+                      <input
+                        type="text"
+                        placeholder="Amount "
+                        value={ amounts }
+                        onChange={ ( e ) => setAmounts( e.target.value ) }
+                      />
+                    </div>
+                  </div>
+
+                  { notify && (
+                    <div className="inputmy">
+                      <p>{ notification }</p>
+                    </div>
+                  ) }
+
+                  <div className="inputo">
+                    <button onClick={ popdelete }>DELETE</button>
+                    <button onClick={ updateExpenses }>UPDATE</button>
+                  </div>
+
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        ) }
+
+
+
         <div className="paysa">
           <p>EXPENSES GENERAL REPORT</p>
 
@@ -255,6 +482,10 @@ export default function Expenses ()
                     <th>AMOUNT</th>
 
                     <th>DATE</th>
+
+                    <th></th>
+
+
                   </tr>
                 </thead>
                 { tableData.map( ( val, key ) =>
@@ -264,7 +495,11 @@ export default function Expenses ()
                       <td>{ key + 1 }</td>
                       <td>{ val.usages }</td>
                       <td>{ Number( val.amount ).toLocaleString() }</td>
-                      <td>{ ( (val.uid).split(",")[1] ).split( " " )[ 0 ] }</td>
+                      <td>{ ( ( val.uid ).split( "," )[ 0 ] ) }</td>
+
+                      <div className="editexp" onClick={ ( e ) => deletePop( val ) }>
+                        <img src={ pen } alt="" />
+                      </div>
                     </tr>
                   );
                 } ) }
