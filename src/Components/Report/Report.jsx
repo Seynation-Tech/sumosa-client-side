@@ -132,6 +132,260 @@ export default function Expenses ()
   const [deletes, setDelete] = useState(false);
   const navigate = useNavigate();
 
+  const [ mydate, setDate ] = useState( "none" );
+
+  const [ salesdata, setSales ] = useState( {
+    totalsales: "0",
+    difference: "0",
+    totaldebts: "0",
+    zreport: "0",
+    agophysical: "0",
+    agodipstick: "0",
+    pmsphysical: "0",
+    creditors: [],
+    debtors: [],
+    dieselsales: "0",
+    pmssales: "0",
+    expenses: "0",
+    expensesdata: [],
+    pmsdipstick: [],
+    pmsoneoutput: "0",
+    pmstwooutput: "0",
+    agooneoutput: "0",
+    agotwooutput: "0",
+} );
+
+const [ values, setValues ] = useState( {
+    pmsonedigitalclosing: "0",
+    pmsonedigitalopening: "0",
+    pmsonedigitaloutput: "0",
+
+    pmstwodigitalclosing: "0",
+    pmstwodigitalopening: "0",
+    pmstwodigitaloutput: "0",
+
+    agoonedigitalclosing: "0",
+    agoonedigitalopening: "0",
+    agoonedigitaloutput: "0",
+
+    agotwodigitalclosing: "0",
+    agotwodigitalopening: "0",
+    agotwodigitaloutput: "0",
+
+    pmsoneanalogclosing: "0",
+    pmsoneanalogopening: "0",
+    pmsoneanalogoutput: "0",
+
+    pmstwoanalogclosing: "0",
+    pmstwoanalogopening: "0",
+    pmstwoanalogoutput: "0",
+
+    agooneanalogclosing: "0",
+    agooneanalogopening: "0",
+    agooneanalogoutput: "0",
+
+    agotwoanalogclosing: "0",
+    agotwoanalogopening: "0",
+    agotwoanalogoutput: "0",
+} );
+
+function getFormattedDate ()
+{
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String( today.getMonth() + 1 ).padStart( 2, "0" ); 
+    const day = String( today.getDate() ).padStart( 2, "0" ); 
+    return `${ year }-${ month }-${ day }`;
+}
+  const handleUpdate = async (event) =>
+  {
+
+    let flag = sidebar;
+    flag = !flag;
+
+    if (flag){
+      setDate( event.target.value );
+
+      const mydates =  getFormattedDate();
+      // const mydates =  '2024-03-22'
+
+      
+
+      const allreportBYid = await axios.get(
+          `http://localhost:5001/api/pumps/alldatavalues/${ mydates }`,
+          {
+              withCredentials: true,
+          }
+      );
+
+      const allreportsbyid = await axios.get(
+          `http://localhost:5001/api/pumps/alldata/${ mydates }`,
+          {
+              withCredentials: true,
+          }
+      );
+
+
+
+
+
+      const datas = allreportBYid.data;
+      const mydatas = allreportsbyid.data;
+
+
+      const pmsoneouput = datas.petrol.pmsone[ 0 ]?.outputvalue ?? 0;
+      const pmstwooutput = datas.petrol.pmstwo[ 0 ]?.outputvalue ?? 0;
+
+      const agooneoutput = datas.diesel.agoone[ 0 ]?.outputvalue ?? 0;
+      const agotwooutput = datas.diesel.agotwo[ 0 ]?.outputvalue ?? 0;
+
+      // console.log(datas)
+
+      const pmsonedigitalclosing = mydatas.pmsone[ 0 ]?.closingdigital ?? 0;
+      const pmsonedigitalopening = mydatas.pmsone[ 0 ]?.openingdigital ?? 0;
+      const pmsonedigitaloutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
+
+
+
+      const pmsoneanalogclosing = mydatas.pmsone[ 0 ]?.closingsanalog ?? 0;
+      const pmsoneanalogopening = mydatas.pmsone[ 0 ]?.openinganalog ?? 0;
+      const pmsoneanalogoutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
+
+      setPmsonedigOpening(pmsonedigitalopening)
+      setPmsonedigClosing(pmsonedigitalclosing)
+      setPmsoneanalogOpening(pmsoneanalogopening)
+      setPmsoneanalogClosing(pmsoneanalogclosing)
+
+ 
+      const pmstwodigitalclosing = mydatas.pmstwo[ 0 ]?.closingdigital ?? 0;
+      const pmstwodigitalopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
+      const pmstwodigitaloutputvalue = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
+
+      const pmstwoanalogClosing = mydatas.pmstwo[ 0 ]?.closingsanalog ?? 0;
+      const pmstwoanalogopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
+      const pmstwoanalogoutput = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
+
+      setPmstwodigOpening(pmstwodigitalopening)
+      setPmstwodigClosing(pmstwodigitalclosing)
+      setPmstwoanalogOpening(pmstwoanalogopening)
+      setPmstwoanalogClosing(pmstwoanalogClosing)
+    
+
+
+      const agoonedigitalclosing = mydatas.agoone[ 0 ]?.closingdigital ?? 0;
+      const agoonedigitalopening = mydatas.agoone[ 0 ]?.openingdigital ?? 0;
+      const agoonedigitaloutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
+
+      const agotwodigitalclosing = mydatas.agotwo[ 0 ]?.closingdigital ?? 0;
+      const agotowodigitalopening = mydatas.agotwo[ 0 ]?.openingdigital ?? 0;
+      const agotwodigitaloutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
+
+      
+      setAgoonedigOpening(agoonedigitalopening)
+      setAgoonedigClosing(agoonedigitalclosing)
+      setAgotwodigOpening(agotowodigitalopening)
+      setAgotwodigClosing(agotwodigitalclosing)
+
+
+      const agooneanalogclosing = mydatas.agoone[ 0 ]?.closingsanalog ?? 0;
+      const agooneanalogopening = mydatas.agoone[ 0 ]?.openinganalog ?? 0;
+      const agooneanalogoutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
+
+      const agotwoanalogclosing = mydatas.agotwo[ 0 ]?.closingsanalog ?? 0;
+      const agotwoanalogopening = mydatas.agotwo[ 0 ]?.openinganalog ?? 0;
+      const agotwoanalogoutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
+
+      
+      setAgotwoanalogOpening(agotwoanalogopening)
+      setAgotwoanalogClosing(agotwoanalogclosing)
+      setAgooneanalogOpening(agooneanalogopening)
+      setAgooneanalogClosing(agooneanalogclosing)
+
+      // the
+
+      setValues( {
+          pmsonedigitalclosing: pmsonedigitalclosing,
+          pmsonedigitalopening: pmsonedigitalopening,
+          pmsonedigitaloutput: pmsonedigitaloutputvalue,
+
+          pmstwodigitalclosing: pmstwodigitalclosing,
+          pmstwodigitalopening: pmstwodigitalopening,
+          pmstwodigitaloutput: pmstwodigitaloutputvalue,
+
+          agoonedigitalclosing: agoonedigitalclosing,
+          agoonedigitalopening: agoonedigitalopening,
+          agoonedigitaloutput: agoonedigitaloutput,
+
+          agotwodigitalclosing: agotwodigitalclosing,
+          agotwodigitalopening: agotowodigitalopening,
+          agotwodigitaloutput: agotwodigitaloutput,
+
+          pmsoneanalogclosing: pmsoneanalogclosing,
+          pmsoneanalogopening: pmsoneanalogopening,
+          pmsoneanalogoutput: pmsoneanalogoutputvalue,
+
+          pmstwoanalogclosing: pmstwoanalogClosing,
+          pmstwoanalogopening: pmstwoanalogopening,
+          pmstwoanalogoutput: pmstwoanalogoutput,
+
+          agooneanalogclosing: agooneanalogclosing,
+          agooneanalogopening: agooneanalogopening,
+          agooneanalogoutput: agooneanalogoutput,
+
+          agotwoanalogclosing: agotwoanalogclosing,
+          agotwoanalogopening: agotwoanalogopening,
+          agotwoanalogoutput: agotwoanalogoutput,
+      } );
+
+      // console.log( oneData.petrol.pmsone )
+
+      setSales( {
+          totalsales: datas?.totalsales,
+          difference: datas?.difference,
+          totaldebts: datas?.debts,
+          zreport: datas?.zreport,
+          agophysical: datas?.agopysical,
+          agodipstick: datas?.agodipstick,
+          pmsphysical: datas?.pmsphysical,
+          creditors: datas?.creditors,
+          debtors: datas?.debtors,
+          dieselsales: datas?.dieselsales,
+          pmssales: datas?.pmssales,
+          expenses: datas?.expenses,
+          expensesdata: datas?.expensesdata,
+          pmsdipstick: datas?.pmsdipstic,
+          pmsoneoutput: pmsoneouput,
+          pmstwooutput: pmstwooutput,
+          agooneoutput: agooneoutput,
+          agotwooutput: agotwooutput,
+      } );
+    }else{
+      
+      setAgotwoanalogOpening("")
+      setAgotwoanalogClosing("")
+      setAgooneanalogOpening("")
+      setAgooneanalogClosing("")
+        
+      setAgoonedigOpening("")
+      setAgoonedigClosing("")
+      setAgotwodigOpening("")
+      setAgotwodigClosing("")
+
+      setPmsonedigOpening("")
+      setPmsonedigClosing("")
+      setPmsoneanalogOpening("")
+      setPmsoneanalogClosing("")
+
+      
+      setPmstwodigOpening("")
+      setPmstwodigClosing("")
+      setPmstwoanalogOpening("")
+      setPmstwoanalogClosing("")
+    
+    }
+
+  };
+
   const literHandler = async () =>
   {setNotify( false );
     if (
@@ -147,9 +401,9 @@ export default function Expenses ()
     {
       try
       {
-        const dats = days.toLowerCase() + "," + date;
+        const dats =  getFormattedDate()
         let pmsOne = {
-          uid: formattedEndDate,
+          uid: dats,
           closingsanalog: pmsoneanalogClosing,
           closingdigital: pmsonedigClosing,
           openinganalog: pmsoneanalogOpening,
@@ -586,6 +840,8 @@ export default function Expenses ()
       <div className="sectionthresa">
         <div className="general">
           <p>DAILY REPORT FORMS</p>
+          
+          
         </div>
         <div className="year">
           <div className="dail">
@@ -612,12 +868,8 @@ export default function Expenses ()
             <p onClick={ handleStocks }>FUEL STOCK</p>
           </div>
 
-          <div className="download">
-            {/* <p>Monday 12/03/2024</p> */ }
-            {/* <p>12:00:00 AM</p> */ }
-            <div className="down">
-              <img src="" alt="" />
-            </div>
+          <div className="download" onClick={handleUpdate}>
+          <p>EDIT DATA</p>
           </div>
         </div>
         {/* <Real /> */ }

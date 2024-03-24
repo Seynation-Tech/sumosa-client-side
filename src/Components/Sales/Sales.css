@@ -467,12 +467,13 @@
     border-radius: 7px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content:center;
     padding-left: 12px;
     padding-right: 12px;
     font-size: 0.8em;
-    color: rgba(13, 62, 196, 0.539);
-    background: rgba(0, 0, 255, 0.086);
+    color: rgb(255, 255, 255);
+    background: rgb(64, 0, 255);
+    cursor: pointer;
   }
 
   .down {

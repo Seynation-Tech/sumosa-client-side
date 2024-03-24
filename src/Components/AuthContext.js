@@ -439,6 +439,8 @@ export const AuthContextProvider = ( { children } ) =>
             agotwoanalogoutput: agotwoanalogoutput,
         } );
 
+        // console.log(mydatas)
+
 
 
 
@@ -544,7 +546,7 @@ export const AuthContextProvider = ( { children } ) =>
           const toataldiesel =
             Number( aone.outputvalue ) + Number( atwo.outputvalue );
 
-          // console.log(respthree.data.length)
+          console.log(pmone)
 
           if ( respthree.data.length > 1 )
           {

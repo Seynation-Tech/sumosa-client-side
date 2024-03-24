@@ -2,6 +2,12 @@ body {
   background-color: white;
 }
 
+.download p{
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.8em;
+}
+
 @media screen and (min-width: 540px) {
   .welcome-pages {
     min-height: 110vh;

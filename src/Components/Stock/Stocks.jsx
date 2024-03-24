@@ -46,7 +46,7 @@ export default function Sales() {
     diesellitres,
     lastpetrol,
     lastdiesel,
-    url,
+    url,values,salesdata
   } = useContext(AuthContext);
   const [notify, setNotify] = useState(false);
   const [notification, setNotification] = useState("");
@@ -189,11 +189,11 @@ export default function Sales() {
             </div>
             <div className="alls">
               <div className="sds">
-                <p>{petrollitres} L</p>
+                <p>{Number( Number(values.pmsonedigitaloutput) + Number(values.pmstwodigitaloutput)).toLocaleString()} L</p>
                 <p>Total Petol Litres </p>
               </div>
               <div className="sds">
-                <p> {diesellitres} L</p>
+                <p> {Number(Number(values.agoonedigitaloutput)+Number(values.agotwodigitaloutput)).toLocaleString()} L</p>
                 <p>Total Diesel Litres</p>
               </div>
             </div>
@@ -220,7 +220,7 @@ export default function Sales() {
                 <p>PMS 01</p>
               </div>
 
-              <p>{pmsonelitres} L</p>
+              <p>{Number(values.pmsonedigitaloutput).toLocaleString()} L</p>
             </div>
             <div className="bbba">
               <div className="sdaa">
@@ -228,7 +228,7 @@ export default function Sales() {
                 <p>PMS 02</p>
               </div>
 
-              <p>{pmstwolitres} L</p>
+              <p>{ Number(values.pmstwodigitaloutput).toLocaleString} L</p>
             </div>
 
             <div className="bbba">
@@ -237,7 +237,7 @@ export default function Sales() {
                 <p>AGO 01</p>
               </div>
 
-              <p>{agoonelitres} L</p>
+              <p>{Number(values.agoonedigitaloutput).toLocaleString()} L</p>
             </div>
 
             <div className="bbba">
@@ -246,7 +246,7 @@ export default function Sales() {
                 <p>AGO 02</p>
               </div>
 
-              <p>{agotwolitres} L</p>
+              <p>{Number(values.agotwodigitaloutput).toLocaleString()} L</p>
             </div>
           </div>
         </div>

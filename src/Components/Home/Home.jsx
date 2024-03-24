@@ -370,7 +370,7 @@ export default function Home ()
                   </div>
 
                   <div className="amount">
-                    <p> { Number(values.pmsonedigitaloutput) - Number(values.pmstwodigitaloutput)-Number(values.agoonedigitaloutput)-Number(values.agotwodigitaloutput) }</p>
+                    <p> { (Number(values.pmsonedigitaloutput) + Number(values.pmstwodigitaloutput)+Number(values.agoonedigitaloutput)+Number(values.agotwodigitaloutput)).toLocaleString() } L</p>
                   </div>
                 </div>
 
