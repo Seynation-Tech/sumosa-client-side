@@ -37,7 +37,7 @@ export default function Sales ()
   const [ dieselprice, setDieselprice ] = useState( "" );
   const [ petrolprice, setPetrolprice ] = useState( "" );
 
-  const { url, diff, days, zrepos, totalEarnings, dieselAmount, petrolAmount } =
+  const { url, diff, days,salesdata,values, zrepos, totalEarnings, dieselAmount, petrolAmount } =
     useContext( AuthContext );
   const [ loadings, setLoading ] = useState( false );
   const [ reason, setReason ] = useState( "" );
@@ -497,7 +497,7 @@ export default function Sales ()
 
               <div className="en">
                 <div className="mon">
-                  <p>Tsh { totalEarnings }</p>
+                  <p>Tsh { Number(salesdata.totalsales).toLocaleString() }</p>
                 </div>
                 <div className="mm">
                   <img src="" alt="" />
@@ -510,18 +510,18 @@ export default function Sales ()
           <div className="lefts">
             <div className="alls">
               <div className="sds">
-                <p>Tsh { petrolAmount }</p>
+                <p>Tsh { Number(salesdata.pmssales).toLocaleString()  }</p>
                 <p>Today's Petrol Sales </p>
               </div>
               <div className="sds">
-                <p>Tsh { dieselAmount }</p>
+                <p>Tsh { Number(salesdata.dieselsales).toLocaleString()  }</p>
                 <p>Today's Diesel Earnings</p>
               </div>
             </div>
 
             <div className="bbb">
               <p>Sales Difference</p>
-              <p>{ Number( diff ) < 0 ? ( -( Number( diff ) ) ).toLocaleString() : Number( diff ).toLocaleString() }/=</p>
+              <p>{  Number(salesdata.difference).toLocaleString()}/=</p>
             </div>
 
             <div className="stoc">
@@ -562,19 +562,19 @@ export default function Sales ()
                   <div className="input-twos">
                     {/* <i>icon</i> */ }
                     <p>CASH</p>
-                    <p>{ totalEarnings }</p>
+                    <p>{ Number(salesdata.totalsales).toLocaleString() }</p>
                   </div>
 
                   <div className="input-twos">
                     {/* <i>icon</i> */ }
                     <p>Z-REPORT</p>
-                    <p>{ zrepos }</p>
+                    <p>{ Number(salesdata.zreport).toLocaleString() }</p>
                   </div>
 
                   <div className="input-twoos">
                     {/* <i>icon</i> */ }
                     <p>DIFFERENCE</p>
-                    <p>{ totalEarnings }</p>
+                    <p>{ Number(salesdata.difference).toLocaleString() }</p>
                   </div>
                 </div>
                 <div className="input-twoo">

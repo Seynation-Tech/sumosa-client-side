@@ -62,7 +62,7 @@ export default function Home ()
     alldebts,
     totalEarnings,
     dieselAmount,
-    petroldisp,
+    petroldisp,salesdata,values,
     petrolstock,
     dieseldips,
     dieselstock,
@@ -370,7 +370,7 @@ export default function Home ()
                   </div>
 
                   <div className="amount">
-                    <p> { totalliters }</p>
+                    <p> { Number(values.pmsonedigitaloutput) - Number(values.pmstwodigitaloutput)-Number(values.agoonedigitaloutput)-Number(values.agotwodigitaloutput) }</p>
                   </div>
                 </div>
 
@@ -383,7 +383,7 @@ export default function Home ()
                   </div>
 
                   <div className="amount">
-                    <p>Tsh { petrolAmount }</p>
+                    <p>Tsh { Number(salesdata.pmssales).toLocaleString() }</p>
                   </div>
                 </div>
 
@@ -394,7 +394,7 @@ export default function Home ()
                   </div>
 
                   <div className="amount">
-                    <p>Tsh { dieselAmount }</p>
+                    <p>Tsh { Number(salesdata.dieselsales).toLocaleString() }</p>
                   </div>
                 </div>
 
@@ -405,7 +405,7 @@ export default function Home ()
                   </div>
 
                   <div className="amount">
-                    <p>Tsh { totalEarnings }</p>
+                    <p>Tsh { Number(salesdata.totalsales).toLocaleString() }</p>
                   </div>
                 </div>
               </div>
@@ -452,9 +452,9 @@ export default function Home ()
               <img src={stoc} style={{width: "28px"}} alt="" />
               </div>
 
-              <p>Instock: { petrolstock }</p>
+              <p>Instock: { Number(salesdata.pmsphysical).toLocaleString() }</p>
               <p>
-                <span id="aval"> Dipstock: </span> { petroldisp }
+                <span id="aval"> Dipstock: </span> { Number(salesdata.pmsdipstick).toLocaleString() }
               </p>
             </div>
 
@@ -462,7 +462,7 @@ export default function Home ()
               <p>
                 Remain:{ " " }
                 { Number(
-                  Number( petrolstock ) - Number( petroldisp )
+                  Number( salesdata.pmsphysical ) - Number( salesdata.pmsdipstick )
                 ).toLocaleString() }
               </p>
             </div>
@@ -486,9 +486,9 @@ export default function Home ()
               <img src={stoc} style={{width: "28px"}} alt="" />
               </div>
 
-              <p>Instock: { dieselstock }</p>
+              <p>Instock: { Number(salesdata.agophysical).toLocaleString() }</p>
               <p>
-                <span id="aval"> Dipstock: </span> { dieseldips }
+                <span id="aval"> Dipstock: </span> { Number(salesdata.agodipstick).toLocaleString() }
               </p>
             </div>
 
@@ -496,7 +496,7 @@ export default function Home ()
               <p>
                 Remain:{ " " }
                 { Number(
-                  Number( dieselstock ) - Number( dieseldips )
+                  Number( salesdata.agophysical ) - Number( salesdata.agodipstick )
                 ).toLocaleString() }
               </p>
             </div>
