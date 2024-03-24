@@ -133,7 +133,7 @@ export default function Expenses ()
   const navigate = useNavigate();
 
   const literHandler = async () =>
-  {
+  {setNotify( false );
     if (
       pmsonedigOpening &&
       pmsonedigClosing &&
@@ -195,6 +195,7 @@ export default function Expenses ()
         setNotification( resfour.data );
         setLoading( false );
 
+
         //
       } catch ( err )
       {
@@ -210,12 +211,15 @@ export default function Expenses ()
   };
 
   const sureTy =()=>{
+    setNotify(false)
+    setNotification( "" );
     setAre(true)
+
   }
 
   const confirm = async () =>
-  {
-    
+  { setNotify(false)
+    setNotification( "" );
     if ( isNaN( diesellitres ) && isNaN( dieselAmount ) && isNaN( petrolAmount ) && isNaN( petrollitres ) )
     {
       try
@@ -236,17 +240,17 @@ export default function Expenses ()
 
         const response = await axios.post( `${ url }/api/weeklydatas/data`, data );
 
-
-
         setNotify( true );
         setNotification( response.data );
         setLoading( false );
+        
       } catch ( err ) { }
     } 
   };
 
   const pesaHandler = async () =>
-  {
+  { setNotify(false)
+    setNotification( "" );
     if ( mPesa && nmb && crdb )
     {
       try
@@ -270,6 +274,9 @@ export default function Expenses ()
         setNotify( true );
         setNotification( resone.data );
         setLoading( false );
+        setNmb("")
+        setCrdb("")
+        setMpesa("")
 
         //
       } catch ( err )
@@ -289,10 +296,13 @@ export default function Expenses ()
   };
 
   const cancPopdelete =()=>{
+    setNotify(false)
+    setNotification( "" );
     setAre(false);
   }
   const credHandler = async () =>
-  {
+  {   setNotify(false)
+    setNotification( "" );
     if ( name && amount && mode )
     {
       try
@@ -303,7 +313,7 @@ export default function Expenses ()
           name: name,
           amount: amount,
           modeofpay: mode,
-          date: mydate,
+          date: mydate
         };
         setLoading( true );
 
@@ -314,6 +324,10 @@ export default function Expenses ()
         setNotify( true );
         setNotification( resone.data );
         setLoading( false );
+        setName("")
+        setAmount("")
+        setMode("")
+        
       } catch ( err )
       {
         setLoading( false );
@@ -328,7 +342,8 @@ export default function Expenses ()
   };
 
   const debtsHandler = async () =>
-  {
+  { setNotify(false)
+    setNotification( "" );
     if ( name && amount )
     {
       try
@@ -348,6 +363,9 @@ export default function Expenses ()
         setNotification( resone.data );
         setLoading( false );
 
+        setName("")
+        setAmount("")
+
         //
       } catch ( err )
       {
@@ -364,6 +382,8 @@ export default function Expenses ()
 
   const stocksHandler = async () =>
   {
+    setNotify(false)
+    setNotification( "" );
     if ( pmsphyscal && pmsdispst )
     {
       try
@@ -397,6 +417,10 @@ export default function Expenses ()
         setNotify( true );
         setNotification( resone.data );
         setLoading( false );
+        setPhysicalago("")
+        setPhysicalpms("")
+        setDipstago("")
+        setDipstpms("")
 
         //
       } catch ( err )
@@ -417,7 +441,8 @@ export default function Expenses ()
   }
 
   const moneycountHandler = async () =>
-  {
+  {   setNotify(false)
+    setNotification( "" );
     if (
       tenths &&
       fivehs &&
@@ -457,6 +482,15 @@ export default function Expenses ()
         setNotification( resone.data );
         setLoading( false );
 
+        setOnehs("")
+        setTwohs("")
+        setFivehs("")
+        setOneths("")
+        setTwoths("")
+        setFiveths("")
+        setTenths("")
+        setFiftys("")
+
         //
       } catch ( err )
       {
@@ -478,13 +512,14 @@ export default function Expenses ()
   };
 
   const handlePesa = () =>
-  {
+  {  
     setStocks( false );
     setMoneycount( false );
     setDebts( false );
     setPesa( true );
     setCred( false );
-    setNotify( false );
+    setNotify(false)
+    setNotification( "" );
   };
 
   const handleDebt = () =>
@@ -494,7 +529,8 @@ export default function Expenses ()
     setStocks( false );
     setDebts( true );
     setCred( false );
-    setNotify( false );
+    setNotify(false)
+    setNotification( "" );
   };
 
   const handleCred = () =>
@@ -504,7 +540,8 @@ export default function Expenses ()
     setStocks( false );
     setDebts( false );
     setCred( true );
-    setNotify( false );
+    setNotify(false)
+    setNotification( "" );
   };
 
   const handleMoneycount = () =>
@@ -512,7 +549,8 @@ export default function Expenses ()
     setPesa( false );
     setStocks( false );
     setDebts( false );
-    setNotify( false );
+    setNotify(false)
+    setNotification( "" );
     setMoneycount( true );
     setCred( false );
   };
@@ -521,7 +559,8 @@ export default function Expenses ()
   {
     setPesa( false );
     setDebts( false );
-    setNotify( false );
+    setNotify(false)
+    setNotification( "" );
     setMoneycount( false );
     setStocks( true );
     setCred( false );
@@ -532,7 +571,8 @@ export default function Expenses ()
     setPesa( false );
     setDebts( false );
     setMoneycount( false );
-    setNotify( false );
+    setNotify(false)
+    setNotification( "" );
     setStocks( false );
     setCred( false );
   };
@@ -703,8 +743,8 @@ export default function Expenses ()
           ) }
      
      {sure && (
-        <div className="poppesao">
-          <div className="contentonesty">
+        <div className="poppesaoo">
+          <div className="contentonestyo">
             <div className="canc" onClick={cancPopdelete}>
             <img src={cancs} alt="" />
             </div>

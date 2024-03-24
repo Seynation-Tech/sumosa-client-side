@@ -175,6 +175,15 @@ export default function Expenses ()
         setLoading( false );
         setExpenses( false );
 
+        setExpenses( false );
+        setNotify( false );
+        setDelete( false );
+    setDelets( false )
+
+    
+    // setAmounts("")
+    // setName("")
+
         //
       } catch ( err )
       {
@@ -187,13 +196,14 @@ export default function Expenses ()
       setNotify( true );
       setNotification( "Fill all fields!" );
     }
+    
   };
 
 
   const deletePop = async ( e ) =>
   {
     setDelete( true );
-    setNotify( false );
+    
 
     // console.log(e)
     setName( e?.usages )
@@ -206,7 +216,12 @@ export default function Expenses ()
         withCredentials: true,
       } );
 
-      // alert(respfour.data);
+      // setName("")
+      // setAmounts("")
+      setExpenses( false );
+      setNotify( false );
+      // setDelete( false );
+    setDelets( false )
 
       //
     } catch ( err )
@@ -227,6 +242,10 @@ export default function Expenses ()
       setNotify( true );
       setNotification( resone.data );
       setLoading( false );
+      setExpenses( false );
+      setNotify( false );
+      setDelete( false );
+    setDelets( false )
 
     } catch ( err )
     {
@@ -259,6 +278,12 @@ export default function Expenses ()
 
 
       setNotification( res.data );
+      // setName("")
+      // setAmounts("")
+      setExpenses( false );
+      setNotify( false );
+      setDelete( false );
+    setDelets( false )
 
       // console.log(res.data)
 
