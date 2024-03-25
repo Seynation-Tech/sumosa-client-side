@@ -14,90 +14,110 @@ import { AuthContext } from "../AuthContext";
 import moment from "moment";
 import DotLoader from "react-spinners/DotLoader";
 import Cookies from "cookie-universal";
+import _ from "lodash-es";
 
 axios.defaults.withCredentials = true;
 
-export default function Sidebar() {
+export default function Sidebar ()
+{
   const cookies = new Cookies();
-  const { currentUser, tokns, url, logoout } = useContext(AuthContext);
-  const [currentUsers, setCurrentUser] = useState(null);
+  const { currentUser, tokns, url, logoout } = useContext( AuthContext );
+  const [ currentUsers, setCurrentUser ] = useState( null );
   const navigate = useNavigate();
 
+  const [data,setDatas] = useState({
+    "name":"User",
+    "role":"user"
+  })
 
-  const removeUser =()=>{
+  const [ userdata, setUserdata ] = useState( [] )
+
+  useEffect( () =>
+  {
+    localStorage.setItem( "userdata", JSON.stringify( currentUser ) );
+  }, [ currentUser ] );
+
+
+
+  const removeUser = () =>
+  {
     localStorage.clear();
-    navigate("/")
+
+
+    localStorage.setItem( "userdata", JSON.stringify( data ) );
+    navigate( "/" )
   }
 
   return (
     // <div className='allsides'>
     <div className="sectionone">
       <div className="uppersect">
-        <img src={logos} alt="" />
-        {/* <p id="sum">SUMOSA</p> */}
+        <img src={ logos } alt="" />
+        {/* <p id="sum">SUMOSA</p> */ }
       </div>
 
-      
+
 
       <div className="profilesect">
         <div className="profimg">
-          <img src={profile} alt="" />
+          <img src={ profile } alt="" />
         </div>
         <div className="profcaption">
-          <p>{currentUser[0]?.name || "User"}</p>
-          <p>{String(currentUser[0]?.role).toLocaleLowerCase() || ""}</p>
+
+          <p>{ currentUser[ 0 ]?.name }</p>
+          <p>{ currentUser[ 0 ]?.role }</p>
         </div>
       </div>
 
       <div className="midsect">
         <NavLink to="/home">
           <div className="sectcont">
-            <img src={home} alt="" />
+            <img src={ home } alt="" />
             <p>Dashboard</p>
           </div>
         </NavLink>
 
         <NavLink to="/sales">
           <div className="sectcont">
-            <img src={sales} alt="" />
+            <img src={ sales } alt="" />
             <p>Sales</p>
           </div>
         </NavLink>
 
         <NavLink to="/expenses">
           <div className="sectcont">
-            <img src={epxenses} alt="" />
+            <img src={ epxenses } alt="" />
             <p>Expenses</p>
           </div>
         </NavLink>
 
         <NavLink to="/report">
           <div className="sectcont">
-            <img src={report} alt="" />
+            <img src={ report } alt="" />
             <p>Daily Report</p>
           </div>
         </NavLink>
-        {currentUser[0]?.role === "director" ? (
+        { currentUser[ 0 ]?.role === "director" ? (
           <NavLink to="/review">
             <div className="sectcont">
-              <img src={stock} alt="" />
+              <img src={ stock } alt="" />
               <p>Data Review</p>
             </div>
           </NavLink>
         ) : (
           <></>
-        )}
+        ) }
       </div>
 
-      {/* <NavLink className="lowersect" to="/"> */}
-      <div className="lowersect"  onClick={removeUser}>
-         <div className="logimg">
-          <img src={logout} alt="" />
+      {/* <NavLink className="lowersect" to="/"> */ }
+      <div className="lowersect" onClick={ removeUser }>
+        <div className="logimg">
+          <img src={ logout } alt="" />
         </div>
         <p>Log out</p>
       </div>
-       
-      {/* </NavLink> */}
+
+      {/* </NavLink> */ }
 
       <div className="copyright">
         <p>copyright @2024</p>

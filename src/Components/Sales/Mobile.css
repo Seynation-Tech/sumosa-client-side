@@ -1,3 +1,33 @@
+
+.poppesaoo {
+  min-height: 113vh;
+  width: 100%;
+  background: rgba(0, 194, 253, 0.084);
+  position: absolute;
+  top: -6%;
+  border-radius: 9px;
+  backdrop-filter: blur(4px);
+  z-index: 898;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+  
+  .contentonestyo {
+    background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 50%;
+    min-height: 57vh;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    z-index: 10000;
+    margin-right: -19px;
+  }
+
 @media screen and (max-width: 640px) {
   .sectiontwos {
     /* background-color: blue; */
@@ -87,8 +117,8 @@
   }
 
   .sss {
-    width: 27px;
-    height: 27px;
+    width: 37px;
+    height: 37px;
     background: rgba(0, 0, 255, 0.048);
     border-radius: 50%;
     border: 1px solid rgba(140, 140, 140, 0.086);

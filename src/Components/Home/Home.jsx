@@ -3,12 +3,16 @@ import "./Home.css";
 import "./Mobile.css";
 import Mids from "../Charts/Mids";
 import Values from "../Charts/Values";
-import petrol from "../../Images/sum.png";
+import stoc from "../../Images/invest.png";
 import report from "../../Images/repo.png";
 import drop from "../../Images/dropdo.png";
 import settings from "../../Images/setting.png";
 import message from "../../Images/chat.png";
 import overview from "../../Images/routine.png";
+import ela from "../../Images/ela.png";
+import col from "../../Images/c.png";
+
+import pet from "../../Images/p.png";
 import Sidebar from "../Sidebar/Sidebar";
 import Clock from "react-live-clock";
 import { useNavigate, NavLink } from "react-router-dom";
@@ -27,11 +31,7 @@ let date =
   "/" +
   ( today.getMonth() + 1 ) +
   "/" +
-  today.getFullYear() +
-  " " +
-  today.getHours() +
-  ":" +
-  today.getMinutes();
+  today.getFullYear() 
 let mydate =
   today.getDate() +
   "/" +
@@ -62,7 +62,7 @@ export default function Home ()
     alldebts,
     totalEarnings,
     dieselAmount,
-    petroldisp,
+    petroldisp,salesdata,values,
     petrolstock,
     dieseldips,
     dieselstock,
@@ -80,6 +80,9 @@ export default function Home ()
   const [ messageOne, setMessageone ] = useState( [] )
   const [ messagetwo, setMessagetwo ] = useState( [] )
   const [ reads, setRead ] = useState( false )
+
+  window.scrollTo( 0, 0 );
+
   useEffect( () =>
   {
 
@@ -244,7 +247,7 @@ export default function Home ()
             </div>
             }
 
-            { currentUser[ 0 ]?.role === "director" ? <NavLink to="/signup">
+            { currentUser[ 0 ]?.role ? <NavLink to="/signup">
 
           
              <div className="leftimgs">
@@ -308,7 +311,7 @@ export default function Home ()
                 <div className="l">
                   <div className="petrol">
                     <div className="pimg">
-                      <img src={ petrol } alt="" />
+                      <img src={ ela } alt="" />
                     </div>
 
                     <div className="ss">
@@ -333,7 +336,7 @@ export default function Home ()
                 <div className="l">
                   <div className="petrol">
                     <div className="pimg">
-                      <img src={ petrol } alt="" />
+                      <img src={ ela } alt="" />
                     </div>
 
                     <div className="ss">
@@ -367,7 +370,7 @@ export default function Home ()
                   </div>
 
                   <div className="amount">
-                    <p> { totalliters }</p>
+                    <p> { (Number(values.pmsonedigitaloutput) + Number(values.pmstwodigitaloutput)+Number(values.agoonedigitaloutput)+Number(values.agotwodigitaloutput)).toLocaleString() } L</p>
                   </div>
                 </div>
 
@@ -380,7 +383,7 @@ export default function Home ()
                   </div>
 
                   <div className="amount">
-                    <p>Tsh { petrolAmount }</p>
+                    <p>Tsh { Number(salesdata.pmssales).toLocaleString() }</p>
                   </div>
                 </div>
 
@@ -391,7 +394,7 @@ export default function Home ()
                   </div>
 
                   <div className="amount">
-                    <p>Tsh { dieselAmount }</p>
+                    <p>Tsh { Number(salesdata.dieselsales).toLocaleString() }</p>
                   </div>
                 </div>
 
@@ -402,7 +405,7 @@ export default function Home ()
                   </div>
 
                   <div className="amount">
-                    <p>Tsh { totalEarnings }</p>
+                    <p>Tsh { Number(salesdata.totalsales).toLocaleString() }</p>
                   </div>
                 </div>
               </div>
@@ -414,19 +417,19 @@ export default function Home ()
       </div>
       <div className="sectionthree">
         <div className="lowersecta">
-          {/* <Moment date={dateToFormat} /> */ }
-          {/* <img src={clocs} alt="" /> */ }
-          <p>{ days }</p>
+    
           <Clock
             format={ "HH:mm:ss" }
             ticking={ true }
             timezone={ "Africa/Nairobi" }
           />
+
+<p id="dat">{days}, { date }</p>
         </div>
         <div className="first">
           <div className="fs">
             <div className="ex">
-              <img src="" alt="" />
+              <img src={col} alt="" />
               <p>Collection</p>
             </div>
 
@@ -437,7 +440,7 @@ export default function Home ()
           <div className="sc">
             <div className="pd">
               <div className="pet">
-                <img src="" alt="" />
+                <img src={pet} style={{width: "23px"}} alt="" />
                 <p>Petrol</p>
               </div>
               <div className="exch">
@@ -446,13 +449,12 @@ export default function Home ()
             </div>
             <div className="totalamount">
               <div className="tot">
-                {/* <img src="" alt="" /> */ }
-                {/* <p id="ids">Total Amount</p> */ }
+              <img src={stoc} style={{width: "28px"}} alt="" />
               </div>
 
-              <p>Instock: { petrolstock }</p>
+              <p>Instock: { Number(salesdata.pmsphysical).toLocaleString() }</p>
               <p>
-                <span id="aval"> Dipstock: </span> { petroldisp }
+                <span id="aval"> Dipstock: </span> { Number(salesdata.pmsdipstick).toLocaleString() }
               </p>
             </div>
 
@@ -460,7 +462,7 @@ export default function Home ()
               <p>
                 Remain:{ " " }
                 { Number(
-                  Number( petrolstock ) - Number( petroldisp )
+                  Number( salesdata.pmsphysical ) - Number( salesdata.pmsdipstick )
                 ).toLocaleString() }
               </p>
             </div>
@@ -472,22 +474,21 @@ export default function Home ()
           <div className="sc">
             <div className="pd">
               <div className="pet">
-                <img src="" alt="" />
+              <img src={pet} style={{width: "28px"}} alt="" />
                 <p>Diesel</p>
               </div>
-              <div className="exch">
-                <img src="" alt="" />
+              <div className="exch" sytle={{background: "green"}}>
+                {/* <img src={pet} style={{width: "28px"}} alt="" /> */}
               </div>
             </div>
             <div className="totalamount">
-              <div className="tot">
-                {/* <img src="" alt="" /> */ }
-                {/* <p id="ids">Total Amount</p> */ }
+              <div className="tot" style={{width: "28px"}} >
+              <img src={stoc} style={{width: "28px"}} alt="" />
               </div>
 
-              <p>Instock: { dieselstock }</p>
+              <p>Instock: { Number(salesdata.agophysical).toLocaleString() }</p>
               <p>
-                <span id="aval"> Dipstock: </span> { dieseldips }
+                <span id="aval"> Dipstock: </span> { Number(salesdata.agodipstick).toLocaleString() }
               </p>
             </div>
 
@@ -495,7 +496,7 @@ export default function Home ()
               <p>
                 Remain:{ " " }
                 { Number(
-                  Number( dieselstock ) - Number( dieseldips )
+                  Number( salesdata.agophysical ) - Number( salesdata.agodipstick )
                 ).toLocaleString() }
               </p>
             </div>

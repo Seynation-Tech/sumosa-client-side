@@ -1,4 +1,35 @@
 
+
+.editexp{
+  width: 30px;
+  min-height: 30px;
+  background: rgba(255, 255, 255, 0.697);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor:pointer;
+  position: relavive;
+
+  
+}
+
+.editexp img{
+  width: 18px;
+}
+
+.csc{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  /* background: rgb(0, 255, 21); */
+}
+
+.canc img{
+  width: 30px
+}
+
+
 @media screen and (min-width: 640px) {
 
 .sectionthres {
@@ -19,6 +50,12 @@
   align-items: center;
   cursor: pointer;
 }
+
+.canc img{
+  width: 30px
+}
+
+
 
 .addexpenses {
   display: flex;

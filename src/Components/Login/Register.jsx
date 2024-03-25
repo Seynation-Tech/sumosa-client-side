@@ -27,7 +27,7 @@ let mydate =
   ":" +
   today.getSeconds();
 
-export default function Sign() {
+export default function Register() {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [contacts, setContacts] = useState("");
@@ -44,73 +44,67 @@ export default function Sign() {
   const [phaseshift,setPhaseshift] = useState("")
   const [byster,setB] = useState("Register Account")
   const [permit,setPermit] = useState("")	
-  const [ids,setId] = useState("")
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("userdata") || null)
   );
 
-  const [typs,setTypes] = useState("userinfo")
+
 
   
+const  signIn=()=>{
+navigate("/signin")
+}
+
+  const registerUser = async () => {
+  
+    setB("Register Account")
+    setNotfs(false)
+
+   
+    if (name && role && contacts && residence && idnumber && password) {
+      try {
+        
+        const uid = days.toLowerCase() + ","+date;
+        // name	username	password	role	contacts	phaseshift	image	idnumber	residence	permit	
+
+        // console.log(uid,name,idnumber,lastName,role,contacts,residence)
+        let data = {
+          uid: uid,
+          name: name,
+          username: username,
+          password: password,
+          role: role.toLowerCase(),
+          contacts: contacts,
+          phaseshift: "default",
+          image: "default",
+          idnumber: idnumber,
+          residence: residence,
+          permit: "none",
+        };
+
+        setLoading(true);
+        const res = await axios.post(`${url}/api/auths/register`, data, {
+          withCredentials: true,
+        });
+        setNotfs(true)
+        setLoading(false);
+        setStatus(res.data);
+
+      
+      } catch (err) {
+        setNotfs(true)
+
+        setStatus("Registration Failed!");
+      }
+    } else {
+      setNotfs(true)
+      setStatus("Fill all details!");
+    }
+  };
+
 
   const updateData=()=>{
-
-    setTypes("update")
-    setB("Update infos")
-    setId(currentUser[0]?.id)
-   
-      setName(currentUser[0]?.name)
-      setContacts(Number(currentUser[0]?.contacts))
-      setPassword(currentUser[0]?.password) 
-      setRole(currentUser[0]?.role)
-      setResidence(currentUser[0]?.residence)
-      setPermit(currentUser[0]?.permit)
-      setIdnumber(Number(currentUser[0]?.idnumber))
-      setUsername(currentUser[0]?.username)
-    setPhaseshift(currentUser[0]?.phaseshift)
-    
-
-
-  }
-
-  const updateDatabase = async()=>{
-    const uid = days.toLowerCase() + "," + date;
-   
-    let data = {
-                    
-      'uid': uid,
-      'name': name,
-      'username': username,
-      'password': password,
-      'role':  role.toLowerCase(),
-      'contacts': contacts,
-      'phaseshift': phaseshift,
-      'image': '',
-      'idnumber': idnumber,
-      'residence': residence,
-      'permit': "default"
-    
-  }
-
-  
-  try{
-      const res = await axios.put(`${url}/api/auths/userinfo/${ids}`,data,   {withCredentials: true})
-      setStatus(res.data)
-
-      setNotfs(true)
-      setLoading(false);
-      setStatus(res.data);
-      navigate("/signin")
-      
-  }catch(err){
-    setNotfs(true)
-    
-    setStatus("Registration Failed!");
-  }
-  }
-
-  const addUser=()=>{
-   navigate("/register")
+    navigate("/signup")
   }
   return (
     <div className="welcome-pages">
@@ -124,7 +118,7 @@ export default function Sign() {
           </div>
           <div className="sdaconts">
             <div className="anaccount">
-              <p>Update Account</p>
+              <p>Create Account</p>
             </div>
 
             <div className="forms">
@@ -134,16 +128,24 @@ export default function Sign() {
                   onChange={(e) => setName(e.target.value)}/>
               </div>
 
-              {currentUser[ 0 ]?.role==="director" && <div className="input-two">
+              <div className="input-two">
                 {/* <i>icon</i> */}
                 <input placeholder="Role" alue={role}
                   onChange={(e) => setRole(e.target.value)}/>
-              </div>}
+              </div>
               <div className="input-two">
                 {/* <i>icon</i> */}
                 <input type="number" placeholder="Contacts" value={contacts}
                   onChange={(e) => setContacts(e.target.value)}/>
               </div>
+
+              <div className="input-two">
+                {/* <i>icon</i> */}
+                <input type="text" placeholder="Idnumber" value={idnumber}
+                  onChange={(e) => setIdnumber(e.target.value)}/>
+              </div>
+
+             
 
               <div className="input-two">
                 {/* <i>icon</i> */}
@@ -153,11 +155,9 @@ export default function Sign() {
 
               <div className="input-two">
                 {/* <i>icon</i> */}
-                <input type="text" placeholder="Password" value={password}
+                <input type="password" placeholder="Password" value={password}
                   onChange={(e) => setPassword(e.target.value)}/>
               </div>
-
-            
 
 
 
@@ -169,10 +169,11 @@ export default function Sign() {
             </div>
 
             <div className="remember-opt">
-              <button className="sign-btn" onClick={updateDatabase}>
-               Update
-              </button>
+        
 
+              <button className="sign-btn" onClick={registerUser}>
+                Register
+              </button>
             </div>
 
             {notify&& <div className="stat">
@@ -181,10 +182,14 @@ export default function Sign() {
           </div>
           <div className="atts">
             <button onClick={updateData}>UPDATE</button>
-           { currentUser[ 0 ]?.role === "director" && <button  onClick={addUser}>ADD USER</button>}
+            {/* <button  onClick={addUser}>ADD USER</button> */}
           </div>
+
+          <div className="ssd" style={{color: "yellow", cursor: "pointer"}}>
+          <p onClick={signIn}>Login?</p>
         </div>
-       
+        </div>
+      
       </div>
     </div>
   );

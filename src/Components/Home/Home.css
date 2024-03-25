@@ -1,3 +1,9 @@
+#dat{
+    font-size: 0.8em;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.848);
+    
+}
 .otify{
   width: 12px;
   height: 12px;
@@ -84,6 +90,11 @@ cursor: pointer;
   top: 2px;
 }
 
+.tot{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
 @media screen and (min-width: 540px) {
@@ -180,6 +191,8 @@ cursor: pointer;
 
   .profcaption p:nth-child(2) {
     font-size: 0.8em;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.756);
   }
 
   /*MID SECTION CSS*/
@@ -842,7 +855,10 @@ cursor: pointer;
   }
 
   .exch {
-    width: 25%;
+    width: 12px;
+    height: 12px;
+    background: rgba(5, 17, 255, 0.266);
+    border-radius: 50%;
     border-left: 1px solid rgba(0, 0, 0, 0.105);
     border-right: 1px solid rgba(0, 0, 0, 0.145);
   }
@@ -1047,20 +1063,21 @@ cursor: pointer;
 
   .lowersecta {
     background: rgba(7, 1, 1, 0.09);
-    height: 47px;
+    height: 57px;
     width: 100%;
     /* border-left: 3px solid rgb(255, 255, 255); */
     /* border-right: 3px solid rgba(6, 194, 24, 0.878); */
     border-radius: 6px;
     backdrop-filter: blur(2px);
     display: flex;
+    flex-direction: column;
     /* justify-content: flex-start; */
     align-items: center;
     justify-content: center;
     /* padding-left: 63px; */
     font-size: 0.9em;
     font-weight: bold;
-    gap: 12px;
+gap:5px;
     margin-top: 10px;
     background: #2776ea;
     /* background: linear-gradient(rgba(31, 184, 255, 0.757), rgba(66, 69, 255, 0.959)); */

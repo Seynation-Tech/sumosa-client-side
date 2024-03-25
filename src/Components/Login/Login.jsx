@@ -126,7 +126,7 @@ export default function Login() {
                 <span>Sign up</span>
               </Link> */}
             </p>
-            <p id="forgot">Forgot Password?</p>
+            {/* <p id="forgot">Forgot Password?</p> */}
           </div>
         </div>
       </div>
