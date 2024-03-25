@@ -153,7 +153,7 @@ export default function Sign() {
 
               <div className="input-two">
                 {/* <i>icon</i> */}
-                <input type="text" placeholder="Password" value={password}
+                <input type="password" placeholder="Password" value={password}
                   onChange={(e) => setPassword(e.target.value)}/>
               </div>
 

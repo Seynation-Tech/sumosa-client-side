@@ -81,6 +81,7 @@ export default function Login() {
               <div className="input-two">
                 {/* <i>icon</i> */}
                 <input
+                  type="password"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
