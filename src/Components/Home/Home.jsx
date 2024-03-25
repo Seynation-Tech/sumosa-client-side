@@ -11,6 +11,7 @@ import message from "../../Images/chat.png";
 import overview from "../../Images/routine.png";
 import ela from "../../Images/ela.png";
 import col from "../../Images/c.png";
+import locate from "../../Images/lo.png";
 
 import pet from "../../Images/p.png";
 import Sidebar from "../Sidebar/Sidebar";
@@ -81,7 +82,7 @@ export default function Home ()
   const [ messagetwo, setMessagetwo ] = useState( [] )
   const [ reads, setRead ] = useState( false )
 
-  window.scrollTo( 0, 0 );
+  
 
   useEffect( () =>
   {
@@ -292,7 +293,7 @@ export default function Home ()
                 <Values />
               </div>
 
-              <div className="grap">{/* <p>Graphical data analysis</p> */ }</div>
+              <div className="grap"> <p>Fuel Weekly Analysis</p> </div>
             </div>
 
             <div className="right">
@@ -410,7 +411,10 @@ export default function Home ()
                 </div>
               </div>
 
-              <div className="firsts"></div>
+              <div className="firsts">
+                <img src={locate} alt="" />
+                <p>TUTUO TABORA</p>
+              </div>
             </div>
           </div>
         </div>
@@ -482,7 +486,7 @@ export default function Home ()
               </div>
             </div>
             <div className="totalamount">
-              <div className="tot" style={{width: "28px"}} >
+              <div className="tot"  >
               <img src={stoc} style={{width: "28px"}} alt="" />
               </div>
 
@@ -504,7 +508,9 @@ export default function Home ()
           <div className="thr"></div>
         </div>
 
-        <div className="firsts"></div>
+        <div className="firstss">
+          <p>website: sumosa.ac.tz</p>
+        </div>
       </div>
     </div>
   );

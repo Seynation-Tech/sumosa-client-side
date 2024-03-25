@@ -102,8 +102,8 @@
 /*  */
 
 .lss {
-  background: linear-gradient(to right, rgb(25, 36, 255), rgb(2, 30, 95));
-  height: 100vh;
+  background: linear-gradient(to right, rgb(25, 36, 255), rgba(0, 36, 216, 0.911));
+  height: 79vh;
   border-radius: 5px;
   display: flex;
   gap: 5px;

@@ -568,11 +568,11 @@ export default function Review ()
     {
         try
         {
-            const uid = days.toLowerCase() + "," + date;
+            const dats =  getFormattedDate()
             let data = {
                 uid: currentUser[ 0 ]?.role,
                 message: mesg,
-                date: mydate,
+                date: dats,
             };
 
             // console.log(pmsOne)
@@ -600,12 +600,12 @@ export default function Review ()
     {
         try
         {
-            const uid = days.toLowerCase() + "," + date;
+            const dats =  getFormattedDate()
             let data = {
                 uid: currentUser[ 0 ]?.role,
                 reportstatus: "Accepted",
                 message: mesg,
-                date: mydate,
+                date: dats,
             };
 
             // console.log(pmsOne)
@@ -631,12 +631,12 @@ export default function Review ()
     {
         try
         {
-            const uid = days.toLowerCase() + "," + date;
+            const dats =  getFormattedDate()
             let data = {
                 uid: currentUser[ 0 ]?.role,
                 reportstatus: "Rejected",
                 message: mesg,
-                date: mydate,
+                date: dats,
             };
 
             // console.log(pmsOne)

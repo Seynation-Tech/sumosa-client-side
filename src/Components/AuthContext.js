@@ -48,8 +48,8 @@ export const AuthContextProvider = ( { children } ) =>
     JSON.parse( localStorage.getItem( "userdata" ) || null )
   );
 
-  // const url = "https://sumosa-api.onrender.com";
-  const url = "http://localhost:5001";
+  const url = "https://dolphin-app-t5xzi.ondigitalocean.app";
+  // const url = "http://localhost:5001";
 
   const [ zrepos, setZreport ] = useState( "0" );
 
@@ -262,14 +262,14 @@ export const AuthContextProvider = ( { children } ) =>
           } );
 
 
-          // const todate = getFormattedDate();
+          const todate = getFormattedDate();
 
-          const todate = '2024-03-22'
-
-
+          // const todate = '2024-03-22'
 
 
 
+
+//  console.log(todate)
 
 
           const allreportBYid = await axios.get(
@@ -402,7 +402,7 @@ export const AuthContextProvider = ( { children } ) =>
             agotwooutput: agotwooutput,
           } );
 
-          // console.log(pmsonedigitaloutputvalue)
+          
 
           
           setValues( {

@@ -764,10 +764,55 @@ cursor: pointer;
       inset 1px -1px 10px rgba(10, 0, 99, 0.192);
   }
 
+
+  .firstss p{
+    font-size: 0.8em;
+    font-weight: bold;
+    color: rgba(6, 85, 255, 0.807);
+    font-style: italic;
+    cursor: pointer;
+  }
+
+  .firstss {
+    color: rgba(0, 0, 0, 0.679);
+    width: 100%;
+    min-height: 8vh;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.148);
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(252, 253, 255, 0.153);
+    margin-top: 18px;
+    box-shadow: 30px 30px 30px -24px rgba(57, 100, 255, 0.078),
+      inset 15px 15px 10px rgba(255, 255, 255, 0.212),
+      -15px 15px 35px rgba(255, 255, 255, 0.2),
+      inset 1px -1px 10px rgba(0, 102, 255, 0.349);
+  }
+
+
+
+
+  .firsts img{
+    width: 23px;
+  }
+
+  .firsts p{
+    font-size: 0.9em;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.807);
+  }
+
   .firsts {
     color: rgba(0, 0, 0, 0.679);
     width: 100%;
     min-height: 8vh;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    align-items: center;
     /* border: 1px solid rgba(0, 0, 0, 0.148); */
     padding: 12px;
     border-radius: 8px;

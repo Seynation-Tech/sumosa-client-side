@@ -408,34 +408,32 @@ function getFormattedDate ()
           closingdigital: pmsonedigClosing,
           openinganalog: pmsoneanalogOpening,
           openingdigital: pmsonedigOpening,
-          outputvalue: Number( pmsonedigClosing ) - Number( pmsonedigOpening ),
+          outputvalue: Number( pmsonedigOpening ) - Number( pmsonedigClosing ),
         };
-
+        
         let pmsTwo = {
           uid: dats,
           closingsanalog: pmstwoanalogClosing,
           closingdigital: pmstwodigClosing,
           openinganalog: pmstwoanalogOpening,
           openingdigital: pmstwodigOpening,
-          outputvalue: Number( pmstwodigClosing ) - Number( pmstwodigOpening ),
+          outputvalue: Number( pmstwodigOpening ) - Number( pmstwodigClosing ),
         };
-
         let agoOne = {
           uid: dats,
           closingsanalog: agooneanalogClosing,
           closingdigital: agoonedigClosing,
           openinganalog: agooneanalogOpening,
           openingdigital: agoonedigOpening,
-          outputvalue: Number( agoonedigClosing ) - Number( agoonedigOpening ),
+          outputvalue: Number( agoonedigOpening ) - Number( agoonedigClosing ),
         };
-
         let agoTwo = {
           uid: dats,
           closingsanalog: agotwoanalogClosing,
           closingdigital: agotwodigClosing,
           openinganalog: agotwoanalogOpening,
           openingdigital: agotwodigOpening,
-          outputvalue: Number( agotwodigClosing ) - Number( agotwodigOpening ),
+          outputvalue: Number( agotwodigOpening ) - Number( agotwodigClosing ),
         };
 
         setLoading( true );
@@ -474,15 +472,14 @@ function getFormattedDate ()
   const confirm = async () =>
   { setNotify(false)
     setNotification( "" );
+   
     if ( isNaN( diesellitres ) && isNaN( dieselAmount ) && isNaN( petrolAmount ) && isNaN( petrollitres ) )
     {
       try
       {
-       
-        // console.log(Math.floor(pAmount),plita)
-        const dats = date;
+        const dats =  getFormattedDate()
         let data = {
-          uid: formattedStartDate,
+          uid: dats,
           dieselamount: Math.floor( dAmount ),
           petrolamount: Math.floor( pAmount ),
           dieselvalue: dlita,
@@ -499,7 +496,10 @@ function getFormattedDate ()
         setLoading( false );
         
       } catch ( err ) { }
-    } 
+    } else{
+      setNotify( true );
+        setNotification( "Ensure all todays' data are filled!" );
+    }
   };
 
   const pesaHandler = async () =>
@@ -509,9 +509,9 @@ function getFormattedDate ()
     {
       try
       {
-        const dats = date;
+        const dats =  getFormattedDate()
         let virtualmoney = {
-          uid: formattedEndDate,
+          uid: dats,
           mpesa: mPesa,
           nmbpesa: nmb,
           crdbpesa: crdb,
@@ -561,9 +561,9 @@ function getFormattedDate ()
     {
       try
       {
-        const dats = date;
+        const dats =  getFormattedDate()
         let debtors = {
-          uid: formattedEndDate,
+          uid: dats,
           name: name,
           amount: amount,
           modeofpay: mode,
@@ -598,16 +598,18 @@ function getFormattedDate ()
   const debtsHandler = async () =>
   { setNotify(false)
     setNotification( "" );
+
     if ( name && amount )
     {
       try
       {
-        const dats = date;
+        const dats =  getFormattedDate()
+    
         let debtors = {
-          uid: formattedEndDate,
+          uid: dats,
           name: name,
           amount: amount,
-          date: "12/23/34",
+          date: dats,
         };
 
         setLoading( true );
@@ -624,7 +626,6 @@ function getFormattedDate ()
       } catch ( err )
       {
         setLoading( false );
-        console.log( err );
         setError( "Please refresh..." );
       }
     } else
@@ -642,9 +643,9 @@ function getFormattedDate ()
     {
       try
       {
-        const dats = date;
+        const dats =  getFormattedDate()
         let pmsStock = {
-          uid: formattedEndDate,
+          uid: dats,
           physical: pmsphyscal,
           dipstick: pmsdispst,
           difference: Number( pmsphyscal ) - Number( pmsdispst ),
@@ -711,9 +712,9 @@ function getFormattedDate ()
     {
       try
       {
-        const dats = date;
+        const dats =  getFormattedDate()
         let collections = {
-          uid: formattedEndDate,
+          uid: dats,
           tenth: tenths,
           fiveth: fiveths,
           twoth: twoths,
@@ -749,7 +750,6 @@ function getFormattedDate ()
       } catch ( err )
       {
         setLoading( false );
-        console.log( err );
         setError( "Please refresh..." );
       }
     } else

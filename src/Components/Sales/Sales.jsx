@@ -74,6 +74,17 @@ export default function Sales ()
 
   const navigate = useNavigate();
   let [ color, setColor ] = useState( "#ffffff" );
+
+  function getFormattedDate ()
+{
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String( today.getMonth() + 1 ).padStart( 2, "0" ); 
+    const day = String( today.getDate() ).padStart( 2, "0" ); 
+    return `${ year }-${ month }-${ day }`;
+}
+
+
   useEffect( () =>
   {
     window.scrollTo( 0, 0 );
@@ -110,6 +121,10 @@ export default function Sales ()
 
   const deletePop = ( e ) =>
   {
+
+    
+    setNotification("")
+    setNotify(false)
     setName( alldat?.name )
     setAmounts( alldat?.amount )
     setIds(alldat?.id)
@@ -156,7 +171,7 @@ export default function Sales ()
     setWeekly( false );
     setDaily( false );
     setYearly( false );
-    setMonthly( true );
+    setMonthly( false );
   };
 
   const handleDaily = () =>
@@ -190,7 +205,7 @@ export default function Sales ()
   const popsetDeletee = () =>
   {
     setDelete( false )
-    setDeletee( true )
+    // setDeletee( true )
   }
 
   const handleHandle = () =>
@@ -209,7 +224,7 @@ export default function Sales ()
   const popClick = () =>
   {
     setDelete( false )
-    setDeletee( true )
+    // setDeletee( true )
     setNotify( false );
   };
 
@@ -257,8 +272,9 @@ export default function Sales ()
     {
       try
       {
+        const dats =  getFormattedDate()
         let inwords = {
-          uid: formattedStartDate,
+          uid: dats,
           differencereason: reason,
           totalamount: amountinwords,
         };
@@ -293,9 +309,9 @@ export default function Sales ()
     {
       try
       {
-        const uid = date;
+        const dats =  getFormattedDate()
         let pricings = {
-          uid: formattedStartDate,
+          uid: dats,
           petrol: petrolprice,
           diesel: dieselprice,
         };
@@ -308,7 +324,7 @@ export default function Sales ()
         setNotify( true );
         setNotification( resone.data );
         setLoading( false );
-        setPrices( false );
+     
 
         setDieselprice("")
         setPetrolprice("")
@@ -384,7 +400,6 @@ export default function Sales ()
     }
 
 
-
     try
     {
       const res = await axios.put( `${ url }/api/billing/debtors/${ ids }`, data, { withCredentials: true } )
@@ -457,16 +472,7 @@ export default function Sales ()
     <div className="mysales">
       <Sidebar />
 
-      {/* <div className="upbove">
-        <div className="aboveall">
-          <img src={logos} alt="" />
-        </div>
-        <div className="aboves">
-          <p>SUMOSA</p>
-        </div>
-
-        <img className="dropdo" onClick={popUpside} src={drop} alt="" />
-      </div> */}
+    
 
       <div className=""></div>
       <div className="sectiontwos">
@@ -656,7 +662,7 @@ export default function Sales ()
 
                 <div className="inputo">
 
-                  {vs ? <button onClick={ updateExpenses }>UPDATE</button>:<button onClick={ updateCreditor }>UPDATE</button>}
+                  {/* {vs ? <button onClick={ updateCreditor }>UPDATE</button>:<button onClick={ updateExpenses }>UPDATE</button>} */}
                 </div>
 
                 <p id="dup" onClick={ popdelete }>Delete?</p>
@@ -707,7 +713,7 @@ export default function Sales ()
                   </div>
                 </div>
 
-                <p id="dup" onClick={ popsetDeletee }>Update?</p>
+                {/* <p id="dup" onClick={ popsetDeletee }>Update?</p> */}
 
                 { notify && (
                   <div className="inputmy">
@@ -764,21 +770,7 @@ export default function Sales ()
                   </div>
                 ) }
 
-                {/* {loadings ? (
-              <div className="spin">
-                {" "}
-                <DotLoader
-                  color={color}
-                  loading={loadings}
-                  // cssOverride={override}
-                  size={25}
-                  aria-label="Loading Spinner"
-                  data-testid="loader"
-                />
-              </div>
-            ) : (
-              <></>
-            )} */}
+                
 
                 <div className="remember-opt">
                   <button onClick={ priceHandler } className="sign-btn">
@@ -862,7 +854,7 @@ export default function Sales ()
                     <div className="delets"></div>
                   </tr>
                 </thead>
-                <tbody onClick={ popClick }>
+                <tbody>
                   { tableData.map( ( val, key ) =>
                   {
                     return (
