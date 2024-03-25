@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import home from "../../Images/hoo.png";
-import logos from "../../Images/sumoo.png";
-import profile from "../../Images/one.png";
+import logos from "../../Images/sumooo.png";
+import profile from "../../Images/two.png";
 import sales from "../../Images/sale.png";
 import epxenses from "../../Images/expenses.png";
 import report from "../../Images/repo.png";

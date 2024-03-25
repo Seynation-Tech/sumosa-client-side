@@ -124,7 +124,11 @@
     position: absolute;
     right: 7px;
     top: 9px;
-    background: rgba(255, 255, 255, 0.163);
+    /* background: rgba(255, 255, 255, 0.163); */
+  }
+
+  .deletes img{
+    width: 23px;
   }
   .inputmy {
     width: 80%;

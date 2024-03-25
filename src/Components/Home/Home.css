@@ -110,7 +110,7 @@ cursor: pointer;
     /* justify-content: center; */
     align-items: center;
     flex-direction: column;
-    gap: 27px;
+    gap: 17px;
     padding: 20px;
     margin: 12px;
     border-radius: 23px;
@@ -127,7 +127,7 @@ cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 4px;
+    /* margin-top: 4px; */
     flex-direction: column;
   }
 
@@ -136,7 +136,7 @@ cursor: pointer;
   }
 
   .uppersect img {
-    width: 63px;
+    width: 93px;
   }
 
   .profimg {
@@ -157,7 +157,7 @@ cursor: pointer;
     flex-direction: column;
     /* border-bottom: 1px solid rgba(255, 255, 255, 0.055); */
     border-radius: 7px;
-    padding: 8px;
+    padding-top: 8px;
     background: linear-gradient(rgb(0, 89, 255), rgba(2, 5, 175, 0.959));
     /* background: rgba(255, 255, 255, 0.107); */
     /* flex-direction: column; */
@@ -165,8 +165,9 @@ cursor: pointer;
   }
 
   .profimg img {
-    /* width: 50px;
-  height: 50px; */
+border-radius: 50%;
+  height: 50px; 
+  width: 50px;
     cursor: pointer;
   }
 
@@ -226,7 +227,7 @@ cursor: pointer;
     backdrop-filter: blur(2px);
     display: flex;
     position: absolute;
-    bottom: 53px;
+    bottom: 33px;
     /* justify-content: flex-start; */
     align-items: center;
     /* justify-content: center; */
@@ -256,7 +257,7 @@ cursor: pointer;
   .copyright {
     font-size: 0.7em;
     position: absolute;
-    bottom: 19px;
+    bottom: 10px;
     font-weight: 10px;
     color: rgba(255, 255, 255, 0.52);
   }

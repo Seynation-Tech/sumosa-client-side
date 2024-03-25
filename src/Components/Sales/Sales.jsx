@@ -9,6 +9,7 @@ import "./Mobile.css";
 import downlo from "../../Images/download.png";
 import growth from "../../Images/growth.png";
 import cancs from "../../Images/o.png";
+import edy from "../../Images/dots.png";
 
 import axios from "axios";
 import { AuthContext } from "../AuthContext";
@@ -865,7 +866,7 @@ export default function Sales ()
                         <td>{ val?.modeofpay || "-" }</td>
                         <td>{ ( val.uid ).split( "," )[ 0 ] }</td>
                         <div className="deletes" onClick={ deletePop }>
-                          {/* <img src={delete} alt="" /> */ }
+                          <img src={edy} alt="" /> 
                         </div>
                       </tr>
                     );

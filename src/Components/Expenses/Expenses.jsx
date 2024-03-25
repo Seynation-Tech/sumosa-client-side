@@ -90,7 +90,9 @@ export default function Expenses ()
             // console.log(expens)
           }
 
-          setData( resptwo.data );
+          // console.log(resptwo)
+
+          setData( resptwo?.data || [] );
 
           //
         } catch ( err )
