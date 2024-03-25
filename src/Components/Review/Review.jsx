@@ -573,7 +573,7 @@ function getStartandEndofMonth ( date )
         const agooneoutput = datas.diesel.agoone[ 0 ]?.outputvalue ?? 0;
         const agotwooutput = datas.diesel.agotwo[ 0 ]?.outputvalue ?? 0;
 
-        // console.log(datas)
+        // console.log(mydatas)
 
         const pmsonedigitalclosing = mydatas.pmsone[ 0 ]?.closingdigital ?? 0;
         const pmsonedigitalopening = mydatas.pmsone[ 0 ]?.openingdigital ?? 0;
