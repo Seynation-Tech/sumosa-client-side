@@ -48,8 +48,8 @@ export const AuthContextProvider = ( { children } ) =>
     JSON.parse( localStorage.getItem( "userdata" ) || null )
   );
 
-  const url = "https://dolphin-app-t5xzi.ondigitalocean.app";
-  // const url = "http://localhost:5001";
+  // const url = "https://dolphin-app-t5xzi.ondigitalocean.app";
+  const url = "http://localhost:5001";
 
   const [ zrepos, setZreport ] = useState( "0" );
 
@@ -139,6 +139,8 @@ export const AuthContextProvider = ( { children } ) =>
     pmstwooutput: "0",
     agooneoutput: "0",
     agotwooutput: "0",
+    petrolprice: "0",
+    dieselprice: "0"
   } );
 
   const [ values, setValues ] = useState( {
@@ -269,7 +271,7 @@ export const AuthContextProvider = ( { children } ) =>
 
 
 
-//  console.log(todate)
+          //  console.log(todate)
 
 
           const allreportBYid = await axios.get(
@@ -379,8 +381,8 @@ export const AuthContextProvider = ( { children } ) =>
             agotwoanalogoutput: agotwoanalogoutput,
           } );
 
-         
-          
+
+
           setSales( {
             totalsales: datas?.totalsales,
             difference: datas?.difference,
@@ -400,11 +402,13 @@ export const AuthContextProvider = ( { children } ) =>
             pmstwooutput: pmstwooutput,
             agooneoutput: agooneoutput,
             agotwooutput: agotwooutput,
+            petrolprice: datas?.petrolprice,
+            dieselprice: datas?.dieselprice
           } );
 
-          
 
-          
+
+
           setValues( {
             pmsonedigitalclosing: pmsonedigitalclosing,
             pmsonedigitalopening: pmsonedigitalopening,
@@ -437,9 +441,9 @@ export const AuthContextProvider = ( { children } ) =>
             agotwoanalogclosing: agotwoanalogclosing,
             agotwoanalogopening: agotwoanalogopening,
             agotwoanalogoutput: agotwoanalogoutput,
-        } );
+          } );
 
-        // console.log(mydatas)
+          // console.log(mydatas)
 
 
 
@@ -546,7 +550,7 @@ export const AuthContextProvider = ( { children } ) =>
           const toataldiesel =
             Number( aone.outputvalue ) + Number( atwo.outputvalue );
 
-          console.log(pmone)
+          console.log( pmone )
 
           if ( respthree.data.length > 1 )
           {

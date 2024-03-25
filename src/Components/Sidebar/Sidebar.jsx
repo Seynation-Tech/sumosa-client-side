@@ -97,16 +97,14 @@ export default function Sidebar ()
             <p>Daily Report</p>
           </div>
         </NavLink>
-        { currentUser[ 0 ]?.role === "director" ? (
+      
           <NavLink to="/review">
             <div className="sectcont">
               <img src={ stock } alt="" />
               <p>Data Review</p>
             </div>
           </NavLink>
-        ) : (
-          <></>
-        ) }
+      
       </div>
 
       {/* <NavLink className="lowersect" to="/"> */ }

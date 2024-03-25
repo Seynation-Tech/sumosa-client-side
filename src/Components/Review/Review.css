@@ -1,3 +1,30 @@
+.weekdata{
+  width: 20%;
+  height: 40px;
+  background-color: rgb(0, 85, 255);
+  border-radius: 3px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.weekdata p{
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.handles{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* justify-content: space-evenly; */
+
+}
+
+
+
 .dateing{
   width: 90px;
   height: 33px;

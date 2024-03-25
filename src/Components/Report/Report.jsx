@@ -128,8 +128,8 @@ export default function Expenses ()
   const [ agophyscal, setPhysicalago ] = useState( "" );
   const [ agodispst, setDipstago ] = useState( "" );
 
-  const [sure,setAre] = useState(false)
-  const [deletes, setDelete] = useState(false);
+  const [ sure, setAre ] = useState( false )
+  const [ deletes, setDelete ] = useState( false );
   const navigate = useNavigate();
 
   const [ mydate, setDate ] = useState( "none" );
@@ -153,9 +153,9 @@ export default function Expenses ()
     pmstwooutput: "0",
     agooneoutput: "0",
     agotwooutput: "0",
-} );
+  } );
 
-const [ values, setValues ] = useState( {
+  const [ values, setValues ] = useState( {
     pmsonedigitalclosing: "0",
     pmsonedigitalopening: "0",
     pmsonedigitaloutput: "0",
@@ -187,42 +187,43 @@ const [ values, setValues ] = useState( {
     agotwoanalogclosing: "0",
     agotwoanalogopening: "0",
     agotwoanalogoutput: "0",
-} );
+  } );
 
-function getFormattedDate ()
-{
+  function getFormattedDate ()
+  {
     const today = new Date();
     const year = today.getFullYear();
-    const month = String( today.getMonth() + 1 ).padStart( 2, "0" ); 
-    const day = String( today.getDate() ).padStart( 2, "0" ); 
+    const month = String( today.getMonth() + 1 ).padStart( 2, "0" );
+    const day = String( today.getDate() ).padStart( 2, "0" );
     return `${ year }-${ month }-${ day }`;
-}
-  const handleUpdate = async (event) =>
+  }
+  const handleUpdate = async ( event ) =>
   {
 
     let flag = sidebar;
     flag = !flag;
 
-    if (flag){
+    if ( flag )
+    {
       setDate( event.target.value );
 
-      const mydates =  getFormattedDate();
+      const mydates = getFormattedDate();
       // const mydates =  '2024-03-22'
 
-      
+
 
       const allreportBYid = await axios.get(
-          `http://localhost:5001/api/pumps/alldatavalues/${ mydates }`,
-          {
-              withCredentials: true,
-          }
+        `http://localhost:5001/api/pumps/alldatavalues/${ mydates }`,
+        {
+          withCredentials: true,
+        }
       );
 
       const allreportsbyid = await axios.get(
-          `http://localhost:5001/api/pumps/alldata/${ mydates }`,
-          {
-              withCredentials: true,
-          }
+        `http://localhost:5001/api/pumps/alldata/${ mydates }`,
+        {
+          withCredentials: true,
+        }
       );
 
 
@@ -251,12 +252,12 @@ function getFormattedDate ()
       const pmsoneanalogopening = mydatas.pmsone[ 0 ]?.openinganalog ?? 0;
       const pmsoneanalogoutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
 
-      setPmsonedigOpening(pmsonedigitalopening)
-      setPmsonedigClosing(pmsonedigitalclosing)
-      setPmsoneanalogOpening(pmsoneanalogopening)
-      setPmsoneanalogClosing(pmsoneanalogclosing)
+      setPmsonedigOpening( pmsonedigitalopening )
+      setPmsonedigClosing( pmsonedigitalclosing )
+      setPmsoneanalogOpening( pmsoneanalogopening )
+      setPmsoneanalogClosing( pmsoneanalogclosing )
 
- 
+
       const pmstwodigitalclosing = mydatas.pmstwo[ 0 ]?.closingdigital ?? 0;
       const pmstwodigitalopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
       const pmstwodigitaloutputvalue = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
@@ -265,11 +266,11 @@ function getFormattedDate ()
       const pmstwoanalogopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
       const pmstwoanalogoutput = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
 
-      setPmstwodigOpening(pmstwodigitalopening)
-      setPmstwodigClosing(pmstwodigitalclosing)
-      setPmstwoanalogOpening(pmstwoanalogopening)
-      setPmstwoanalogClosing(pmstwoanalogClosing)
-    
+      setPmstwodigOpening( pmstwodigitalopening )
+      setPmstwodigClosing( pmstwodigitalclosing )
+      setPmstwoanalogOpening( pmstwoanalogopening )
+      setPmstwoanalogClosing( pmstwoanalogClosing )
+
 
 
       const agoonedigitalclosing = mydatas.agoone[ 0 ]?.closingdigital ?? 0;
@@ -280,11 +281,11 @@ function getFormattedDate ()
       const agotowodigitalopening = mydatas.agotwo[ 0 ]?.openingdigital ?? 0;
       const agotwodigitaloutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
 
-      
-      setAgoonedigOpening(agoonedigitalopening)
-      setAgoonedigClosing(agoonedigitalclosing)
-      setAgotwodigOpening(agotowodigitalopening)
-      setAgotwodigClosing(agotwodigitalclosing)
+
+      setAgoonedigOpening( agoonedigitalopening )
+      setAgoonedigClosing( agoonedigitalclosing )
+      setAgotwodigOpening( agotowodigitalopening )
+      setAgotwodigClosing( agotwodigitalclosing )
 
 
       const agooneanalogclosing = mydatas.agoone[ 0 ]?.closingsanalog ?? 0;
@@ -295,99 +296,101 @@ function getFormattedDate ()
       const agotwoanalogopening = mydatas.agotwo[ 0 ]?.openinganalog ?? 0;
       const agotwoanalogoutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
 
-      
-      setAgotwoanalogOpening(agotwoanalogopening)
-      setAgotwoanalogClosing(agotwoanalogclosing)
-      setAgooneanalogOpening(agooneanalogopening)
-      setAgooneanalogClosing(agooneanalogclosing)
+
+      setAgotwoanalogOpening( agotwoanalogopening )
+      setAgotwoanalogClosing( agotwoanalogclosing )
+      setAgooneanalogOpening( agooneanalogopening )
+      setAgooneanalogClosing( agooneanalogclosing )
 
       // the
 
       setValues( {
-          pmsonedigitalclosing: pmsonedigitalclosing,
-          pmsonedigitalopening: pmsonedigitalopening,
-          pmsonedigitaloutput: pmsonedigitaloutputvalue,
+        pmsonedigitalclosing: pmsonedigitalclosing,
+        pmsonedigitalopening: pmsonedigitalopening,
+        pmsonedigitaloutput: pmsonedigitaloutputvalue,
 
-          pmstwodigitalclosing: pmstwodigitalclosing,
-          pmstwodigitalopening: pmstwodigitalopening,
-          pmstwodigitaloutput: pmstwodigitaloutputvalue,
+        pmstwodigitalclosing: pmstwodigitalclosing,
+        pmstwodigitalopening: pmstwodigitalopening,
+        pmstwodigitaloutput: pmstwodigitaloutputvalue,
 
-          agoonedigitalclosing: agoonedigitalclosing,
-          agoonedigitalopening: agoonedigitalopening,
-          agoonedigitaloutput: agoonedigitaloutput,
+        agoonedigitalclosing: agoonedigitalclosing,
+        agoonedigitalopening: agoonedigitalopening,
+        agoonedigitaloutput: agoonedigitaloutput,
 
-          agotwodigitalclosing: agotwodigitalclosing,
-          agotwodigitalopening: agotowodigitalopening,
-          agotwodigitaloutput: agotwodigitaloutput,
+        agotwodigitalclosing: agotwodigitalclosing,
+        agotwodigitalopening: agotowodigitalopening,
+        agotwodigitaloutput: agotwodigitaloutput,
 
-          pmsoneanalogclosing: pmsoneanalogclosing,
-          pmsoneanalogopening: pmsoneanalogopening,
-          pmsoneanalogoutput: pmsoneanalogoutputvalue,
+        pmsoneanalogclosing: pmsoneanalogclosing,
+        pmsoneanalogopening: pmsoneanalogopening,
+        pmsoneanalogoutput: pmsoneanalogoutputvalue,
 
-          pmstwoanalogclosing: pmstwoanalogClosing,
-          pmstwoanalogopening: pmstwoanalogopening,
-          pmstwoanalogoutput: pmstwoanalogoutput,
+        pmstwoanalogclosing: pmstwoanalogClosing,
+        pmstwoanalogopening: pmstwoanalogopening,
+        pmstwoanalogoutput: pmstwoanalogoutput,
 
-          agooneanalogclosing: agooneanalogclosing,
-          agooneanalogopening: agooneanalogopening,
-          agooneanalogoutput: agooneanalogoutput,
+        agooneanalogclosing: agooneanalogclosing,
+        agooneanalogopening: agooneanalogopening,
+        agooneanalogoutput: agooneanalogoutput,
 
-          agotwoanalogclosing: agotwoanalogclosing,
-          agotwoanalogopening: agotwoanalogopening,
-          agotwoanalogoutput: agotwoanalogoutput,
+        agotwoanalogclosing: agotwoanalogclosing,
+        agotwoanalogopening: agotwoanalogopening,
+        agotwoanalogoutput: agotwoanalogoutput,
       } );
 
       // console.log( oneData.petrol.pmsone )
 
       setSales( {
-          totalsales: datas?.totalsales,
-          difference: datas?.difference,
-          totaldebts: datas?.debts,
-          zreport: datas?.zreport,
-          agophysical: datas?.agopysical,
-          agodipstick: datas?.agodipstick,
-          pmsphysical: datas?.pmsphysical,
-          creditors: datas?.creditors,
-          debtors: datas?.debtors,
-          dieselsales: datas?.dieselsales,
-          pmssales: datas?.pmssales,
-          expenses: datas?.expenses,
-          expensesdata: datas?.expensesdata,
-          pmsdipstick: datas?.pmsdipstic,
-          pmsoneoutput: pmsoneouput,
-          pmstwooutput: pmstwooutput,
-          agooneoutput: agooneoutput,
-          agotwooutput: agotwooutput,
+        totalsales: datas?.totalsales,
+        difference: datas?.difference,
+        totaldebts: datas?.debts,
+        zreport: datas?.zreport,
+        agophysical: datas?.agopysical,
+        agodipstick: datas?.agodipstick,
+        pmsphysical: datas?.pmsphysical,
+        creditors: datas?.creditors,
+        debtors: datas?.debtors,
+        dieselsales: datas?.dieselsales,
+        pmssales: datas?.pmssales,
+        expenses: datas?.expenses,
+        expensesdata: datas?.expensesdata,
+        pmsdipstick: datas?.pmsdipstic,
+        pmsoneoutput: pmsoneouput,
+        pmstwooutput: pmstwooutput,
+        agooneoutput: agooneoutput,
+        agotwooutput: agotwooutput,
       } );
-    }else{
-      
-      setAgotwoanalogOpening("")
-      setAgotwoanalogClosing("")
-      setAgooneanalogOpening("")
-      setAgooneanalogClosing("")
-        
-      setAgoonedigOpening("")
-      setAgoonedigClosing("")
-      setAgotwodigOpening("")
-      setAgotwodigClosing("")
+    } else
+    {
 
-      setPmsonedigOpening("")
-      setPmsonedigClosing("")
-      setPmsoneanalogOpening("")
-      setPmsoneanalogClosing("")
+      setAgotwoanalogOpening( "" )
+      setAgotwoanalogClosing( "" )
+      setAgooneanalogOpening( "" )
+      setAgooneanalogClosing( "" )
 
-      
-      setPmstwodigOpening("")
-      setPmstwodigClosing("")
-      setPmstwoanalogOpening("")
-      setPmstwoanalogClosing("")
-    
+      setAgoonedigOpening( "" )
+      setAgoonedigClosing( "" )
+      setAgotwodigOpening( "" )
+      setAgotwodigClosing( "" )
+
+      setPmsonedigOpening( "" )
+      setPmsonedigClosing( "" )
+      setPmsoneanalogOpening( "" )
+      setPmsoneanalogClosing( "" )
+
+
+      setPmstwodigOpening( "" )
+      setPmstwodigClosing( "" )
+      setPmstwoanalogOpening( "" )
+      setPmstwoanalogClosing( "" )
+
     }
 
   };
 
   const literHandler = async () =>
-  {setNotify( false );
+  {
+    setNotify( false );
     if (
       pmsonedigOpening &&
       pmsonedigClosing &&
@@ -401,7 +404,7 @@ function getFormattedDate ()
     {
       try
       {
-        const dats =  getFormattedDate()
+        const dats = getFormattedDate()
         let pmsOne = {
           uid: dats,
           closingsanalog: pmsoneanalogClosing,
@@ -410,7 +413,7 @@ function getFormattedDate ()
           openingdigital: pmsonedigOpening,
           outputvalue: Number( pmsonedigOpening ) - Number( pmsonedigClosing ),
         };
-        
+
         let pmsTwo = {
           uid: dats,
           closingsanalog: pmstwoanalogClosing,
@@ -462,22 +465,24 @@ function getFormattedDate ()
     }
   };
 
-  const sureTy =()=>{
-    setNotify(false)
+  const sureTy = () =>
+  {
+    setNotify( false )
     setNotification( "" );
-    setAre(true)
+    setAre( true )
 
   }
 
   const confirm = async () =>
-  { setNotify(false)
+  {
+    setNotify( false )
     setNotification( "" );
-   
+
     if ( isNaN( diesellitres ) && isNaN( dieselAmount ) && isNaN( petrolAmount ) && isNaN( petrollitres ) )
     {
       try
       {
-        const dats =  getFormattedDate()
+        const dats = getFormattedDate()
         let data = {
           uid: dats,
           dieselamount: Math.floor( dAmount ),
@@ -494,22 +499,24 @@ function getFormattedDate ()
         setNotify( true );
         setNotification( response.data );
         setLoading( false );
-        
+
       } catch ( err ) { }
-    } else{
+    } else
+    {
       setNotify( true );
-        setNotification( "Ensure all todays' data are filled!" );
+      setNotification( "Ensure all todays' data are filled!" );
     }
   };
 
   const pesaHandler = async () =>
-  { setNotify(false)
+  {
+    setNotify( false )
     setNotification( "" );
     if ( mPesa && nmb && crdb )
     {
       try
       {
-        const dats =  getFormattedDate()
+        const dats = getFormattedDate()
         let virtualmoney = {
           uid: dats,
           mpesa: mPesa,
@@ -528,9 +535,9 @@ function getFormattedDate ()
         setNotify( true );
         setNotification( resone.data );
         setLoading( false );
-        setNmb("")
-        setCrdb("")
-        setMpesa("")
+        setNmb( "" )
+        setCrdb( "" )
+        setMpesa( "" )
 
         //
       } catch ( err )
@@ -545,23 +552,26 @@ function getFormattedDate ()
       setNotification( "Fill all the details!" );
     }
   };
-  const deletePop = () => {
-    setDelete(true);
+  const deletePop = () =>
+  {
+    setDelete( true );
   };
 
-  const cancPopdelete =()=>{
-    setNotify(false)
+  const cancPopdelete = () =>
+  {
+    setNotify( false )
     setNotification( "" );
-    setAre(false);
+    setAre( false );
   }
   const credHandler = async () =>
-  {   setNotify(false)
+  {
+    setNotify( false )
     setNotification( "" );
     if ( name && amount && mode )
     {
       try
       {
-        const dats =  getFormattedDate()
+        const dats = getFormattedDate()
         let debtors = {
           uid: dats,
           name: name,
@@ -578,10 +588,10 @@ function getFormattedDate ()
         setNotify( true );
         setNotification( resone.data );
         setLoading( false );
-        setName("")
-        setAmount("")
-        setMode("")
-        
+        setName( "" )
+        setAmount( "" )
+        setMode( "" )
+
       } catch ( err )
       {
         setLoading( false );
@@ -596,15 +606,16 @@ function getFormattedDate ()
   };
 
   const debtsHandler = async () =>
-  { setNotify(false)
+  {
+    setNotify( false )
     setNotification( "" );
 
     if ( name && amount )
     {
       try
       {
-        const dats =  getFormattedDate()
-    
+        const dats = getFormattedDate()
+
         let debtors = {
           uid: dats,
           name: name,
@@ -619,8 +630,8 @@ function getFormattedDate ()
         setNotification( resone.data );
         setLoading( false );
 
-        setName("")
-        setAmount("")
+        setName( "" )
+        setAmount( "" )
 
         //
       } catch ( err )
@@ -637,13 +648,13 @@ function getFormattedDate ()
 
   const stocksHandler = async () =>
   {
-    setNotify(false)
+    setNotify( false )
     setNotification( "" );
     if ( pmsphyscal && pmsdispst )
     {
       try
       {
-        const dats =  getFormattedDate()
+        const dats = getFormattedDate()
         let pmsStock = {
           uid: dats,
           physical: pmsphyscal,
@@ -672,10 +683,10 @@ function getFormattedDate ()
         setNotify( true );
         setNotification( resone.data );
         setLoading( false );
-        setPhysicalago("")
-        setPhysicalpms("")
-        setDipstago("")
-        setDipstpms("")
+        setPhysicalago( "" )
+        setPhysicalpms( "" )
+        setDipstago( "" )
+        setDipstpms( "" )
 
         //
       } catch ( err )
@@ -691,12 +702,14 @@ function getFormattedDate ()
     }
   };
 
-  const updateHandler=()=>{
+  const updateHandler = () =>
+  {
 
   }
 
   const moneycountHandler = async () =>
-  {   setNotify(false)
+  {
+    setNotify( false )
     setNotification( "" );
     if (
       tenths &&
@@ -712,7 +725,7 @@ function getFormattedDate ()
     {
       try
       {
-        const dats =  getFormattedDate()
+        const dats = getFormattedDate()
         let collections = {
           uid: dats,
           tenth: tenths,
@@ -737,14 +750,14 @@ function getFormattedDate ()
         setNotification( resone.data );
         setLoading( false );
 
-        setOnehs("")
-        setTwohs("")
-        setFivehs("")
-        setOneths("")
-        setTwoths("")
-        setFiveths("")
-        setTenths("")
-        setFiftys("")
+        setOnehs( "" )
+        setTwohs( "" )
+        setFivehs( "" )
+        setOneths( "" )
+        setTwoths( "" )
+        setFiveths( "" )
+        setTenths( "" )
+        setFiftys( "" )
 
         //
       } catch ( err )
@@ -766,13 +779,13 @@ function getFormattedDate ()
   };
 
   const handlePesa = () =>
-  {  
+  {
     setStocks( false );
     setMoneycount( false );
     setDebts( false );
     setPesa( true );
     setCred( false );
-    setNotify(false)
+    setNotify( false )
     setNotification( "" );
   };
 
@@ -783,7 +796,7 @@ function getFormattedDate ()
     setStocks( false );
     setDebts( true );
     setCred( false );
-    setNotify(false)
+    setNotify( false )
     setNotification( "" );
   };
 
@@ -794,7 +807,7 @@ function getFormattedDate ()
     setStocks( false );
     setDebts( false );
     setCred( true );
-    setNotify(false)
+    setNotify( false )
     setNotification( "" );
   };
 
@@ -803,7 +816,7 @@ function getFormattedDate ()
     setPesa( false );
     setStocks( false );
     setDebts( false );
-    setNotify(false)
+    setNotify( false )
     setNotification( "" );
     setMoneycount( true );
     setCred( false );
@@ -813,7 +826,7 @@ function getFormattedDate ()
   {
     setPesa( false );
     setDebts( false );
-    setNotify(false)
+    setNotify( false )
     setNotification( "" );
     setMoneycount( false );
     setStocks( true );
@@ -825,7 +838,7 @@ function getFormattedDate ()
     setPesa( false );
     setDebts( false );
     setMoneycount( false );
-    setNotify(false)
+    setNotify( false )
     setNotification( "" );
     setStocks( false );
     setCred( false );
@@ -840,8 +853,8 @@ function getFormattedDate ()
       <div className="sectionthresa">
         <div className="general">
           <p>DAILY REPORT FORMS</p>
-          
-          
+
+
         </div>
         <div className="year">
           <div className="dail">
@@ -868,8 +881,8 @@ function getFormattedDate ()
             <p onClick={ handleStocks }>FUEL STOCK</p>
           </div>
 
-          <div className="download" onClick={handleUpdate}>
-          <p>EDIT DATA</p>
+          <div className="download" onClick={ handleUpdate }>
+            <p>EDIT DATA</p>
           </div>
         </div>
         {/* <Real /> */ }
@@ -993,39 +1006,39 @@ function getFormattedDate ()
               </div>
             </div>
           ) }
-     
-     {sure && (
-        <div className="poppesaoo">
-          <div className="contentonestyo">
-            <div className="canc" onClick={cancPopdelete}>
-            <img src={cancs} alt="" />
-            </div>
-            <div className="ours">
-              <div className="sdacont">
-                <div className="totalcash">
-                  <p>UPDATING' FUEL VALUES? </p>
+
+          { sure && (
+            <div className="poppesaoo">
+              <div className="contentonestyo">
+                <div className="canc" onClick={ cancPopdelete }>
+                  <img src={ cancs } alt="" />
                 </div>
-                <div className="forms">
-                  
+                <div className="ours">
+                  <div className="sdacont">
+                    <div className="totalcash">
+                      <p>UPDATING' FUEL VALUES? </p>
+                    </div>
+                    <div className="forms">
 
-                  <div className="areyou">
-                    <p>Adding to today values and amount.</p>
-                    <p>Are you sure to do this?</p>
-                  </div>
 
-                  <div className="inputo">
-                    <button onClick={cancPopdelete}>No</button>
-                    <button onClick={confirm}>Yes</button>
-                  </div>
-                </div>
+                      <div className="areyou">
+                        <p>Adding to today values and amount.</p>
+                        <p>Are you sure to do this?</p>
+                      </div>
 
-                {notify && (
-                  <div className="inputmy">
-                    <p>{notification}</p>
-                  </div>
-                )}
+                      <div className="inputo">
+                        <button onClick={ cancPopdelete }>No</button>
+                        <button onClick={ confirm }>Yes</button>
+                      </div>
+                    </div>
 
-                {/* {loadings ? (
+                    { notify && (
+                      <div className="inputmy">
+                        <p>{ notification }</p>
+                      </div>
+                    ) }
+
+                    {/* {loadings ? (
               <div className="spin">
                 {" "}
                 <DotLoader
@@ -1041,12 +1054,12 @@ function getFormattedDate ()
               <></>
             )} */}
 
-            
+
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      )}
+          ) }
 
           { debts && (
             <div className="poppesa">

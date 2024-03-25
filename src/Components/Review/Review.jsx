@@ -29,22 +29,7 @@ let mydate =
     today.getSeconds();
 
 axios.defaults.withCredentials = true;
-function getStartandEndofWeek ( date )
-{
-    const currentDate = new Date( date );
-    const currentDayofWeek = currentDate.getDay();
 
-    const startDate = new Date( currentDate );
-    startDate.setDate( currentDate.getDate() - currentDayofWeek + 1 );
-
-    const endDate = new Date( currentDate );
-    endDate.setDate( currentDate.getDate() - currentDayofWeek + 7 );
-
-    const formattedStartDate = startDate.toISOString().split( "T" )[ 0 ];
-    const formattedEndDate = endDate.toISOString().split( "T" )[ 0 ];
-
-    return { startDate: formattedStartDate, endDate: formattedEndDate };
-}
 
 export default function Review ()
 {
@@ -118,19 +103,6 @@ export default function Review ()
 
     const [ mydate, setDate ] = useState( "none" );
 
-    function getFormattedDate ()
-    {
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = String( today.getMonth() + 1 ).padStart( 2, "0" ); // Add leading zero if needed
-        const day = String( today.getDate() ).padStart( 2, "0" ); // Add leading zero if needed
-        return `${ year }-${ month }-${ day }`;
-    }
-
-
-
-    
-
     const [ salesdata, setSales ] = useState( {
         totalsales: "0",
         difference: "0",
@@ -185,6 +157,50 @@ export default function Review ()
         agotwoanalogopening: "0",
         agotwoanalogoutput: "0",
     } );
+
+    function getFormattedDate ()
+    {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String( today.getMonth() + 1 ).padStart( 2, "0" ); // Add leading zero if needed
+        const day = String( today.getDate() ).padStart( 2, "0" ); // Add leading zero if needed
+        return `${ year }-${ month }-${ day }`;
+    }
+
+    function getStartandEndofWeek ( date )
+{
+    const currentDate = new Date( date );
+    const currentDayofWeek = currentDate.getDay();
+
+    const startDate = new Date( currentDate );
+    startDate.setDate( currentDate.getDate() - currentDayofWeek + 1 );
+
+    const endDate = new Date( currentDate );
+    endDate.setDate( currentDate.getDate() - currentDayofWeek + 7 );
+
+    const formattedStartDate = startDate.toISOString().split( "T" )[ 0 ];
+    const formattedEndDate = endDate.toISOString().split( "T" )[ 0 ];
+
+    return { startDate: formattedStartDate, endDate: formattedEndDate };
+}
+
+function getStartandEndofMonth ( date )
+{
+    const currentDate = new Date( date )
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+
+    const startDate = new Date( year, month, 1 )
+    const endDate = new Date( year, month + 1, 0 )
+
+    const formattedStartDate = startDate.toISOString().split( 'T' )[ 0 ]
+    const formattedEndDate = endDate.toISOString().split( 'T' )[ 0 ]
+
+    return { startDate: formattedStartDate, endDate: formattedEndDate };
+}
+
+
+
 
     useEffect( () =>
     {
@@ -398,6 +414,7 @@ export default function Review ()
         // return () => clearInterval(interval);
     }, [] );
 
+
     const handleChange = async (event) =>
     {
 
@@ -414,6 +431,264 @@ export default function Review ()
 
         const allreportsbyid = await axios.get(
             `http://localhost:5001/api/pumps/alldata/${ mydates }`,
+            {
+                withCredentials: true,
+            }
+        );
+
+        const datas = allreportBYid.data;
+        const mydatas = allreportsbyid.data;
+
+        const pmsoneouput = datas.petrol.pmsone[ 0 ]?.outputvalue ?? 0;
+        const pmstwooutput = datas.petrol.pmstwo[ 0 ]?.outputvalue ?? 0;
+
+        const agooneoutput = datas.diesel.agoone[ 0 ]?.outputvalue ?? 0;
+        const agotwooutput = datas.diesel.agotwo[ 0 ]?.outputvalue ?? 0;
+
+        // console.log(datas)
+
+        const pmsonedigitalclosing = mydatas.pmsone[ 0 ]?.closingdigital ?? 0;
+        const pmsonedigitalopening = mydatas.pmsone[ 0 ]?.openingdigital ?? 0;
+        const pmsonedigitaloutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
+
+        const pmsoneanalogclosing = mydatas.pmsone[ 0 ]?.closingsanalog ?? 0;
+        const pmsoneanalogopening = mydatas.pmsone[ 0 ]?.openinganalog ?? 0;
+        const pmsoneanalogoutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
+
+        const pmstwodigitalclosing = mydatas.pmstwo[ 0 ]?.closingdigital ?? 0;
+        const pmstwodigitalopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
+        const pmstwodigitaloutputvalue = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
+
+        const pmstwoanalogClosing = mydatas.pmstwo[ 0 ]?.closingsanalog ?? 0;
+        const pmstwoanalogopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
+        const pmstwoanalogoutput = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
+
+        const agoonedigitalclosing = mydatas.agoone[ 0 ]?.closingdigital ?? 0;
+        const agoonedigitalopening = mydatas.agoone[ 0 ]?.openingdigital ?? 0;
+        const agoonedigitaloutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
+
+        const agotwodigitalclosing = mydatas.agotwo[ 0 ]?.closingdigital ?? 0;
+        const agotowodigitalopening = mydatas.agotwo[ 0 ]?.openingdigital ?? 0;
+        const agotwodigitaloutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
+
+        const agooneanalogclosing = mydatas.agoone[ 0 ]?.closingsanalog ?? 0;
+        const agooneanalogopening = mydatas.agoone[ 0 ]?.openinganalog ?? 0;
+        const agooneanalogoutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
+
+        const agotwoanalogclosing = mydatas.agotwo[ 0 ]?.closingsanalog ?? 0;
+        const agotwoanalogopening = mydatas.agotwo[ 0 ]?.openinganalog ?? 0;
+        const agotwoanalogoutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
+
+        // the
+
+        setValues( {
+            pmsonedigitalclosing: pmsonedigitalclosing,
+            pmsonedigitalopening: pmsonedigitalopening,
+            pmsonedigitaloutput: pmsonedigitaloutputvalue,
+
+            pmstwodigitalclosing: pmstwodigitalclosing,
+            pmstwodigitalopening: pmstwodigitalopening,
+            pmstwodigitaloutput: pmstwodigitaloutputvalue,
+
+            agoonedigitalclosing: agoonedigitalclosing,
+            agoonedigitalopening: agoonedigitalopening,
+            agoonedigitaloutput: agoonedigitaloutput,
+
+            agotwodigitalclosing: agotwodigitalclosing,
+            agotwodigitalopening: agotowodigitalopening,
+            agotwodigitaloutput: agotwodigitaloutput,
+
+            pmsoneanalogclosing: pmsoneanalogclosing,
+            pmsoneanalogopening: pmsoneanalogopening,
+            pmsoneanalogoutput: pmsoneanalogoutputvalue,
+
+            pmstwoanalogclosing: pmstwoanalogClosing,
+            pmstwoanalogopening: pmstwoanalogopening,
+            pmstwoanalogoutput: pmstwoanalogoutput,
+
+            agooneanalogclosing: agooneanalogclosing,
+            agooneanalogopening: agooneanalogopening,
+            agooneanalogoutput: agooneanalogoutput,
+
+            agotwoanalogclosing: agotwoanalogclosing,
+            agotwoanalogopening: agotwoanalogopening,
+            agotwoanalogoutput: agotwoanalogoutput,
+        } );
+
+        // console.log( oneData.petrol.pmsone )
+
+        setSales( {
+            totalsales: datas?.totalsales,
+            difference: datas?.difference,
+            totaldebts: datas?.debts,
+            zreport: datas?.zreport,
+            agophysical: datas?.agopysical,
+            agodipstick: datas?.agodipstick,
+            pmsphysical: datas?.pmsphysical,
+            creditors: datas?.creditors,
+            debtors: datas?.debtors,
+            dieselsales: datas?.dieselsales,
+            pmssales: datas?.pmssales,
+            expenses: datas?.expenses,
+            expensesdata: datas?.expensesdata,
+            pmsdipstick: datas?.pmsdipstic,
+            pmsoneoutput: pmsoneouput,
+            pmstwooutput: pmstwooutput,
+            agooneoutput: agooneoutput,
+            agotwooutput: agotwooutput,
+        } );
+    };
+
+    const handleChangeweekly = async (event) =>
+    {
+
+        const mydates =  getFormattedDate()
+
+        const startDate = getStartandEndofWeek(mydates).startDate 
+        const endDate = getStartandEndofWeek(mydates).endDate
+
+        // console.log(startDate, endDate)
+
+
+        const allreportBYid = await axios.get(
+            `http://localhost:5001/api/pumps/alldatavalues/${ startDate }/${endDate}`,
+            {
+                withCredentials: true,
+            }
+        );
+
+        const allreportsbyid = await axios.get(
+            `http://localhost:5001/api/pumps/alldata/${ startDate }/${endDate}`,
+            {
+                withCredentials: true,
+            }
+        );
+
+        const datas = allreportBYid.data;
+        const mydatas = allreportsbyid.data;
+
+        const pmsoneouput = datas.petrol.pmsone[ 0 ]?.outputvalue ?? 0;
+        const pmstwooutput = datas.petrol.pmstwo[ 0 ]?.outputvalue ?? 0;
+
+        const agooneoutput = datas.diesel.agoone[ 0 ]?.outputvalue ?? 0;
+        const agotwooutput = datas.diesel.agotwo[ 0 ]?.outputvalue ?? 0;
+
+        // console.log(datas)
+
+        const pmsonedigitalclosing = mydatas.pmsone[ 0 ]?.closingdigital ?? 0;
+        const pmsonedigitalopening = mydatas.pmsone[ 0 ]?.openingdigital ?? 0;
+        const pmsonedigitaloutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
+
+        const pmsoneanalogclosing = mydatas.pmsone[ 0 ]?.closingsanalog ?? 0;
+        const pmsoneanalogopening = mydatas.pmsone[ 0 ]?.openinganalog ?? 0;
+        const pmsoneanalogoutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
+
+        const pmstwodigitalclosing = mydatas.pmstwo[ 0 ]?.closingdigital ?? 0;
+        const pmstwodigitalopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
+        const pmstwodigitaloutputvalue = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
+
+        const pmstwoanalogClosing = mydatas.pmstwo[ 0 ]?.closingsanalog ?? 0;
+        const pmstwoanalogopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
+        const pmstwoanalogoutput = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
+
+        const agoonedigitalclosing = mydatas.agoone[ 0 ]?.closingdigital ?? 0;
+        const agoonedigitalopening = mydatas.agoone[ 0 ]?.openingdigital ?? 0;
+        const agoonedigitaloutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
+
+        const agotwodigitalclosing = mydatas.agotwo[ 0 ]?.closingdigital ?? 0;
+        const agotowodigitalopening = mydatas.agotwo[ 0 ]?.openingdigital ?? 0;
+        const agotwodigitaloutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
+
+        const agooneanalogclosing = mydatas.agoone[ 0 ]?.closingsanalog ?? 0;
+        const agooneanalogopening = mydatas.agoone[ 0 ]?.openinganalog ?? 0;
+        const agooneanalogoutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
+
+        const agotwoanalogclosing = mydatas.agotwo[ 0 ]?.closingsanalog ?? 0;
+        const agotwoanalogopening = mydatas.agotwo[ 0 ]?.openinganalog ?? 0;
+        const agotwoanalogoutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
+
+        // the
+
+        setValues( {
+            pmsonedigitalclosing: pmsonedigitalclosing,
+            pmsonedigitalopening: pmsonedigitalopening,
+            pmsonedigitaloutput: pmsonedigitaloutputvalue,
+
+            pmstwodigitalclosing: pmstwodigitalclosing,
+            pmstwodigitalopening: pmstwodigitalopening,
+            pmstwodigitaloutput: pmstwodigitaloutputvalue,
+
+            agoonedigitalclosing: agoonedigitalclosing,
+            agoonedigitalopening: agoonedigitalopening,
+            agoonedigitaloutput: agoonedigitaloutput,
+
+            agotwodigitalclosing: agotwodigitalclosing,
+            agotwodigitalopening: agotowodigitalopening,
+            agotwodigitaloutput: agotwodigitaloutput,
+
+            pmsoneanalogclosing: pmsoneanalogclosing,
+            pmsoneanalogopening: pmsoneanalogopening,
+            pmsoneanalogoutput: pmsoneanalogoutputvalue,
+
+            pmstwoanalogclosing: pmstwoanalogClosing,
+            pmstwoanalogopening: pmstwoanalogopening,
+            pmstwoanalogoutput: pmstwoanalogoutput,
+
+            agooneanalogclosing: agooneanalogclosing,
+            agooneanalogopening: agooneanalogopening,
+            agooneanalogoutput: agooneanalogoutput,
+
+            agotwoanalogclosing: agotwoanalogclosing,
+            agotwoanalogopening: agotwoanalogopening,
+            agotwoanalogoutput: agotwoanalogoutput,
+        } );
+
+        // console.log( oneData.petrol.pmsone )
+
+        setSales( {
+            totalsales: datas?.totalsales,
+            difference: datas?.difference,
+            totaldebts: datas?.debts,
+            zreport: datas?.zreport,
+            agophysical: datas?.agopysical,
+            agodipstick: datas?.agodipstick,
+            pmsphysical: datas?.pmsphysical,
+            creditors: datas?.creditors,
+            debtors: datas?.debtors,
+            dieselsales: datas?.dieselsales,
+            pmssales: datas?.pmssales,
+            expenses: datas?.expenses,
+            expensesdata: datas?.expensesdata,
+            pmsdipstick: datas?.pmsdipstic,
+            pmsoneoutput: pmsoneouput,
+            pmstwooutput: pmstwooutput,
+            agooneoutput: agooneoutput,
+            agotwooutput: agotwooutput,
+        } );
+    };
+
+
+
+    const handleChangemonthly = async (event) =>
+    {
+
+        const mydates =  getFormattedDate()
+
+        const startDate = getStartandEndofMonth(mydates).startDate 
+        const endDate = getStartandEndofMonth(mydates).endDate
+
+        // console.log(startDate, endDate)
+
+
+        const allreportBYid = await axios.get(
+            `http://localhost:5001/api/pumps/alldatavalues/${ startDate }/${endDate}`,
+            {
+                withCredentials: true,
+            }
+        );
+
+        const allreportsbyid = await axios.get(
+            `http://localhost:5001/api/pumps/alldata/${ startDate }/${endDate}`,
             {
                 withCredentials: true,
             }
@@ -669,8 +944,20 @@ export default function Review ()
 
             <div className="sectionthres">
                 <div className="general">
-                    <p>GENERAL REPORT  {getFormattedDate()}</p>
+                    <p>GENERAL REPORT  </p>
                 </div>
+
+                <div className="handles">
+                <div className="weekdata" onClick={handleChangeweekly}>
+                    <p>WEEKY DATA</p>
+                </div>
+
+                <div className="weekdata" onClick={handleChangemonthly}>
+                    <p>MONTHLY DATA</p>
+                </div>
+                </div>
+
+                
                 <div className="datepicking">
                     <input
                         type="date"
@@ -1046,7 +1333,7 @@ export default function Review ()
                 </div>
 
                 <div className="debtorslista"></div>
-                <div className="mesags">
+                {currentUser[ 0 ]?.role === "director" ?<div className="mesags">
                     <div className="debtorslis">
                         <button onClick={ approve }>Approve</button>
                         <button onClick={ rejected }>Reject</button>
@@ -1065,7 +1352,7 @@ export default function Review ()
                             <p>{ messagesent }</p>
                         </div>
                     </div>
-                </div>
+                </div>:<></>}
 
                 <div className="debtoslis"></div>
             </div>

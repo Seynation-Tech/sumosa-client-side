@@ -319,7 +319,7 @@ export default function Home ()
                       <p id="gs">Petrol</p>
 
                       <div className="pri">
-                        <p>Tsh { petrolprice }</p>
+                        <p>Tsh { Number(salesdata.petrolprice).toLocaleString() }</p>
                         {/* <img src={pend} alt="" /> */ }
                       </div>
                     </div>
@@ -344,7 +344,7 @@ export default function Home ()
                       <p id="gs">Diesel</p>
 
                       <div className="pri">
-                        <p>Tsh { dieselprice }</p>
+                        <p>Tsh { Number(salesdata.dieselprice).toLocaleString() }</p>
                         {/* <img src={pend} alt="" /> */ }
                       </div>
                     </div>
