@@ -1277,7 +1277,7 @@ export default function Review ()
 
                     <div className="cashs">
 
-                        <p>ONLINE PAY + EXPENSES + DEBTS</p>
+                        <p>ONLINE + EXPENS + DEBTS</p>
                         <p>Tsh { Number( salesdata?.othermoney ).toLocaleString() }</p>
                     </div>
 
