@@ -65,7 +65,7 @@ export default function Sidebar ()
         <div className="profcaption">
 
           <p>{ currentUser[ 0 ]?.name }</p>
-          <p>{ currentUser[ 0 ]?.role }</p>
+          <p>{ String(currentUser[ 0 ]?.role).toLocaleUpperCase() }</p>
         </div>
       </div>
 

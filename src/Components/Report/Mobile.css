@@ -1,5 +1,8 @@
 @media screen and (max-width: 640px) {
-
+  .reloa{
+    position: absolute;
+    z-index: 8988989;
+  }
 
     .sectionthresa {
         background-color: rgba(255, 255, 255, 0.449);
@@ -31,21 +34,28 @@
         /* margin: 23px; */
       }
 
-      .year {
-        
+      .yearrr {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        /* margin-top: 3px; */
-        min-height: 34vh;
-        padding: 33px;
+        margin-top: 3px;
+        min-height: 10vh;
         width: 100%;
         background-color: rgba(0, 0, 255, 0.072);
         border-radius: 5px;
-        display: flex;
+        margin-bottom: 45px;
         flex-wrap: wrap;
+        gap: 5px;
+        padding-top: 23px;
+        padding-bottom: 23px;
+      }
 
-        gap: 2px;
+      .yearrr div:nth-child(7){
+        margin-left: -70px;
+      }
+
+      .yearrr div:nth-child(8){
+        margin-right: -70px;
       }
 
       .download{
@@ -60,7 +70,7 @@
     align-items: center;
     /* margin: 12px; */
     position: absolute;
-    top: 50%;
+    top: 40%;
     border-radius: 10px;
     /* opacity: 0; */
   }
@@ -123,12 +133,16 @@
     border-radius: 10px;
     padding: 12px;
     z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   
 
   .jinsr {
-    width: 100%;
+    width: 50%;
     height: 45px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 3px;
@@ -136,6 +150,7 @@
     justify-content: center;
     align-items: center;
     backdrop-filter: blur(3px);
+    margin: 12px;
   }
 
   .chote {
@@ -168,6 +183,9 @@
     border-radius: 10px;
     padding: 12px;
     z-index: 10000;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     /* margin: 12px; */
   }
   .bone{

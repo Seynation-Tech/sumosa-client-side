@@ -98,7 +98,7 @@ export default function Home ()
             withCredentials: true,
           } );
 
-          const resp = await axios.get( `http://localhost:5001/api/billing/incoming`, {
+          const resp = await axios.get( `${url}/api/billing/incoming`, {
             withCredentials: true,
           } );
 
@@ -185,7 +185,10 @@ export default function Home ()
   return (
     <div className="mainpage">
       { sidebar && <Sidebar /> }
-      <Sidebar />
+      <div className="opa">
+           <Sidebar />
+      </div>
+   
       {/* SECTION TWO THE CONTENT PAGE */ }|
       <div className="upbove">
         <div className="aboveall">
@@ -508,9 +511,12 @@ export default function Home ()
           <div className="thr"></div>
         </div>
 
-        <div className="firstss">
-          <p>website: sumosa.ac.tz</p>
+<a href="https://sumosa.co.tz">
+    <div className="firstss">
+          <p>website - sumosa.co.tz</p>
         </div>
+</a>
+      
       </div>
     </div>
   );

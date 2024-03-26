@@ -7,9 +7,14 @@ import Sidebar from "../Sidebar/Sidebar";
 import "./Sales.css";
 import "./Mobile.css";
 import downlo from "../../Images/download.png";
+import nets from "../../Images/nets.png";
 import growth from "../../Images/growth.png";
+import growths from "../../Images/startarrow.png";
 import cancs from "../../Images/o.png";
 import edy from "../../Images/dots.png";
+import Loaders from '../Loaders/Loaders.jsx'
+import Return from '../Return/Return.jsx'
+import { NavLink } from "react-router-dom";
 
 import axios from "axios";
 import { AuthContext } from "../AuthContext";
@@ -38,9 +43,8 @@ export default function Sales ()
   const [ dieselprice, setDieselprice ] = useState( "" );
   const [ petrolprice, setPetrolprice ] = useState( "" );
 
-  const { url, diff, days,salesdata,values, zrepos, totalEarnings, dieselAmount, petrolAmount } =
+  const { url, diff, days, salesdata, values, zrepos, totalEarnings, dieselAmount, petrolAmount } =
     useContext( AuthContext );
-  const [ loadings, setLoading ] = useState( false );
   const [ reason, setReason ] = useState( "" );
   const [ amountinwords, setAmountinwords ] = useState( "" );
 
@@ -59,7 +63,8 @@ export default function Sales ()
   const [ click, setClick ] = useState( false );
   const [ notify, setNotify ] = useState( false );
 
-  const [vsdata,setVsdata] = useState("Debtors")
+  const [ vsdata, setVsdata ] = useState( "Debtors" )
+  const [ loading, setLoading ] = useState( false );
 
   const [ setdelete, setDeletename ] = useState( "" );
   const [ sidebar, setSidebar ] = useState( false );
@@ -67,29 +72,29 @@ export default function Sales ()
   const [ notification, setNotification ] = useState( "" );
   const [ deletes, setDelete ] = useState( false );
   const [ deletee, setDeletee ] = useState( false );
-  const [vs,setVs] = useState(false)
+  const [ vs, setVs ] = useState( false )
 
   const [ name, setName ] = useState( "" )
   const [ amounts, setAmounts ] = useState( "" )
-  const [mode,setMode] = useState("")
+  const [ mode, setMode ] = useState( "" )
 
   const navigate = useNavigate();
   let [ color, setColor ] = useState( "#ffffff" );
 
   function getFormattedDate ()
-{
+  {
     const today = new Date();
     const year = today.getFullYear();
-    const month = String( today.getMonth() + 1 ).padStart( 2, "0" ); 
-    const day = String( today.getDate() ).padStart( 2, "0" ); 
+    const month = String( today.getMonth() + 1 ).padStart( 2, "0" );
+    const day = String( today.getDate() ).padStart( 2, "0" );
     return `${ year }-${ month }-${ day }`;
-}
+  }
 
 
   useEffect( () =>
   {
     window.scrollTo( 0, 0 );
-    setLoading( true );
+
     // const interval = setInterval(() => {
     const fetchData = async () =>
     {
@@ -123,12 +128,12 @@ export default function Sales ()
   const deletePop = ( e ) =>
   {
 
-    
-    setNotification("")
-    setNotify(false)
+    window.scrollTo( 0, 0 );
+    setNotification( "" )
+    setNotify( false )
     setName( alldat?.name )
     setAmounts( alldat?.amount )
-    setIds(alldat?.id)
+    setIds( alldat?.id )
     setDelete( true );
   };
 
@@ -236,6 +241,7 @@ export default function Sales ()
 
   const deleteHandlers = async ( e ) =>
   {
+    setLoading( true )
     try
     {
       //  alert(alldat.name)
@@ -253,6 +259,7 @@ export default function Sales ()
 
   const deleteHandler = async ( e ) =>
   {
+    setLoading( true )
     try
     {
       //  alert(alldat.name)
@@ -269,31 +276,32 @@ export default function Sales ()
 
   const reasonsHandler = async () =>
   {
+
     if ( reason && amountinwords )
     {
+      setLoading( true )
       try
       {
-        const dats =  getFormattedDate()
+        const dats = getFormattedDate()
         let inwords = {
           uid: dats,
           differencereason: reason,
           totalamount: amountinwords,
         };
-        setLoading( true );
+
 
         const resone = await axios.post( `${ url }/api/billing/reason`, inwords );
         setNotify( true );
         setNotification( resone.data );
         setLoading( false );
         setReasons( false );
-        setAmountinwords("")
-        setReason("")
+        setAmountinwords( "" )
+        setReason( "" )
         //
       } catch ( err )
       {
         setLoading( false );
-        console.log( err );
-        // setError( "Please refresh..." );
+
       }
     } else
     {
@@ -306,18 +314,19 @@ export default function Sales ()
 
   const priceHandler = async () =>
   {
+
     if ( petrolprice && dieselprice )
     {
+      setLoading( true )
       try
       {
-        const dats =  getFormattedDate()
+        const dats = getFormattedDate()
         let pricings = {
           uid: dats,
           petrol: petrolprice,
           diesel: dieselprice,
         };
 
-        setLoading( true );
         const resone = await axios.post(
           `${ url }/api/billing/pricings`,
           pricings
@@ -325,10 +334,10 @@ export default function Sales ()
         setNotify( true );
         setNotification( resone.data );
         setLoading( false );
-     
 
-        setDieselprice("")
-        setPetrolprice("")
+
+        setDieselprice( "" )
+        setPetrolprice( "" )
 
 
         //
@@ -345,34 +354,39 @@ export default function Sales ()
 
   const debtorcrediLoad = async () =>
   {
+
     setWahusika( "DEBTORS" )
-    setVs(false)
+    setVs( false )
     try
     {
+      setLoading( true )
       const respfour = await axios.get( `${ url }/api/billing/debtors`, {
         withCredentials: true,
       } );
       setData( respfour.data );
 
-      // setLoading(false);
+      setLoading( false );
     } catch ( err )
     {
       setLoading( false );
-      console.log( err );
+      // console.log( err );
+      // setNotify(true)
       // setError( "Please refresh..." );
     }
   };
 
   const creditorLoad = async () =>
   {
+    setLoading( true )
     setWahusika( "CREDITORS" )
-    setVs(true)
+    setVs( true )
     try
     {
       const respfour = await axios.get( `${ url }/api/billing/creditors`, {
         withCredentials: true,
       } );
       setData( respfour.data );
+      setLoading( false )
       // alert(respfour.data);
 
       //
@@ -389,91 +403,111 @@ export default function Sales ()
   {
 
     setNotify( false );
-    setVsdata("Debtor")
+    setVsdata( "Debtor" )
 
-    // const uid = (e.target.value)
-    alert(ids)
-
-    let data = {
-
-      'name': name,
-      'amount': amounts
-    }
-
-
-    try
+    if ( name && amounts )
     {
-      const res = await axios.put( `${ url }/api/billing/debtors/${ ids }`, data, { withCredentials: true } )
-      // setStatus(res.data)
+      setLoading( true )
+
+
+      let data = {
+
+        'name': name,
+        'amount': amounts
+      }
+
+
+      try
+      {
+        const res = await axios.put( `${ url }/api/billing/debtors/${ ids }`, data, { withCredentials: true } )
+        // setStatus(res.data)
+        setNotify( true );
+
+
+        setNotification( res.data );
+
+        setName( "" )
+        setAmounts( "" )
+
+        // setNotfs(true)
+        setLoading( false );
+        // setStatus(res.data);
+
+      } catch ( err )
+      {
+        // setNotfs(true)
+        setLoading( false )
+        // setStatus("Registration Failed!");
+      }
+    } else
+    {
       setNotify( true );
-
-
-      setNotification( res.data );
-
-      setName("")
-      setAmounts("")
-
-      // setNotfs(true)
-      setLoading( false );
-      // setStatus(res.data);
-
-    } catch ( err )
-    {
-      // setNotfs(true)
-
-      // setStatus("Registration Failed!");
+      setNotification( "Fill all data!" )
     }
   }
 
-  
+
 
   const updateCreditor = async ( e ) =>
   {
 
-    setVsdata("Creditor")
+    setVsdata( "Creditor" )
 
     setNotify( false );
-
-    // const uid = (e.target.value)
-    // alert(ids)
-
-    let data = {
-
-      'name': name,
-      'amount': amounts,
-      'modeofpay':mode
-    }
-
-
-
-    try
+    if ( name && amounts && mode )
     {
-      const res = await axios.put( `${ url }/api/billing/creditors/${ ids }`, data, { withCredentials: true } )
-      // setStatus(res.data)
+      setLoading( true )
+      let data = {
+
+        'name': name,
+        'amount': amounts,
+        'modeofpay': mode
+      }
+
+
+
+      try
+      {
+        const res = await axios.put( `${ url }/api/billing/creditors/${ ids }`, data, { withCredentials: true } )
+        // setStatus(res.data)
+        setNotify( true );
+
+
+        setNotification( res.data );
+
+        // console.log(res.data)
+
+        // setNotfs(true)
+        setLoading( false );
+        // setStatus(res.data);
+
+      } catch ( err )
+      {
+        // setNotfs(true)
+        setLoading( false )
+        // setStatus("Registration Failed!");
+      }
+    } else
+    {
       setNotify( true );
-
-
-      setNotification( res.data );
-
-      // console.log(res.data)
-
-      // setNotfs(true)
-      setLoading( false );
-      // setStatus(res.data);
-
-    } catch ( err )
-    {
-      // setNotfs(true)
-
-      // setStatus("Registration Failed!");
+      setNotification( "Fill all data!" )
     }
   }
 
   return (
     <div className="mysales">
-      <Sidebar />
+      <div className="opa">
+        <Sidebar />
+      </div>
+      { loading && <Loaders /> }
 
-    
+      <div className="reloa">
+        <NavLink to="/home">
+           <Return />
+        </NavLink>
+       
+      </div>
+
 
       <div className=""></div>
       <div className="sectiontwos">
@@ -490,7 +524,7 @@ export default function Sales ()
               </div>
 
               <div className="sss">
-              <img src={growth} style={{width: "23px"}} alt="" />
+                <img src={ growth } style={ { width: "23px" } } alt="" />
               </div>
             </div>
 
@@ -504,7 +538,7 @@ export default function Sales ()
 
               <div className="en">
                 <div className="mon">
-                  <p>Tsh { Number(salesdata.totalsales).toLocaleString() }</p>
+                  <p>Tsh { Number( salesdata.totalsales ).toLocaleString() }</p>
                 </div>
                 <div className="mm">
                   <img src="" alt="" />
@@ -512,23 +546,33 @@ export default function Sales ()
               </div>
             </div>
 
-            <div className="bbbp"> SUMOSA FILLING STATION</div>
+            <div className="bbbp">
+              <NavLink to="/home">
+                <img className="sumosa" src={ growths } style={ { width: "23px" } } alt="" />
+              </NavLink>
+
+              <p>
+                SUMOSA FILLING STATION
+              </p>
+
+
+            </div>
           </div>
           <div className="lefts">
             <div className="alls">
               <div className="sds">
-                <p>Tsh { Number(salesdata.pmssales).toLocaleString()  }</p>
+                <p>Tsh { Number( salesdata.pmssales ).toLocaleString() }</p>
                 <p>Today's Petrol Sales </p>
               </div>
               <div className="sds">
-                <p>Tsh { Number(salesdata.dieselsales).toLocaleString()  }</p>
+                <p>Tsh { Number( salesdata.dieselsales ).toLocaleString() }</p>
                 <p>Today's Diesel Earnings</p>
               </div>
             </div>
 
             <div className="bbb">
               <p>Sales Difference</p>
-              <p>{  Number(salesdata.difference).toLocaleString()}/=</p>
+              <p>{ Number( salesdata.difference ).toLocaleString() }/=</p>
             </div>
 
             <div className="stoc">
@@ -541,24 +585,16 @@ export default function Sales ()
             </div>
           </div>
 
-          {/* <div className="rights">
-                        <div className="grs">
-                            <Graphs />
-                        </div>
 
-                        <div className="ls">
-
-                        </div>
-                    </div> */}
         </div>
       </div>
 
       { reasons && (
         <div className="poppesao">
           <div className="contentonestya">
-            <div className="canc" onClick={ cancelReason }>
-            <img src={cancs} alt="" />
-              {/* <p>x</p> */}
+            <div className="cancs" onClick={ cancelReason }>
+              <img src={ cancs } alt="" />
+              {/* <p>x</p> */ }
             </div>
             <div className="ours">
               <div className="sdacont">
@@ -569,19 +605,19 @@ export default function Sales ()
                   <div className="input-twos">
                     {/* <i>icon</i> */ }
                     <p>CASH</p>
-                    <p>{ Number(salesdata.totalsales).toLocaleString() }</p>
+                    <p>{ Number( salesdata.totalsales ).toLocaleString() }</p>
                   </div>
 
                   <div className="input-twos">
                     {/* <i>icon</i> */ }
                     <p>Z-REPORT</p>
-                    <p>{ Number(salesdata.zreport).toLocaleString() }</p>
+                    <p>{ Number( salesdata.zreport ).toLocaleString() }</p>
                   </div>
 
                   <div className="input-twoos">
                     {/* <i>icon</i> */ }
                     <p>DIFFERENCE</p>
-                    <p>{ Number(salesdata.difference).toLocaleString() }</p>
+                    <p>{ Number( salesdata.difference ).toLocaleString() }</p>
                   </div>
                 </div>
                 <div className="input-twoo">
@@ -626,7 +662,7 @@ export default function Sales ()
         <div className="poppesaoo">
           <div className="contentonestyo">
             <div className="canc" onClick={ cancPopdelete }>
-            <img src={cancs} alt="" />
+              <img src={ cancs } alt="" />
             </div>
             <div className="ours">
               <div className="sdacont">
@@ -663,7 +699,7 @@ export default function Sales ()
 
                 <div className="inputo">
 
-                  {/* {vs ? <button onClick={ updateCreditor }>UPDATE</button>:<button onClick={ updateExpenses }>UPDATE</button>} */}
+                  {/* {vs ? <button onClick={ updateCreditor }>UPDATE</button>:<button onClick={ updateExpenses }>UPDATE</button>} */ }
                 </div>
 
                 <p id="dup" onClick={ popdelete }>Delete?</p>
@@ -681,7 +717,7 @@ export default function Sales ()
         <div className="poppesao">
           <div className="contentonesty">
             <div className="canc" onClick={ cancPopdelete }>
-            <img src={cancs} alt="" />
+              <img src={ cancs } alt="" />
             </div>
             <div className="ours">
               <div className="sdacont">
@@ -705,16 +741,16 @@ export default function Sales ()
                   </div>
 
                   <div className="areyou">
-                    <p>Are you sure to delete {vsdata}?</p>
+                    <p>Are you sure to delete { vsdata }?</p>
                   </div>
 
                   <div className="inputo">
                     <button onClick={ cancPopdelete }>No</button>
-                    {vs?<button onClick={ deleteHandlers }>Yes</button>:<button onClick={ deleteHandler }>Yes</button>}
+                    { vs ? <button onClick={ deleteHandlers }>Yes</button> : <button onClick={ deleteHandler }>Yes</button> }
                   </div>
                 </div>
 
-                {/* <p id="dup" onClick={ popsetDeletee }>Update?</p> */}
+                {/* <p id="dup" onClick={ popsetDeletee }>Update?</p> */ }
 
                 { notify && (
                   <div className="inputmy">
@@ -735,7 +771,7 @@ export default function Sales ()
         <div className="poppesao">
           <div className="contentonesty">
             <div className="canc" onClick={ cancPrice }>
-            <img src={cancs} alt="" />
+              <img src={ cancs } alt="" />
             </div>
             <div className="ours">
               <div className="sdacont">
@@ -771,7 +807,7 @@ export default function Sales ()
                   </div>
                 ) }
 
-                
+
 
                 <div className="remember-opt">
                   <button onClick={ priceHandler } className="sign-btn">
@@ -785,10 +821,8 @@ export default function Sales ()
       ) }
 
       <div className="sectionthrees">
-        <div className="year">
-          {/* <div className="dail" onClick={handleDaily}>
-            <p>DAILY</p>
-          </div> */}
+        <div className="yearr">
+
 
           <div className="dail" onClick={ handleWeekly }>
             <p>WEEKLY</p>
@@ -799,13 +833,14 @@ export default function Sales ()
           </div>
 
           <div className="dails" onClick={ handleLitres }>
+         
             <p>LITRES</p>
           </div>
 
           <div className="download">
-            {/* <p>Report</p> */}
+            {/* <p>Report</p> */ }
             <div className="down">
-              <img src={ downlo } alt="" />
+            <img src={ nets } alt="" />
             </div>
           </div>
         </div>
@@ -818,7 +853,7 @@ export default function Sales ()
         { yearly && <Yearly /> }
 
         <div className="payo">
-          <p id='pa'> { wahusika } PAYMENT</p>
+          <p id='pa'> { wahusika }</p>
 
           <div className="pesa">
             <div className="mpesa">
@@ -866,7 +901,7 @@ export default function Sales ()
                         <td>{ val?.modeofpay || "-" }</td>
                         <td>{ ( val.uid ).split( "," )[ 0 ] }</td>
                         <div className="deletes" onClick={ deletePop }>
-                          <img src={edy} alt="" /> 
+                          <img src={ edy } alt="" />
                         </div>
                       </tr>
                     );

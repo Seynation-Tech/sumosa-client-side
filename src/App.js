@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useEffect, useState, useContext } from 'react'
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { HashRouter  as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import Home from './Components/Home/Home';
 import Sales from './Components/Sales/Sales';
 import Stock from './Components/Stock/Stocks';
@@ -10,7 +10,8 @@ import Login from './Components/Login/Login';
 import Sign from './Components/Login/Sign'
 import Review from './Components/Review/Review';
 import Register from './Components/Login/Register';
-
+import Loaders from './Components/Loaders/Loaders';
+import Return from './Components/Return/Return';
 
 
 function App ()
@@ -26,11 +27,13 @@ function App ()
           {/* <Route element={ <ProtectedRouteUser /> }> */}
             <Route path='/home' element={ <Home /> } />
             <Route path='/sales' element={ <Sales /> } />
+            <Route path='/return' element={ <Return /> } />
             <Route path='/sales/litres' element={ <Stock /> } />
             <Route path='/expenses' element={ <Expenses /> } />
             <Route path='/report' element={ <Report /> } />
             <Route path='/signin' element={ <Login /> } />
             <Route path='/signup' element={ <Sign /> } />
+            <Route path='/loading' element={ <Loaders /> } />
             <Route path='/register' element={ <Register /> } />
             <Route path='/review' element={ <Review /> } />
           </Route>

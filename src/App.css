@@ -55,3 +55,68 @@ a {
     transform: translate(-10px, 50px) scale(0.9) rotate(0deg);
   }
 }
+
+
+.loader-pages{
+  width: 80px;
+  height: 70px;
+  position: fixed;
+  right: 50%;
+  min-height: 45px;
+  background: rgb(0, 85, 255);
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  z-index: 434343;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(3px);
+  animation: descriptbox 2s ease-in-out ;
+}
+
+.load-pages{
+  width: 60px;
+  height: 50px;
+  position: fixed;
+  top:12%;
+  /* right: 50%; */
+  min-height: 45px;
+  background: rgb(0, 85, 255);
+  border-bottom-right-radius: 40px;
+  border-top-right-radius: 40px;
+  z-index: 44334343;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(3px);
+  animation: descriptbox 2s ease-in-out ;
+}
+
+.body{
+  overflow-x: hidden;
+}
+
+
+@media screen and (max-width: 640px) {
+
+  .loader-pages{
+    width: 80px;
+    height: 70px;
+    position: fixed;
+    right:0;
+    /* right: 50%; */
+    min-height: 45px;
+    background: rgb(0, 85, 255);
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    z-index: 434343;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(3px);
+    animation: descriptbox 2s ease-in-out ;
+  }
+  
+
+
+}

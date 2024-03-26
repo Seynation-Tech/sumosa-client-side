@@ -4,7 +4,6 @@ import Cookies from "cookie-universal";
 import "moment-timezone";
 axios.defaults.withCredentials = true;
 
-
 function getStartandEndofWeek ( date )
 {
   const currentDate = new Date( date )
@@ -21,7 +20,6 @@ function getStartandEndofWeek ( date )
 
   return { startDate: formattedStartDate, endDate: formattedEndDate };
 }
-
 
 export const AuthContext = createContext();
 
@@ -48,7 +46,7 @@ export const AuthContextProvider = ( { children } ) =>
     JSON.parse( localStorage.getItem( "userdata" ) || null )
   );
 
-  const url = "https://dolphin-app-t5xzi.ondigitalocean.app";
+  const url = "https://sumosa-api.onrender.com";
   // const url = "http://localhost:5001";
 
   const [ zrepos, setZreport ] = useState( "0" );
@@ -58,7 +56,6 @@ export const AuthContextProvider = ( { children } ) =>
 
   const [ dAmount, setDamount ] = useState( "0" )
   const [ pAmount, setpamount ] = useState( "0" )
-
 
   const [ petrolAmount, setpetrolAmount ] = useState( "0" );
   const [ diff, setDifferences ] = useState( "0" );
@@ -119,7 +116,6 @@ export const AuthContextProvider = ( { children } ) =>
   const [ pmstwoanalogopening, setPmstwoanalogopening ] = useState( "0" );
   const [ pmstwoanalogclosing, setPmstwoanalogclosing ] = useState( "0" );
 
-
   const [ salesdata, setSales ] = useState( {
     totalsales: "0",
     difference: "0",
@@ -140,7 +136,14 @@ export const AuthContextProvider = ( { children } ) =>
     agooneoutput: "0",
     agotwooutput: "0",
     petrolprice: "0",
-    dieselprice: "0"
+    dieselprice: "0",
+    cashonhand: "0",
+    creditorsum: "0",
+    virtualmoney: "0",
+    totalvirtual: "0",
+    othermoney: "0",
+    remained: "0"
+    
   } );
 
   const [ values, setValues ] = useState( {
@@ -177,7 +180,6 @@ export const AuthContextProvider = ( { children } ) =>
     agotwoanalogoutput: "0",
   } );
 
-
   function getFormattedDate ()
   {
     const today = new Date();
@@ -186,7 +188,6 @@ export const AuthContextProvider = ( { children } ) =>
     const day = String( today.getDate() ).padStart( 2, "0" ); // Add leading zero if needed
     return `${ year }-${ month }-${ day }`;
   }
-
 
   useEffect( () =>
   {
@@ -263,40 +264,35 @@ export const AuthContextProvider = ( { children } ) =>
             withCredentials: true,
           } );
 
-
           const todate = getFormattedDate();
 
           // const todate = '2024-03-22'
 
-
-
-
           //  console.log(todate)
 
-
           const allreportBYid = await axios.get(
-            `http://localhost:5001/api/pumps/alldatavalues/${ todate }`,
+            `${url}/api/pumps/alldatavalues/${ todate }`,
             {
               withCredentials: true,
             }
           );
 
           const allreportsbyid = await axios.get(
-            `http://localhost:5001/api/pumps/alldata/${ todate }`,
+            `${url}/api/pumps/alldata/${ todate }`,
             {
               withCredentials: true,
             }
           );
 
           const report = await axios.get(
-            `http://localhost:5001/api/pumps/alldatavalues`,
+            `${url}/api/pumps/alldatavalues`,
             {
               withCredentials: true,
             }
           );
 
           const allreports = await axios.get(
-            `http://localhost:5001/api/pumps/alldata`,
+            `${url}/api/pumps/alldata`,
             {
               withCredentials: true,
             }
@@ -304,6 +300,8 @@ export const AuthContextProvider = ( { children } ) =>
 
           const datas = allreportBYid.data;
           const mydatas = allreportsbyid.data;
+
+
 
           // console.log(datas)
 
@@ -381,8 +379,6 @@ export const AuthContextProvider = ( { children } ) =>
             agotwoanalogoutput: agotwoanalogoutput,
           } );
 
-
-
           setSales( {
             totalsales: datas?.totalsales,
             difference: datas?.difference,
@@ -403,11 +399,14 @@ export const AuthContextProvider = ( { children } ) =>
             agooneoutput: agooneoutput,
             agotwooutput: agotwooutput,
             petrolprice: datas?.petrolprice,
-            dieselprice: datas?.dieselprice
+            dieselprice: datas?.dieselprice,
+            cashonhand: datas?.cashOnhand,
+        creditorsum: datas?.creditorSum,
+        virtualmoney: datas?.virtualSum,
+        totalvirtual: datas?.totalvirtual,
+        othermoney: datas?.othermoney,
+        remained: datas?.remained
           } );
-
-
-
 
           setValues( {
             pmsonedigitalclosing: pmsonedigitalclosing,
@@ -445,9 +444,6 @@ export const AuthContextProvider = ( { children } ) =>
 
           // console.log(mydatas)
 
-
-
-
           setDatas( rs.data );
           setDts( rst.data );
           setAllDats( rsts.data );
@@ -455,7 +451,6 @@ export const AuthContextProvider = ( { children } ) =>
           let dieslstk = Object.values( dieslstock.data )[
             Object.values( dieslstock.data ).length - 1
           ];
-
 
           let petrolstk = Object.values( petrolstock.data )[
             Object.values( petrolstock.data ).length - 1
@@ -537,8 +532,6 @@ export const AuthContextProvider = ( { children } ) =>
             Object.values( respthree.data ).length - 2
           ];
 
-
-
           // console.log(pmone,pmto,agoe,agto)
 
           // console.log(pone.outputvalue,ptwo.outputvalue)
@@ -599,7 +592,6 @@ export const AuthContextProvider = ( { children } ) =>
 
           // console.log(agooneAmount)
 
-
           const agotwoAmount =
             Number( Number( atwo.openingdigital ) - Number( atwo.closingdigital ) ) *
             dieselamout;
@@ -613,7 +605,6 @@ export const AuthContextProvider = ( { children } ) =>
           let last_value = Object.values( resps.data )[
             Object.values( resps.data ).length - 1
           ];
-
 
           const differences = Number( last_value.zreport ) - Number( totalAmount );
 
@@ -663,9 +654,6 @@ export const AuthContextProvider = ( { children } ) =>
           setDebts( Number( todaydates.amount ).toLocaleString() );
           setExpenses( Number( allexp.amount ).toLocaleString() );
 
-
-
-
         } catch ( err )
         {
           // console.log(err)
@@ -684,7 +672,6 @@ export const AuthContextProvider = ( { children } ) =>
     } );
     setCurrentUser( res.data );
     const usr = res.data[ 0 ];
-
 
     const token = res.data[ 1 ];
 

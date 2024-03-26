@@ -13,22 +13,34 @@
   align-items: center;
 }
 
-  
+.reloa{
+  position: fixed;
+}
+
   .contentonestyo {
     background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
     display: flex;
     flex-direction: column;
     gap: 7px;
-    width: 50%;
+    width:100%;
     min-height: 67vh;
     justify-content: center;
     align-items: center;
     border-radius: 20px;
     z-index: 10000;
-    margin-right: -19px;
+    /* position: absolute; */
+    /* margin-right: -19px; */
   }
 
 @media screen and (max-width: 640px) {
+  .sumosa{
+    /* position: absolute; */
+    opacity: 1;
+    rotate: 180deg;
+    position: relative;
+    top: 1px;
+    left: -12px;
+  }
   .sectiontwos {
     /* background-color: blue; */
     min-height: 118vh;
@@ -47,7 +59,6 @@
     /* overflow-x: none; */
   }
   
-
   .lowsections {
     width: 100%;
     min-height: 70vh;
@@ -61,11 +72,11 @@
     gap: 5px;
   }
 
-  
   .lefts {
     /* background: rgba(255, 255, 255, 0.782); */
     width: 100%;
-    min-height: 40vh;
+    min-height: 35vh;
+    margin-bottom: 12px;
     color: black;
     border-radius: 6px;
     padding: 12px;
@@ -75,7 +86,6 @@
       inset 1px -1px 10px rgba(4, 0, 255, 0.23);
   }
 
-  
   .rights {
     background: white;
     width: 100%;
@@ -192,7 +202,6 @@
     background-color: rgba(0, 0, 255, 0.119);
   }
 
-  
   .upsections {
     width: 100%;
     height: 59px;
@@ -222,9 +231,9 @@
     cursor: pointer;
     padding-left: 12px;
     padding-right: 12px;
+    
   }
 
-  
   .bbb {
     width: 100%;
     height: 60px;
@@ -259,7 +268,6 @@
     flex-direction: column;
   }
 
-  
   .ls {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -269,16 +277,8 @@
     display: none;
   }
 
-  .year {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 3px;
-    height: 64px;
-    width: 100%;
-    background-color: rgba(0, 0, 255, 0.072);
-    border-radius: 5px;
-  }
+
+  
 
   .dails {
     background: linear-gradient(to right, rgb(0, 38, 255), rgb(1, 13, 142));
@@ -320,7 +320,6 @@
     height: 60px;
     border-radius: 50%;
  
-  
     display: flex;
     justify-content: center;
     align-items: center;
@@ -398,10 +397,10 @@
     display: flex;
     gap: 7px;
     background: rgba(0, 0, 255, 0.082);
+    height: 60px;
+    margin-bottom: 24px;;
   }
   
-  
-
   .bb {
     width: 100%;
     height: 55px;
@@ -417,8 +416,7 @@
 
     background: linear-gradient(to right, rgb(0, 38, 255), rgb(25, 0, 255));
     padding: 5px;
-    /* width: 90px; */
-    height: 37px;
+
     border-radius: 3px;
     display: flex;
     justify-content: center;
@@ -449,7 +447,6 @@
     /* border-bottom: 1px solid rgba(0, 0, 255, 0.064); */
   }
 
-  
   .sectionthrees {
     background-color: rgba(255, 255, 255, 0.449);
     width: 100%;
@@ -474,18 +471,20 @@
     position: relative;
   }
 
-  .year {
+  .yearr {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-top: 3px;
+    /* margin-top: -130px;/ */
+    position: absolute;
+    top: -111px;
+
     height: 64px;
     width: 100%;
     background-color: rgba(0, 0, 255, 0.072);
     border-radius: 5px;
   }
 
-  
   .yeara {
     display: flex;
     justify-content: space-around;
@@ -497,11 +496,11 @@
     border-radius: 5px;
   }
 
-  
   .dail p {
     cursor: pointer;
   }
 
+  
 
   .dails {
     background: linear-gradient(to right, rgb(0, 38, 255), rgb(1, 13, 142));
@@ -514,7 +513,7 @@
     align-items: center;
     font-size: 0.7em;
     position: absolute;
-    top: -160px;
+    top: -170px;
 
   }
 
@@ -551,8 +550,6 @@
   .down img{
     width: 23px;
   }
-
-  
 
   .payo {
     width: 100%;
@@ -595,6 +592,107 @@
     cursor: default;
   }
 
+  .poppesao {
+    min-height: 113vh;
+    width: 100%;
+    background: rgba(0, 194, 253, 0.084);
+    position: absolute;
+    top: 21%;
+    border-radius: 9px;
+    backdrop-filter: blur(4px);
+    z-index: 898;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .forms {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 80%;
+    margin-top: 23px;
+    margin-bottom: 23px;
+  }
+  .inputo {
+    height: 60px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.056);
+    display: flex;
+    margin-bottom: 8px;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .infos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9em;
+    margin: 9px;
+  }
+  .inputo button {
+    border: 3px solid rgba(255, 255, 255, 0.197);
+    width: 30%;
+    height: 40px;
+    background: rgba(0, 0, 255, 0.259);
+    border-radius: 5px;
+    color: white;
+  }
+
+  .inputo button:nth-child(2) {
+    background-color: red;
+  }
+  .areyou {
+    font-size: 0.9em;
+    margin-top: 12px;
+  }
+  .forms .input-one {
+    display: flex;
+    gap: 10px;
+    position: relative;
+  }
+
+  .forms .input-two {
+    display: flex;
+    gap: 10px;
+    position: relative;
+  }
+
+  .sdacont {
+    min-height: 20vh;
+    backdrop-filter: blur(4px);
+    min-width: 360px;
+    background: rgba(1, 37, 114, 0.937);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 12px;
+    text-align: center;
+    /* border: 3px solid rgba(255, 255, 255, 0.243); */
+  }
+  .ours {
+    /* background: rgba(6, 39, 201, 0.596); */
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border-radius: 20px; */
+    min-height: 12vh;
+  }
+
+  .ours {
+    color: white;
+  }
+
+  
+  .deletes img{
+    width: 23px;
+  }
+
   #pa{
     /* position: absolute;
     opacity: 0; */
@@ -602,7 +700,7 @@
     padding: 8.3px;
     border-radius: 4px;
     border: 2px solid rgba(205, 197, 197, 0.159);
-    color: rgba(0, 115, 255, 0.538);
+    color: rgba(255, 0, 0, 0.674);
   }
 
   .ls {
@@ -630,7 +728,6 @@
     overflow: none;
   }
 
-  
   .alld {
     width: 100%;
     min-height: 12vh;
@@ -640,7 +737,6 @@
   padding-top: 5px; */
   }
 
-  
   .home-table {
     border-collapse: collapse;
     padding: 12px;
@@ -683,7 +779,6 @@
     border-bottom: 2px solid rgba(255, 255, 255, 0.157);
   }
 
-  
   .poppesao {
     min-height: 43vh;
     width: 100%;
@@ -698,20 +793,19 @@
     align-items: center;
   }
 
-  
   .contentonesty {
     background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
     display: flex;
     flex-direction: column;
     gap: 7px;
-    width: 100%;
+    width: 90%;
     min-height: 57vh;
     margin-top: -100px;
     justify-content: center;
     align-items: center;
     border-radius: 20px;
     z-index: 10000;
-    margin-right: -19px;
+    /* margin-right: -19px; */
   }
 
   .cancs {
@@ -723,7 +817,6 @@
     /* top: -62px; */
   }
 
-  
   .ours {
     /* background: rgba(6, 39, 201, 0.596); */
     width: 100%;
@@ -741,7 +834,6 @@
     color: white;
   }
 
-  
   .forms {
     display: flex;
     flex-direction: column;
@@ -790,23 +882,10 @@
     padding: 13px;
     position: relative;
     z-index: 10000;
-    margin-right: -24px
+    /* margin-right: -24px */
   }
 
-  .sdacont {
-    min-height: 10vh;
-    backdrop-filter: blur(4px);
-    /* min-width: 110px; */
-    /* background: rgba(1, 37, 114, 0.937); */
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 12px;
-    text-align: center;
-    /* border: 3px solid rgba(255, 255, 255, 0.243); */
-  }
+ 
 
   .totalcash {
   
@@ -821,7 +900,6 @@
     font-size: 0.8em;
   }
 
-  
   .input-twos {
     color: white;
     display: flex;
@@ -895,6 +973,21 @@
     color: rgba(255, 255, 255, 0.582);
   }
 
+  .cancs {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    /* background: rgba(255, 255, 255, 0.09); */
+    margin-top: 62px;
+    position: absolute;
+    z-index:898;
+    top:-50px;
+  }
+
+  .cancs img{
+    width: 27px;
+  }
+
   .canc {
     width: 34px;
     height: 34px;
@@ -903,7 +996,7 @@
     margin-top: 62px;
     position: absolute;
     z-index:898;
-    top:-10px;
+    top:-120px;
   }
 
   .input-too input {
@@ -956,7 +1049,5 @@
     border-radius: 5px;
     border: 3px solid rgba(255, 255, 255, 0.1);
   }
-
-
 
 }

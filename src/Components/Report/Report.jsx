@@ -1,32 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Sidebar from "../Sidebar/Sidebar";
 import "./Report.css";
-import bell from "../../Images/notify.png";
-import Real from "../Charts/Real";
-import morearrow from "../../Images/icono.png";
-import login from "../../Images/login.png";
-import world from "../../Images/blue-world-globe.jpg";
 import "./Mobile.css";
-import connect from "../../Images/connect.png";
-import insta from "../../Images/instagra.png";
-import whatsp from "../../Images/whatsapp.png";
-import youtube from "../../Images/youtub.png";
-import linkin from "../../Images/linked.png";
-import facebook from "../../Images/facebook.png";
-import morarrow from "../../Images/rightarrow.png";
-import long from "../../Images/startarrow.png";
-import search from "../../Images/searchblue.png";
-import sda from "../../Images/sdalogo.jpg";
-import pcm from "../../Images/PCM LOGO.jpg";
 import cancs from "../../Images/o.png";
-
-import { Link, useNavigate } from "react-router-dom";
+import Loaders from "../Loaders/Loaders.jsx";
+import Return from '../Return/Return.jsx'
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../AuthContext";
-import moment from "moment";
-import DotLoader from "react-spinners/DotLoader";
-import Cookies from "cookie-universal";
-
+import { NavLink } from "react-router-dom";
 let today = new Date();
 let date =
   today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate();
@@ -44,7 +26,6 @@ let mydate =
   today.getSeconds();
 
 axios.defaults.withCredentials = true;
-
 
 const currentDate = new Date()
 const currentDayofWeek = currentDate.getDay();
@@ -197,42 +178,55 @@ export default function Expenses ()
     const day = String( today.getDate() ).padStart( 2, "0" );
     return `${ year }-${ month }-${ day }`;
   }
+
+  const handleUpdateF=()=>{
+    setAgotwoanalogOpening( "" )
+    setAgotwoanalogClosing( "" )
+    setAgooneanalogOpening( "" )
+    setAgooneanalogClosing( "" )
+
+    setAgoonedigOpening( "" )
+    setAgoonedigClosing( "" )
+    setAgotwodigOpening( "" )
+    setAgotwodigClosing( "" )
+
+    setPmsonedigOpening( "" )
+    setPmsonedigClosing( "" )
+    setPmsoneanalogOpening( "" )
+    setPmsoneanalogClosing( "" )
+
+    setPmstwodigOpening( "" )
+    setPmstwodigClosing( "" )
+    setPmstwoanalogOpening( "" )
+    setPmstwoanalogClosing( "" )
+  }
+
   const handleUpdate = async ( event ) =>
   {
-
-    let flag = sidebar;
-    flag = !flag;
-
-    if ( flag )
-    {
+    setLoading(true)
+   
+      // setSidebar(false)
       setDate( event.target.value );
 
       const mydates = getFormattedDate();
       // const mydates =  '2024-03-22'
 
-
-
       const allreportBYid = await axios.get(
-        `http://localhost:5001/api/pumps/alldatavalues/${ mydates }`,
+        `${url}/api/pumps/alldatavalues/${ mydates }`,
         {
           withCredentials: true,
         }
       );
 
       const allreportsbyid = await axios.get(
-        `http://localhost:5001/api/pumps/alldata/${ mydates }`,
+        `${url}/api/pumps/alldata/${ mydates }`,
         {
           withCredentials: true,
         }
       );
 
-
-
-
-
       const datas = allreportBYid.data;
       const mydatas = allreportsbyid.data;
-
 
       const pmsoneouput = datas.petrol.pmsone[ 0 ]?.outputvalue ?? 0;
       const pmstwooutput = datas.petrol.pmstwo[ 0 ]?.outputvalue ?? 0;
@@ -246,8 +240,6 @@ export default function Expenses ()
       const pmsonedigitalopening = mydatas.pmsone[ 0 ]?.openingdigital ?? 0;
       const pmsonedigitaloutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
 
-
-
       const pmsoneanalogclosing = mydatas.pmsone[ 0 ]?.closingsanalog ?? 0;
       const pmsoneanalogopening = mydatas.pmsone[ 0 ]?.openinganalog ?? 0;
       const pmsoneanalogoutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
@@ -256,7 +248,6 @@ export default function Expenses ()
       setPmsonedigClosing( pmsonedigitalclosing )
       setPmsoneanalogOpening( pmsoneanalogopening )
       setPmsoneanalogClosing( pmsoneanalogclosing )
-
 
       const pmstwodigitalclosing = mydatas.pmstwo[ 0 ]?.closingdigital ?? 0;
       const pmstwodigitalopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
@@ -271,8 +262,6 @@ export default function Expenses ()
       setPmstwoanalogOpening( pmstwoanalogopening )
       setPmstwoanalogClosing( pmstwoanalogClosing )
 
-
-
       const agoonedigitalclosing = mydatas.agoone[ 0 ]?.closingdigital ?? 0;
       const agoonedigitalopening = mydatas.agoone[ 0 ]?.openingdigital ?? 0;
       const agoonedigitaloutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
@@ -281,12 +270,10 @@ export default function Expenses ()
       const agotowodigitalopening = mydatas.agotwo[ 0 ]?.openingdigital ?? 0;
       const agotwodigitaloutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
 
-
       setAgoonedigOpening( agoonedigitalopening )
       setAgoonedigClosing( agoonedigitalclosing )
       setAgotwodigOpening( agotowodigitalopening )
       setAgotwodigClosing( agotwodigitalclosing )
-
 
       const agooneanalogclosing = mydatas.agoone[ 0 ]?.closingsanalog ?? 0;
       const agooneanalogopening = mydatas.agoone[ 0 ]?.openinganalog ?? 0;
@@ -295,7 +282,6 @@ export default function Expenses ()
       const agotwoanalogclosing = mydatas.agotwo[ 0 ]?.closingsanalog ?? 0;
       const agotwoanalogopening = mydatas.agotwo[ 0 ]?.openinganalog ?? 0;
       const agotwoanalogoutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
-
 
       setAgotwoanalogOpening( agotwoanalogopening )
       setAgotwoanalogClosing( agotwoanalogclosing )
@@ -360,36 +346,13 @@ export default function Expenses ()
         agooneoutput: agooneoutput,
         agotwooutput: agotwooutput,
       } );
-    } else
-    {
-
-      setAgotwoanalogOpening( "" )
-      setAgotwoanalogClosing( "" )
-      setAgooneanalogOpening( "" )
-      setAgooneanalogClosing( "" )
-
-      setAgoonedigOpening( "" )
-      setAgoonedigClosing( "" )
-      setAgotwodigOpening( "" )
-      setAgotwodigClosing( "" )
-
-      setPmsonedigOpening( "" )
-      setPmsonedigClosing( "" )
-      setPmsoneanalogOpening( "" )
-      setPmsoneanalogClosing( "" )
-
-
-      setPmstwodigOpening( "" )
-      setPmstwodigClosing( "" )
-      setPmstwoanalogOpening( "" )
-      setPmstwoanalogClosing( "" )
-
-    }
+   
+      setLoading(false)
 
   };
 
   const literHandler = async () =>
-  {
+  { 
     setNotify( false );
     if (
       pmsonedigOpening &&
@@ -403,7 +366,7 @@ export default function Expenses ()
     )
     {
       try
-      {
+      {setLoading(true)
         const dats = getFormattedDate()
         let pmsOne = {
           uid: dats,
@@ -439,8 +402,6 @@ export default function Expenses ()
           outputvalue: Number( agotwodigOpening ) - Number( agotwodigClosing ),
         };
 
-        setLoading( true );
-
         const resone = await axios.post( `${ url }/api/pumps/petrol`, pmsOne );
         const restwo = await axios.post( `${ url }/api/pumps/petroltwo`, pmsTwo );
         const resthree = await axios.post( `${ url }/api/pumps/diesel`, agoOne );
@@ -450,19 +411,17 @@ export default function Expenses ()
         setNotification( resfour.data );
         setLoading( false );
 
-
         //
       } catch ( err )
       {
         setLoading( false );
-        console.log( err );
         setError( "Please refresh..." );
       }
     } else
-    {
+    {setLoading(false)
       setNotify( true );
       setNotification( "Fill all the details!" );
-    }
+    } setLoading(false)
   };
 
   const sureTy = () =>
@@ -474,12 +433,12 @@ export default function Expenses ()
   }
 
   const confirm = async () =>
-  {
+  { 
     setNotify( false )
     setNotification( "" );
 
     if ( isNaN( diesellitres ) && isNaN( dieselAmount ) && isNaN( petrolAmount ) && isNaN( petrollitres ) )
-    {
+    {setLoading(true)
       try
       {
         const dats = getFormattedDate()
@@ -491,21 +450,19 @@ export default function Expenses ()
           petrolvalue: plita,
         };
 
-
-        setLoading( true );
-
         const response = await axios.post( `${ url }/api/weeklydatas/data`, data );
 
         setNotify( true );
         setNotification( response.data );
         setLoading( false );
 
-      } catch ( err ) { }
+      } catch ( err ) { setLoading(false) }
     } else
     {
       setNotify( true );
+      setLoading(false)
       setNotification( "Ensure all todays' data are filled!" );
-    }
+    }setLoading(false)
   };
 
   const pesaHandler = async () =>
@@ -513,7 +470,7 @@ export default function Expenses ()
     setNotify( false )
     setNotification( "" );
     if ( mPesa && nmb && crdb )
-    {
+    {setLoading(true)
       try
       {
         const dats = getFormattedDate()
@@ -547,10 +504,10 @@ export default function Expenses ()
         setError( "Please refresh..." );
       }
     } else
-    {
+    {setLoading(false)
       setNotify( true );
       setNotification( "Fill all the details!" );
-    }
+    }setLoading(false)
   };
   const deletePop = () =>
   {
@@ -568,7 +525,7 @@ export default function Expenses ()
     setNotify( false )
     setNotification( "" );
     if ( name && amount && mode )
-    {
+    {setLoading(true)
       try
       {
         const dats = getFormattedDate()
@@ -595,11 +552,11 @@ export default function Expenses ()
       } catch ( err )
       {
         setLoading( false );
-        console.log( err );
+        
         setError( "Please refresh..." );
       }
     } else
-    {
+    {setLoading(false)
       setNotify( true );
       setNotification( "Fill all the details!" );
     }
@@ -609,9 +566,9 @@ export default function Expenses ()
   {
     setNotify( false )
     setNotification( "" );
-
+   
     if ( name && amount )
-    {
+    { setLoading(true)
       try
       {
         const dats = getFormattedDate()
@@ -640,7 +597,7 @@ export default function Expenses ()
         setError( "Please refresh..." );
       }
     } else
-    {
+    {setLoading(false)
       setNotify( true );
       setNotification( "Fill all the details!" );
     }
@@ -651,7 +608,7 @@ export default function Expenses ()
     setNotify( false )
     setNotification( "" );
     if ( pmsphyscal && pmsdispst )
-    {
+    {setLoading(true)
       try
       {
         const dats = getFormattedDate()
@@ -692,11 +649,10 @@ export default function Expenses ()
       } catch ( err )
       {
         setLoading( false );
-        console.log( err );
         setError( "Please refresh..." );
       }
     } else
-    {
+    {setLoading(false)
       setNotify( true );
       setNotification( "Fill all the details!" );
     }
@@ -724,7 +680,7 @@ export default function Expenses ()
     )
     {
       try
-      {
+      {setLoading(true)
         const dats = getFormattedDate()
         let collections = {
           uid: dats,
@@ -766,7 +722,7 @@ export default function Expenses ()
         setError( "Please refresh..." );
       }
     } else
-    {
+    {setLoading(false)
       setNotify( true );
       setNotification( "Fill all the details!" );
     }
@@ -846,7 +802,17 @@ export default function Expenses ()
 
   return (
     <div className="mysals">
-      <Sidebar />
+   
+      <div className="opa">
+           <Sidebar />
+      </div>
+      {loading && <Loaders/>}
+      <div className="reloa">
+        <NavLink to="/home">
+           <Return />
+        </NavLink>
+       
+      </div>
 
       <div className=""></div>
 
@@ -854,9 +820,8 @@ export default function Expenses ()
         <div className="general">
           <p>DAILY REPORT FORMS</p>
 
-
         </div>
-        <div className="year">
+        <div className="yearrr">
           <div className="dail">
             <p onClick={ handleAll }>LITRES</p>
           </div>
@@ -881,9 +846,14 @@ export default function Expenses ()
             <p onClick={ handleStocks }>FUEL STOCK</p>
           </div>
 
-          <div className="download" onClick={ handleUpdate }>
-            <p>EDIT DATA</p>
+          <div className="dail">
+            <p  onClick={ handleUpdate }>EDIT DATA</p>  
           </div>
+
+          <div className="dail" >
+           <p onClick={ handleUpdateF }>ERASE FIELDS</p>
+          </div>
+          
         </div>
         {/* <Real /> */ }
 
@@ -925,15 +895,15 @@ export default function Expenses ()
                 </div>
 
                 { notify && (
-                  <div className="inputmy">
+                  <div style={{width: "210px"}} className="inputmy">
                     <p>{ notification }</p>
                   </div>
                 ) }
 
                 <div className="bone">
                   <div className="thetwos">{/* <p></p> */ }</div>
-                  <div className="thetwo">
-                    <button onClick={ pesaHandler }>Submit</button>
+                  <div style={{width: "210px"}} className="thetwo">
+                    <button style={{width: "210px"}} onClick={ pesaHandler }>Submit</button>
                   </div>
                 </div>
               </div>
@@ -1020,7 +990,6 @@ export default function Expenses ()
                     </div>
                     <div className="forms">
 
-
                       <div className="areyou">
                         <p>Adding to today values and amount.</p>
                         <p>Are you sure to do this?</p>
@@ -1033,27 +1002,10 @@ export default function Expenses ()
                     </div>
 
                     { notify && (
-                      <div className="inputmy">
+                      <div className="nputmy">
                         <p>{ notification }</p>
                       </div>
                     ) }
-
-                    {/* {loadings ? (
-              <div className="spin">
-                {" "}
-                <DotLoader
-                  color={color}
-                  loading={loadings}
-                  // cssOverride={override}
-                  size={25}
-                  aria-label="Loading Spinner"
-                  data-testid="loader"
-                />
-              </div>
-            ) : (
-              <></>
-            )} */}
-
 
                   </div>
                 </div>
@@ -1256,7 +1208,7 @@ export default function Expenses ()
                     </div>
 
                     { notify && (
-                      <div className="inputmy">
+                      <div className="inpumy">
                         <p>{ notification }</p>
                       </div>
                     ) }
@@ -1502,7 +1454,7 @@ export default function Expenses ()
                 </div>
 
                 { notify && (
-                  <div className="inputmy">
+                  <div className="i">
                     <p>{ notification }</p>
                   </div>
                 ) }
