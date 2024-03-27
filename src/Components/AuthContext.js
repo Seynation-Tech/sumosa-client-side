@@ -202,7 +202,7 @@ export const AuthContextProvider = ( { children } ) =>
             withCredentials: true,
           } );
 
-          // console.log(res.data)
+
 
           const resps = await axios.get( `${ url }/api/billing/allcollectmoney`, {
             withCredentials: true,
@@ -246,6 +246,21 @@ export const AuthContextProvider = ( { children } ) =>
             }
           );
 
+          let dieslstk = Object.values( dieslstock.data )[
+            Object.values( dieslstock.data ).length - 1
+          ];
+
+          let petrolstk = Object.values( petrolstock.data )[
+            Object.values( petrolstock.data ).length - 1
+          ];
+
+          // console.log(dieslstk)
+          setDieselstock( dieslstk.physical );
+          setDieseldips( dieslstk.dipstick );
+
+          setPetrolStock( petrolstk.physical );
+          setPetroldisps( petrolstk.dipstick );
+
           // http://localhost:5001/api/pumps/datas
 
           // http://localhost:5001/api/pumps/alldatavalues
@@ -257,19 +272,16 @@ export const AuthContextProvider = ( { children } ) =>
             withCredentials: true,
           } );
 
+
           const rst = await axios.get( `${ url }/api/weeklydatas/datas/${ startdate }/${ enddate }`, {
             withCredentials: true,
           } );
-
+         
           const rsts = await axios.get( `${ url }/api/weeklydatas/alldatas/${ startdate }/${ enddate }`, {
             withCredentials: true,
           } );
-
+ 
           const todate = getFormattedDate();
-
-          // const todate = '2024-03-22'
-
-          //  console.log(todate)
 
           const allreportBYid = await axios.get(
             `${ url }/api/pumps/alldatavalues/${ todate }`,
@@ -278,6 +290,8 @@ export const AuthContextProvider = ( { children } ) =>
             }
           );
 
+       
+
           const allreportsbyid = await axios.get(
             `${ url }/api/pumps/alldata/${ todate }`,
             {
@@ -285,26 +299,13 @@ export const AuthContextProvider = ( { children } ) =>
             }
           );
 
-          const report = await axios.get(
-            `${ url }/api/pumps/alldatavalues`,
-            {
-              withCredentials: true,
-            }
-          );
+          // console.log(allreportBYid)
 
-          const allreports = await axios.get(
-            `${ url }/api/pumps/alldata`,
-            {
-              withCredentials: true,
-            }
-          );
 
           const datas = allreportBYid.data;
           const mydatas = allreportsbyid.data;
 
 
-
-          // console.log(datas)
 
           const pmsoneouput = datas.petrol.pmsone[ 0 ]?.outputvalue ?? 0;
           const pmstwooutput = datas.petrol.pmstwo[ 0 ]?.outputvalue ?? 0;
@@ -312,7 +313,7 @@ export const AuthContextProvider = ( { children } ) =>
           const agooneoutput = datas.diesel.agoone[ 0 ]?.outputvalue ?? 0;
           const agotwooutput = datas.diesel.agotwo[ 0 ]?.outputvalue ?? 0;
 
-          // console.log(datas)
+
 
           const pmsonedigitalclosing = mydatas.pmsone[ 0 ]?.closingdigital ?? 0;
           const pmsonedigitalopening = mydatas.pmsone[ 0 ]?.openingdigital ?? 0;
@@ -450,20 +451,7 @@ export const AuthContextProvider = ( { children } ) =>
           setDts( rst.data );
           setAllDats( rsts.data );
 
-          let dieslstk = Object.values( dieslstock.data )[
-            Object.values( dieslstock.data ).length - 1
-          ];
 
-          let petrolstk = Object.values( petrolstock.data )[
-            Object.values( petrolstock.data ).length - 1
-          ];
-
-          // console.log(dieslstk)
-          setDieselstock( dieslstk.physical );
-          setDieseldips( dieslstk.dipstick );
-
-          setPetrolStock( petrolstk.physical );
-          setPetroldisps( petrolstk.dipstick );
 
           let pric = Object.values( res.data )[
             Object.values( res.data ).length - 1

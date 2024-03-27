@@ -538,7 +538,7 @@ body {
     flex-direction: column;
     gap: 7px;
     width: 56%;
-    min-height: 71vh;
+    min-height: 78vh;
     margin-top: -14px;
     justify-content: center;
     align-items: center;
@@ -548,13 +548,87 @@ body {
     z-index: 10000;
   }
 
+  .paymode{
+    height: 45px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+#pasys{
+  color: rgba(255, 255, 255, 0.445);
+  font-size: 0.98em;
+  margin-top: 8px;
+}
+
+.payshans{
+  height: 40px;
+  width: 100%;
+  /* background: rgba(255, 255, 255, 0.068); */
+  border-radius: 5px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 103px;
+  align-items: center;
+}
+
+.payshan{
+  height: 40px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.068);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  .paymode button:nth-child(1){
+    height: 40px;
+    width: 30%;
+    border-radius: 4px;
+    border: none;
+    color: rgba(255, 255, 255, 0.864);
+    background: rgba(255, 255, 255, 0.223);
+  }
+
+  .paymode button:nth-child(2){
+    height: 40px;
+    width: 30%;   border-radius: 4px;
+    border: none;
+    background: rgba(255, 255, 255, 0.223);
+    color: rgba(255, 255, 255, 0.864);
+  }
+
+  .paymode button:nth-child(3){
+    height: 40px;
+    width: 30%;   border-radius: 4px;
+    border: none;
+    color: rgba(255, 255, 255, 0.864);
+    background: rgba(255, 255, 255, 0.223);
+  }
+
+  .paymode button:hover{
+    background-color: rgb(6, 48, 255);
+    color: white;
+  }
+
+  .paymode button:active{
+    background-color: rgb(16, 146, 245);
+    color: white;
+  }
+
+  .calenda{
+    width: 100%;
+    min-height: 45px;
+    background: rgba(255, 255, 255, 0.102);
+    border-radius: 4px;
+  }
+
   .contentonesy {
     background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
     display: flex;
     flex-direction: column;
     gap: 7px;
     width: 45%;
-    min-height: 73vh;
+    min-height: 83vh;
     margin-top: -44px;
     justify-content: center;
     align-items: center;

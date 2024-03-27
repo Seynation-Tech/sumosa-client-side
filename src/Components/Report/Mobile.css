@@ -1,37 +1,37 @@
 @media screen and (max-width: 640px) {
-  .reloa{
+  .reloa {
     position: absolute;
     z-index: 8988989;
   }
 
-    .sectionthresa {
-        background-color: rgba(255, 255, 255, 0.449);
-        width: 100%;
-        height: 99vh;
-        position: absolute;
-        margin-top: 16px;
-        border-radius: 12px;
-        /* display: flex;
+  .sectionthresa {
+    background-color: rgba(255, 255, 255, 0.449);
+    width: 100%;
+    height: 99vh;
+    position: absolute;
+    margin-top: 16px;
+    border-radius: 12px;
+    /* display: flex;
         flex-direction: column; */
-        /* justify-content: center; */
-        /* align-items: center; */
-        /* overflow-x: none; */
-      }
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* overflow-x: none; */
+  }
 
-      .updateing {
-        background-color: rgba(0, 0, 255, 0.059);
-        width: 100%;
-        height: 64px;
-        position: relative;
-        display: flex;
-        /* justify-content: center; */
-        align-items: center;
-        right: 0;
-        border-radius: 5px;
-        /* margin-bottom: 12px; */
-        border: 3px solid rgba(0, 98, 255, 0.019);
-      }
-    
+  .updateing {
+    background-color: rgba(0, 0, 255, 0.059);
+    width: 100%;
+    height: 64px;
+    position: relative;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    right: 0;
+    border-radius: 5px;
+    /* margin-bottom: 12px; */
+    border: 3px solid rgba(0, 98, 255, 0.019);
+  }
+
   .edits {
     width: 30%;
     height: 40px;
@@ -45,72 +45,72 @@
     cursor: pointer;
   }
 
-  .edits:active{
+  .edits:active {
     background: rgb(234, 79, 100);
   }
-      .updateing button {
-        height: 42px;
-        width: 26%;
-        background: linear-gradient(to right, rgb(11, 0, 135), rgb(0, 60, 163));
-        color: white;
-        font-size: 0.9em;
-        font-weight: bold;
-        right: 13px;
-        position: absolute;
-        border: none;
-        outline: none;
-        border-radius: 4px;
-      }
-    
-      .updateing button:active {
-        background: blue;
-      }
-    
-      .general {
-        height: 51px;
-        width: 100%;
-        background: rgba(0, 110, 255, 0.108);
-        /* border-radius: 5px; */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.1em;
-        font-weight: bold;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        color: rgb(0, 119, 255);
-        /* margin: 23px; */
-      }
+  .updateing button {
+    height: 42px;
+    width: 26%;
+    background: linear-gradient(to right, rgb(11, 0, 135), rgb(0, 60, 163));
+    color: white;
+    font-size: 0.9em;
+    font-weight: bold;
+    right: 13px;
+    position: absolute;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+  }
 
-      .yearrr {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        margin-top: 3px;
-        min-height: 10vh;
-        width: 100%;
-        background-color: rgba(0, 0, 255, 0.072);
-        border-radius: 5px;
-        margin-bottom: 45px;
-        flex-wrap: wrap;
-        gap: 5px;
-        padding-top: 23px;
-        padding-bottom: 23px;
-      }
+  .updateing button:active {
+    background: blue;
+  }
 
-      .yearrr div:nth-child(7){
-        margin-left: -70px;
-      }
+  .general {
+    height: 51px;
+    width: 100%;
+    background: rgba(0, 110, 255, 0.108);
+    /* border-radius: 5px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: rgb(0, 119, 255);
+    /* margin: 23px; */
+  }
 
-      .yearrr div:nth-child(8){
-        margin-right: -70px;
-      }
+  .yearrr {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 3px;
+    min-height: 10vh;
+    width: 100%;
+    background-color: rgba(0, 0, 255, 0.072);
+    border-radius: 5px;
+    margin-bottom: 45px;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding-top: 23px;
+    padding-bottom: 23px;
+  }
 
-      .download{
-        position: absolute;
-        opacity: 0;
-      }
-    
+  .yearrr div:nth-child(7) {
+    margin-left: -70px;
+  }
+
+  .yearrr div:nth-child(8) {
+    margin-right: -70px;
+  }
+
+  .download {
+    position: absolute;
+    opacity: 0;
+  }
+
   .body-contentc {
     width: 100%;
     display: flex;
@@ -154,7 +154,6 @@
     border-radius: 10px;
     gap: 34px;
     flex-direction: column;
-
   }
 
   .bodytwo {
@@ -169,8 +168,6 @@
     /* flex-direction: column; */
   }
 
- 
-   
   .contentone {
     background: linear-gradient(to right, rgb(2, 52, 167), rgb(27, 21, 177));
     display: flex;
@@ -186,8 +183,6 @@
     justify-content: center;
     align-items: center;
   }
-
-  
 
   .jinsr {
     width: 50%;
@@ -222,7 +217,11 @@
   }
 
   .contentwo {
-    background: linear-gradient(to right, rgb(2, 52, 167), rgba(0, 14, 123, 0.952));
+    background: linear-gradient(
+      to right,
+      rgb(2, 52, 167),
+      rgba(0, 14, 123, 0.952)
+    );
     display: flex;
     flex-direction: column;
     gap: 7px;
@@ -236,11 +235,10 @@
     align-items: center;
     /* margin: 12px; */
   }
-  .bone{
+  .bone {
     display: flex;
     flex-direction: column;
     gap: 9px;
-    
   }
 
   .thetwo {
@@ -390,10 +388,9 @@
     color: rgba(255, 0, 0, 0.826);
   }
 
+  /*ONLINE PAYMENT REPORT DATA*/
 
-/*ONLINE PAYMENT REPORT DATA*/
-
-.poppesa {
+  .poppesa {
     min-height: 73vh;
     width: 100%;
     background: rgba(0, 194, 253, 0.084);
@@ -406,7 +403,7 @@
     justify-content: center;
     align-items: center;
   }
-.contentones {
+  .contentones {
     background: linear-gradient(to right, rgb(0, 61, 135), rgb(3, 2, 76));
     display: flex;
     flex-direction: column;
@@ -421,7 +418,6 @@
     z-index: 10000;
   }
 
-
   .jinss {
     width: 70%;
     height: 45px;
@@ -431,7 +427,6 @@
     justify-content: center;
     align-items: center;
   }
-
 
   .contentonesy {
     background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
@@ -478,8 +473,6 @@
     /* border: 2px solid rgba(255, 255, 255, 0.243); */
   }
 
-
-  
   .poppesaa {
     min-height: 93vh;
     width: 100%;
@@ -517,7 +510,7 @@
 
   .jins p {
     font-weight: bold;
-    font-size: 1.0em;
+    font-size: 1em;
   }
 
   .chotes {
@@ -557,7 +550,6 @@
     color: rgba(255, 255, 255, 0.64);
   }
 
-  
   .poppesa {
     min-height: 83vh;
     width: 100%;
@@ -571,7 +563,6 @@
     justify-content: center;
     align-items: center;
   }
-
 
   .contentonest {
     background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
@@ -587,5 +578,4 @@
     border-radius: 10px;
     z-index: 10000;
   }
-
 }

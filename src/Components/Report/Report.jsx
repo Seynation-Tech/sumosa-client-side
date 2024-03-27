@@ -87,6 +87,8 @@ export default function Expenses ()
   const [ crdb, setCrdb ] = useState( "" );
   const [ nmb, setNmb ] = useState( "" );
 
+  const [ cashs, setCashs ] = useState( "" )
+
   const [ name, setName ] = useState( "" );
   const [ amount, setAmount ] = useState( "" );
 
@@ -179,7 +181,8 @@ export default function Expenses ()
     return `${ year }-${ month }-${ day }`;
   }
 
-  const handleUpdateF=()=>{
+  const handleUpdateF = () =>
+  {
     setAgotwoanalogOpening( "" )
     setAgotwoanalogClosing( "" )
     setAgooneanalogOpening( "" )
@@ -203,156 +206,156 @@ export default function Expenses ()
 
   const handleUpdate = async ( event ) =>
   {
-    setLoading(true)
-   
-      // setSidebar(false)
-      setDate( event.target.value );
+    setLoading( true )
 
-      const mydates = getFormattedDate();
-      // const mydates =  '2024-03-22'
+    // setSidebar(false)
+    setDate( event.target.value );
 
-      const allreportBYid = await axios.get(
-        `${url}/api/pumps/alldatavalues/${ mydates }`,
-        {
-          withCredentials: true,
-        }
-      );
+    const mydates = getFormattedDate();
+    // const mydates =  '2024-03-22'
 
-      const allreportsbyid = await axios.get(
-        `${url}/api/pumps/alldata/${ mydates }`,
-        {
-          withCredentials: true,
-        }
-      );
+    const allreportBYid = await axios.get(
+      `${ url }/api/pumps/alldatavalues/${ mydates }`,
+      {
+        withCredentials: true,
+      }
+    );
 
-      const datas = allreportBYid.data;
-      const mydatas = allreportsbyid.data;
+    const allreportsbyid = await axios.get(
+      `${ url }/api/pumps/alldata/${ mydates }`,
+      {
+        withCredentials: true,
+      }
+    );
 
-      const pmsoneouput = datas.petrol.pmsone[ 0 ]?.outputvalue ?? 0;
-      const pmstwooutput = datas.petrol.pmstwo[ 0 ]?.outputvalue ?? 0;
+    const datas = allreportBYid.data;
+    const mydatas = allreportsbyid.data;
 
-      const agooneoutput = datas.diesel.agoone[ 0 ]?.outputvalue ?? 0;
-      const agotwooutput = datas.diesel.agotwo[ 0 ]?.outputvalue ?? 0;
+    const pmsoneouput = datas.petrol.pmsone[ 0 ]?.outputvalue ?? 0;
+    const pmstwooutput = datas.petrol.pmstwo[ 0 ]?.outputvalue ?? 0;
 
-      // console.log(datas)
+    const agooneoutput = datas.diesel.agoone[ 0 ]?.outputvalue ?? 0;
+    const agotwooutput = datas.diesel.agotwo[ 0 ]?.outputvalue ?? 0;
 
-      const pmsonedigitalclosing = mydatas.pmsone[ 0 ]?.closingdigital ?? 0;
-      const pmsonedigitalopening = mydatas.pmsone[ 0 ]?.openingdigital ?? 0;
-      const pmsonedigitaloutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
+    // console.log(datas)
 
-      const pmsoneanalogclosing = mydatas.pmsone[ 0 ]?.closingsanalog ?? 0;
-      const pmsoneanalogopening = mydatas.pmsone[ 0 ]?.openinganalog ?? 0;
-      const pmsoneanalogoutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
+    const pmsonedigitalclosing = mydatas.pmsone[ 0 ]?.closingdigital ?? 0;
+    const pmsonedigitalopening = mydatas.pmsone[ 0 ]?.openingdigital ?? 0;
+    const pmsonedigitaloutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
 
-      setPmsonedigOpening( pmsonedigitalopening )
-      setPmsonedigClosing( pmsonedigitalclosing )
-      setPmsoneanalogOpening( pmsoneanalogopening )
-      setPmsoneanalogClosing( pmsoneanalogclosing )
+    const pmsoneanalogclosing = mydatas.pmsone[ 0 ]?.closingsanalog ?? 0;
+    const pmsoneanalogopening = mydatas.pmsone[ 0 ]?.openinganalog ?? 0;
+    const pmsoneanalogoutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
 
-      const pmstwodigitalclosing = mydatas.pmstwo[ 0 ]?.closingdigital ?? 0;
-      const pmstwodigitalopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
-      const pmstwodigitaloutputvalue = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
+    setPmsonedigOpening( pmsonedigitalopening )
+    setPmsonedigClosing( pmsonedigitalclosing )
+    setPmsoneanalogOpening( pmsoneanalogopening )
+    setPmsoneanalogClosing( pmsoneanalogclosing )
 
-      const pmstwoanalogClosing = mydatas.pmstwo[ 0 ]?.closingsanalog ?? 0;
-      const pmstwoanalogopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
-      const pmstwoanalogoutput = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
+    const pmstwodigitalclosing = mydatas.pmstwo[ 0 ]?.closingdigital ?? 0;
+    const pmstwodigitalopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
+    const pmstwodigitaloutputvalue = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
 
-      setPmstwodigOpening( pmstwodigitalopening )
-      setPmstwodigClosing( pmstwodigitalclosing )
-      setPmstwoanalogOpening( pmstwoanalogopening )
-      setPmstwoanalogClosing( pmstwoanalogClosing )
+    const pmstwoanalogClosing = mydatas.pmstwo[ 0 ]?.closingsanalog ?? 0;
+    const pmstwoanalogopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
+    const pmstwoanalogoutput = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
 
-      const agoonedigitalclosing = mydatas.agoone[ 0 ]?.closingdigital ?? 0;
-      const agoonedigitalopening = mydatas.agoone[ 0 ]?.openingdigital ?? 0;
-      const agoonedigitaloutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
+    setPmstwodigOpening( pmstwodigitalopening )
+    setPmstwodigClosing( pmstwodigitalclosing )
+    setPmstwoanalogOpening( pmstwoanalogopening )
+    setPmstwoanalogClosing( pmstwoanalogClosing )
 
-      const agotwodigitalclosing = mydatas.agotwo[ 0 ]?.closingdigital ?? 0;
-      const agotowodigitalopening = mydatas.agotwo[ 0 ]?.openingdigital ?? 0;
-      const agotwodigitaloutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
+    const agoonedigitalclosing = mydatas.agoone[ 0 ]?.closingdigital ?? 0;
+    const agoonedigitalopening = mydatas.agoone[ 0 ]?.openingdigital ?? 0;
+    const agoonedigitaloutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
 
-      setAgoonedigOpening( agoonedigitalopening )
-      setAgoonedigClosing( agoonedigitalclosing )
-      setAgotwodigOpening( agotowodigitalopening )
-      setAgotwodigClosing( agotwodigitalclosing )
+    const agotwodigitalclosing = mydatas.agotwo[ 0 ]?.closingdigital ?? 0;
+    const agotowodigitalopening = mydatas.agotwo[ 0 ]?.openingdigital ?? 0;
+    const agotwodigitaloutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
 
-      const agooneanalogclosing = mydatas.agoone[ 0 ]?.closingsanalog ?? 0;
-      const agooneanalogopening = mydatas.agoone[ 0 ]?.openinganalog ?? 0;
-      const agooneanalogoutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
+    setAgoonedigOpening( agoonedigitalopening )
+    setAgoonedigClosing( agoonedigitalclosing )
+    setAgotwodigOpening( agotowodigitalopening )
+    setAgotwodigClosing( agotwodigitalclosing )
 
-      const agotwoanalogclosing = mydatas.agotwo[ 0 ]?.closingsanalog ?? 0;
-      const agotwoanalogopening = mydatas.agotwo[ 0 ]?.openinganalog ?? 0;
-      const agotwoanalogoutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
+    const agooneanalogclosing = mydatas.agoone[ 0 ]?.closingsanalog ?? 0;
+    const agooneanalogopening = mydatas.agoone[ 0 ]?.openinganalog ?? 0;
+    const agooneanalogoutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
 
-      setAgotwoanalogOpening( agotwoanalogopening )
-      setAgotwoanalogClosing( agotwoanalogclosing )
-      setAgooneanalogOpening( agooneanalogopening )
-      setAgooneanalogClosing( agooneanalogclosing )
+    const agotwoanalogclosing = mydatas.agotwo[ 0 ]?.closingsanalog ?? 0;
+    const agotwoanalogopening = mydatas.agotwo[ 0 ]?.openinganalog ?? 0;
+    const agotwoanalogoutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
 
-      // the
+    setAgotwoanalogOpening( agotwoanalogopening )
+    setAgotwoanalogClosing( agotwoanalogclosing )
+    setAgooneanalogOpening( agooneanalogopening )
+    setAgooneanalogClosing( agooneanalogclosing )
 
-      setValues( {
-        pmsonedigitalclosing: pmsonedigitalclosing,
-        pmsonedigitalopening: pmsonedigitalopening,
-        pmsonedigitaloutput: pmsonedigitaloutputvalue,
+    // the
 
-        pmstwodigitalclosing: pmstwodigitalclosing,
-        pmstwodigitalopening: pmstwodigitalopening,
-        pmstwodigitaloutput: pmstwodigitaloutputvalue,
+    setValues( {
+      pmsonedigitalclosing: pmsonedigitalclosing,
+      pmsonedigitalopening: pmsonedigitalopening,
+      pmsonedigitaloutput: pmsonedigitaloutputvalue,
 
-        agoonedigitalclosing: agoonedigitalclosing,
-        agoonedigitalopening: agoonedigitalopening,
-        agoonedigitaloutput: agoonedigitaloutput,
+      pmstwodigitalclosing: pmstwodigitalclosing,
+      pmstwodigitalopening: pmstwodigitalopening,
+      pmstwodigitaloutput: pmstwodigitaloutputvalue,
 
-        agotwodigitalclosing: agotwodigitalclosing,
-        agotwodigitalopening: agotowodigitalopening,
-        agotwodigitaloutput: agotwodigitaloutput,
+      agoonedigitalclosing: agoonedigitalclosing,
+      agoonedigitalopening: agoonedigitalopening,
+      agoonedigitaloutput: agoonedigitaloutput,
 
-        pmsoneanalogclosing: pmsoneanalogclosing,
-        pmsoneanalogopening: pmsoneanalogopening,
-        pmsoneanalogoutput: pmsoneanalogoutputvalue,
+      agotwodigitalclosing: agotwodigitalclosing,
+      agotwodigitalopening: agotowodigitalopening,
+      agotwodigitaloutput: agotwodigitaloutput,
 
-        pmstwoanalogclosing: pmstwoanalogClosing,
-        pmstwoanalogopening: pmstwoanalogopening,
-        pmstwoanalogoutput: pmstwoanalogoutput,
+      pmsoneanalogclosing: pmsoneanalogclosing,
+      pmsoneanalogopening: pmsoneanalogopening,
+      pmsoneanalogoutput: pmsoneanalogoutputvalue,
 
-        agooneanalogclosing: agooneanalogclosing,
-        agooneanalogopening: agooneanalogopening,
-        agooneanalogoutput: agooneanalogoutput,
+      pmstwoanalogclosing: pmstwoanalogClosing,
+      pmstwoanalogopening: pmstwoanalogopening,
+      pmstwoanalogoutput: pmstwoanalogoutput,
 
-        agotwoanalogclosing: agotwoanalogclosing,
-        agotwoanalogopening: agotwoanalogopening,
-        agotwoanalogoutput: agotwoanalogoutput,
-      } );
+      agooneanalogclosing: agooneanalogclosing,
+      agooneanalogopening: agooneanalogopening,
+      agooneanalogoutput: agooneanalogoutput,
 
-      // console.log( oneData.petrol.pmsone )
+      agotwoanalogclosing: agotwoanalogclosing,
+      agotwoanalogopening: agotwoanalogopening,
+      agotwoanalogoutput: agotwoanalogoutput,
+    } );
 
-      setSales( {
-        totalsales: datas?.totalsales,
-        difference: datas?.difference,
-        totaldebts: datas?.debts,
-        zreport: datas?.zreport,
-        agophysical: datas?.agopysical,
-        agodipstick: datas?.agodipstick,
-        pmsphysical: datas?.pmsphysical,
-        creditors: datas?.creditors,
-        debtors: datas?.debtors,
-        dieselsales: datas?.dieselsales,
-        pmssales: datas?.pmssales,
-        expenses: datas?.expenses,
-        expensesdata: datas?.expensesdata,
-        pmsdipstick: datas?.pmsdipstic,
-        pmsoneoutput: pmsoneouput,
-        pmstwooutput: pmstwooutput,
-        agooneoutput: agooneoutput,
-        agotwooutput: agotwooutput,
-      } );
-   
-      setLoading(false)
+    // console.log( oneData.petrol.pmsone )
+
+    setSales( {
+      totalsales: datas?.totalsales,
+      difference: datas?.difference,
+      totaldebts: datas?.debts,
+      zreport: datas?.zreport,
+      agophysical: datas?.agopysical,
+      agodipstick: datas?.agodipstick,
+      pmsphysical: datas?.pmsphysical,
+      creditors: datas?.creditors,
+      debtors: datas?.debtors,
+      dieselsales: datas?.dieselsales,
+      pmssales: datas?.pmssales,
+      expenses: datas?.expenses,
+      expensesdata: datas?.expensesdata,
+      pmsdipstick: datas?.pmsdipstic,
+      pmsoneoutput: pmsoneouput,
+      pmstwooutput: pmstwooutput,
+      agooneoutput: agooneoutput,
+      agotwooutput: agotwooutput,
+    } );
+
+    setLoading( false )
 
   };
 
   const literHandler = async () =>
-  { 
+  {
     setNotify( false );
     if (
       pmsonedigOpening &&
@@ -366,7 +369,8 @@ export default function Expenses ()
     )
     {
       try
-      {setLoading(true)
+      {
+        setLoading( true )
         const dats = getFormattedDate()
         let pmsOne = {
           uid: dats,
@@ -402,6 +406,7 @@ export default function Expenses ()
           outputvalue: Number( agotwodigOpening ) - Number( agotwodigClosing ),
         };
 
+
         const resone = await axios.post( `${ url }/api/pumps/petrol`, pmsOne );
         const restwo = await axios.post( `${ url }/api/pumps/petroltwo`, pmsTwo );
         const resthree = await axios.post( `${ url }/api/pumps/diesel`, agoOne );
@@ -418,10 +423,11 @@ export default function Expenses ()
         setError( "Please refresh..." );
       }
     } else
-    {setLoading(false)
+    {
+      setLoading( false )
       setNotify( true );
       setNotification( "Fill all the details!" );
-    } setLoading(false)
+    } setLoading( false )
   };
 
   const sureTy = () =>
@@ -433,14 +439,15 @@ export default function Expenses ()
   }
 
   const confirm = async () =>
-  { 
+  {
     setNotify( false )
     setNotification( "" );
 
-    console.log(diesellitres,dieselAmount,petrolAmount,petrollitres)
+    console.log( diesellitres, dieselAmount, petrolAmount, petrollitres )
 
     if ( isNaN( diesellitres ) && isNaN( dieselAmount ) && isNaN( petrolAmount ) && isNaN( petrollitres ) )
-    {setLoading(true)
+    {
+      setLoading( true )
       try
       {
         const dats = getFormattedDate()
@@ -452,19 +459,20 @@ export default function Expenses ()
           petrolvalue: plita,
         };
 
+
         const response = await axios.post( `${ url }/api/weeklydatas/data`, data );
 
         setNotify( true );
         setNotification( response.data );
         setLoading( false );
 
-      } catch ( err ) { setLoading(false) }
+      } catch ( err ) { setLoading( false ) }
     } else
     {
       setNotify( true );
-      setLoading(false)
+      setLoading( false )
       setNotification( "Ensure all todays' data are filled!" );
-    }setLoading(false)
+    } setLoading( false )
   };
 
   const pesaHandler = async () =>
@@ -472,7 +480,8 @@ export default function Expenses ()
     setNotify( false )
     setNotification( "" );
     if ( mPesa && nmb && crdb )
-    {setLoading(true)
+    {
+      setLoading( true )
       try
       {
         const dats = getFormattedDate()
@@ -485,6 +494,9 @@ export default function Expenses ()
           debts: "",
         };
         setLoading( true );
+
+        setPesa( false );
+
 
         const resone = await axios.post(
           `${ url }/api/billing/virtmoney`,
@@ -506,10 +518,11 @@ export default function Expenses ()
         setError( "Please refresh..." );
       }
     } else
-    {setLoading(false)
+    {
+      setLoading( false )
       setNotify( true );
       setNotification( "Fill all the details!" );
-    }setLoading(false)
+    } setLoading( false )
   };
   const deletePop = () =>
   {
@@ -522,43 +535,63 @@ export default function Expenses ()
     setNotification( "" );
     setAre( false );
   }
+  const setThedate = ( event ) =>
+  {
+    setDate( event.target.value );
+  }
   const credHandler = async () =>
   {
     setNotify( false )
     setNotification( "" );
-    if ( name && amount && mode )
-    {setLoading(true)
-      try
+    if ( name && amount && cashs )
+    {
+      if ( mydate )
       {
-        const dats = getFormattedDate()
-        let debtors = {
-          uid: dats,
-          name: name,
-          amount: amount,
-          modeofpay: mode,
-          date: mydate
-        };
-        setLoading( true );
 
-        const resone = await axios.post(
-          `${ url }/api/billing/creditors`,
-          debtors
-        );
+
+        setLoading( true )
+        try
+        {
+
+          setCred( false );
+          const dats = getFormattedDate()
+          let debtors = {
+            uid: mydate,
+            name: name,
+            amount: amount,
+            modeofpay: cashs,
+            date: dats
+          };
+          setLoading( true );
+
+          // console.log(debtors)
+
+          const resone = await axios.post(
+            `${ url }/api/billing/creditors`,
+            debtors
+          );
+          setNotify( true );
+          setNotification( resone.data );
+          setLoading( false );
+          setName( "" )
+          setAmount( "" )
+          setMode( "" )
+
+        } catch ( err )
+        {
+          setLoading( false );
+
+          setError( "Please refresh..." );
+        }
+
+      } else
+      {
         setNotify( true );
-        setNotification( resone.data );
-        setLoading( false );
-        setName( "" )
-        setAmount( "" )
-        setMode( "" )
-
-      } catch ( err )
-      {
-        setLoading( false );
-        
-        setError( "Please refresh..." );
+        setNotification( "Choose the date!" );
       }
     } else
-    {setLoading(false)
+    {
+      setLoading( false )
       setNotify( true );
       setNotification( "Fill all the details!" );
     }
@@ -568,9 +601,10 @@ export default function Expenses ()
   {
     setNotify( false )
     setNotification( "" );
-   
+
     if ( name && amount )
-    { setLoading(true)
+    {
+      setLoading( true )
       try
       {
         const dats = getFormattedDate()
@@ -583,6 +617,10 @@ export default function Expenses ()
         };
 
         setLoading( true );
+
+        setDebts( false );
+
+
 
         const resone = await axios.post( `${ url }/api/billing/debtors`, debtors );
         setNotify( true );
@@ -599,7 +637,8 @@ export default function Expenses ()
         setError( "Please refresh..." );
       }
     } else
-    {setLoading(false)
+    {
+      setLoading( false )
       setNotify( true );
       setNotification( "Fill all the details!" );
     }
@@ -610,7 +649,8 @@ export default function Expenses ()
     setNotify( false )
     setNotification( "" );
     if ( pmsphyscal && pmsdispst )
-    {setLoading(true)
+    {
+      setLoading( true )
       try
       {
         const dats = getFormattedDate()
@@ -629,6 +669,9 @@ export default function Expenses ()
         };
 
         // console.log(pmsOne)
+
+        setStocks( false );
+
 
         const resone = await axios.post(
           `${ url }/api/billing/pmsfuelstock`,
@@ -654,7 +697,8 @@ export default function Expenses ()
         setError( "Please refresh..." );
       }
     } else
-    {setLoading(false)
+    {
+      setLoading( false )
       setNotify( true );
       setNotification( "Fill all the details!" );
     }
@@ -681,8 +725,11 @@ export default function Expenses ()
       twoths
     )
     {
+
+
       try
-      {setLoading(true)
+      {
+        setLoading( true )
         const dats = getFormattedDate()
         let collections = {
           uid: dats,
@@ -698,6 +745,10 @@ export default function Expenses ()
         };
 
         setLoading( true );
+
+
+        setMoneycount( false );
+
 
         const resone = await axios.post(
           `${ url }/api/billing/collectmoney`,
@@ -724,7 +775,8 @@ export default function Expenses ()
         setError( "Please refresh..." );
       }
     } else
-    {setLoading(false)
+    {
+      setLoading( false )
       setNotify( true );
       setNotification( "Fill all the details!" );
     }
@@ -804,16 +856,16 @@ export default function Expenses ()
 
   return (
     <div className="mysals">
-   
+
       <div className="opa">
-           <Sidebar />
+        <Sidebar />
       </div>
-      {loading && <Loaders/>}
+      { loading && <Loaders /> }
       <div className="reloa">
         <NavLink to="/home">
-           <Return />
+          <Return />
         </NavLink>
-       
+
       </div>
 
       <div className=""></div>
@@ -849,13 +901,13 @@ export default function Expenses ()
           </div>
 
           <div className="dail">
-            <p  onClick={ handleUpdate }>EDIT DATA</p>  
+            <p onClick={ handleUpdate }>EDIT DATA</p>
           </div>
 
           <div className="dail" >
-           <p onClick={ handleUpdateF }>ERASE FIELDS</p>
+            <p onClick={ handleUpdateF }>ERASE FIELDS</p>
           </div>
-          
+
         </div>
         {/* <Real /> */ }
 
@@ -897,15 +949,15 @@ export default function Expenses ()
                 </div>
 
                 { notify && (
-                  <div style={{width: "210px"}} className="inputmy">
+                  <div style={ { width: "210px" } } className="inputmy">
                     <p>{ notification }</p>
                   </div>
                 ) }
 
                 <div className="bone">
                   <div className="thetwos">{/* <p></p> */ }</div>
-                  <div style={{width: "210px"}} className="thetwo">
-                    <button style={{width: "210px"}} onClick={ pesaHandler }>Submit</button>
+                  <div style={ { width: "210px" } } className="thetwo">
+                    <button style={ { width: "210px" } } onClick={ pesaHandler }>Submit</button>
                   </div>
                 </div>
               </div>
@@ -1064,6 +1116,15 @@ export default function Expenses ()
           { credits && (
             <div className="poppesa">
               <div className="contentonesy">
+                <div className="payshans">
+                  <input
+                    type="date"
+                    className="custom-date-input"
+                    value={ mydate }
+                    onChange={ setThedate }
+                  />
+
+                </div>
                 <div className="ours">
                   <div className="sdacont">
                     <div className="jinss">
@@ -1090,12 +1151,17 @@ export default function Expenses ()
                       </div>
 
                       <div className="input-two">
-                        {/* <i>icon</i> */ }
-                        <input
-                          placeholder="Mode of Payment"
-                          value={ mode }
-                          onChange={ ( e ) => setMode( e.target.value ) }
-                        />
+                        <p id="pasys">Select Mode of Payment</p>
+                      </div>
+
+                      <div className="paymode">
+                        <button onClick={ e => setCashs( "cash" ) }>CASH</button>
+                        <button onClick={ e => setCashs( "crdb" ) }>CRDB</button>
+                        <button onClick={ e => setCashs( "mpesa" ) }>MPESA</button>
+                      </div>
+
+                      <div className="payshan">
+                        <p>Mode: { cashs }</p>
                       </div>
                     </div>
 
@@ -1110,6 +1176,8 @@ export default function Expenses ()
                         Submit
                       </button>
                     </div>
+
+
                   </div>
                 </div>
               </div>

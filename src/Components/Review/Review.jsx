@@ -237,19 +237,7 @@ export default function Review ()
                     }
                 );
 
-                const report = await axios.get(
-                    `${ url }/api/pumps/alldatavalues`,
-                    {
-                        withCredentials: true,
-                    }
-                );
-
-                const allreports = await axios.get(
-                    `${ url }/api/pumps/alldata`,
-                    {
-                        withCredentials: true,
-                    }
-                );
+             
 
                 // console.log(allreportBYid)
 
@@ -360,24 +348,7 @@ export default function Review ()
                     totalreceipt: datas?.totalreceipt
                 } );
 
-                //   const  allreport = await axios.get(`${url}/api/weeklydatas/alldatavalues`, {
-                //     withCredentials: true,
-                //   });
-
-                //   console.log(startdate,enddate)
-                //   console.log(allreportBYid)
-                //   console.log(allreportsbyid)
-
-                // setDatas( respfour.data );
-
-                // console.log(resptwo.data);
-                // let words = Object.values( resptwo.data )[
-                //     Object.values( resptwo.data ).length - 1
-                // ];
-
-                // setReason( words.differencereason )
-
-                //
+           
             } catch ( err )
             {
                 setLoading( false );
@@ -909,7 +880,7 @@ export default function Review ()
     {
         if ( mesg )
         {
-
+ 
             setLoading( true );
             try
             {
@@ -1261,7 +1232,7 @@ export default function Review ()
 
                     <div className="cashs">
 
-                        <p id="cashs">MONEY IN CASH</p>
+                        <p id="cashs">CASH ON HAND</p>
                         <p id="cashs">Tsh { Number( salesdata?.cashonhand ).toLocaleString() }</p>
                     </div>
 
@@ -1282,8 +1253,8 @@ export default function Review ()
                     </div>
 
                     <div className="cashs">
-                        <p>ONLINE / EXPENS / DEBTS</p>
-                        <p>Tsh { Number( salesdata?.othermoney ).toLocaleString() }</p>
+                        <p>GENERAL EXPENSES</p>
+                        <p>Tsh { Number( salesdata?.expenses ).toLocaleString() }</p>
                     </div>
 
                 </div>
