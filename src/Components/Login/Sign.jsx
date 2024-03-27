@@ -77,30 +77,26 @@ export default function Sign ()
 
   const updateDatabase = async () =>
   {
-    if ( name && role && contacts && residence && idnumber && password )
-    {
+
+   const myid = currentUser[0]?.id
+    
       const uid = days.toLowerCase() + "," + date;
       setLoading( true );
       let data = {
 
-        'uid': uid,
+        
         'name': name,
         'username': username,
         'password': password,
-        'role': role.toLowerCase(),
         'contacts': contacts,
-        'phaseshift': phaseshift,
-        'image': '',
-        'idnumber': idnumber,
         'residence': residence,
-        'permit': "default"
 
       }
 
 
       try
       {
-        const res = await axios.put( `${ url }/api/auths/userinfo/${ ids }`, data, { withCredentials: true } )
+        const res = await axios.put( `${ url }/api/auths/userinfo/${ myid }`, data, { withCredentials: true } )
         setStatus( res.data )
 
         setNotfs( true )
@@ -110,16 +106,13 @@ export default function Sign ()
 
       } catch ( err )
       {
+        // console.log(err)
         setNotfs( true )
         setLoading( false );
         setStatus( "Update Failed!" );
       }
-    }
-    else
-    {
-      setNotfs( true )
-      setStatus( "Fill all data!" )
-    }
+    
+    
   }
 
   const addUser = () =>
@@ -148,11 +141,7 @@ export default function Sign ()
                   onChange={ ( e ) => setName( e.target.value ) } />
               </div>
 
-              { currentUser[ 0 ]?.role === "director" && <div className="input-two">
-                {/* <i>icon</i> */ }
-                <input placeholder="Role" alue={ role }
-                  onChange={ ( e ) => setRole( e.target.value ) } />
-              </div> }
+        
               <div className="input-two">
                 {/* <i>icon</i> */ }
                 <input type="number" placeholder="Contacts" value={ contacts }

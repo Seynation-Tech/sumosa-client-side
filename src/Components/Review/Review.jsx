@@ -124,11 +124,12 @@ export default function Review ()
         agooneoutput: "0",
         agotwooutput: "0",
         cashonhand: "0",
-        creditorsum: "0",
+        creditorsum: 0,
         virtualmoney: "0",
         totalvirtual: "0",
         othermoney: "0",
-        remained: "0"
+        remained: "0",
+        totalreceipt: "0"
     } );
 
     const [ values, setValues ] = useState( {
@@ -250,6 +251,8 @@ export default function Review ()
                     }
                 );
 
+                // console.log(allreportBYid)
+
                 const datas = allreportBYid.data;
                 const mydatas = allreportsbyid.data;
 
@@ -259,7 +262,7 @@ export default function Review ()
                 const agooneoutput = datas.diesel.agoone[ 0 ]?.outputvalue ?? 0;
                 const agotwooutput = datas.diesel.agotwo[ 0 ]?.outputvalue ?? 0;
 
-                // console.log(datas)
+               
 
                 const pmsonedigitalclosing = mydatas.pmsone[ 0 ]?.closingdigital ?? 0;
                 const pmsonedigitalopening = mydatas.pmsone[ 0 ]?.openingdigital ?? 0;
@@ -348,13 +351,13 @@ export default function Review ()
                     pmstwooutput: pmstwooutput,
                     agooneoutput: agooneoutput,
                     agotwooutput: agotwooutput,
-
                     cashonhand: datas?.cashonhand,
                     creditorsum: datas?.creditorSum,
                     virtualmoney: datas?.virtualSum,
                     totalvirtual: datas?.totalvirtual,
                     othermoney: datas?.othermoney,
-                    remained: datas?.remained
+                    remained: datas?.remained,
+                    totalreceipt: datas?.totalreceipt
                 } );
 
                 //   const  allreport = await axios.get(`${url}/api/weeklydatas/alldatavalues`, {
@@ -363,7 +366,7 @@ export default function Review ()
 
                 //   console.log(startdate,enddate)
                 //   console.log(allreportBYid)
-                  console.log(allreportsbyid)
+                //   console.log(allreportsbyid)
 
                 // setDatas( respfour.data );
 
@@ -560,7 +563,8 @@ export default function Review ()
                 virtualmoney: datas?.virtualSum,
                 totalvirtual: datas?.totalvirtual,
                 othermoney: datas?.othermoney,
-                remained: datas?.remained
+                remained: datas?.remained,
+                totalreceipt: datas?.totalreceipt
             } );
             setLoading( false );
         } catch ( err )
@@ -704,7 +708,8 @@ export default function Review ()
                 virtualmoney: datas?.virtualSum,
                 totalvirtual: datas?.totalvirtual,
                 othermoney: datas?.othermoney,
-                remained: datas?.remained
+                remained: datas?.remained,
+                totalreceipt: datas?.totalreceipt
             } ); setLoading( false );
 
         }
@@ -848,7 +853,8 @@ export default function Review ()
                 virtualmoney: datas?.virtualSum,
                 totalvirtual: datas?.totalvirtual,
                 othermoney: datas?.othermoney,
-                remained: datas?.remained
+                remained: datas?.remained,
+                totalreceipt: datas?.totalreceipt
             } ); setLoading( false );
         }
         catch ( err )
@@ -1255,8 +1261,8 @@ export default function Review ()
 
                     <div className="cashs">
 
-                        <p>CONLINE PAYMENTS</p>
-                        <p>Tsh { Number( salesdata?.cashonhand ).toLocaleString() }</p>
+                        <p id="cashs">MONEY IN CASH</p>
+                        <p id="cashs">Tsh { Number( salesdata?.cashonhand ).toLocaleString() }</p>
                     </div>
 
                     <div className="cashs">
@@ -1272,16 +1278,17 @@ export default function Review ()
                     <div className="cashs">
 
                         <p>RECEIPT MONEY</p>
-                        <p>Tsh { Number( salesdata?.totalvirtual ).toLocaleString() }</p>
+                        <p>Tsh { Number( salesdata?.totalreceipt ).toLocaleString() }</p>
                     </div>
 
                     <div className="cashs">
-
-                        <p>ONLINE + EXPENS + DEBTS</p>
+                        <p>ONLINE / EXPENS / DEBTS</p>
                         <p>Tsh { Number( salesdata?.othermoney ).toLocaleString() }</p>
                     </div>
 
                 </div>
+
+
 
                 <div className="stocks">
                     <div className="diesels">

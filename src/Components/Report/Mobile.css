@@ -18,6 +18,54 @@
         /* overflow-x: none; */
       }
 
+      .updateing {
+        background-color: rgba(0, 0, 255, 0.059);
+        width: 100%;
+        height: 64px;
+        position: relative;
+        display: flex;
+        /* justify-content: center; */
+        align-items: center;
+        right: 0;
+        border-radius: 5px;
+        /* margin-bottom: 12px; */
+        border: 3px solid rgba(0, 98, 255, 0.019);
+      }
+    
+  .edits {
+    width: 30%;
+    height: 40px;
+    background: rgb(185, 1, 25);
+    border-radius: 5px;
+    position: absolute;
+    left: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .edits:active{
+    background: rgb(234, 79, 100);
+  }
+      .updateing button {
+        height: 42px;
+        width: 26%;
+        background: linear-gradient(to right, rgb(11, 0, 135), rgb(0, 60, 163));
+        color: white;
+        font-size: 0.9em;
+        font-weight: bold;
+        right: 13px;
+        position: absolute;
+        border: none;
+        outline: none;
+        border-radius: 4px;
+      }
+    
+      .updateing button:active {
+        background: blue;
+      }
+    
       .general {
         height: 51px;
         width: 100%;

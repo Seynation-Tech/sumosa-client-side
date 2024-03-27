@@ -14,7 +14,9 @@
   font-weight: bold;
   font-size: 0.9em;
 }
-
+#cashs{
+  color: rgba(255, 0, 0, 0.893);
+}
 .handles{
   display: flex;
   align-items: center;

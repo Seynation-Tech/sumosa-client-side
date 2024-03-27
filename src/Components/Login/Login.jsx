@@ -21,6 +21,8 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   let [color, setColor] = useState("#ffffff");
 
+  // window.location.reload(true);
+
   const submitButton = async (e) => {
     e.preventDefault();
    

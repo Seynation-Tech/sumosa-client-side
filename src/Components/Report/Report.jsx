@@ -437,6 +437,8 @@ export default function Expenses ()
     setNotify( false )
     setNotification( "" );
 
+    console.log(diesellitres,dieselAmount,petrolAmount,petrollitres)
+
     if ( isNaN( diesellitres ) && isNaN( dieselAmount ) && isNaN( petrolAmount ) && isNaN( petrollitres ) )
     {setLoading(true)
       try

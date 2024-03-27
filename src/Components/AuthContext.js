@@ -46,7 +46,7 @@ export const AuthContextProvider = ( { children } ) =>
     JSON.parse( localStorage.getItem( "userdata" ) || null )
   );
 
-  const url = "https://sumosa-api.onrender.com";
+  const url = "https://sumosa-api-production.up.railway.app";
   // const url = "http://localhost:5001";
 
   const [ zrepos, setZreport ] = useState( "0" );
@@ -142,8 +142,9 @@ export const AuthContextProvider = ( { children } ) =>
     virtualmoney: "0",
     totalvirtual: "0",
     othermoney: "0",
-    remained: "0"
-    
+    remained: "0",
+    totalreceipt: "0"
+
   } );
 
   const [ values, setValues ] = useState( {
@@ -271,28 +272,28 @@ export const AuthContextProvider = ( { children } ) =>
           //  console.log(todate)
 
           const allreportBYid = await axios.get(
-            `${url}/api/pumps/alldatavalues/${ todate }`,
+            `${ url }/api/pumps/alldatavalues/${ todate }`,
             {
               withCredentials: true,
             }
           );
 
           const allreportsbyid = await axios.get(
-            `${url}/api/pumps/alldata/${ todate }`,
+            `${ url }/api/pumps/alldata/${ todate }`,
             {
               withCredentials: true,
             }
           );
 
           const report = await axios.get(
-            `${url}/api/pumps/alldatavalues`,
+            `${ url }/api/pumps/alldatavalues`,
             {
               withCredentials: true,
             }
           );
 
           const allreports = await axios.get(
-            `${url}/api/pumps/alldata`,
+            `${ url }/api/pumps/alldata`,
             {
               withCredentials: true,
             }
@@ -401,11 +402,12 @@ export const AuthContextProvider = ( { children } ) =>
             petrolprice: datas?.petrolprice,
             dieselprice: datas?.dieselprice,
             cashonhand: datas?.cashOnhand,
-        creditorsum: datas?.creditorSum,
-        virtualmoney: datas?.virtualSum,
-        totalvirtual: datas?.totalvirtual,
-        othermoney: datas?.othermoney,
-        remained: datas?.remained
+            creditorsum: datas?.creditorSum,
+            virtualmoney: datas?.virtualSum,
+            totalvirtual: datas?.totalvirtual,
+            othermoney: datas?.othermoney,
+            remained: datas?.remained,
+            totalreceipt: datas?.totalreceipt
           } );
 
           setValues( {
