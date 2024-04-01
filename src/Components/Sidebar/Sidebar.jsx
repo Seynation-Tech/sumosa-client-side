@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import home from "../../Images/hoo.png";
-import logos from "../../Images/sumoo.png";
-import profile from "../../Images/one.png";
+import logos from "../../Images/sumooo.png";
+import profile from "../../Images/two.png";
 import sales from "../../Images/sale.png";
 import epxenses from "../../Images/expenses.png";
 import report from "../../Images/repo.png";
@@ -65,7 +65,7 @@ export default function Sidebar ()
         <div className="profcaption">
 
           <p>{ currentUser[ 0 ]?.name }</p>
-          <p>{ currentUser[ 0 ]?.role }</p>
+          <p>{ String(currentUser[ 0 ]?.role).toLocaleUpperCase() }</p>
         </div>
       </div>
 
@@ -97,16 +97,14 @@ export default function Sidebar ()
             <p>Daily Report</p>
           </div>
         </NavLink>
-        { currentUser[ 0 ]?.role === "director" ? (
+      
           <NavLink to="/review">
             <div className="sectcont">
               <img src={ stock } alt="" />
               <p>Data Review</p>
             </div>
           </NavLink>
-        ) : (
-          <></>
-        ) }
+      
       </div>
 
       {/* <NavLink className="lowersect" to="/"> */ }

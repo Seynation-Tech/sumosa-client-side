@@ -1,5 +1,37 @@
 @media screen and (max-width: 640px) {
+  .reloa{
+    position: absolute;
+    z-index: 8988989;
+    opacity: 1;
+  }
 
+.differencereason{
+  color: black;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  align-items: center;
+  /* gap: 4px; */
+  margin-top: 27px;
+  border: 1px solid rgba(0, 0, 0, 0.075);
+  width: 100%;
+  border-radius: 5px;
+min-height: 95px;
+padding: 22px;
+  ;
+}
+
+.cashs {
+width:50% ;
+height: 35px;
+display: flex;
+gap:23px;
+align-items: center;
+flex-direction: column;
+color: rgba(0, 0, 0, 0.739);
+font-size: 1.0em;
+/* background-color: black; */
+}
     .sectionthres {
         background-color: rgba(255, 255, 255, 0.449);
         width: 90%;
@@ -14,6 +46,24 @@
         border: 1px solid rgba(0, 0, 0, 0.085);
       }
 
+      .handles{
+        /* border: 1px solid rgba(0, 0, 0, 0.297); */
+        height: 60px;
+        border-radius: 4px;
+        display: flex;
+  
+        align-items: center;
+      }
+      .weekdata{
+        background-color: transparent;;
+        color: rgba(0, 60, 255, 0.708);
+        font-style: italic;
+        font-size: 0.8em;
+        position: relative;
+        cursor: default;
+        margin-left: -12px;;
+      }
+
       .report {
         display: flex;
         flex-direction: column;
@@ -23,6 +73,106 @@
         gap: 23px;
       }
 
+.debtorslis{
+  background-color: rgba(0, 30, 255, 0.005);
+  height: 55px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 13px;
+  
+}
+
+.debtorslis button:nth-child(1){
+  width: 160px;
+  height: 45px;
+  border-radius: 4px;
+  background: blue;
+  border:none;
+  color: white;
+}
+
+.debtorslis button:nth-child(2){
+  width: 160px;
+  height: 45px;
+  border-radius: 4px;
+  background: rgb(255, 0, 0);
+  color: white;
+  border:none;
+}
+
+.mesags{
+  /* background-color: blue; */
+  height: 45px;
+  width: 100%;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.msgs{
+  background-color: rgba(0, 0, 255, 0.09);
+  height: 45px;
+  width: 90%;
+  border-radius: 5px;
+  position: absolute;
+  bottom:12px;
+}
+
+.msgs input{
+  color: rgba(0, 0, 0, 0.763);
+  width: 100%;
+  height: 45px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  padding-left: 12px;
+  padding-right: 40px;
+  background-color:rgba(0, 0, 255, 0.082);
+}
+
+.msgs input::placeholder{
+  color: rgba(0, 0, 0, 0.248);
+}
+
+.msgs img{
+  width: 23px;
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  cursor: pointer;
+}
+
+.mbili {
+  font-size: 0.6em;
+  /* margin-left: 27px; */
+}
+.msgsent{
+  position: absolute;
+color: rgba(0, 98, 255, 0.692);
+
+  height: 35px;
+  width: 320px;
+  right: 0;
+  top: -133px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+      .dots{
+        opacity: 0;
+      }
+
+      .dda p{
+        font-size: 0.7em;
+      }
+
+      .dda{
+        display: flex;
+        flex-direction: column;
+      }
       .allo {
         display: flex;
         justify-content: space-between;
@@ -31,10 +181,9 @@
         margin-top: 8px;
         /* padding-left: 12px;
           padding-right: 12px; */
-          flex-direction: column;
+          flex-direction: row;
       }
 
-      
 .conts {
     display: flex;
     justify-content: space-between;

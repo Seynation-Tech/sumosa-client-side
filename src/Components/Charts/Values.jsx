@@ -83,7 +83,7 @@ export default function Values() {
           bottom: -4,
         }}
       >
-        {/* <CartesianGrid strokeDasharray="3 3" /> */}
+        <CartesianGrid strokeDasharray="3 3" />
         <XAxis  tick={{ fontSize: 10 }}  dataKey="name" />
         <YAxis  tick={{ fontSize: 10 }}  />
         <Tooltip />

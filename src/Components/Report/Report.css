@@ -9,6 +9,20 @@ body {
 }
 
 @media screen and (min-width: 540px) {
+  .reloa{
+    position: absolute;
+    opacity: 0;
+  }
+  .down{
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .down img{
+    opacity: 1;
+    width: 24px;
+  }
   .welcome-pages {
     min-height: 110vh;
     display: flex;
@@ -22,6 +36,18 @@ body {
         rgba(3, 0, 37, 0.932)
       ),
       url("../../Images/sheli.jpg");
+  }
+
+  .yearrr {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 3px;
+    height: 64px;
+    width: 100%;
+    background-color: rgba(0, 0, 255, 0.072);
+    border-radius: 5px;
+    margin-bottom: 45px;
   }
 
   .login-page {
@@ -288,6 +314,7 @@ body {
     justify-content: center;
     align-items: center;
     backdrop-filter: blur(3px);
+    margin-bottom: 12px;
   }
 
   .our {
@@ -479,14 +506,25 @@ body {
     z-index: 10000;
   }
 
+  .i p{
+    color: rgb(255, 10, 10);
+    font-style: italic;
+    position: absolute;
+    left: 45%;
+    background-color: rgba(0, 0, 255, 0.031);
+    padding: 12px;
+    border-radius: 3px;
+    margin-top: -22px;
+  }
+
   .contentonest {
     background: linear-gradient(to right, rgb(6, 40, 81), rgb(4, 1, 145));
     display: flex;
     flex-direction: column;
     gap: 7px;
-    width: 45%;
-    min-height: 80vh;
-    margin-top: -44px;
+    width: 50%;
+    min-height: 90vh;
+    margin-top: -4px;
     justify-content: center;
     align-items: center;
     font-size: 0.9em;
@@ -517,7 +555,7 @@ body {
     gap: 7px;
     width: 45%;
     min-height: 73vh;
-    margin-top: -114px;
+    margin-top: -44px;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
@@ -530,8 +568,8 @@ body {
     flex-direction: column;
     gap: 7px;
     width: 75%;
-    min-height: 60vh;
-    margin-top: -114px;
+    min-height: 70vh;
+    margin-top: -74px;
     border-radius: 10px;
     padding-top: 23px;
     z-index: 10000;
@@ -543,8 +581,8 @@ body {
     flex-direction: column;
     gap: 7px;
     width: 50%;
-    min-height: 54vh;
-    margin-top: -114px;
+    min-height: 64vh;
+    margin-top: -94px;
     border-radius: 10px;
     justify-content: center;
     align-items: center;
@@ -552,9 +590,11 @@ body {
   }
 
   .contentone {
-    background: linear-gradient(to right, rgb(8, 0, 115), rgb(10, 0, 150));
+    background: linear-gradient(to right, rgb(23, 9, 220),rgb(21, 6, 234));
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 7px;
     width: 50%;
     min-height: 33vh;
@@ -565,10 +605,12 @@ body {
   }
 
   .contentwo {
-    background: linear-gradient(to right, rgb(2, 52, 167), rgb(4, 2, 76));
+    background: linear-gradient(to right, rgb(9, 9, 220),rgb(21, 6, 234));
     display: flex;
     flex-direction: column;
     gap: 7px;
+    justify-content: center;
+    align-items: center;
     width: 52%;
     min-height: 33vh;
     border-radius: 10px;
@@ -611,6 +653,7 @@ body {
     width: 100%;
     position: relative;
     display: flex;
+    /* margin-top: 12px; */
   }
 
   .thetwo button {
@@ -670,11 +713,11 @@ body {
   }
 
   .thetwo p {
-    font-size: 0.8em;
+    font-size: 0.6em;
   }
 
   .thetwos p {
-    font-size: 0.8em;
+    font-size: 0.6em;
   }
   .thetwo input {
     border: none;

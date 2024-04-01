@@ -8,6 +8,8 @@ import DotLoader from "react-spinners/DotLoader";
 import sda from "../../Images/sumoo.png";
 import axios from "axios";
 
+import Loaders from '../Loaders/Loaders.jsx'
+
 
 export default function Login() {
   const [name, setName] = useState("");
@@ -21,11 +23,11 @@ export default function Login() {
 
   const submitButton = async (e) => {
     e.preventDefault();
-    // setLoading(true);
+   
     // console.log("login")
 
     if (name && password)
-
+ setLoading(true);
     try {
       let data = {
         username: name,
@@ -58,6 +60,7 @@ export default function Login() {
   return (
     <div className="welcome-pages">
       {/* body contents */}
+      {/* {loading && <Loaders/>} */}
       <div className="body-contentcc">
         <div className="ouu">
           <div className="sdas">
@@ -81,6 +84,7 @@ export default function Login() {
               <div className="input-two">
                 {/* <i>icon</i> */}
                 <input
+                  type="password"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -103,21 +107,18 @@ export default function Login() {
               <p>{status}</p>
             </div>
 
-            {loading ? (
-              <div className="spin">
-                {" "}
-                <DotLoader
-                  color={color}
-                  loading={loading}
-                  // cssOverride={override}
-                  size={25}
-                  aria-label="Loading Spinner"
-                  data-testid="loader"
-                />
-              </div>
-            ) : (
-              <></>
-            )}
+            {
+                    loading?<div className="spin"> <DotLoader
+ 
+                    color={color}
+                    loading={loading}
+                    // cssOverride={override}
+                    size={25}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                  /></div>:<></>
+                }
+
           </div>
           <div className="accounts">
             <p>

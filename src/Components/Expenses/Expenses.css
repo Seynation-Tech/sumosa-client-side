@@ -3,7 +3,7 @@
 .editexp{
   width: 30px;
   min-height: 30px;
-  background: rgba(255, 255, 255, 0.697);
+  /* background: rgba(255, 255, 255, 0.697); */
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -11,7 +11,6 @@
   cursor:pointer;
   position: relavive;
 
-  
 }
 
 .editexp img{
@@ -29,10 +28,9 @@
   width: 30px
 }
 
-
 @media screen and (min-width: 640px) {
 
-.sectionthres {
+.sectionthresi {
   background-color: rgba(255, 255, 255, 0.449);
   width: 56%;
   height: 99vh;
@@ -55,8 +53,6 @@
   width: 30px
 }
 
-
-
 .addexpenses {
   display: flex;
   margin: 20px;
@@ -70,7 +66,7 @@
   position: absolute;
   right: 23%;
   cursor: pointer;
-  top: 24px;
+  top: 1px;
   /* bottom: 13%; */
   /* right: 0; */
 }
@@ -102,8 +98,8 @@
 /*  */
 
 .lss {
-  background: linear-gradient(to right, rgb(25, 36, 255), rgb(2, 30, 95));
-  height: 100vh;
+  background: linear-gradient(to right, rgb(25, 36, 255), rgba(0, 36, 216, 0.911));
+  height: 79vh;
   border-radius: 5px;
   display: flex;
   gap: 5px;

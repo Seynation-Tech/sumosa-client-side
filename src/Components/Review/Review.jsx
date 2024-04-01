@@ -7,7 +7,9 @@ import DatePicker from "react-datepicker";
 import Calendar from "react-calendar";
 import { format } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
-import dayjs from "dayjs"; 
+import dayjs from "dayjs";
+import Return from '../Return/Return.jsx'
+import { NavLink } from "react-router-dom";
 
 import axios from "axios";
 import { AuthContext } from "../AuthContext";
@@ -29,22 +31,6 @@ let mydate =
     today.getSeconds();
 
 axios.defaults.withCredentials = true;
-function getStartandEndofWeek ( date )
-{
-    const currentDate = new Date( date );
-    const currentDayofWeek = currentDate.getDay();
-
-    const startDate = new Date( currentDate );
-    startDate.setDate( currentDate.getDate() - currentDayofWeek + 1 );
-
-    const endDate = new Date( currentDate );
-    endDate.setDate( currentDate.getDate() - currentDayofWeek + 7 );
-
-    const formattedStartDate = startDate.toISOString().split( "T" )[ 0 ];
-    const formattedEndDate = endDate.toISOString().split( "T" )[ 0 ];
-
-    return { startDate: formattedStartDate, endDate: formattedEndDate };
-}
 
 export default function Review ()
 {
@@ -118,19 +104,6 @@ export default function Review ()
 
     const [ mydate, setDate ] = useState( "none" );
 
-    function getFormattedDate ()
-    {
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = String( today.getMonth() + 1 ).padStart( 2, "0" ); // Add leading zero if needed
-        const day = String( today.getDate() ).padStart( 2, "0" ); // Add leading zero if needed
-        return `${ year }-${ month }-${ day }`;
-    }
-
-
-
-    
-
     const [ salesdata, setSales ] = useState( {
         totalsales: "0",
         difference: "0",
@@ -186,9 +159,50 @@ export default function Review ()
         agotwoanalogoutput: "0",
     } );
 
+    function getFormattedDate ()
+    {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String( today.getMonth() + 1 ).padStart( 2, "0" ); // Add leading zero if needed
+        const day = String( today.getDate() ).padStart( 2, "0" ); // Add leading zero if needed
+        return `${ year }-${ month }-${ day }`;
+    }
+
+    function getStartandEndofWeek ( date )
+    {
+        const currentDate = new Date( date );
+        const currentDayofWeek = currentDate.getDay();
+
+        const startDate = new Date( currentDate );
+        startDate.setDate( currentDate.getDate() - currentDayofWeek + 1 );
+
+        const endDate = new Date( currentDate );
+        endDate.setDate( currentDate.getDate() - currentDayofWeek + 7 );
+
+        const formattedStartDate = startDate.toISOString().split( "T" )[ 0 ];
+        const formattedEndDate = endDate.toISOString().split( "T" )[ 0 ];
+
+        return { startDate: formattedStartDate, endDate: formattedEndDate };
+    }
+
+    function getStartandEndofMonth ( date )
+    {
+        const currentDate = new Date( date )
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+
+        const startDate = new Date( year, month, 1 )
+        const endDate = new Date( year, month + 1, 0 )
+
+        const formattedStartDate = startDate.toISOString().split( 'T' )[ 0 ]
+        const formattedEndDate = endDate.toISOString().split( 'T' )[ 0 ]
+
+        return { startDate: formattedStartDate, endDate: formattedEndDate };
+    }
+
     useEffect( () =>
     {
-        setLoading( true );
+
         window.scrollTo( 0, 0 );
         // const interval = setInterval( () =>
         // {
@@ -203,28 +217,28 @@ export default function Review ()
                 } );
 
                 const allreportBYid = await axios.get(
-                    `http://localhost:5001/api/pumps/alldatavalues/${ todate }`,
+                    `${ url }/api/pumps/alldatavalues/${ todate }`,
                     {
                         withCredentials: true,
                     }
                 );
 
                 const allreportsbyid = await axios.get(
-                    `http://localhost:5001/api/pumps/alldata/${ todate }`,
+                    `${ url }/api/pumps/alldata/${ todate }`,
                     {
                         withCredentials: true,
                     }
                 );
 
                 const report = await axios.get(
-                    `http://localhost:5001/api/pumps/alldatavalues`,
+                    `${ url }/api/pumps/alldatavalues`,
                     {
                         withCredentials: true,
                     }
                 );
 
                 const allreports = await axios.get(
-                    `http://localhost:5001/api/pumps/alldata`,
+                    `${ url }/api/pumps/alldata`,
                     {
                         withCredentials: true,
                     }
@@ -362,18 +376,19 @@ export default function Review ()
 
     useEffect( () =>
     {
-        setLoading( true );
+        // setLoading( true );
         // const interval = setInterval(() => {
         const fetchData = async () =>
         {
             try
             {
+                const todate = getFormattedDate()
                 window.scrollTo( 0, 0 );
                 const dets = await axios.get( `${ url }/api/billing/debtors`, {
                     withCredentials: true,
                 } );
 
-                const resptwo = await axios.get( `${ url }/api/billing/allexpenses`, {
+                const resptwo = await axios.get( `${ url }/api/billing/expenses/${todate}`, {
                     withCredentials: true,
                 } );
 
@@ -398,128 +413,412 @@ export default function Review ()
         // return () => clearInterval(interval);
     }, [] );
 
-    const handleChange = async (event) =>
+    const handleChange = async ( event ) =>
     {
 
-        setDate( event.target.value );
+        try
+        {
 
-        const mydates =  event.target.value;
+            setDate( event.target.value );
+            setLoading( true );
 
-        const allreportBYid = await axios.get(
-            `http://localhost:5001/api/pumps/alldatavalues/${ mydates }`,
-            {
-                withCredentials: true,
-            }
-        );
+            const mydates = event.target.value;
 
-        const allreportsbyid = await axios.get(
-            `http://localhost:5001/api/pumps/alldata/${ mydates }`,
-            {
-                withCredentials: true,
-            }
-        );
+            const allreportBYid = await axios.get(
+                `${ url }/api/pumps/alldatavalues/${ mydates }`,
+                {
+                    withCredentials: true,
+                }
+            );
 
-        const datas = allreportBYid.data;
-        const mydatas = allreportsbyid.data;
+            const allreportsbyid = await axios.get(
+                `${ url }/api/pumps/alldata/${ mydates }`,
+                {
+                    withCredentials: true,
+                }
+            );
 
-        const pmsoneouput = datas.petrol.pmsone[ 0 ]?.outputvalue ?? 0;
-        const pmstwooutput = datas.petrol.pmstwo[ 0 ]?.outputvalue ?? 0;
+            const datas = allreportBYid.data;
+            const mydatas = allreportsbyid.data;
 
-        const agooneoutput = datas.diesel.agoone[ 0 ]?.outputvalue ?? 0;
-        const agotwooutput = datas.diesel.agotwo[ 0 ]?.outputvalue ?? 0;
+            const pmsoneouput = datas.petrol.pmsone[ 0 ]?.outputvalue ?? 0;
+            const pmstwooutput = datas.petrol.pmstwo[ 0 ]?.outputvalue ?? 0;
 
-        // console.log(datas)
+            const agooneoutput = datas.diesel.agoone[ 0 ]?.outputvalue ?? 0;
+            const agotwooutput = datas.diesel.agotwo[ 0 ]?.outputvalue ?? 0;
 
-        const pmsonedigitalclosing = mydatas.pmsone[ 0 ]?.closingdigital ?? 0;
-        const pmsonedigitalopening = mydatas.pmsone[ 0 ]?.openingdigital ?? 0;
-        const pmsonedigitaloutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
+            // console.log(datas)
 
-        const pmsoneanalogclosing = mydatas.pmsone[ 0 ]?.closingsanalog ?? 0;
-        const pmsoneanalogopening = mydatas.pmsone[ 0 ]?.openinganalog ?? 0;
-        const pmsoneanalogoutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
+            const pmsonedigitalclosing = mydatas.pmsone[ 0 ]?.closingdigital ?? 0;
+            const pmsonedigitalopening = mydatas.pmsone[ 0 ]?.openingdigital ?? 0;
+            const pmsonedigitaloutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
 
-        const pmstwodigitalclosing = mydatas.pmstwo[ 0 ]?.closingdigital ?? 0;
-        const pmstwodigitalopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
-        const pmstwodigitaloutputvalue = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
+            const pmsoneanalogclosing = mydatas.pmsone[ 0 ]?.closingsanalog ?? 0;
+            const pmsoneanalogopening = mydatas.pmsone[ 0 ]?.openinganalog ?? 0;
+            const pmsoneanalogoutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
 
-        const pmstwoanalogClosing = mydatas.pmstwo[ 0 ]?.closingsanalog ?? 0;
-        const pmstwoanalogopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
-        const pmstwoanalogoutput = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
+            const pmstwodigitalclosing = mydatas.pmstwo[ 0 ]?.closingdigital ?? 0;
+            const pmstwodigitalopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
+            const pmstwodigitaloutputvalue = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
 
-        const agoonedigitalclosing = mydatas.agoone[ 0 ]?.closingdigital ?? 0;
-        const agoonedigitalopening = mydatas.agoone[ 0 ]?.openingdigital ?? 0;
-        const agoonedigitaloutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
+            const pmstwoanalogClosing = mydatas.pmstwo[ 0 ]?.closingsanalog ?? 0;
+            const pmstwoanalogopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
+            const pmstwoanalogoutput = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
 
-        const agotwodigitalclosing = mydatas.agotwo[ 0 ]?.closingdigital ?? 0;
-        const agotowodigitalopening = mydatas.agotwo[ 0 ]?.openingdigital ?? 0;
-        const agotwodigitaloutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
+            const agoonedigitalclosing = mydatas.agoone[ 0 ]?.closingdigital ?? 0;
+            const agoonedigitalopening = mydatas.agoone[ 0 ]?.openingdigital ?? 0;
+            const agoonedigitaloutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
 
-        const agooneanalogclosing = mydatas.agoone[ 0 ]?.closingsanalog ?? 0;
-        const agooneanalogopening = mydatas.agoone[ 0 ]?.openinganalog ?? 0;
-        const agooneanalogoutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
+            const agotwodigitalclosing = mydatas.agotwo[ 0 ]?.closingdigital ?? 0;
+            const agotowodigitalopening = mydatas.agotwo[ 0 ]?.openingdigital ?? 0;
+            const agotwodigitaloutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
 
-        const agotwoanalogclosing = mydatas.agotwo[ 0 ]?.closingsanalog ?? 0;
-        const agotwoanalogopening = mydatas.agotwo[ 0 ]?.openinganalog ?? 0;
-        const agotwoanalogoutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
+            const agooneanalogclosing = mydatas.agoone[ 0 ]?.closingsanalog ?? 0;
+            const agooneanalogopening = mydatas.agoone[ 0 ]?.openinganalog ?? 0;
+            const agooneanalogoutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
 
-        // the
+            const agotwoanalogclosing = mydatas.agotwo[ 0 ]?.closingsanalog ?? 0;
+            const agotwoanalogopening = mydatas.agotwo[ 0 ]?.openinganalog ?? 0;
+            const agotwoanalogoutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
 
-        setValues( {
-            pmsonedigitalclosing: pmsonedigitalclosing,
-            pmsonedigitalopening: pmsonedigitalopening,
-            pmsonedigitaloutput: pmsonedigitaloutputvalue,
+            // the
 
-            pmstwodigitalclosing: pmstwodigitalclosing,
-            pmstwodigitalopening: pmstwodigitalopening,
-            pmstwodigitaloutput: pmstwodigitaloutputvalue,
+            setValues( {
+                pmsonedigitalclosing: pmsonedigitalclosing,
+                pmsonedigitalopening: pmsonedigitalopening,
+                pmsonedigitaloutput: pmsonedigitaloutputvalue,
 
-            agoonedigitalclosing: agoonedigitalclosing,
-            agoonedigitalopening: agoonedigitalopening,
-            agoonedigitaloutput: agoonedigitaloutput,
+                pmstwodigitalclosing: pmstwodigitalclosing,
+                pmstwodigitalopening: pmstwodigitalopening,
+                pmstwodigitaloutput: pmstwodigitaloutputvalue,
 
-            agotwodigitalclosing: agotwodigitalclosing,
-            agotwodigitalopening: agotowodigitalopening,
-            agotwodigitaloutput: agotwodigitaloutput,
+                agoonedigitalclosing: agoonedigitalclosing,
+                agoonedigitalopening: agoonedigitalopening,
+                agoonedigitaloutput: agoonedigitaloutput,
 
-            pmsoneanalogclosing: pmsoneanalogclosing,
-            pmsoneanalogopening: pmsoneanalogopening,
-            pmsoneanalogoutput: pmsoneanalogoutputvalue,
+                agotwodigitalclosing: agotwodigitalclosing,
+                agotwodigitalopening: agotowodigitalopening,
+                agotwodigitaloutput: agotwodigitaloutput,
 
-            pmstwoanalogclosing: pmstwoanalogClosing,
-            pmstwoanalogopening: pmstwoanalogopening,
-            pmstwoanalogoutput: pmstwoanalogoutput,
+                pmsoneanalogclosing: pmsoneanalogclosing,
+                pmsoneanalogopening: pmsoneanalogopening,
+                pmsoneanalogoutput: pmsoneanalogoutputvalue,
 
-            agooneanalogclosing: agooneanalogclosing,
-            agooneanalogopening: agooneanalogopening,
-            agooneanalogoutput: agooneanalogoutput,
+                pmstwoanalogclosing: pmstwoanalogClosing,
+                pmstwoanalogopening: pmstwoanalogopening,
+                pmstwoanalogoutput: pmstwoanalogoutput,
 
-            agotwoanalogclosing: agotwoanalogclosing,
-            agotwoanalogopening: agotwoanalogopening,
-            agotwoanalogoutput: agotwoanalogoutput,
-        } );
+                agooneanalogclosing: agooneanalogclosing,
+                agooneanalogopening: agooneanalogopening,
+                agooneanalogoutput: agooneanalogoutput,
 
-        // console.log( oneData.petrol.pmsone )
+                agotwoanalogclosing: agotwoanalogclosing,
+                agotwoanalogopening: agotwoanalogopening,
+                agotwoanalogoutput: agotwoanalogoutput,
+            } );
 
-        setSales( {
-            totalsales: datas?.totalsales,
-            difference: datas?.difference,
-            totaldebts: datas?.debts,
-            zreport: datas?.zreport,
-            agophysical: datas?.agopysical,
-            agodipstick: datas?.agodipstick,
-            pmsphysical: datas?.pmsphysical,
-            creditors: datas?.creditors,
-            debtors: datas?.debtors,
-            dieselsales: datas?.dieselsales,
-            pmssales: datas?.pmssales,
-            expenses: datas?.expenses,
-            expensesdata: datas?.expensesdata,
-            pmsdipstick: datas?.pmsdipstic,
-            pmsoneoutput: pmsoneouput,
-            pmstwooutput: pmstwooutput,
-            agooneoutput: agooneoutput,
-            agotwooutput: agotwooutput,
-        } );
+            // console.log( oneData.petrol.pmsone )
+
+            setSales( {
+                totalsales: datas?.totalsales,
+                difference: datas?.difference,
+                totaldebts: datas?.debts,
+                zreport: datas?.zreport,
+                agophysical: datas?.agopysical,
+                agodipstick: datas?.agodipstick,
+                pmsphysical: datas?.pmsphysical,
+                creditors: datas?.creditors,
+                debtors: datas?.debtors,
+                dieselsales: datas?.dieselsales,
+                pmssales: datas?.pmssales,
+                expenses: datas?.expenses,
+                expensesdata: datas?.expensesdata,
+                pmsdipstick: datas?.pmsdipstic,
+                pmsoneoutput: pmsoneouput,
+                pmstwooutput: pmstwooutput,
+                agooneoutput: agooneoutput,
+                agotwooutput: agotwooutput,
+            } );
+            setLoading( false );
+        } catch ( err )
+        {
+            setLoading( false );
+
+        }
+    };
+
+    const handleChangeweekly = async ( event ) =>
+    {
+
+        try
+        {
+
+            setLoading( true );
+            const mydates = getFormattedDate()
+
+            const startDate = getStartandEndofWeek( mydates ).startDate
+            const endDate = getStartandEndofWeek( mydates ).endDate
+
+            // console.log(startDate, endDate)
+
+            const allreportBYid = await axios.get(
+                `${ url }/api/pumps/alldatavalues/${ startDate }/${ endDate }`,
+                {
+                    withCredentials: true,
+                }
+            );
+
+            const allreportsbyid = await axios.get(
+                `${ url }/api/pumps/alldata/${ startDate }/${ endDate }`,
+                {
+                    withCredentials: true,
+                }
+            );
+
+            const datas = allreportBYid.data;
+            const mydatas = allreportsbyid.data;
+
+            const pmsoneouput = datas.petrol.pmsone[ 0 ]?.outputvalue ?? 0;
+            const pmstwooutput = datas.petrol.pmstwo[ 0 ]?.outputvalue ?? 0;
+
+            const agooneoutput = datas.diesel.agoone[ 0 ]?.outputvalue ?? 0;
+            const agotwooutput = datas.diesel.agotwo[ 0 ]?.outputvalue ?? 0;
+
+            // console.log(mydatas)
+
+            const pmsonedigitalclosing = mydatas.pmsone[ 0 ]?.closingdigital ?? 0;
+            const pmsonedigitalopening = mydatas.pmsone[ 0 ]?.openingdigital ?? 0;
+            const pmsonedigitaloutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
+
+            const pmsoneanalogclosing = mydatas.pmsone[ 0 ]?.closingsanalog ?? 0;
+            const pmsoneanalogopening = mydatas.pmsone[ 0 ]?.openinganalog ?? 0;
+            const pmsoneanalogoutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
+
+            const pmstwodigitalclosing = mydatas.pmstwo[ 0 ]?.closingdigital ?? 0;
+            const pmstwodigitalopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
+            const pmstwodigitaloutputvalue = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
+
+            const pmstwoanalogClosing = mydatas.pmstwo[ 0 ]?.closingsanalog ?? 0;
+            const pmstwoanalogopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
+            const pmstwoanalogoutput = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
+
+            const agoonedigitalclosing = mydatas.agoone[ 0 ]?.closingdigital ?? 0;
+            const agoonedigitalopening = mydatas.agoone[ 0 ]?.openingdigital ?? 0;
+            const agoonedigitaloutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
+
+            const agotwodigitalclosing = mydatas.agotwo[ 0 ]?.closingdigital ?? 0;
+            const agotowodigitalopening = mydatas.agotwo[ 0 ]?.openingdigital ?? 0;
+            const agotwodigitaloutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
+
+            const agooneanalogclosing = mydatas.agoone[ 0 ]?.closingsanalog ?? 0;
+            const agooneanalogopening = mydatas.agoone[ 0 ]?.openinganalog ?? 0;
+            const agooneanalogoutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
+
+            const agotwoanalogclosing = mydatas.agotwo[ 0 ]?.closingsanalog ?? 0;
+            const agotwoanalogopening = mydatas.agotwo[ 0 ]?.openinganalog ?? 0;
+            const agotwoanalogoutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
+
+            // the
+
+            setValues( {
+                pmsonedigitalclosing: pmsonedigitalclosing,
+                pmsonedigitalopening: pmsonedigitalopening,
+                pmsonedigitaloutput: pmsonedigitaloutputvalue,
+
+                pmstwodigitalclosing: pmstwodigitalclosing,
+                pmstwodigitalopening: pmstwodigitalopening,
+                pmstwodigitaloutput: pmstwodigitaloutputvalue,
+
+                agoonedigitalclosing: agoonedigitalclosing,
+                agoonedigitalopening: agoonedigitalopening,
+                agoonedigitaloutput: agoonedigitaloutput,
+
+                agotwodigitalclosing: agotwodigitalclosing,
+                agotwodigitalopening: agotowodigitalopening,
+                agotwodigitaloutput: agotwodigitaloutput,
+
+                pmsoneanalogclosing: pmsoneanalogclosing,
+                pmsoneanalogopening: pmsoneanalogopening,
+                pmsoneanalogoutput: pmsoneanalogoutputvalue,
+
+                pmstwoanalogclosing: pmstwoanalogClosing,
+                pmstwoanalogopening: pmstwoanalogopening,
+                pmstwoanalogoutput: pmstwoanalogoutput,
+
+                agooneanalogclosing: agooneanalogclosing,
+                agooneanalogopening: agooneanalogopening,
+                agooneanalogoutput: agooneanalogoutput,
+
+                agotwoanalogclosing: agotwoanalogclosing,
+                agotwoanalogopening: agotwoanalogopening,
+                agotwoanalogoutput: agotwoanalogoutput,
+            } );
+
+            // console.log( oneData.petrol.pmsone )
+
+            setSales( {
+                totalsales: datas?.totalsales,
+                difference: datas?.difference,
+                totaldebts: datas?.debts,
+                zreport: datas?.zreport,
+                agophysical: datas?.agopysical,
+                agodipstick: datas?.agodipstick,
+                pmsphysical: datas?.pmsphysical,
+                creditors: datas?.creditors,
+                debtors: datas?.debtors,
+                dieselsales: datas?.dieselsales,
+                pmssales: datas?.pmssales,
+                expenses: datas?.expenses,
+                expensesdata: datas?.expensesdata,
+                pmsdipstick: datas?.pmsdipstic,
+                pmsoneoutput: pmsoneouput,
+                pmstwooutput: pmstwooutput,
+                agooneoutput: agooneoutput,
+                agotwooutput: agotwooutput,
+            } ); setLoading( false );
+
+        }
+        catch ( err )
+        {
+            setLoading( false );
+        }
+    };
+
+    const handleChangemonthly = async ( event ) =>
+    {
+
+        try
+        {
+
+            setLoading( true );
+
+            const mydates = getFormattedDate()
+
+            const startDate = getStartandEndofMonth( mydates ).startDate
+            const endDate = getStartandEndofMonth( mydates ).endDate
+
+            // console.log(startDate, endDate)
+
+            const allreportBYid = await axios.get(
+                `${ url }/api/pumps/alldatavalues/${ startDate }/${ endDate }`,
+                {
+                    withCredentials: true,
+                }
+            );
+
+            const allreportsbyid = await axios.get(
+                `${ url }/api/pumps/alldata/${ startDate }/${ endDate }`,
+                {
+                    withCredentials: true,
+                }
+            );
+
+            const datas = allreportBYid.data;
+            const mydatas = allreportsbyid.data;
+
+            const pmsoneouput = datas.petrol.pmsone[ 0 ]?.outputvalue ?? 0;
+            const pmstwooutput = datas.petrol.pmstwo[ 0 ]?.outputvalue ?? 0;
+
+            const agooneoutput = datas.diesel.agoone[ 0 ]?.outputvalue ?? 0;
+            const agotwooutput = datas.diesel.agotwo[ 0 ]?.outputvalue ?? 0;
+
+            // console.log(datas)
+
+            const pmsonedigitalclosing = mydatas.pmsone[ 0 ]?.closingdigital ?? 0;
+            const pmsonedigitalopening = mydatas.pmsone[ 0 ]?.openingdigital ?? 0;
+            const pmsonedigitaloutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
+
+            const pmsoneanalogclosing = mydatas.pmsone[ 0 ]?.closingsanalog ?? 0;
+            const pmsoneanalogopening = mydatas.pmsone[ 0 ]?.openinganalog ?? 0;
+            const pmsoneanalogoutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
+
+            const pmstwodigitalclosing = mydatas.pmstwo[ 0 ]?.closingdigital ?? 0;
+            const pmstwodigitalopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
+            const pmstwodigitaloutputvalue = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
+
+            const pmstwoanalogClosing = mydatas.pmstwo[ 0 ]?.closingsanalog ?? 0;
+            const pmstwoanalogopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
+            const pmstwoanalogoutput = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
+
+            const agoonedigitalclosing = mydatas.agoone[ 0 ]?.closingdigital ?? 0;
+            const agoonedigitalopening = mydatas.agoone[ 0 ]?.openingdigital ?? 0;
+            const agoonedigitaloutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
+
+            const agotwodigitalclosing = mydatas.agotwo[ 0 ]?.closingdigital ?? 0;
+            const agotowodigitalopening = mydatas.agotwo[ 0 ]?.openingdigital ?? 0;
+            const agotwodigitaloutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
+
+            const agooneanalogclosing = mydatas.agoone[ 0 ]?.closingsanalog ?? 0;
+            const agooneanalogopening = mydatas.agoone[ 0 ]?.openinganalog ?? 0;
+            const agooneanalogoutput = mydatas.agoone[ 0 ]?.outputvalue ?? 0;
+
+            const agotwoanalogclosing = mydatas.agotwo[ 0 ]?.closingsanalog ?? 0;
+            const agotwoanalogopening = mydatas.agotwo[ 0 ]?.openinganalog ?? 0;
+            const agotwoanalogoutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
+
+            // the
+
+            setValues( {
+                pmsonedigitalclosing: pmsonedigitalclosing,
+                pmsonedigitalopening: pmsonedigitalopening,
+                pmsonedigitaloutput: pmsonedigitaloutputvalue,
+
+                pmstwodigitalclosing: pmstwodigitalclosing,
+                pmstwodigitalopening: pmstwodigitalopening,
+                pmstwodigitaloutput: pmstwodigitaloutputvalue,
+
+                agoonedigitalclosing: agoonedigitalclosing,
+                agoonedigitalopening: agoonedigitalopening,
+                agoonedigitaloutput: agoonedigitaloutput,
+
+                agotwodigitalclosing: agotwodigitalclosing,
+                agotwodigitalopening: agotowodigitalopening,
+                agotwodigitaloutput: agotwodigitaloutput,
+
+                pmsoneanalogclosing: pmsoneanalogclosing,
+                pmsoneanalogopening: pmsoneanalogopening,
+                pmsoneanalogoutput: pmsoneanalogoutputvalue,
+
+                pmstwoanalogclosing: pmstwoanalogClosing,
+                pmstwoanalogopening: pmstwoanalogopening,
+                pmstwoanalogoutput: pmstwoanalogoutput,
+
+                agooneanalogclosing: agooneanalogclosing,
+                agooneanalogopening: agooneanalogopening,
+                agooneanalogoutput: agooneanalogoutput,
+
+                agotwoanalogclosing: agotwoanalogclosing,
+                agotwoanalogopening: agotwoanalogopening,
+                agotwoanalogoutput: agotwoanalogoutput,
+            } );
+
+            // console.log( oneData.petrol.pmsone )
+
+            setSales( {
+                totalsales: datas?.totalsales,
+                difference: datas?.difference,
+                totaldebts: datas?.debts,
+                zreport: datas?.zreport,
+                agophysical: datas?.agopysical,
+                agodipstick: datas?.agodipstick,
+                pmsphysical: datas?.pmsphysical,
+                creditors: datas?.creditors,
+                debtors: datas?.debtors,
+                dieselsales: datas?.dieselsales,
+                pmssales: datas?.pmssales,
+                expenses: datas?.expenses,
+                expensesdata: datas?.expensesdata,
+                pmsdipstick: datas?.pmsdipstic,
+                pmsoneoutput: pmsoneouput,
+                pmstwooutput: pmstwooutput,
+                agooneoutput: agooneoutput,
+                agotwooutput: agotwooutput,
+            } ); setLoading( false );
+        }
+        catch ( err )
+        {
+            setLoading( false );
+        }
     };
     const handleDateChange = ( date ) =>
     {
@@ -566,33 +865,33 @@ export default function Review ()
 
     const sendingsms = async () =>
     {
-        try
+        if ( mesg )
         {
-            const uid = days.toLowerCase() + "," + date;
-            let data = {
-                uid: currentUser[ 0 ]?.role,
-                message: mesg,
-                date: mydate,
-            };
 
-            // console.log(pmsOne)
+            setLoading( true );
+            try
+            {
+                const dats = getFormattedDate()
+                let data = {
+                    uid: currentUser[ 0 ]?.role,
+                    message: mesg,
+                    date: dats,
+                };
 
-            console.log( "message" );
+                const resone = await axios.post( `${ url }/api/billing/incoming`, data );
 
-            const resone = await axios.post( `${ url }/api/billing/incoming`, data );
+                setMessagesent( resone.data );
+                setLoading( false );
 
-            setMessagesent( resone.data );
-            // console.log(res)
-
-            // alert( resone.data );
-            // console.log(resone.data);
-
-            //
-        } catch ( err )
+            } catch ( err )
+            {
+                setLoading( false );
+                // console.log( err );
+                //   setError("Please refresh...");
+            }
+        } else
         {
             setLoading( false );
-            console.log( err );
-            //   setError("Please refresh...");
         }
     };
 
@@ -600,12 +899,13 @@ export default function Review ()
     {
         try
         {
-            const uid = days.toLowerCase() + "," + date;
+            setLoading( true );
+            const dats = getFormattedDate()
             let data = {
                 uid: currentUser[ 0 ]?.role,
                 reportstatus: "Accepted",
                 message: mesg,
-                date: mydate,
+                date: dats,
             };
 
             // console.log(pmsOne)
@@ -613,17 +913,13 @@ export default function Review ()
             const resone = await axios.post( `${ url }/api/billing/message`, data );
 
             setMessagesent( `Approval ${ resone.data }` );
-            // console.log(res)
-
-            // alert( resone.data );
-            // console.log(resone.data);
+            setLoading( false );
 
             //
         } catch ( err )
         {
             setLoading( false );
-            console.log( err );
-            //   setError("Please refresh...");
+
         }
     };
 
@@ -631,46 +927,58 @@ export default function Review ()
     {
         try
         {
-            const uid = days.toLowerCase() + "," + date;
+            setLoading( true );
+            const dats = getFormattedDate()
             let data = {
                 uid: currentUser[ 0 ]?.role,
                 reportstatus: "Rejected",
                 message: mesg,
-                date: mydate,
+                date: dats,
             };
-
-            // console.log(pmsOne)
 
             const resone = await axios.post( `${ url }/api/billing/message`, data );
 
             setMessagesent( `Reject ${ resone.data }` );
-            // console.log(res)
+            setLoading( false );
 
-            // alert( resone.data );
-            // console.log(resone.data);
-
-            //
         } catch ( err )
         {
             setLoading( false );
-            console.log( err );
-            //   setError("Please refresh...");
 
         }
     };
 
-
-
     return (
         <div className="mysals">
-            <Sidebar />
+
+            <div className="opa">
+                <Sidebar />
+            </div>
+
+            <div className="reloa">
+                <NavLink to="/home">
+                    <Return />
+                </NavLink>
+
+            </div>
 
             <div className=""></div>
 
             <div className="sectionthres">
                 <div className="general">
-                    <p>GENERAL REPORT  {getFormattedDate()}</p>
+                    <p>GENERAL REPORT  </p>
                 </div>
+
+                <div className="handles">
+                    <div className="weekdata" onClick={ handleChangeweekly }>
+                        <p>WEEKLY</p>
+                    </div>
+
+                    <div className="weekdata" onClick={ handleChangemonthly }>
+                        <p>MONTHLY</p>
+                    </div>
+                </div>
+
                 <div className="datepicking">
                     <input
                         type="date"
@@ -679,12 +987,7 @@ export default function Review ()
                         onChange={ handleChange }
                     />
 
-                    {/* <div className="dateing" onClick={ handleChange }>
-                        <p>FETCH</p>
-                    </div> */}
                 </div>
-
-
 
                 <div className="report">
                     <div className="line"></div>
@@ -913,8 +1216,19 @@ export default function Review ()
                 </div>
 
                 <div className="differencereason">
-                    <p>REASON FOR Z-REPORT & CASH SALES</p>
-                    <p>{ reason }</p>
+
+                    <div className="cashs">
+
+                        <p>CASH ON HAND</p>
+                        <p>Tsh { Number(salesdata.cashonhand).toLocaleString() }</p>
+                    </div>
+
+                    <div  className="cashs">
+
+                        <p>ONLINE PAYMENTS</p>
+                        <p>Tsh { Number(salesdata.virtualmoney).toLocaleString() }</p>
+                    </div>
+
                 </div>
 
                 <div className="stocks">
@@ -1046,7 +1360,7 @@ export default function Review ()
                 </div>
 
                 <div className="debtorslista"></div>
-                <div className="mesags">
+                { currentUser[ 0 ]?.role === "director" ? <div className="mesags">
                     <div className="debtorslis">
                         <button onClick={ approve }>Approve</button>
                         <button onClick={ rejected }>Reject</button>
@@ -1065,7 +1379,7 @@ export default function Review ()
                             <p>{ messagesent }</p>
                         </div>
                     </div>
-                </div>
+                </div> : <></> }
 
                 <div className="debtoslis"></div>
             </div>

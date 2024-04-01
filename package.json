@@ -30,7 +30,7 @@
     "mydumper": "^0.0.1-security",
     "react": "^18.2.0",
     "react-calendar": "^4.8.0",
-    "react-datepicker": "^6.6.0",
+    "react-datepicker": "^6.5.0",
     "react-dom": "^18.2.0",
     "react-dropdown": "^1.11.0",
     "react-howler": "^5.2.0",

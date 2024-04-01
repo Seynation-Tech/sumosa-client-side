@@ -11,6 +11,50 @@
     /* padding-top: 100px; */
   }
 
+  .readmssg{
+    position: absolute;
+    right: 20px;
+    width: 58%;
+    top: 189px;
+    min-height: 20vh;
+    padding-bottom: 22px;
+    padding-top: 22px;
+    background-color: rgba(0, 21, 255, 0.059);
+    border-radius: 6px;
+    z-index: 3023023;
+    border: 3px solid rgba(111, 0, 255, 0.112);
+    backdrop-filter: blur(3px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+
+  .profimg img{
+    border-radius: 50%;
+  }
+
+  .opa{
+    position: absolute;
+    opacity: 0;
+  }
+
+  .grap{
+    opacity: 0;
+    position: absolute;
+  }
+  .firsts{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px
+  }
+.firsts img{
+  width: 23px;
+}
+
   .upbove{
     position: absolute;
     width: 100%;
@@ -155,8 +199,39 @@
   }
 
   .profcaption p:nth-child(2) {
-    font-size: 0.8em;
+    font-size: 0.7em;
+    font-style: italic;
   }
+
+  
+
+  .firstss p{
+    font-size: 0.8em;
+    font-weight: bold;
+    color: rgba(6, 85, 255, 0.807);
+    font-style: italic;
+    cursor: pointer;
+  }
+
+  .firstss {
+    color: rgba(0, 0, 0, 0.679);
+    width: 100%;
+    min-height: 8vh;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.148);
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(252, 253, 255, 0.153);
+    margin-top: 18px;
+    box-shadow: 30px 30px 30px -24px rgba(57, 100, 255, 0.078),
+      inset 15px 15px 10px rgba(255, 255, 255, 0.212),
+      -15px 15px 35px rgba(255, 255, 255, 0.2),
+      inset 1px -1px 10px rgba(0, 102, 255, 0.349);
+  }
+
 
   #sum {
     font-weight: 500;
@@ -263,7 +338,7 @@
     /* left: 24%; */
     margin-top: 16px;
     border-radius: 13px;
-    margin-top: 160px;
+    margin-top: 180px;
     /* padding: 12px; */
     display: flex;
     flex-direction: column;

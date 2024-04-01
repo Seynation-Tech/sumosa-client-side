@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import sda from "../../Images/sumoo.png";
 import axios from "axios";
 import { AuthContext } from "../AuthContext.js";
-
+import Loaders from '../Loaders/Loaders.jsx'
+import DotLoader from "react-spinners/DotLoader";
 const dateToFormat = "1976-04-19T12:59-0500";
 
 let today = new Date();
@@ -57,17 +58,17 @@ navigate("/signin")
 
   const registerUser = async () => {
   
+   
     setB("Register Account")
     setNotfs(false)
 
+
    
     if (name && role && contacts && residence && idnumber && password) {
-      try {
+      try { setLoading(true)
         
         const uid = days.toLowerCase() + ","+date;
-        // name	username	password	role	contacts	phaseshift	image	idnumber	residence	permit	
-
-        // console.log(uid,name,idnumber,lastName,role,contacts,residence)
+      
         let data = {
           uid: uid,
           name: name,
@@ -82,7 +83,7 @@ navigate("/signin")
           permit: "none",
         };
 
-        setLoading(true);
+     
         const res = await axios.post(`${url}/api/auths/register`, data, {
           withCredentials: true,
         });
@@ -93,7 +94,7 @@ navigate("/signin")
       
       } catch (err) {
         setNotfs(true)
-
+        setLoading(false);
         setStatus("Registration Failed!");
       }
     } else {
@@ -108,7 +109,8 @@ navigate("/signin")
   }
   return (
     <div className="welcome-pages">
-      {/* body contents */}
+      {/* body contents */} 
+      {/* {loading && <Loaders/>} */}
       <div className="body-contentcc">
         {/* Highlight words */}
 
@@ -179,6 +181,18 @@ navigate("/signin")
             {notify&& <div className="stat">
               <p>{status}</p>
             </div>}
+
+            {
+                    loading?<div className="spin"> <DotLoader
+ 
+                    color={color}
+                    loading={loading}
+                    // cssOverride={override}
+                    size={25}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                  /></div>:<></>
+                }
           </div>
           <div className="atts">
             <button onClick={updateData}>UPDATE</button>

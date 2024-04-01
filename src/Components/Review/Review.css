@@ -1,3 +1,33 @@
+.weekdata{
+  width: 20%;
+  height: 40px;
+  background-color: rgb(0, 85, 255);
+  border-radius: 3px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.weekdata p{
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.handles{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* justify-content: space-evenly; */
+
+}
+
+.reloa{
+  position: absolute;
+  opacity: 0;
+}
+
 .dateing{
   width: 90px;
   height: 33px;
@@ -12,8 +42,6 @@
   cursor: pointer;
 
 }
-
-
 
 .custom-date-input {
   cursor: pointer;
@@ -32,7 +60,6 @@
   border-color: #007bff; /* Border color when focused */
 }
 
-
 .dateing:active{
   background: blue;
   cursor: pointer;
@@ -42,10 +69,9 @@
   display: flex;
   position: absolute;
   right: 29px;
-  top: 28px;
+  top: 95px;
 
 }
-
 
 .report {
   display: flex;
@@ -68,7 +94,6 @@
 
   border: 1px solid rgba(0, 0, 0, 0.085);
 }
-
 
 .line {
   width: 100%;
@@ -190,7 +215,7 @@
     /* flex-direction: column; */
     justify-content: space-between;
     align-items: center;
-    gap: 4px;
+    /* gap: 4px; */
     margin-top: 27px;
     border: 1px solid rgba(0, 0, 0, 0.075);
     width: 100%;
@@ -198,6 +223,17 @@
 height: 45px;
 padding: 12px;
     ;
+}
+
+.cashs {
+  width:50% ;
+  height: 35px;
+  display: flex;
+gap:23px;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.739);
+  font-size: 1.0em;
+  /* background-color: black; */
 }
 
 .differencereason p:nth-child(1){
@@ -232,7 +268,6 @@ gap: 9px;
 padding: 12px;
 }
 
-
 .alldiesel{
     display: flex;
     justify-content: space-between;
@@ -243,7 +278,6 @@ padding: 12px;
     font-weight: bold;
     margin-bottom: 12px;
 }
-
 
 .debtorslist{
     width: 100%;
@@ -291,7 +325,6 @@ padding: 12px;
     margin-bottom: 14px;
     position: relative;
 }
-
 
 .debtorslis{
     background-color: rgba(0, 30, 255, 0.005);

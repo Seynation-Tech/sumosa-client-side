@@ -1,32 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Sidebar from "../Sidebar/Sidebar";
 import "./Report.css";
-import bell from "../../Images/notify.png";
-import Real from "../Charts/Real";
-import morearrow from "../../Images/icono.png";
-import login from "../../Images/login.png";
-import world from "../../Images/blue-world-globe.jpg";
 import "./Mobile.css";
-import connect from "../../Images/connect.png";
-import insta from "../../Images/instagra.png";
-import whatsp from "../../Images/whatsapp.png";
-import youtube from "../../Images/youtub.png";
-import linkin from "../../Images/linked.png";
-import facebook from "../../Images/facebook.png";
-import morarrow from "../../Images/rightarrow.png";
-import long from "../../Images/startarrow.png";
-import search from "../../Images/searchblue.png";
-import sda from "../../Images/sdalogo.jpg";
-import pcm from "../../Images/PCM LOGO.jpg";
 import cancs from "../../Images/o.png";
-
-import { Link, useNavigate } from "react-router-dom";
+import Loaders from "../Loaders/Loaders.jsx";
+import Return from '../Return/Return.jsx'
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../AuthContext";
-import moment from "moment";
-import DotLoader from "react-spinners/DotLoader";
-import Cookies from "cookie-universal";
-
+import { NavLink } from "react-router-dom";
 let today = new Date();
 let date =
   today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate();
@@ -44,7 +26,6 @@ let mydate =
   today.getSeconds();
 
 axios.defaults.withCredentials = true;
-
 
 const currentDate = new Date()
 const currentDayofWeek = currentDate.getDay();
@@ -128,8 +109,8 @@ export default function Expenses ()
   const [ agophyscal, setPhysicalago ] = useState( "" );
   const [ agodispst, setDipstago ] = useState( "" );
 
-  const [sure,setAre] = useState(false)
-  const [deletes, setDelete] = useState(false);
+  const [ sure, setAre ] = useState( false )
+  const [ deletes, setDelete ] = useState( false );
   const navigate = useNavigate();
 
   const [ mydate, setDate ] = useState( "none" );
@@ -153,9 +134,9 @@ export default function Expenses ()
     pmstwooutput: "0",
     agooneoutput: "0",
     agotwooutput: "0",
-} );
+  } );
 
-const [ values, setValues ] = useState( {
+  const [ values, setValues ] = useState( {
     pmsonedigitalclosing: "0",
     pmsonedigitalopening: "0",
     pmsonedigitaloutput: "0",
@@ -187,51 +168,65 @@ const [ values, setValues ] = useState( {
     agotwoanalogclosing: "0",
     agotwoanalogopening: "0",
     agotwoanalogoutput: "0",
-} );
+  } );
 
-function getFormattedDate ()
-{
+  function getFormattedDate ()
+  {
     const today = new Date();
     const year = today.getFullYear();
-    const month = String( today.getMonth() + 1 ).padStart( 2, "0" ); 
-    const day = String( today.getDate() ).padStart( 2, "0" ); 
+    const month = String( today.getMonth() + 1 ).padStart( 2, "0" );
+    const day = String( today.getDate() ).padStart( 2, "0" );
     return `${ year }-${ month }-${ day }`;
-}
-  const handleUpdate = async (event) =>
+  }
+
+  const handleUpdateF=()=>{
+    setAgotwoanalogOpening( "" )
+    setAgotwoanalogClosing( "" )
+    setAgooneanalogOpening( "" )
+    setAgooneanalogClosing( "" )
+
+    setAgoonedigOpening( "" )
+    setAgoonedigClosing( "" )
+    setAgotwodigOpening( "" )
+    setAgotwodigClosing( "" )
+
+    setPmsonedigOpening( "" )
+    setPmsonedigClosing( "" )
+    setPmsoneanalogOpening( "" )
+    setPmsoneanalogClosing( "" )
+
+    setPmstwodigOpening( "" )
+    setPmstwodigClosing( "" )
+    setPmstwoanalogOpening( "" )
+    setPmstwoanalogClosing( "" )
+  }
+
+  const handleUpdate = async ( event ) =>
   {
-
-    let flag = sidebar;
-    flag = !flag;
-
-    if (flag){
+    setLoading(true)
+   
+      // setSidebar(false)
       setDate( event.target.value );
 
-      const mydates =  getFormattedDate();
+      const mydates = getFormattedDate();
       // const mydates =  '2024-03-22'
 
-      
-
       const allreportBYid = await axios.get(
-          `http://localhost:5001/api/pumps/alldatavalues/${ mydates }`,
-          {
-              withCredentials: true,
-          }
+        `${url}/api/pumps/alldatavalues/${ mydates }`,
+        {
+          withCredentials: true,
+        }
       );
 
       const allreportsbyid = await axios.get(
-          `http://localhost:5001/api/pumps/alldata/${ mydates }`,
-          {
-              withCredentials: true,
-          }
+        `${url}/api/pumps/alldata/${ mydates }`,
+        {
+          withCredentials: true,
+        }
       );
-
-
-
-
 
       const datas = allreportBYid.data;
       const mydatas = allreportsbyid.data;
-
 
       const pmsoneouput = datas.petrol.pmsone[ 0 ]?.outputvalue ?? 0;
       const pmstwooutput = datas.petrol.pmstwo[ 0 ]?.outputvalue ?? 0;
@@ -245,18 +240,15 @@ function getFormattedDate ()
       const pmsonedigitalopening = mydatas.pmsone[ 0 ]?.openingdigital ?? 0;
       const pmsonedigitaloutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
 
-
-
       const pmsoneanalogclosing = mydatas.pmsone[ 0 ]?.closingsanalog ?? 0;
       const pmsoneanalogopening = mydatas.pmsone[ 0 ]?.openinganalog ?? 0;
       const pmsoneanalogoutputvalue = mydatas.pmsone[ 0 ]?.outputvalue ?? 0;
 
-      setPmsonedigOpening(pmsonedigitalopening)
-      setPmsonedigClosing(pmsonedigitalclosing)
-      setPmsoneanalogOpening(pmsoneanalogopening)
-      setPmsoneanalogClosing(pmsoneanalogclosing)
+      setPmsonedigOpening( pmsonedigitalopening )
+      setPmsonedigClosing( pmsonedigitalclosing )
+      setPmsoneanalogOpening( pmsoneanalogopening )
+      setPmsoneanalogClosing( pmsoneanalogclosing )
 
- 
       const pmstwodigitalclosing = mydatas.pmstwo[ 0 ]?.closingdigital ?? 0;
       const pmstwodigitalopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
       const pmstwodigitaloutputvalue = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
@@ -265,12 +257,10 @@ function getFormattedDate ()
       const pmstwoanalogopening = mydatas.pmstwo[ 0 ]?.openinganalog ?? 0;
       const pmstwoanalogoutput = mydatas.pmstwo[ 0 ]?.outputvalue ?? 0;
 
-      setPmstwodigOpening(pmstwodigitalopening)
-      setPmstwodigClosing(pmstwodigitalclosing)
-      setPmstwoanalogOpening(pmstwoanalogopening)
-      setPmstwoanalogClosing(pmstwoanalogClosing)
-    
-
+      setPmstwodigOpening( pmstwodigitalopening )
+      setPmstwodigClosing( pmstwodigitalclosing )
+      setPmstwoanalogOpening( pmstwoanalogopening )
+      setPmstwoanalogClosing( pmstwoanalogClosing )
 
       const agoonedigitalclosing = mydatas.agoone[ 0 ]?.closingdigital ?? 0;
       const agoonedigitalopening = mydatas.agoone[ 0 ]?.openingdigital ?? 0;
@@ -280,12 +270,10 @@ function getFormattedDate ()
       const agotowodigitalopening = mydatas.agotwo[ 0 ]?.openingdigital ?? 0;
       const agotwodigitaloutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
 
-      
-      setAgoonedigOpening(agoonedigitalopening)
-      setAgoonedigClosing(agoonedigitalclosing)
-      setAgotwodigOpening(agotowodigitalopening)
-      setAgotwodigClosing(agotwodigitalclosing)
-
+      setAgoonedigOpening( agoonedigitalopening )
+      setAgoonedigClosing( agoonedigitalclosing )
+      setAgotwodigOpening( agotowodigitalopening )
+      setAgotwodigClosing( agotwodigitalclosing )
 
       const agooneanalogclosing = mydatas.agoone[ 0 ]?.closingsanalog ?? 0;
       const agooneanalogopening = mydatas.agoone[ 0 ]?.openinganalog ?? 0;
@@ -295,99 +283,77 @@ function getFormattedDate ()
       const agotwoanalogopening = mydatas.agotwo[ 0 ]?.openinganalog ?? 0;
       const agotwoanalogoutput = mydatas.agotwo[ 0 ]?.outputvalue ?? 0;
 
-      
-      setAgotwoanalogOpening(agotwoanalogopening)
-      setAgotwoanalogClosing(agotwoanalogclosing)
-      setAgooneanalogOpening(agooneanalogopening)
-      setAgooneanalogClosing(agooneanalogclosing)
+      setAgotwoanalogOpening( agotwoanalogopening )
+      setAgotwoanalogClosing( agotwoanalogclosing )
+      setAgooneanalogOpening( agooneanalogopening )
+      setAgooneanalogClosing( agooneanalogclosing )
 
       // the
 
       setValues( {
-          pmsonedigitalclosing: pmsonedigitalclosing,
-          pmsonedigitalopening: pmsonedigitalopening,
-          pmsonedigitaloutput: pmsonedigitaloutputvalue,
+        pmsonedigitalclosing: pmsonedigitalclosing,
+        pmsonedigitalopening: pmsonedigitalopening,
+        pmsonedigitaloutput: pmsonedigitaloutputvalue,
 
-          pmstwodigitalclosing: pmstwodigitalclosing,
-          pmstwodigitalopening: pmstwodigitalopening,
-          pmstwodigitaloutput: pmstwodigitaloutputvalue,
+        pmstwodigitalclosing: pmstwodigitalclosing,
+        pmstwodigitalopening: pmstwodigitalopening,
+        pmstwodigitaloutput: pmstwodigitaloutputvalue,
 
-          agoonedigitalclosing: agoonedigitalclosing,
-          agoonedigitalopening: agoonedigitalopening,
-          agoonedigitaloutput: agoonedigitaloutput,
+        agoonedigitalclosing: agoonedigitalclosing,
+        agoonedigitalopening: agoonedigitalopening,
+        agoonedigitaloutput: agoonedigitaloutput,
 
-          agotwodigitalclosing: agotwodigitalclosing,
-          agotwodigitalopening: agotowodigitalopening,
-          agotwodigitaloutput: agotwodigitaloutput,
+        agotwodigitalclosing: agotwodigitalclosing,
+        agotwodigitalopening: agotowodigitalopening,
+        agotwodigitaloutput: agotwodigitaloutput,
 
-          pmsoneanalogclosing: pmsoneanalogclosing,
-          pmsoneanalogopening: pmsoneanalogopening,
-          pmsoneanalogoutput: pmsoneanalogoutputvalue,
+        pmsoneanalogclosing: pmsoneanalogclosing,
+        pmsoneanalogopening: pmsoneanalogopening,
+        pmsoneanalogoutput: pmsoneanalogoutputvalue,
 
-          pmstwoanalogclosing: pmstwoanalogClosing,
-          pmstwoanalogopening: pmstwoanalogopening,
-          pmstwoanalogoutput: pmstwoanalogoutput,
+        pmstwoanalogclosing: pmstwoanalogClosing,
+        pmstwoanalogopening: pmstwoanalogopening,
+        pmstwoanalogoutput: pmstwoanalogoutput,
 
-          agooneanalogclosing: agooneanalogclosing,
-          agooneanalogopening: agooneanalogopening,
-          agooneanalogoutput: agooneanalogoutput,
+        agooneanalogclosing: agooneanalogclosing,
+        agooneanalogopening: agooneanalogopening,
+        agooneanalogoutput: agooneanalogoutput,
 
-          agotwoanalogclosing: agotwoanalogclosing,
-          agotwoanalogopening: agotwoanalogopening,
-          agotwoanalogoutput: agotwoanalogoutput,
+        agotwoanalogclosing: agotwoanalogclosing,
+        agotwoanalogopening: agotwoanalogopening,
+        agotwoanalogoutput: agotwoanalogoutput,
       } );
 
       // console.log( oneData.petrol.pmsone )
 
       setSales( {
-          totalsales: datas?.totalsales,
-          difference: datas?.difference,
-          totaldebts: datas?.debts,
-          zreport: datas?.zreport,
-          agophysical: datas?.agopysical,
-          agodipstick: datas?.agodipstick,
-          pmsphysical: datas?.pmsphysical,
-          creditors: datas?.creditors,
-          debtors: datas?.debtors,
-          dieselsales: datas?.dieselsales,
-          pmssales: datas?.pmssales,
-          expenses: datas?.expenses,
-          expensesdata: datas?.expensesdata,
-          pmsdipstick: datas?.pmsdipstic,
-          pmsoneoutput: pmsoneouput,
-          pmstwooutput: pmstwooutput,
-          agooneoutput: agooneoutput,
-          agotwooutput: agotwooutput,
+        totalsales: datas?.totalsales,
+        difference: datas?.difference,
+        totaldebts: datas?.debts,
+        zreport: datas?.zreport,
+        agophysical: datas?.agopysical,
+        agodipstick: datas?.agodipstick,
+        pmsphysical: datas?.pmsphysical,
+        creditors: datas?.creditors,
+        debtors: datas?.debtors,
+        dieselsales: datas?.dieselsales,
+        pmssales: datas?.pmssales,
+        expenses: datas?.expenses,
+        expensesdata: datas?.expensesdata,
+        pmsdipstick: datas?.pmsdipstic,
+        pmsoneoutput: pmsoneouput,
+        pmstwooutput: pmstwooutput,
+        agooneoutput: agooneoutput,
+        agotwooutput: agotwooutput,
       } );
-    }else{
-      
-      setAgotwoanalogOpening("")
-      setAgotwoanalogClosing("")
-      setAgooneanalogOpening("")
-      setAgooneanalogClosing("")
-        
-      setAgoonedigOpening("")
-      setAgoonedigClosing("")
-      setAgotwodigOpening("")
-      setAgotwodigClosing("")
-
-      setPmsonedigOpening("")
-      setPmsonedigClosing("")
-      setPmsoneanalogOpening("")
-      setPmsoneanalogClosing("")
-
-      
-      setPmstwodigOpening("")
-      setPmstwodigClosing("")
-      setPmstwoanalogOpening("")
-      setPmstwoanalogClosing("")
-    
-    }
+   
+      setLoading(false)
 
   };
 
   const literHandler = async () =>
-  {setNotify( false );
+  { 
+    setNotify( false );
     if (
       pmsonedigOpening &&
       pmsonedigClosing &&
@@ -400,15 +366,15 @@ function getFormattedDate ()
     )
     {
       try
-      {
-        const dats =  getFormattedDate()
+      {setLoading(true)
+        const dats = getFormattedDate()
         let pmsOne = {
           uid: dats,
           closingsanalog: pmsoneanalogClosing,
           closingdigital: pmsonedigClosing,
           openinganalog: pmsoneanalogOpening,
           openingdigital: pmsonedigOpening,
-          outputvalue: Number( pmsonedigClosing ) - Number( pmsonedigOpening ),
+          outputvalue: Number( pmsonedigOpening ) - Number( pmsonedigClosing ),
         };
 
         let pmsTwo = {
@@ -417,28 +383,24 @@ function getFormattedDate ()
           closingdigital: pmstwodigClosing,
           openinganalog: pmstwoanalogOpening,
           openingdigital: pmstwodigOpening,
-          outputvalue: Number( pmstwodigClosing ) - Number( pmstwodigOpening ),
+          outputvalue: Number( pmstwodigOpening ) - Number( pmstwodigClosing ),
         };
-
         let agoOne = {
           uid: dats,
           closingsanalog: agooneanalogClosing,
           closingdigital: agoonedigClosing,
           openinganalog: agooneanalogOpening,
           openingdigital: agoonedigOpening,
-          outputvalue: Number( agoonedigClosing ) - Number( agoonedigOpening ),
+          outputvalue: Number( agoonedigOpening ) - Number( agoonedigClosing ),
         };
-
         let agoTwo = {
           uid: dats,
           closingsanalog: agotwoanalogClosing,
           closingdigital: agotwodigClosing,
           openinganalog: agotwoanalogOpening,
           openingdigital: agotwodigOpening,
-          outputvalue: Number( agotwodigClosing ) - Number( agotwodigOpening ),
+          outputvalue: Number( agotwodigOpening ) - Number( agotwodigClosing ),
         };
-
-        setLoading( true );
 
         const resone = await axios.post( `${ url }/api/pumps/petrol`, pmsOne );
         const restwo = await axios.post( `${ url }/api/pumps/petroltwo`, pmsTwo );
@@ -449,69 +411,71 @@ function getFormattedDate ()
         setNotification( resfour.data );
         setLoading( false );
 
-
         //
       } catch ( err )
       {
         setLoading( false );
-        console.log( err );
         setError( "Please refresh..." );
       }
     } else
-    {
+    {setLoading(false)
       setNotify( true );
       setNotification( "Fill all the details!" );
-    }
+    } setLoading(false)
   };
 
-  const sureTy =()=>{
-    setNotify(false)
+  const sureTy = () =>
+  {
+    setNotify( false )
     setNotification( "" );
-    setAre(true)
+    setAre( true )
 
   }
 
   const confirm = async () =>
-  { setNotify(false)
+  { 
+    setNotify( false )
     setNotification( "" );
+
     if ( isNaN( diesellitres ) && isNaN( dieselAmount ) && isNaN( petrolAmount ) && isNaN( petrollitres ) )
-    {
+    {setLoading(true)
       try
       {
-       
-        // console.log(Math.floor(pAmount),plita)
-        const dats = date;
+        const dats = getFormattedDate()
         let data = {
-          uid: formattedStartDate,
+          uid: dats,
           dieselamount: Math.floor( dAmount ),
           petrolamount: Math.floor( pAmount ),
           dieselvalue: dlita,
           petrolvalue: plita,
         };
 
-
-        setLoading( true );
-
         const response = await axios.post( `${ url }/api/weeklydatas/data`, data );
 
         setNotify( true );
         setNotification( response.data );
         setLoading( false );
-        
-      } catch ( err ) { }
-    } 
+
+      } catch ( err ) { setLoading(false) }
+    } else
+    {
+      setNotify( true );
+      setLoading(false)
+      setNotification( "Ensure all todays' data are filled!" );
+    }setLoading(false)
   };
 
   const pesaHandler = async () =>
-  { setNotify(false)
+  {
+    setNotify( false )
     setNotification( "" );
     if ( mPesa && nmb && crdb )
-    {
+    {setLoading(true)
       try
       {
-        const dats = date;
+        const dats = getFormattedDate()
         let virtualmoney = {
-          uid: formattedEndDate,
+          uid: dats,
           mpesa: mPesa,
           nmbpesa: nmb,
           crdbpesa: crdb,
@@ -528,9 +492,9 @@ function getFormattedDate ()
         setNotify( true );
         setNotification( resone.data );
         setLoading( false );
-        setNmb("")
-        setCrdb("")
-        setMpesa("")
+        setNmb( "" )
+        setCrdb( "" )
+        setMpesa( "" )
 
         //
       } catch ( err )
@@ -540,30 +504,33 @@ function getFormattedDate ()
         setError( "Please refresh..." );
       }
     } else
-    {
+    {setLoading(false)
       setNotify( true );
       setNotification( "Fill all the details!" );
-    }
+    }setLoading(false)
   };
-  const deletePop = () => {
-    setDelete(true);
+  const deletePop = () =>
+  {
+    setDelete( true );
   };
 
-  const cancPopdelete =()=>{
-    setNotify(false)
+  const cancPopdelete = () =>
+  {
+    setNotify( false )
     setNotification( "" );
-    setAre(false);
+    setAre( false );
   }
   const credHandler = async () =>
-  {   setNotify(false)
+  {
+    setNotify( false )
     setNotification( "" );
     if ( name && amount && mode )
-    {
+    {setLoading(true)
       try
       {
-        const dats = date;
+        const dats = getFormattedDate()
         let debtors = {
-          uid: formattedEndDate,
+          uid: dats,
           name: name,
           amount: amount,
           modeofpay: mode,
@@ -578,36 +545,39 @@ function getFormattedDate ()
         setNotify( true );
         setNotification( resone.data );
         setLoading( false );
-        setName("")
-        setAmount("")
-        setMode("")
-        
+        setName( "" )
+        setAmount( "" )
+        setMode( "" )
+
       } catch ( err )
       {
         setLoading( false );
-        console.log( err );
+        
         setError( "Please refresh..." );
       }
     } else
-    {
+    {setLoading(false)
       setNotify( true );
       setNotification( "Fill all the details!" );
     }
   };
 
   const debtsHandler = async () =>
-  { setNotify(false)
+  {
+    setNotify( false )
     setNotification( "" );
+   
     if ( name && amount )
-    {
+    { setLoading(true)
       try
       {
-        const dats = date;
+        const dats = getFormattedDate()
+
         let debtors = {
-          uid: formattedEndDate,
+          uid: dats,
           name: name,
           amount: amount,
-          date: "12/23/34",
+          date: dats,
         };
 
         setLoading( true );
@@ -617,18 +587,17 @@ function getFormattedDate ()
         setNotification( resone.data );
         setLoading( false );
 
-        setName("")
-        setAmount("")
+        setName( "" )
+        setAmount( "" )
 
         //
       } catch ( err )
       {
         setLoading( false );
-        console.log( err );
         setError( "Please refresh..." );
       }
     } else
-    {
+    {setLoading(false)
       setNotify( true );
       setNotification( "Fill all the details!" );
     }
@@ -636,15 +605,15 @@ function getFormattedDate ()
 
   const stocksHandler = async () =>
   {
-    setNotify(false)
+    setNotify( false )
     setNotification( "" );
     if ( pmsphyscal && pmsdispst )
-    {
+    {setLoading(true)
       try
       {
-        const dats = date;
+        const dats = getFormattedDate()
         let pmsStock = {
-          uid: formattedEndDate,
+          uid: dats,
           physical: pmsphyscal,
           dipstick: pmsdispst,
           difference: Number( pmsphyscal ) - Number( pmsdispst ),
@@ -671,31 +640,32 @@ function getFormattedDate ()
         setNotify( true );
         setNotification( resone.data );
         setLoading( false );
-        setPhysicalago("")
-        setPhysicalpms("")
-        setDipstago("")
-        setDipstpms("")
+        setPhysicalago( "" )
+        setPhysicalpms( "" )
+        setDipstago( "" )
+        setDipstpms( "" )
 
         //
       } catch ( err )
       {
         setLoading( false );
-        console.log( err );
         setError( "Please refresh..." );
       }
     } else
-    {
+    {setLoading(false)
       setNotify( true );
       setNotification( "Fill all the details!" );
     }
   };
 
-  const updateHandler=()=>{
+  const updateHandler = () =>
+  {
 
   }
 
   const moneycountHandler = async () =>
-  {   setNotify(false)
+  {
+    setNotify( false )
     setNotification( "" );
     if (
       tenths &&
@@ -710,10 +680,10 @@ function getFormattedDate ()
     )
     {
       try
-      {
-        const dats = date;
+      {setLoading(true)
+        const dats = getFormattedDate()
         let collections = {
-          uid: formattedEndDate,
+          uid: dats,
           tenth: tenths,
           fiveth: fiveths,
           twoth: twoths,
@@ -736,24 +706,23 @@ function getFormattedDate ()
         setNotification( resone.data );
         setLoading( false );
 
-        setOnehs("")
-        setTwohs("")
-        setFivehs("")
-        setOneths("")
-        setTwoths("")
-        setFiveths("")
-        setTenths("")
-        setFiftys("")
+        setOnehs( "" )
+        setTwohs( "" )
+        setFivehs( "" )
+        setOneths( "" )
+        setTwoths( "" )
+        setFiveths( "" )
+        setTenths( "" )
+        setFiftys( "" )
 
         //
       } catch ( err )
       {
         setLoading( false );
-        console.log( err );
         setError( "Please refresh..." );
       }
     } else
-    {
+    {setLoading(false)
       setNotify( true );
       setNotification( "Fill all the details!" );
     }
@@ -766,13 +735,13 @@ function getFormattedDate ()
   };
 
   const handlePesa = () =>
-  {  
+  {
     setStocks( false );
     setMoneycount( false );
     setDebts( false );
     setPesa( true );
     setCred( false );
-    setNotify(false)
+    setNotify( false )
     setNotification( "" );
   };
 
@@ -783,7 +752,7 @@ function getFormattedDate ()
     setStocks( false );
     setDebts( true );
     setCred( false );
-    setNotify(false)
+    setNotify( false )
     setNotification( "" );
   };
 
@@ -794,7 +763,7 @@ function getFormattedDate ()
     setStocks( false );
     setDebts( false );
     setCred( true );
-    setNotify(false)
+    setNotify( false )
     setNotification( "" );
   };
 
@@ -803,7 +772,7 @@ function getFormattedDate ()
     setPesa( false );
     setStocks( false );
     setDebts( false );
-    setNotify(false)
+    setNotify( false )
     setNotification( "" );
     setMoneycount( true );
     setCred( false );
@@ -813,7 +782,7 @@ function getFormattedDate ()
   {
     setPesa( false );
     setDebts( false );
-    setNotify(false)
+    setNotify( false )
     setNotification( "" );
     setMoneycount( false );
     setStocks( true );
@@ -825,7 +794,7 @@ function getFormattedDate ()
     setPesa( false );
     setDebts( false );
     setMoneycount( false );
-    setNotify(false)
+    setNotify( false )
     setNotification( "" );
     setStocks( false );
     setCred( false );
@@ -833,17 +802,26 @@ function getFormattedDate ()
 
   return (
     <div className="mysals">
-      <Sidebar />
+   
+      <div className="opa">
+           <Sidebar />
+      </div>
+      {loading && <Loaders/>}
+      <div className="reloa">
+        <NavLink to="/home">
+           <Return />
+        </NavLink>
+       
+      </div>
 
       <div className=""></div>
 
       <div className="sectionthresa">
         <div className="general">
           <p>DAILY REPORT FORMS</p>
-          
-          
+
         </div>
-        <div className="year">
+        <div className="yearrr">
           <div className="dail">
             <p onClick={ handleAll }>LITRES</p>
           </div>
@@ -868,9 +846,14 @@ function getFormattedDate ()
             <p onClick={ handleStocks }>FUEL STOCK</p>
           </div>
 
-          <div className="download" onClick={handleUpdate}>
-          <p>EDIT DATA</p>
+          <div className="dail">
+            <p  onClick={ handleUpdate }>EDIT DATA</p>  
           </div>
+
+          <div className="dail" >
+           <p onClick={ handleUpdateF }>ERASE FIELDS</p>
+          </div>
+          
         </div>
         {/* <Real /> */ }
 
@@ -912,15 +895,15 @@ function getFormattedDate ()
                 </div>
 
                 { notify && (
-                  <div className="inputmy">
+                  <div style={{width: "210px"}} className="inputmy">
                     <p>{ notification }</p>
                   </div>
                 ) }
 
                 <div className="bone">
                   <div className="thetwos">{/* <p></p> */ }</div>
-                  <div className="thetwo">
-                    <button onClick={ pesaHandler }>Submit</button>
+                  <div style={{width: "210px"}} className="thetwo">
+                    <button style={{width: "210px"}} onClick={ pesaHandler }>Submit</button>
                   </div>
                 </div>
               </div>
@@ -993,60 +976,42 @@ function getFormattedDate ()
               </div>
             </div>
           ) }
-     
-     {sure && (
-        <div className="poppesaoo">
-          <div className="contentonestyo">
-            <div className="canc" onClick={cancPopdelete}>
-            <img src={cancs} alt="" />
-            </div>
-            <div className="ours">
-              <div className="sdacont">
-                <div className="totalcash">
-                  <p>UPDATING' FUEL VALUES? </p>
+
+          { sure && (
+            <div className="poppesaoo">
+              <div className="contentonestyo">
+                <div className="canc" onClick={ cancPopdelete }>
+                  <img src={ cancs } alt="" />
                 </div>
-                <div className="forms">
-                  
+                <div className="ours">
+                  <div className="sdacont">
+                    <div className="totalcash">
+                      <p>UPDATING' FUEL VALUES? </p>
+                    </div>
+                    <div className="forms">
 
-                  <div className="areyou">
-                    <p>Adding to today values and amount.</p>
-                    <p>Are you sure to do this?</p>
-                  </div>
+                      <div className="areyou">
+                        <p>Adding to today values and amount.</p>
+                        <p>Are you sure to do this?</p>
+                      </div>
 
-                  <div className="inputo">
-                    <button onClick={cancPopdelete}>No</button>
-                    <button onClick={confirm}>Yes</button>
+                      <div className="inputo">
+                        <button onClick={ cancPopdelete }>No</button>
+                        <button onClick={ confirm }>Yes</button>
+                      </div>
+                    </div>
+
+                    { notify && (
+                      <div className="nputmy">
+                        <p>{ notification }</p>
+                      </div>
+                    ) }
+
                   </div>
                 </div>
-
-                {notify && (
-                  <div className="inputmy">
-                    <p>{notification}</p>
-                  </div>
-                )}
-
-                {/* {loadings ? (
-              <div className="spin">
-                {" "}
-                <DotLoader
-                  color={color}
-                  loading={loadings}
-                  // cssOverride={override}
-                  size={25}
-                  aria-label="Loading Spinner"
-                  data-testid="loader"
-                />
-              </div>
-            ) : (
-              <></>
-            )} */}
-
-            
               </div>
             </div>
-          </div>
-        </div>
-      )}
+          ) }
 
           { debts && (
             <div className="poppesa">
@@ -1243,7 +1208,7 @@ function getFormattedDate ()
                     </div>
 
                     { notify && (
-                      <div className="inputmy">
+                      <div className="inpumy">
                         <p>{ notification }</p>
                       </div>
                     ) }
@@ -1489,7 +1454,7 @@ function getFormattedDate ()
                 </div>
 
                 { notify && (
-                  <div className="inputmy">
+                  <div className="i">
                     <p>{ notification }</p>
                   </div>
                 ) }

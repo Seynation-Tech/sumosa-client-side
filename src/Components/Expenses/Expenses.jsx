@@ -9,6 +9,8 @@ import "./Mobile.css";
 import axios from "axios";
 import pen from "../../Images/pen.png";
 import { AuthContext } from "../AuthContext";
+import Loaders from "../Loaders/Loaders.jsx";
+import edy from "../../Images/dots.png";
 
 let today = new Date();
 let date =
@@ -68,13 +70,22 @@ export default function Expenses() {
   const [name, setName] = useState("");
   const [amounts, setAmounts] = useState("");
 
-  useEffect(() => {
-    setLoading(true);
+  function getFormattedDate ()
+  {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String( today.getMonth() + 1 ).padStart( 2, "0" ); // Add leading zero if needed
+      const day = String( today.getDate() ).padStart( 2, "0" ); // Add leading zero if needed
+      return `${ year }-${ month }-${ day }`;
+  }
 
+
+  useEffect(() => {
     const interval = setInterval(() => {
       const fetchData = async () => {
         try {
-          const resptwo = await axios.get(`${url}/api/billing/allexpenses`, {
+          const todate = getFormattedDate()
+          const resptwo = await axios.get(`${url}/api/billing/expenses/${todate}`, {
             withCredentials: true,
           });
           let expens = 0;
@@ -84,12 +95,14 @@ export default function Expenses() {
             // console.log(expens)
           }
 
-          setData(resptwo.data);
+          // console.log(resptwo)
+
+          setData(resptwo?.data || []);
 
           //
         } catch (err) {
           setLoading(false);
-          console.log(err);
+          // console.log(err);
           // setError( "Please refresh..." );
         }
       };
@@ -135,6 +148,7 @@ export default function Expenses() {
   };
 
   const expenseHandler = async () => {
+    setLoading(true);
     if (usage && amount) {
       try {
         const uid = days.toLowerCase() + "," + date;
@@ -147,24 +161,20 @@ export default function Expenses() {
         // console.log(pmsOne)
 
         const resone = await axios.post(`${url}/api/billing/expenses`, debtors);
-
+        setAmounts("");
+        setName("");
+        setUsage("");
+        setAmount("");
         setNotify(true);
         setNotification(resone.data);
         setLoading(false);
-        setExpenses(false);
 
-        setExpenses(false);
-        setNotify(false);
-        setDelete(false);
         setDelets(false);
-
-        // setAmounts("")
-        // setName("")
 
         //
       } catch (err) {
         setLoading(false);
-        console.log(err);
+        // console.log(err);
         //   setError("Please refresh...");
       }
     } else {
@@ -175,7 +185,7 @@ export default function Expenses() {
 
   const deletePop = async (e) => {
     setDelete(true);
-
+    setLoading(true); setNotify(false);
     // console.log(e)
     setName(e?.usages);
     setAmounts(e?.amount);
@@ -186,13 +196,11 @@ export default function Expenses() {
         withCredentials: true,
       });
 
-      // setName("")
-      // setAmounts("")
-      setExpenses(false);
       setNotify(false);
-      // setDelete( false );
-      setDelets(false);
 
+      setDelets(false);
+      setLoading(false);
+      //
       //
     } catch (err) {
       setLoading(false);
@@ -202,6 +210,7 @@ export default function Expenses() {
   };
 
   const deleteHandler = async (e) => {
+    setLoading(true); setNotify(false);
     try {
       //  alert(alldat.name)
       const resone = await axios.delete(`${url}/api/billing/expenses/${ids}`, {
@@ -210,8 +219,7 @@ export default function Expenses() {
       setNotify(true);
       setNotification(resone.data);
       setLoading(false);
-      setExpenses(false);
-      setNotify(false);
+
       setDelete(false);
       setDelets(false);
     } catch (err) {}
@@ -219,52 +227,66 @@ export default function Expenses() {
 
   const updateExpenses = async (e) => {
     setNotify(false);
+    setLoading(true);
 
     // const uid = (e.target.value)
     // alert(ids)
 
-    let data = {
-      usages: name,
-      amount: amounts,
-    };
+    if (name && amounts) {
+      let data = {
+        usages: name,
+        amount: amounts,
+      };
 
-    try {
-      const res = await axios.put(`${url}/api/billing/expenses/${ids}`, data, {
-        withCredentials: true,
-      });
-      // setStatus(res.data)
+      try {
+        const res = await axios.put(
+          `${url}/api/billing/expenses/${ids}`,
+          data,
+          {
+            withCredentials: true,
+          }
+        );
+        // setStatus(res.data)
+        setNotify(true);
+
+        setNotification(res.data);
+        setUsage("");
+        setAmounts("");
+        setAmount("");
+
+     
+        setDelets(false);
+
+        // console.log(res.data)
+
+        // setNotfs(true)
+        setLoading(false);
+        // setStatus(res.data);
+      } catch (err) {
+        // setNotfs(true)
+        setLoading(false);
+        // setStatus("Registration Failed!");
+      }
+    } else {
       setNotify(true);
-
-      setNotification(res.data);
-      // setName("")
-      // setAmounts("")
-      setExpenses(false);
-      setNotify(false);
-      setDelete(false);
-      setDelets(false);
-
-      // console.log(res.data)
-
-      // setNotfs(true)
+      setNotification("Fill all fields!");
       setLoading(false);
-      // setStatus(res.data);
-    } catch (err) {
-      // setNotfs(true)
-      // setStatus("Registration Failed!");
     }
   };
 
   return (
     <div className="mysals">
-      <Sidebar />
 
+      <div className="opa">
+           <Sidebar />
+      </div>
       <div className={sidbar}>{/* <Sidebar /> */}</div>
 
       <div className={sidbar}>{/* <Sidebar /> */}</div>
 
       <div className=""></div>
 
-      <div className="sectionthres">
+      <div className="sectionthresi">
         {/* <div className="general">
           <p>EXPENSES MANAGEMENT REPORT</p>
         </div> */}
@@ -276,7 +298,7 @@ export default function Expenses() {
         {expenses && (
           <div className="poppes">
             <div className="contentonesya">
-              <div className="canc" onClick={cancelExpense}>
+              <div className="cancs" onClick={cancelExpense}>
                 <img src={cancs} alt="" />
               </div>
               <div className="ours">
@@ -375,7 +397,7 @@ export default function Expenses() {
         {deletes && (
           <div className="poppesaoo">
             <div className="contentonestyo">
-              <div className="canc" onClick={cancPopdelete}>
+              <div className="cancs" onClick={cancPopdelete}>
                 <img src={cancs} alt="" />
               </div>
               <div className="ours">
@@ -457,7 +479,7 @@ export default function Expenses() {
                       <td>{val.uid.split(",")[0]}</td>
 
                       <div className="editexp" onClick={(e) => deletePop(val)}>
-                        <img src={pen} alt="" />
+                      <img src={edy} alt="" /> 
                       </div>
                     </tr>
                   );

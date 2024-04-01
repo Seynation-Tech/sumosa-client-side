@@ -11,6 +11,7 @@ import message from "../../Images/chat.png";
 import overview from "../../Images/routine.png";
 import ela from "../../Images/ela.png";
 import col from "../../Images/c.png";
+import locate from "../../Images/lo.png";
 
 import pet from "../../Images/p.png";
 import Sidebar from "../Sidebar/Sidebar";
@@ -31,7 +32,7 @@ let date =
   "/" +
   ( today.getMonth() + 1 ) +
   "/" +
-  today.getFullYear() 
+  today.getFullYear()
 let mydate =
   today.getDate() +
   "/" +
@@ -62,7 +63,7 @@ export default function Home ()
     alldebts,
     totalEarnings,
     dieselAmount,
-    petroldisp,salesdata,values,
+    petroldisp, salesdata, values,
     petrolstock,
     dieseldips,
     dieselstock,
@@ -81,7 +82,7 @@ export default function Home ()
   const [ messagetwo, setMessagetwo ] = useState( [] )
   const [ reads, setRead ] = useState( false )
 
-  window.scrollTo( 0, 0 );
+
 
   useEffect( () =>
   {
@@ -97,7 +98,7 @@ export default function Home ()
             withCredentials: true,
           } );
 
-          const resp = await axios.get( `http://localhost:5001/api/billing/incoming`, {
+          const resp = await axios.get( `${url}/api/billing/incoming`, {
             withCredentials: true,
           } );
 
@@ -125,13 +126,13 @@ export default function Home ()
           }
           // console.log(mesage)
           setMessageone( [ mesage ] )
-     
+
 
           //
         } catch ( err )
         {
 
-          console.log( err );
+          // console.log( err );
           // setError( "Please refresh..." );
         }
       };
@@ -183,8 +184,11 @@ export default function Home ()
 
   return (
     <div className="mainpage">
-      {sidebar && <Sidebar />}
-      <Sidebar />
+      { sidebar && <Sidebar /> }
+      <div className="opa">
+           <Sidebar />
+      </div>
+   
       {/* SECTION TWO THE CONTENT PAGE */ }|
       <div className="upbove">
         <div className="aboveall">
@@ -249,10 +253,10 @@ export default function Home ()
 
             { currentUser[ 0 ]?.role ? <NavLink to="/signup">
 
-          
-             <div className="leftimgs">
-              <img src={ settings } alt="" />
-            </div>  </NavLink> : <></> }
+
+              <div className="leftimgs">
+                <img src={ settings } alt="" />
+              </div>  </NavLink> : <></> }
             <div className="leftimgs" onClick={ startreading }>
               <img src={ message } alt="" />
               { nun ? <div className="otify"></div> : <div className="otif"></div> }
@@ -292,7 +296,7 @@ export default function Home ()
                 <Values />
               </div>
 
-              <div className="grap">{/* <p>Graphical data analysis</p> */ }</div>
+              <div className="grap"> <p>Fuel Weekly Analysis</p> </div>
             </div>
 
             <div className="right">
@@ -318,7 +322,7 @@ export default function Home ()
                       <p id="gs">Petrol</p>
 
                       <div className="pri">
-                        <p>Tsh { petrolprice }</p>
+                        <p>Tsh { Number( salesdata.petrolprice ).toLocaleString() }</p>
                         {/* <img src={pend} alt="" /> */ }
                       </div>
                     </div>
@@ -343,7 +347,7 @@ export default function Home ()
                       <p id="gs">Diesel</p>
 
                       <div className="pri">
-                        <p>Tsh { dieselprice }</p>
+                        <p>Tsh { Number( salesdata.dieselprice ).toLocaleString() }</p>
                         {/* <img src={pend} alt="" /> */ }
                       </div>
                     </div>
@@ -370,11 +374,11 @@ export default function Home ()
                   </div>
 
                   <div className="amount">
-                    <p> { (Number(values.pmsonedigitaloutput) + Number(values.pmstwodigitaloutput)+Number(values.agoonedigitaloutput)+Number(values.agotwodigitaloutput)).toLocaleString() } L</p>
+                    <p> { ( Number( values.pmsonedigitaloutput ) + Number( values.pmstwodigitaloutput ) + Number( values.agoonedigitaloutput ) + Number( values.agotwodigitaloutput ) ).toLocaleString() } L</p>
                   </div>
                 </div>
 
-               
+
 
                 <div className="sectconty">
                   <div className="sst">
@@ -383,7 +387,7 @@ export default function Home ()
                   </div>
 
                   <div className="amount">
-                    <p>Tsh { Number(salesdata.pmssales).toLocaleString() }</p>
+                    <p>Tsh { Number( salesdata.pmssales ).toLocaleString() }</p>
                   </div>
                 </div>
 
@@ -394,7 +398,7 @@ export default function Home ()
                   </div>
 
                   <div className="amount">
-                    <p>Tsh { Number(salesdata.dieselsales).toLocaleString() }</p>
+                    <p>Tsh { Number( salesdata.dieselsales ).toLocaleString() }</p>
                   </div>
                 </div>
 
@@ -405,31 +409,34 @@ export default function Home ()
                   </div>
 
                   <div className="amount">
-                    <p>Tsh { Number(salesdata.totalsales).toLocaleString() }</p>
+                    <p>Tsh { Number( salesdata.totalsales ).toLocaleString() }</p>
                   </div>
                 </div>
               </div>
 
-              <div className="firsts"></div>
+              <div className="firsts">
+                <img src={ locate } alt="" />
+                <p>TUTUO TABORA</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div className="sectionthree">
         <div className="lowersecta">
-    
+
           <Clock
             format={ "HH:mm:ss" }
             ticking={ true }
             timezone={ "Africa/Nairobi" }
           />
 
-<p id="dat">{days}, { date }</p>
+          <p id="dat">{ days }, { date }</p>
         </div>
         <div className="first">
           <div className="fs">
             <div className="ex">
-              <img src={col} alt="" />
+              <img src={ col } alt="" />
               <p>Collection</p>
             </div>
 
@@ -440,7 +447,7 @@ export default function Home ()
           <div className="sc">
             <div className="pd">
               <div className="pet">
-                <img src={pet} style={{width: "23px"}} alt="" />
+                <img src={ pet } style={ { width: "23px" } } alt="" />
                 <p>Petrol</p>
               </div>
               <div className="exch">
@@ -449,12 +456,12 @@ export default function Home ()
             </div>
             <div className="totalamount">
               <div className="tot">
-              <img src={stoc} style={{width: "28px"}} alt="" />
+                <img src={ stoc } style={ { width: "28px" } } alt="" />
               </div>
 
-              <p>Instock: { Number(salesdata.pmsphysical).toLocaleString() }</p>
+              <p>Instock: { Number( salesdata.pmsphysical ).toLocaleString() }</p>
               <p>
-                <span id="aval"> Dipstock: </span> { Number(salesdata.pmsdipstick).toLocaleString() }
+                <span id="aval"> Dipstock: </span> { Number( salesdata.pmsdipstick ).toLocaleString() }
               </p>
             </div>
 
@@ -474,21 +481,21 @@ export default function Home ()
           <div className="sc">
             <div className="pd">
               <div className="pet">
-              <img src={pet} style={{width: "28px"}} alt="" />
+                <img src={ pet } style={ { width: "28px" } } alt="" />
                 <p>Diesel</p>
               </div>
-              <div className="exch" sytle={{background: "green"}}>
-                {/* <img src={pet} style={{width: "28px"}} alt="" /> */}
+              <div className="exch" sytle={ { background: "green" } }>
+                {/* <img src={pet} style={{width: "28px"}} alt="" /> */ }
               </div>
             </div>
             <div className="totalamount">
-              <div className="tot" style={{width: "28px"}} >
-              <img src={stoc} style={{width: "28px"}} alt="" />
+              <div className="tot"  >
+                <img src={ stoc } style={ { width: "28px" } } alt="" />
               </div>
 
-              <p>Instock: { Number(salesdata.agophysical).toLocaleString() }</p>
+              <p>Instock: { Number( salesdata.agophysical ).toLocaleString() }</p>
               <p>
-                <span id="aval"> Dipstock: </span> { Number(salesdata.agodipstick).toLocaleString() }
+                <span id="aval"> Dipstock: </span> { Number( salesdata.agodipstick ).toLocaleString() }
               </p>
             </div>
 
@@ -504,7 +511,12 @@ export default function Home ()
           <div className="thr"></div>
         </div>
 
-        <div className="firsts"></div>
+<a href="https://sumosa.co.tz">
+    <div className="firstss">
+          <p>website - sumosa.co.tz</p>
+        </div>
+</a>
+      
       </div>
     </div>
   );
