@@ -47,7 +47,7 @@ export const AuthContextProvider = ( { children } ) =>
   );
 
   // const url = "https://sumosa-api-production.up.railway.app";
-  const url = "http://localhost:5001";
+  const url = "http://127.0.0.1:5001";
 
   const [ zrepos, setZreport ] = useState( "0" );
 
