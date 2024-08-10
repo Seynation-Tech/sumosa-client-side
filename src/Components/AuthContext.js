@@ -46,7 +46,7 @@ export const AuthContextProvider = ( { children } ) =>
     JSON.parse( localStorage.getItem( "userdata" ) || null )
   );
 
-  const url = "https://167.172.158.92";
+  const url = "http://167.172.158.92";
  // const url = "http://127.0.0.1:5001";
 
   const [ zrepos, setZreport ] = useState( "0" );
