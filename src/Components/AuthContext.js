@@ -677,7 +677,7 @@ export const AuthContextProvider = ( { children } ) =>
       secure: true,
     } );
 
-    return usr;
+    return res;
   };
 
   const userlogout = async ( inputs ) =>
