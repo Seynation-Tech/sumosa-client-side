@@ -36,16 +36,18 @@ export default function Login() {
         password: password,
       };
       const resp = await userlogin(data);
-      const counter = Object.keys(resp).length
 
-      if (counter === 11) {
-        setLoading(false);
-        navigate("/home");
-      } else {
-        setLoading(false);
-        setStatus("User not found!");
-        setError("User not found!");
-      }
+      console.log(resp)
+      // const counter = Object.keys(resp).length
+
+      // if (counter === 11) {
+      //   setLoading(false);
+         navigate("/home");
+      // } else {
+      //   setLoading(false);
+      //   setStatus("User not found!");
+      //   setError("User not found!");
+      // }
     } catch (err) {
       setLoading(false);
       setStatus("Failed to login!");
