@@ -656,11 +656,15 @@ export const AuthContextProvider = ( { children } ) =>
 
   const userlogin = async ( inputs ) =>
   {
-    console.log(inputs)
+    
     const res = await axios.post( `${ url }/api/auths/login`, inputs, {
       withCredentials: true,
     } );
+
+    console.log(res)
     setCurrentUser( res.data );
+
+
     const usr = res.data[ 0 ];
 
     const token = res.data[ 1 ];
