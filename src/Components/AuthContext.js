@@ -656,7 +656,7 @@ export const AuthContextProvider = ( { children } ) =>
 
   const userlogin = async ( inputs ) =>
   {
-    // console.log(inputs)
+    console.log(inputs)
     const res = await axios.post( `${ url }/api/auths/login`, inputs, {
       withCredentials: true,
     } );
